@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider, Theme, StyledEngineProvider, Box } from "@mui/material";
+import { muiTheme } from "./theme";
+import AppRoutes from "./Routes";
+import {  useTheme } from '@mui/material';
+import "./App.css";
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={muiTheme}>
+          <Box
+            sx={{
+              backgroundColor: '#F6F6F6',
+              height: "100vh",
+            }}
+          >
+              <AppRoutes />
+          </Box>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
-}
+};
 
 export default App;

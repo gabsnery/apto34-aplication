@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { SaveResourcePayload } from '../../@types'
+import { SaveResourcePayload } from '@types'
 import api from '../api'
-import { createRequestError } from '../../utils/functions'
+import { createRequestError } from 'utils'
 
 export const get = async <E>(
   endpoint: string,
