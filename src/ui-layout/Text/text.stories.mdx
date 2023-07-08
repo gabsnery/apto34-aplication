@@ -1,0 +1,59 @@
+<!-- TestComponent.stories.mdx-->
+
+import { Meta, Story } from '@storybook/addon-docs'
+
+import { Text } from './index'
+
+<Meta title="Text" component={Text} />
+
+<!-- 👇 We create a “template” of how args map to rendering -->
+
+export const Template = args => <Text {...args} />
+
+<!-- 👇 Each story then reuses that template -->
+
+<Story
+  name="h4"
+  args={{
+    variant: 'h4',
+    weight: 700,
+    children: 'Ranking região',
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="SecondaryH3"
+  args={{
+    variant: 'h3',
+    color: 'secondary',
+    weight: 700,
+    children: '-60mm',
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Body1"
+  args={{
+    variant: 'body1',
+    weight: 400,
+    children: 'lorem ipsum',
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="SecondaryBody1"
+  args={{
+    variant: 'body1',
+    color: 'secondary',
+    weight: 400,
+    children: 'Balanço hídrico:',
+  }}
+>
+  {Template.bind({})}
+</Story>

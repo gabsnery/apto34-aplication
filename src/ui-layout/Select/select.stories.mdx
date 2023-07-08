@@ -1,0 +1,161 @@
+<!-- TestComponent.stories.mdx-->
+
+import { Meta, Story } from '@storybook/addon-docs'
+
+import { Select } from './index'
+import { Home } from '@mui/icons-material'
+<Meta title="Select" component={Select} />
+
+<!-- 👇 We create a “template” of how args map to rendering -->
+
+export const Template = args => <Select {...args} />
+
+<!-- 👇 Each story then reuses that template -->
+
+<Story
+  name="Options Icon"
+  args={{
+    variation: 'filled',
+    sx: { width: 400 },
+    label: 'LabelAqui',
+    options: [
+      {icon:<Home/>,value: 1, label: 'Option 1' },
+      {icon:<Home/>,value: 2, label: 'Option 2' },
+      {icon:<Home/>,value: 3, label: 'Option 3' },
+      {icon:<Home/>,value: 4, label: 'Option 4' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Options Icon Grouped"
+  args={{
+    variation: 'filled',
+    sx: { width: 400 },
+    label: 'LabelAqui',
+    options: [
+      {icon:<Home/>,group: 'Grupo 1',value: 1, label: 'Option 1' },
+      {icon:<Home/>,group: 'Grupo 1',value: 2, label: 'Option 2' },
+      {icon:<Home/>,group: 'Grupo 2',value: 3, label: 'Option 3' },
+      {icon:<Home/>,group: 'Grupo 2',value: 4, label: 'Option 4' },
+      {icon:<Home/>,group: 'Grupo 2',value: 5, label: 'Option 5' },
+      {icon:<Home/>,group: 'Grupo 2',value: 6, label: 'Option 6' },
+      {icon:<Home/>,group: 'Grupo 2',value: 7, label: 'Option 7' },
+      {icon:<Home/>,group: 'Grupo 2',value: 8, label: 'Option 8' },
+      {icon:<Home/>,group: 'Grupo 2',value: 9, label: 'Option 9' },
+      {icon:<Home/>,group: 'Grupo 3',value: 10, label: 'Option 10' },
+      {icon:<Home/>,group: 'Grupo 3',value: 11, label: 'Option 11' },
+      {icon:<Home/>,group: 'Grupo 3',value: 12, label: 'Option 12' },
+      {icon:<Home/>,group: 'Grupo 3',value: 13, label: 'Option 13' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Main Icon Basic"
+  args={{
+    variation: 'filled',
+    sx: { width: 400 },
+    footer:'basic',
+    label: 'LabelAqui',
+    mainIcon:<Home/>,
+    options: [
+      {value: 1, label: 'Option 1' },
+      {value: 2, label: 'Option 2' },
+      {value: 3, label: 'Option 3' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Radio Composed"
+  args={{
+    label: 'LabelAqui',
+    variation: 'composed',
+    type: 'radio',
+    value: 2,
+    sx: { width: 400 },
+    options: [
+      { group: 'Grupo 1', value: 1, label: 'OptionOptionOption 1' },
+      { group: 'Grupo 1', value: 2, label: 'Option 2' },
+      { group: 'Grupo 2', value: 3, label: 'Option 3' },
+      { group: 'Grupo 2', value: 4, label: 'Option 4' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Multiple Filled"
+  args={{
+    label: 'LabelAqui',
+    value: [2, 3],
+    variation: 'filled',
+    sx: { width: 400 },
+    type: 'multiple',
+    options: [
+      { value: 1, label: 'OptionOptionOptionOption 1' },
+      { value: 2, label: 'Option 2' },
+      { value: 3, label: 'Option 3' },
+      { value: 4, label: 'Option 4' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Grouped Complete"
+  args={{
+    variation: 'filled',
+    sx: { width: 400 },
+    footer:'complete',
+    label: 'LabelAqui',
+    options: [
+      {group: 'Grupo 1',value: 1, label: 'Option 1' },
+      {group: 'Grupo 1',value: 2, label: 'Option 2' },
+      {group: 'Grupo 2',value: 3, label: 'Option 3' },
+      {group: 'Grupo 2',value: 4, label: 'Option 4' },
+      {group: 'Grupo 2',value: 5, label: 'Option 5' },
+      {group: 'Grupo 2',value: 6, label: 'Option 6' },
+      {group: 'Grupo 2',value: 7, label: 'Option 7' },
+      {group: 'Grupo 2',value: 8, label: 'Option 8' },
+      {group: 'Grupo 2',value: 9, label: 'Option 9' },
+      {group: 'Grupo 3',value: 10, label: 'Option 10' },
+      {group: 'Grupo 3',value: 11, label: 'Option 11' },
+      {group: 'Grupo 3',value: 12, label: 'Option 12' },
+      {group: 'Grupo 3',value: 13, label: 'Option 13' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+
+<Story
+  name="Radio Basic"
+  args={{
+    variation: 'filled',
+    sx: { width: 400 },
+    value:2,
+    type: 'radio',
+    footer:'basic',
+    label: 'LabelAqui',
+    icon:'',
+    options: [
+      {value: 1, label: 'Option 1' },
+      {value: 2, label: 'Option 2' },
+      {value: 3, label: 'Option 3' },
+      {value: 4, label: 'Option 4' },
+    ],
+  }}
+>
+  {Template.bind({})}
+</Story>
+

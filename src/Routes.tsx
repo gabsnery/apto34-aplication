@@ -4,6 +4,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Login from "pages/Login";
+import Cart from "pages/Cart";
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -21,6 +22,9 @@ const AppRoutes = () => {
         </Route>
         <Route path="/store" element={<PrivateRoute unprivate />}>
           <Route path="/store" element={<Products />} />
+        </Route>
+        <Route path="/cart" element={<PrivateRoute unprivate />}>
+          <Route path="/cart" element={<Cart />} />
         </Route>
       </Routes>
     </Suspense>

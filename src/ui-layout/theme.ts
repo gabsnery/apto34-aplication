@@ -45,7 +45,7 @@ export const theme = {
     divider: '#5F5B5B',
   },
   typography: {
-    fontFamily: 'VisbyCF, Roboto',
+    fontFamily: 'Comfortaa',
     fontSize: 12,
   },
 }
