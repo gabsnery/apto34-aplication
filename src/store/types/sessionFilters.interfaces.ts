@@ -3,8 +3,8 @@ import { Product } from 'store/api/product/product.interface'
 
 
 export interface SessionFilter {
-  category?:number[]
-  tags?: number[]
-  size?:number[]
-  color?:number[]
+  category:number[]
+  size:number[]
+  color:number[]
+  type:number[]
 }

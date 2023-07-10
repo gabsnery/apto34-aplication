@@ -46,15 +46,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             }}
           >
 
-            <Grid item>
-              <Badge badgeContent={cart.items.length} color="primary">
-                <IconButton onClick={(e) => {
-                  navigate('/cart')
-                }} edge="end" size="large" color="primary" >
-                  <ShoppingCartIcon height={25} width={25} fontSize="inherit" color="action" />
-                </IconButton>
-              </Badge>
-            </Grid>
+
             {items.map((item: NavObj, idx: number) => {
               return <Grid display={{ xs: "none", sm: 'block' }} item key={idx}>
                 <Button key={idx} sx={{ padding: '13px' }} variant="text" color={"primary"} onClick={() => {
@@ -66,6 +58,18 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 </Button>
               </Grid>
             })}
+            <Grid item>
+              <Badge badgeContent={cart.items.length} color="primary">
+                <IconButton onClick={(e) => {
+                  navigate('/cart')
+                }} edge="end" size="large" color="primary" >
+                  <ShoppingCartIcon height={25} width={25} fontSize="inherit" color="action" />
+                </IconButton>
+              </Badge>
+            </Grid>
+            <Grid item>
+           <Text sx={{ padding: '13px' }}  variant={"h5"} weight={900} color="grey.700"> {`Olá, ${'Fulana'}`}</Text>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

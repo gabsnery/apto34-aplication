@@ -13,7 +13,7 @@ import {
 } from './styles'
 interface TextProps extends Omit<TypographyProps, 'variant'> {
   variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body'
-  color?: 'primary' | 'secondary' | 'textPrimary' | 'textSecondary' | 'error.main' | 'warning.main'|'grey.700'
+  color?: 'primary' | 'secondary' | 'textPrimary' | 'textSecondary' | 'error.main' | 'warning.main'|'grey.700'|'primary.light'
   weight?: number
   textCase?: 'lowercase' | 'uppercase' | 'capitalize'
 }

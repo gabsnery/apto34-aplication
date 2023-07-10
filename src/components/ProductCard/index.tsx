@@ -88,7 +88,7 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
                 height: '3.6em',
                 lineHeight: '1.8em'
               }}>
-                {value.name}
+                {value.id} {value.name}
               </Text>
             </Grid>
             <Grid item xs={6} sx={{ py: '6px' }}>
@@ -99,7 +99,7 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
             <Grid item xs={6} sx={{ textAlign: 'right' }}>
               <IconButton onClick={() => {
                 setModal({open:true,item:value})
-              }} sx={{ border: '1px solid red', color: 'white', backgroundColor: 'red', borderRadius: '2px', py: '2px', px: '5px' }}>
+              }} sx={{ color: 'primary.light', backgroundColor: 'primary.dark', borderRadius: '2px', py: '2px', px: '5px' }}>
                 <AddIcon />
               </IconButton>
             </Grid>

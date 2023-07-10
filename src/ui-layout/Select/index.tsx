@@ -77,7 +77,7 @@ export const Select: FC<_SelectProps> = ({ children, type, mainIcon, footer, opt
   }
 
   return <FormControl fullWidth sx={{width: '100%'}}
-    variant="outlined"
+    variant="outlined" 
   >
     <InputLabel sx={{
       //marginLeft: '20px',
@@ -95,7 +95,7 @@ export const Select: FC<_SelectProps> = ({ children, type, mainIcon, footer, opt
         {SelectProps.label}
       </Box>
     </InputLabel>
-    <BaseSelect
+    <BaseSelect 
       IconComponent={KeyboardArrowDown}
       fullWidth
       renderValue={(value:any) => renderValue(value, options ?? [], type)}
