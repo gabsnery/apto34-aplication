@@ -19,7 +19,7 @@ const AppRoutes = () => {
   return (
     <Suspense fallback={<div>carregando</div>}>
       <Routes>
-        <Route path="/admin/product" element={<PrivateRoute unprivate path="/login" />}>
+        <Route path="/admin/product" element={<PrivateRoute path="/login" />}>
           <Route path="/admin/product" element={<Product />} />
         </Route>
         <Route path="/" element={<PrivateRoute unprivate path="/login" />}>

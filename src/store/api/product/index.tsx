@@ -5,9 +5,10 @@ export const productApi = defaultApi.injectEndpoints({
 
         updateAddProduct: build.mutation<Product, Partial<Product>>({
             query: (payload) => {
+                console.log("🚀 ~ file: index.tsx:8 ~ payload:", payload)
                 return {
                     url: "api/product",
-                    method: payload.id ? 'PUT' : 'POST',
+                    method: 'POST',
                     body: payload,
                     headers: {
                         "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export const productApi = defaultApi.injectEndpoints({
 
         }),
         getProducts: build.query<Product[], void>({
-            query: () => `/api/product`,
+            query: () => `/api/product/0/100/e`,
             providesTags:['Product']
         }),
         getProduct: build.query<Product, number>({

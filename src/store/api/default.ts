@@ -11,10 +11,11 @@ const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
   prepareHeaders: (headers, { getState }) => {
     const {
-      auth: { accessToken }
+      auth: { token }
     } = getState() as any
-    if (accessToken) {
-      headers.set('Authorization', `Bearer ${accessToken}`)
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`)
+      console.log("🚀 ~ file: default.ts:19 ~ token:", token)
     }
     return headers
   }
@@ -34,7 +35,7 @@ const baseQueryWithReauth: BaseQueryFn<
 }
 export const defaultApi = createApi({
   reducerPath: 'defaultApi',
-  tagTypes: ['Product'],
+  tagTypes: ['Product','Categoria'],
   keepUnusedDataFor: 240,
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({})

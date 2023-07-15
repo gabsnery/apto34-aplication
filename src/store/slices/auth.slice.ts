@@ -20,7 +20,7 @@ export const fetchLogin = createAsyncThunk(
   async (loginData: Login) => await
     save<any>('login', {
       email: loginData.email,
-      password: loginData.password,
+      senha: loginData.senha,
       grantType: 'password',
     })
 )
@@ -32,25 +32,7 @@ const fetchIpTest = createAsyncThunk('auth/test', async () =>
 
 export const initialState: AuthState = {
   status: 'NotAsked',
-  accessToken: '',
-  expiresIn: 0,
-  userId: 0,
-  email: '',
-  name: '',
-  cnpjcpf: '',
-  cellphone: '',
-  telephone: '',
-  refreshToken: '',
-  company: {
-    Id: 0,
-    Name: '',
-    CNPJ: '',
-    Active: false,
-  },
-  profiles: [],
-  layers: [],
-  framesbi: [],
-  tools: []
+  token: '',
 }
 
 
@@ -63,59 +45,17 @@ const authSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchLogin.pending, (state) => {
       state.status = 'Pending'
-      state.accessToken = ''
-      state.refreshToken = ''
-      state.expiresIn = 0
-      state.userId = 0
-      state.email = ''
-      state.name = ''
-      state.cnpjcpf = ''
-      state.cellphone = ''
-      state.layers = []
-      state.framesbi = []
-      state.telephone = ''
-      state.company = {
-        Id: 0,
-        Name: '',
-        CNPJ: '',
-        Active: false,
-      }
+      state.token = ''
     })
     builder.addCase(fetchLogin.rejected, (state) => {
       state.status = 'Error'
-      state.accessToken = ''
-      state.refreshToken = ''
-      state.expiresIn = 0
-      state.userId = 0
-      state.email = ''
-      state.name = ''
-      state.cnpjcpf = ''
-      state.cellphone = ''
-      state.telephone = ''
-      state.layers = []
-      state.framesbi = []
-      state.company = {
-        Id: 0,
-        Name: '',
-        CNPJ: '',
-        Active: false,
-      }
+      state.token = ''
+
     })
 
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.status = 'Done'
-      state.accessToken = action.payload.accessToken
-      state.refreshToken = action.payload.refreshToken
-      state.expiresIn = action.payload.expiresIn
-      state.userId = action.payload.userId
-      state.email = action.payload.email
-      state.name = action.payload.name
-      state.cnpjcpf = action.payload.cnpjcpf
-      state.layers = action.payload.layers
-      state.framesbi = action.payload.framesbi
-      state.company = action.payload.company
-      state.cellphone = action.payload.cellphone
-      state.telephone = action.payload.telephone
+      state.token = action.payload.token
     })
 
     builder.addCase(reAuth.rejected, (state) => {
@@ -124,8 +64,7 @@ const authSlice = createSlice({
 
     builder.addCase(reAuth.fulfilled, (state, action) => {
       state.status = 'Done'
-      state.accessToken = action.payload.accessToken
-      state.refreshToken = action.payload.refreshToken
+      state.token = action.payload.token
       
     })
   }

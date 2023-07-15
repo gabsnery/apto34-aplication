@@ -14,12 +14,14 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import items, { NavObj } from './nav';
 import { Button, Text } from "ui-layout";
 import { useSelector } from "react-redux";
-import { RootState } from "store/store";
+import { RootState, useAppDispatch } from "store/store";
+import { logout } from "store/slices/logout";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const theme = useTheme()
   const navigate = useNavigate()
   const cart = useSelector((st: RootState) => st.cart)
+  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -37,7 +39,10 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
           <RouterLink to="/">
             <img src={logo} alt="logo" style={{ height: 100, marginTop: 10 }} />
           </RouterLink>
+<Button variant="text" color="primary" onClick={()=>{
+    dispatch(logout())
 
+}}>Sair</Button>
           <Grid container rowSpacing={2} direction="row"
             sx={{
               display: 'flex',

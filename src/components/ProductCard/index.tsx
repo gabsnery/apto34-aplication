@@ -78,7 +78,7 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
           component="img"
           height="250"
           sx={{ objectPosition: 'top' }}
-          image={value.picture}
+          image="https://img.lojasrenner.com.br/banner/01-home/230707_HOME_APOSTAS_BLUSAS_DESK_FEM.jpg"
           alt="green iguana"
         />
         <CardContent>
@@ -88,12 +88,12 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
                 height: '3.6em',
                 lineHeight: '1.8em'
               }}>
-                {value.id} {value.name}
+                {value.id} {value.nome}
               </Text>
             </Grid>
             <Grid item xs={6} sx={{ py: '6px' }}>
               <Text variant="body" color="secondary">
-                {`R$${value.value}`}
+                {`R$${value.valor_produto}`}
               </Text>
             </Grid>
             <Grid item xs={6} sx={{ textAlign: 'right' }}>

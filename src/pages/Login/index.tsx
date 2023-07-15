@@ -56,8 +56,8 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
        
             {t("common|login")}
           <form
-            onSubmit={handleSubmit(({ email, password }:any) => {
-              return onSubmit({ email, password });
+            onSubmit={handleSubmit(({ email, senha }:any) => {
+              return onSubmit({ email, senha });
             })}
           >
             <TextField
@@ -75,12 +75,12 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
             />
 
             <TextField
-              label={t("common|password")}
-              id="salva-login-password"
-              InputProps={{ ...register("password", { required: true }) }}
-              type="password"
-              error={!!errors.password}
-              helperText={errors.password && t(errors.password?.message as string)}
+              label={t("common|senha")}
+              id="salva-login-senha"
+              InputProps={{ ...register("senha", { required: true }) }}
+              type="senha"
+              error={!!errors.senha}
+              helperText={errors.senha && t(errors.senha?.message as string)}
               fullWidth
             />
  

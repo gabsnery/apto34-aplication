@@ -3,7 +3,7 @@ import axios from 'axios'
 import store from '../store/store'
 
 const configAuthorizationHeader = async (config: InternalAxiosRequestConfig) => {
-  const token = store.getState().auth?.accessToken
+  const token = store.getState().auth?.token
   if (config.headers && token) config.headers['Authorization'] = `Bearer ${token}`
 
   return config

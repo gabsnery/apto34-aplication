@@ -30,7 +30,7 @@ const { reducer, actions } = createSlice({
       console.log("🚀 ~ file: cartSlice.ts:29 ~ items:", items)
       return ({
         items: items,
-        total: items.reduce((partialSum, a) => partialSum + (a.product.value*a.quantity), 0),
+        total: items.reduce((partialSum, a) => partialSum + (a.product.valor_produto*a.quantity), 0),
       })
     },
     clearCart: () => initialState

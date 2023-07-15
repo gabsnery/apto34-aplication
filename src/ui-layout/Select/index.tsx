@@ -28,6 +28,7 @@ interface _SelectProps extends MUISelectPropsProps {
 
 
 export const Select: FC<_SelectProps> = ({ children, type, mainIcon, footer, options, ...SelectProps }) => {
+console.log("🚀 ~ file: index.tsx:31 ~ options:", options)
 
   const renderItems = (_options: OptionProps[] | undefined) => {
     let { grouped, options } = sortedOptions(_options);

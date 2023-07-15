@@ -17,12 +17,12 @@ const PrivateRoute: FC<React.PropsWithChildren<PrivateRouteProps>> = (props) => 
     both,
     ...routeProps
   } = props
-  const accessToken = useTypedSelector(({ auth }) => auth.accessToken)
+  const token = useTypedSelector(({ auth }) => auth.token)
 
   if (both) {
     return <Outlet />
   }
-  else if (accessToken) { //logado
+  else if (token) { //logado
     if (unprivate) {
       return <Navigate to="/Dashboard" />
     }

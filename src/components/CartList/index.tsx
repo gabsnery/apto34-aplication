@@ -23,8 +23,8 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
           return (
             <React.Fragment key={idx}>
               <ListItem title="list-item" divider >
-                <ListItemText>{item.product.name}</ListItemText>
-                <ListItemText>{item.product.value}</ListItemText>
+                <ListItemText>{item.product.nome}</ListItemText>
+                <ListItemText>{item.product.valor_produto}</ListItemText>
                 <ListItemText>{item.quantity}</ListItemText>
               </ListItem>
             </React.Fragment>)
