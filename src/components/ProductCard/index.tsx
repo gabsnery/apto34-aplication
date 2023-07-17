@@ -8,18 +8,19 @@ import { Text, TextField } from "ui-layout";
 import AddIcon from "@mui/icons-material/Add";
 import { addProduct } from "store/slices/cartSlice";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 export const AddModal: React.FC<{
-  modal: { open: boolean, item: Product|undefined  },
-  setModal: (value: { open: boolean, item: Product|undefined }) => void
+  modal: { open: boolean, item: Product | undefined },
+  setModal: (value: { open: boolean, item: Product | undefined }) => void
 }> = ({ modal, setModal }) => {
   const [quantity, setQuantity] = useState<number>(1)
   const dispatch = useAppDispatch();
 
   return <Modal open={modal.open} onClose={() => {
-    setModal({ open: false,item:undefined })
+    setModal({ open: false, item: undefined })
   }}
     aria-labelledby="modal-modal-title"
     aria-describedby="modal-modal-description"
@@ -51,8 +52,8 @@ export const AddModal: React.FC<{
         </Grid>
         <Grid item xs={6} >
           <IconButton onClick={() => {
-           modal.item && dispatch(addProduct({ product: modal.item, quantity: quantity }))
-           setModal({ open: false,item:undefined })
+            modal.item && dispatch(addProduct({ product: modal.item, quantity: quantity }))
+            setModal({ open: false, item: undefined })
           }} sx={{ border: '1px solid red', color: 'white', backgroundColor: 'red', borderRadius: '2px', py: '2px', px: '5px' }}>
             <AddIcon />
           </IconButton>
@@ -65,51 +66,56 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
   const { t } = useTranslation(["login", "common"]);
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<{ open: boolean, item: Product | undefined }>({ open: false, item: undefined })
+  const navigate = useNavigate()
 
   const theme = useTheme();
 
   return (
     <>
-    <AddModal modal={modal} setModal={setModal}/>
-    <Box>
-      <Card sx={{borderRadius:'0'}}>
-        {/* <CardActionArea> */}
-        <CardMedia
-          component="img"
-          height="250"
-          sx={{ objectPosition: 'top' }}
-          image="https://img.lojasrenner.com.br/banner/01-home/230707_HOME_APOSTAS_BLUSAS_DESK_FEM.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Grid container >
-            <Grid item xs={12} >
-              <Text gutterBottom variant="h5" sx={{
-                height: '3.6em',
-                lineHeight: '1.8em'
-              }}>
-                {value.id} {value.nome}
-              </Text>
-            </Grid>
-            <Grid item xs={6} sx={{ py: '6px' }}>
-              <Text variant="body" color="secondary">
-                {`R$${value.valor_produto}`}
-              </Text>
-            </Grid>
-            <Grid item xs={6} sx={{ textAlign: 'right' }}>
-              <IconButton onClick={() => {
-                setModal({open:true,item:value})
-              }} sx={{ color: 'primary.light', backgroundColor: 'primary.dark', borderRadius: '2px', py: '2px', px: '5px' }}>
-                <AddIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
-        </CardContent>
-        {/* </CardActionArea> */}
-      </Card>
+      <AddModal modal={modal} setModal={setModal} />
+      <Box>
+        <Card sx={{ borderRadius: '0' }}>
+          <CardActionArea
+            component="a"
+            onClick={() => navigate(`/product/${value.id}`)}>
+            <CardMedia
+              component="img"
+              height="250"
+              sx={{ objectPosition: 'top' }}
+              image={value.photos.length > 0 ? value.photos[0] : 'https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg'}
+              alt="green iguana"
+            />
+            <CardContent>
+              <Grid container >
+                <Grid item xs={12} >
+                  <Text gutterBottom variant="h5" sx={{
+                    height: '3.6em',
+                    lineHeight: '1.8em'
+                  }}>
+                    {value.id} {value.nome}
+                  </Text>
+                </Grid>
+                <Grid item xs={6} sx={{ py: '6px' }}>
+                  <Text variant="body" color="secondary">
+                    {`R$${value.valor_produto}`}
+                  </Text>
+                </Grid>
+                <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                  <IconButton onClick={(event) => {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    setModal({ open: true, item: value })
+                  }} sx={{ color: 'primary.light', backgroundColor: 'primary.dark', borderRadius: '2px', py: '2px', px: '5px' }}>
+                    <AddIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </CardActionArea>
+        </Card>
 
 
-    </Box>
+      </Box>
     </>
   );
 };

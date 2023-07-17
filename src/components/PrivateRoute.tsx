@@ -19,22 +19,7 @@ const PrivateRoute: FC<React.PropsWithChildren<PrivateRouteProps>> = (props) => 
   } = props
   const token = useTypedSelector(({ auth }) => auth.token)
 
-  if (both) {
-    return <Outlet />
-  }
-  else if (token) { //logado
-    if (unprivate) {
-      return <Navigate to="/Dashboard" />
-    }
-    else
-      return <Outlet />
-  }
-  else { //des-logado
-    if (!unprivate)
-      return <Navigate to="/login" />
-    else
-      return <Outlet />
-  }
+  return <Outlet />
 }
 
 export default PrivateRoute

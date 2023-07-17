@@ -6,7 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "pages/Login";
 import Cart from "pages/Cart";
 import Home from "pages/Home";
-import Product from "pages/Admin/Product";
+import {Product as ProdAdm} from "pages/Admin/Product" ;
+import Product from "pages/Product" ;
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -20,7 +21,7 @@ const AppRoutes = () => {
     <Suspense fallback={<div>carregando</div>}>
       <Routes>
         <Route path="/admin/product" element={<PrivateRoute path="/login" />}>
-          <Route path="/admin/product" element={<Product />} />
+          <Route path="/admin/product" element={<ProdAdm />} />
         </Route>
         <Route path="/" element={<PrivateRoute unprivate path="/login" />}>
           <Route path="/" element={<Home />} />
@@ -33,6 +34,9 @@ const AppRoutes = () => {
         </Route>
         <Route path="/cart" element={<PrivateRoute unprivate />}>
           <Route path="/cart" element={<Cart />} />
+        </Route>
+        <Route path="/product/:id" element={<PrivateRoute unprivate />}>
+          <Route path="/product/:id" element={<Product />} />
         </Route>
       </Routes>
     </Suspense>

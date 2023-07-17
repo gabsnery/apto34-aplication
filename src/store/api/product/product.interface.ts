@@ -1,9 +1,14 @@
+export interface ProductPost {
+  json: Partial<Product>;
+  files: File[];
+}
 export interface Product {
   id?: number;
   nome: string;
   descricao: string;
   valor_produto: number ;
   desativado?: boolean;
+  photos:string[],
   produtoSubcategoria: ProdutoSubcategoria[];
 }
 

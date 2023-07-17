@@ -6,7 +6,7 @@ export const BaseTypography = styled(Typography)(() => ({
 }))
 
 export const HeaderText1 = styled(BaseTypography)(() => ({
-  fontSize: '1.6rem',
+  fontSize: '3.6rem',
   fontWeight: 500,
 }))
 export const HeaderText2 = styled(BaseTypography)(() => ({
