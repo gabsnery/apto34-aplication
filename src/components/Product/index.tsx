@@ -24,15 +24,15 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <>
       <Grid item container p={2} columnSpacing={2}>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <Grid item xs={12}>
-            <img style={{ backgroundImage: `url(${data?.photos[0]})`, width: '100%', height: '400px', backgroundPosition: 'top', backgroundSize: 'cover' }} />
+            <img style={{ backgroundImage: `url(${data?.photos[0]})`, width: '100%', height: '700px', backgroundPosition: 'top', backgroundSize: 'cover' }} />
           </Grid>
           <Grid item xs={12}>
             {data?.photos.map((item,idx) => (<img key={idx} src={item} style={{ width: `20%` }} />))}
           </Grid>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           <Grid item xs={12}>
             <Text variant="h1" color="primary">{data?.nome}</Text>
           </Grid>

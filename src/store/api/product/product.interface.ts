@@ -7,9 +7,13 @@ export interface Product {
   nome: string;
   descricao: string;
   valor_produto: number ;
+  quantity: number ;
   desativado?: boolean;
   photos:string[],
+  thumbnails:string[],
   produtoSubcategoria: ProdutoSubcategoria[];
+  cores: ProductoColor[];
+  tamanhos: ProductoSize[];
 }
 
 export interface Category {
@@ -18,6 +22,16 @@ export interface Category {
   categoria: string;
   descricao_categoria?: string;
   desativado?: boolean;
+}
+export interface ProductoColor {
+  id?: number;
+  descricao?: string;
+  quantidade?: number;
+}
+export interface ProductoSize {
+  id?: number;
+  descricao?: string;
+  quantidade?: number;
 }
 
 export interface ProdutoSubcategoria {

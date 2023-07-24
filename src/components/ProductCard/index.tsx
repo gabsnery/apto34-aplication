@@ -82,7 +82,7 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
               component="img"
               height="250"
               sx={{ objectPosition: 'top' }}
-              image={value.photos.length > 0 ? value.photos[0] : 'https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg'}
+              image={value.thumbnails.length > 0 ? value.thumbnails[0] : 'https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg'}
               alt="green iguana"
             />
             <CardContent>

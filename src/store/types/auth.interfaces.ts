@@ -9,5 +9,6 @@ export interface Login {
 
 export interface AuthState {
   status: status
-  token:  string;
+  admin?: boolean
+  token: string;
 }

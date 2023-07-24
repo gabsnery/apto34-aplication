@@ -8,6 +8,7 @@ import { logout } from 'store/slices/logout'
 export type PrivateRouteProps = RouteProps & {
   unprivate?: boolean
   both?: boolean
+  admin?: boolean
 }
 
 const PrivateRoute: FC<React.PropsWithChildren<PrivateRouteProps>> = (props) => {
@@ -15,11 +16,43 @@ const PrivateRoute: FC<React.PropsWithChildren<PrivateRouteProps>> = (props) => 
   const {
     unprivate,
     both,
+    admin,
     ...routeProps
   } = props
   const token = useTypedSelector(({ auth }) => auth.token)
+  const isAdmin = useTypedSelector(({ auth }) => auth.admin)
+  console.log("🚀 ~ file: PrivateRoute.tsx:22 ~ admin:", admin)
+  console.log("🚀 ~ file: PrivateRoute.tsx:24 ~ isAdmin:", isAdmin)
+  console.log("🚀 ~ file: PrivateRoute.tsx:23 ~ token:", token)
+  const status = useTypedSelector(({ auth }) => auth.status)
+  const dispatch = useAppDispatch();
 
-  return <Outlet />
+useEffect(() => {
+  if(admin && token)
+  dispatch(reAuth());
+  
+}, [admin]);
+useEffect(() => {
+  /* if (status==='Error')
+  dispatch(logout());
+   */console.log("🚀 ~ file: PrivateRoute.tsx:35 ~ status:", status)
+}, [status]);
+  if (both) {
+    return <Outlet />
+  }
+  else if ((token) && (!admin || (admin && isAdmin))) { //logado
+    if (unprivate) {
+      return <Navigate to="/Dashboard" />
+    }
+    else
+      return <Outlet />
+  }
+  else { //des-logado
+    if (!unprivate)
+      return <Navigate to="/login" />
+    else
+      return <Outlet />
+  }
 }
 
 export default PrivateRoute

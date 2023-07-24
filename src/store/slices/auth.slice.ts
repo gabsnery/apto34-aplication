@@ -5,15 +5,12 @@ import {
 import { AuthState, Login } from '../types/auth.interfaces'
 
 import { get, save } from '../../services/requests'
+import { logout } from './logout'
 
 export const reAuth = createAsyncThunk(
   'auth/reAuth',
-  async (loginData: Login) => await
-    save<any>('login', {
-      email: loginData.email,
-      refreshToken : loginData.refreshToken,
-      grantType: 'refresh_token',
-    })
+  async () => await
+    save<any>('welcome', {})
 )
 export const fetchLogin = createAsyncThunk(
   'auth/fetchLogin',
@@ -33,6 +30,7 @@ const fetchIpTest = createAsyncThunk('auth/test', async () =>
 export const initialState: AuthState = {
   status: 'NotAsked',
   token: '',
+  admin: false
 }
 
 
@@ -43,29 +41,28 @@ const authSlice = createSlice({
     clearAuth: () => initialState
   },
   extraReducers(builder) {
-    builder.addCase(fetchLogin.pending, (state) => {
-      state.status = 'Pending'
-      state.token = ''
-    })
     builder.addCase(fetchLogin.rejected, (state) => {
       state.status = 'Error'
       state.token = ''
+      state.admin = false
 
     })
 
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.status = 'Done'
       state.token = action.payload.token
+      state.admin = action.payload.admin
     })
-
     builder.addCase(reAuth.rejected, (state) => {
       state.status = 'Error'
+      state.token = ''
+      state.admin = false
+
     })
 
     builder.addCase(reAuth.fulfilled, (state, action) => {
       state.status = 'Done'
-      state.token = action.payload.token
-      
+
     })
   }
 })

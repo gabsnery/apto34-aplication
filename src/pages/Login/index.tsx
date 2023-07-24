@@ -79,6 +79,7 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
               id="salva-login-senha"
               InputProps={{ ...register("senha", { required: true }) }}
               type="senha"
+              name="password"
               error={!!errors.senha}
               helperText={errors.senha && t(errors.senha?.message as string)}
               fullWidth

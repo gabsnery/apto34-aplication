@@ -4,22 +4,29 @@ import { Chip, Container, Grid, Input, useTheme } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../store/store";
 import ProductsCard from "components/ProductCard";
-import { Product } from "store/api/product/product.interface";
+import { Product, ProductoColor, ProductoSize } from "store/api/product/product.interface";
 import { useState, useEffect } from "react";
 import { TextField, Text, Select, Button } from "ui-layout";
 import { useGetCategoriasQuery } from "store/api/category";
 import { useUpdateAddProductMutation } from "store/api/product";
 import { useDropzone } from "react-dropzone";
+import { useGetColorsQuery } from "store/api/color";
+import { useGetSizesQuery } from "store/api/size";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
     const { t } = useTranslation(["login", "common"]);
     const dispatch = useAppDispatch();
     const [formData, setFormData] = useState<Partial<Product>>({})
+    const [productoColors, setProductoColors] = useState<ProductoColor[]>([])
+    const [productoColor, setProductoColor] = useState<Partial<ProductoColor>>({})
+    const [productoSize, setProductoSize] = useState<Partial<ProductoSize>>({})
     const [file, setFile] = useState<File | undefined>(undefined)
     const [files, setFiles] = useState<File[]>([])
 
     const { data: categorias } = useGetCategoriasQuery()
+    const { data: colors } = useGetColorsQuery()
+    const { data: sizes } = useGetSizesQuery()
     const [updateAddProduct, { isSuccess }] = useUpdateAddProductMutation()
 
     const theme = useTheme();
@@ -123,6 +130,17 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                 <Grid item xs={4} >
 
                     <TextField
+                        label={t("quantity")}
+                        type="number"
+                        onChange={(ev) => setFormData({ ...formData, quantity: +ev.target.value })}
+                        value={formData.quantity || ''}
+                        required
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={4} >
+
+                    <TextField
                         label={t("descricao")}
                         onChange={(ev) => setFormData({ ...formData, descricao: ev.target.value })}
                         value={formData.descricao || ''}
@@ -163,6 +181,76 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                         options={categorias?.map((item) => ({ value: item.id.toString(), label: item.descricao_subcategoria })) || []}
                     />
                 </Grid>
+                <Grid item container xs={12} rowSpacing={2}
+                    columnSpacing={2}>
+                    <Grid item xs={4} >
+                        <Select
+                            name={'categoryId'}
+                            label="Cor"
+                            sx={{ backgroundColor: 'transparent' }}
+                            fullWidth
+                            value={productoColor?.id?.toString() || ''}
+                            onChange={(e) => {
+                                console.log("🚀 ~ file: index.tsx:177 ~ ProductoColor:", productoColor)
+                                setProductoColor({ ...productoColor, id: +(e.target.value as string) ,descricao:colors?.filter(s=>s.id===+(e.target.value as string))[0].descricao })
+                            }}
+                            options={colors?.map((item: any) => ({ value: item.id.toString(), label: item.descricao || '' })) || []}
+                        />
+                    </Grid>
+                    <Grid item xs={4} >
+                        <TextField
+                            label={t("Quantidade")}
+                            type="number"
+                            onChange={(ev) => setProductoColor({ ...productoColor, quantidade: +(ev.target.value as string) })}
+                            value={productoColor.quantidade || 0}
+                            required
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={4} >
+                        <Button variant="contained" color="primary" onClick={() => {
+                            const cores = formData['cores'] || []
+                            setFormData({ ...formData, cores: [...cores, productoColor] })
+                            setProductoSize({})
+                        }}> add</Button>
+                    </Grid>
+                </Grid>
+                <Grid item container xs={12} rowSpacing={2}
+                    columnSpacing={2}>
+                    <Grid item xs={4} >
+                        <Select
+                            name={'categoryId'}
+                            label="Temanho"
+                            sx={{ backgroundColor: 'transparent' }}
+                            fullWidth
+                            value={productoSize?.id?.toString() || ''}
+                            onChange={(e) => {
+                                console.log("🚀 ~ file: index.tsx:177 ~ ProductoColor:", productoSize)
+                                setProductoSize({ ...productoSize, id: +(e.target.value as string),descricao:sizes?.filter(s=>s.id===+(e.target.value as string))[0].descricao })
+                            }}
+                            options={sizes?.map((item: any) => ({ value: item.id.toString(), label: item.descricao || '' })) || []}
+                        />
+                    </Grid>
+                    <Grid item xs={4} >
+                        <TextField
+                            label={t("Quantidade")}
+                            type="number"
+                            onChange={(ev) => setProductoSize({ ...productoSize, quantidade: +(ev.target.value as string) })}
+                            value={productoSize.quantidade || 0}
+                            required
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={4} >
+                        <Button variant="contained" color="primary" onClick={() => {
+                            const tamanhos = formData['tamanhos'] || []
+                            setFormData({ ...formData, tamanhos: [...tamanhos, productoSize] })
+                            setProductoSize({})
+                        }}> add</Button>
+                    </Grid>
+                </Grid>
+                {formData.cores?.map(item => <><Text sx={{display:'contents'}} variant="h4" >{item.id}-{item.descricao}-{item.quantidade}</Text><br /></>)}
+                {formData.tamanhos?.map(item => <><Text sx={{display:'contents'}} variant="h4" >{item.id}-{item.descricao}-{item.quantidade}</Text><br /></>)}
             </Grid>
             <Grid item xs={12} textAlign={'right'}>
 

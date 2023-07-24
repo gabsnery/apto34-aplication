@@ -4,6 +4,8 @@ import store from '../store/store'
 
 const configAuthorizationHeader = async (config: InternalAxiosRequestConfig) => {
   const token = store.getState().auth?.token
+  console.log("🚀 ~ file: api.ts:7 ~ configAuthorizationHeader ~ store.getState().auth:", store.getState().auth)
+  console.log("🚀 ~ file: api.ts:7 ~ configAuthorizationHeader ~ token:", token)
   if (config.headers && token) config.headers['Authorization'] = `Bearer ${token}`
 
   return config
