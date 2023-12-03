@@ -9,6 +9,7 @@ import Home from "pages/Home";
 import {Product as ProdAdm} from "pages/Admin/Product" ;
 import Product from "pages/Product" ;
 import {Admin} from "pages/Admin" ;
+import CloseOrder from "pages/CloseOrder";
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -35,6 +36,9 @@ const AppRoutes = () => {
         </Route>
         <Route path="/cart" element={<PrivateRoute both />}>
           <Route path="/cart" element={<Cart />} />
+        </Route>
+        <Route path="/close-order" element={<PrivateRoute both />}>
+          <Route path="/close-order" element={<CloseOrder />} />
         </Route>
         <Route path="/product/:id" element={<PrivateRoute both />}>
           <Route path="/product/:id" element={<Product />} />

@@ -3,7 +3,7 @@ import { Product, ProductPost } from "./product.interface";
 export const productApi = defaultApi.injectEndpoints({
     endpoints: (build) => ({
 
-        updateAddProduct: build.mutation<Product, ProductPost>({
+        updateAddProduct: build.mutation<Partial<Product>, ProductPost>({
             query: (payload) => {
                 console.log("🚀 ~ file: index.tsx:8 ~ payload:", payload)
                 const body = new FormData();

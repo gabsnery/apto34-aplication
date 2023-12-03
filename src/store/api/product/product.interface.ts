@@ -3,7 +3,7 @@ export interface ProductPost {
   files: File[];
 }
 export interface Product {
-  id?: number;
+  id: number;
   nome: string;
   descricao: string;
   valor_produto: number ;
