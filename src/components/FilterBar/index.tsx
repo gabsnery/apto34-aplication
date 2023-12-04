@@ -6,11 +6,19 @@ import { mockFilter } from "./mock";
 import { RootState, useAppDispatch } from "store/store";
 import { useSelector } from "react-redux";
 import { addFilter, clearFilter, removeFilter } from "store/slices/sessionFilterSlice";
+import { useGetColorsQuery } from "store/api/color";
+import { useGetSizesQuery } from "store/api/size";
+import { useGetCategoriasQuery, useGetSubCategoriasQuery } from "store/api/category";
 
 const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter)
+  const { data: colors } = useGetColorsQuery()
+  const { data: sizes } = useGetSizesQuery()
+  const { data: categorias } = useGetCategoriasQuery()
+  const { data:subCategorias  } = useGetSubCategoriasQuery()
+
   console.log("🚀 ~ file: index.tsx:14 ~ sessionFilter:", sessionFilter)
 
   return (
@@ -32,8 +40,8 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
             else
               dispatch(addFilter({ filter: 'category', value: +(e.target.value as string) }))
           }}
-          options={Object.keys(mockFilter.category).map((item) => ({ value: item.toString(), label: mockFilter.category[item as keyof typeof mockFilter.category] || '' })) || []}
-        />
+          options={categorias?.map((item) => ({ value: item.id.toString(), label: item.categoria })) || []}
+          />
         <Select
           name={'categoryId'}
           label="Tipo"
@@ -50,7 +58,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
             else
               dispatch(addFilter({ filter: 'type', value: +(e.target.value as string) }))
           }}
-          options={Object.keys(mockFilter.type).map((item) => ({ value: item.toString(), label: mockFilter.type[item as keyof typeof mockFilter.category] || '' })) || []}
+          options={subCategorias?.map((item) => ({ value: item.id.toString(), label: item.descricao_subcategoria })) || []}
         />
         <Select
           name={'categoryId'}
@@ -60,7 +68,6 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           type="multiple"
           value={sessionFilter?.color?.map(i => i.toString())}
           onChange={(e) => {
-            console.log("🚀 ~ file: index.tsx:20 ~ e:", e)
             const array = sessionFilter.color
             const index = array.indexOf(+(e.target.value as string));
             if (index >= 0)
@@ -68,8 +75,8 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
             else
               dispatch(addFilter({ filter: 'color', value: +(e.target.value as string) }))
           }}
-          options={Object.keys(mockFilter.color).map((item) => ({ value: item.toString(), label: mockFilter.color[item as keyof typeof mockFilter.category] || '' })) || []}
-        />
+          options={colors?.map((item: any) => ({ value: item.id.toString(), label: item.descricao || '' })) || []}
+          />
         <Select
           name={'categoryId'}
           label="Tamanho"
@@ -86,8 +93,8 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
             else
               dispatch(addFilter({ filter: 'size', value: +(e.target.value as string) }))
           }}
-          options={Object.keys(mockFilter.size).map((item) => ({ value: item.toString(), label: mockFilter.size[item as keyof typeof mockFilter.category] || '' })) || []}
-        />
+          options={sizes?.map((item: any) => ({ value: item.id.toString(), label: item.descricao || '' })) || []}
+          />
 
         <Button variant='text' color="primary" onClick={() => {
           dispatch(clearFilter())

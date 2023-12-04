@@ -30,7 +30,6 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
       <BottomNavigation
         sx={{ backgroundColor: theme.palette.primary.main, height: '300px', marginTop: '30px', paddingTop: '30px' }}
         onChange={(event, newValue) => {
-          console.log("🚀 ~ file: DefaultFooter.tsx:32 ~ newValue:", newValue)
         }}
       >
         <Grid container rowSpacing={2} direction="row"

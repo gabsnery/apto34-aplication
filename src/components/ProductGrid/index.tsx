@@ -2,15 +2,18 @@ import { Grid, useTheme } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../store/store";
+import { RootState, useAppDispatch } from "../../store/store";
 import ProductsCard from "components/ProductCard";
 import { useGetProductsQuery } from "store/api/product";
+import { useSelector } from "react-redux";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
     const { t } = useTranslation(["login", "common"]);
     const dispatch = useAppDispatch();
-    const { data } = useGetProductsQuery()
+    const sessionFilter = useSelector((st: RootState) => st.sessionFilter)
+
+    const { data } = useGetProductsQuery(sessionFilter,{skip:!sessionFilter})
     const theme = useTheme();
 
     return (

@@ -7,7 +7,7 @@ import ProductsCard from "components/ProductCard";
 import { Product, ProductoColor, ProductoSize } from "store/api/product/product.interface";
 import { useState, useEffect } from "react";
 import { TextField, Text, Select, Button } from "ui-layout";
-import { useGetCategoriasQuery } from "store/api/category";
+import { useGetSubCategoriasQuery } from "store/api/category";
 import { useUpdateAddProductMutation } from "store/api/product";
 import { useDropzone } from "react-dropzone";
 import { useGetColorsQuery } from "store/api/color";
@@ -24,7 +24,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
     const [file, setFile] = useState<File | undefined>(undefined)
     const [files, setFiles] = useState<File[]>([])
 
-    const { data: categorias } = useGetCategoriasQuery()
+    const { data: categorias } = useGetSubCategoriasQuery()
     const { data: colors } = useGetColorsQuery()
     const { data: sizes } = useGetSizesQuery()
     const [updateAddProduct, { isSuccess }] = useUpdateAddProductMutation()

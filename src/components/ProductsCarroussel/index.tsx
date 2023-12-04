@@ -4,13 +4,16 @@ import { Button, theme } from "ui-layout";
 import "./style.css";
 import { Grid } from "@mui/material";
 import { useGetProductsQuery } from "store/api/product";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 
 export const ProductsCarroussel: React.FC = () => {
   const [firstItemToShowIndex, setfirstItemToShowIndex] = useState<number>(0);
   const quantityToShow = 5
-  const { data } = useGetProductsQuery()
+  const sessionFilter = useSelector((st: RootState) => st.sessionFilter)
 
+  const { data } = useGetProductsQuery(sessionFilter,{skip:!sessionFilter})
   return (data ?
     <Grid
       container

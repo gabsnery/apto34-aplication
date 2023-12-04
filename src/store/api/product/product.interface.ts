@@ -17,7 +17,7 @@ export interface Product {
 }
 
 export interface Category {
-  id?: number;
+  id: number;
   data_criacao?: Date;
   categoria: string;
   descricao_categoria?: string;

@@ -1,3 +1,4 @@
+import { SessionFilter } from "store/types/sessionFilters.interfaces";
 import { defaultApi } from "../default";
 import { Product, ProductPost } from "./product.interface";
 export const productApi = defaultApi.injectEndpoints({
@@ -16,7 +17,7 @@ export const productApi = defaultApi.injectEndpoints({
                     url: "api/product",
                     method: 'POST',
                     body: body,
-                    formData:true
+                    formData: true
                 };
             },
             invalidatesTags: ['Product']
@@ -36,8 +37,9 @@ export const productApi = defaultApi.injectEndpoints({
             invalidatesTags: ['Product']
 
         }),
-        getProducts: build.query<Product[], void>({
-            query: () => `/api/product`,
+        getProducts: build.query<Product[], SessionFilter>({
+            query: (filter) => `/api/product?${filter.category.map(item => `category[]=${item}`).join('&')}&${filter.size.map(item => `size[]=${item}`).join('&')}&${filter.color.map(item => `color[]=${item}`).join('&')}&${filter.type.map(item => `type[]=${item}`).join('&')}
+            `,
             providesTags: ['Product']
         }),
         getProduct: build.query<Product, number>({

@@ -43,6 +43,12 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12}>
             {data?.produtoSubcategoria.map((item,idx)=><Text key={idx} variant="body" color="primary" >{item.subcategoria}</Text>)}
           </Grid>
+          <Grid item xs={12}>
+            {data?.cores.map((item,idx)=><Text key={idx} variant="body" color="primary" >{item.descricao}</Text>)}
+          </Grid>
+          <Grid item xs={12}>
+            {data?.tamanhos.map((item,idx)=><Text key={idx} variant="body" color="primary" >{item.descricao}|</Text>)}
+          </Grid>
         </Grid>
 
         {/* {JSON.stringify(data)} */}
