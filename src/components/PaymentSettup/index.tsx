@@ -1,6 +1,5 @@
 import { getIdentificationTypes, getIssuers, initMercadoPago } from '@mercadopago/sdk-react';
 import { Grid, TextField, useTheme } from "@mui/material";
-import PaymentForm from "components/PaymentForm";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -13,31 +12,21 @@ import { useAppDispatch } from "../../store/store";
 import { getPaymentMethods } from '@mercadopago/sdk-react/coreMethods';
 import { PaymentMethods } from "@mercadopago/sdk-react/coreMethods/getPaymentMethods/types";
 import { setSnackbar } from "store/slices/snackbarSlice";
+import PersonalInfo from './personalInfo';
+import PaymentInfo from './paymentInfo';
+import AddreddInfo from './addreddInfo';
+import DeliverInfo from './deliverInfo';
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
 
-  const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart)
   const [getCardToken, { data: cardToken }] = useGetCardTokenMutation()
 
   const dispatch = useAppDispatch();
-  const [formData, setFormData] = useState<{
-    name: string,
-    surname: string,
-    email: string,
-    street_name: string,
-    street_number: string,
-  }>({
-    name: 'Gabriela',
-    surname: 'NEry',
-    email: 'admin@gatostecnologia.com',
-    street_name: 'admin@gatostecnologia.com',
-    street_number: '33',
-  })
-  const [paymentId, setPaymentId] = useState<string | undefined>()
-  const [preferenceId, setPreferenceId] = useState<string | undefined>()
+
   const [paymentInfo, setPaymentInfo] = useState<any>()
+  const [personalInfoData, setPersonalInfoData] = useState<any>({})
+  const [addressInfoData, setAddressInfoData] = useState<any>({})
   const [addPreference, { isSuccess, data }] = useAddPreferenceMutation()
   const [addOrder, { data: orderResponse }] = useAddOrderMutation()
   const [addPayment, { data: payment }] = useAddPaymentMutation()
@@ -46,7 +35,6 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   useEffect(() => {
     if (process.env.REACT_APP_MERCADOLIVRE_TOKEN)
       initMercadoPago(process.env.REACT_APP_MERCADOLIVRE_TOKEN);
-
   }, []);
   useEffect(() => {
     if (payment?.pix_qrcode !== '')
@@ -77,7 +65,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
             dispatch(
               setSnackbar({
                 type: 'error',
-                message: e,
+                message: JSON.stringify(e),
                 duration: 4000
               })
             )
@@ -94,52 +82,19 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     }
   }, [cardToken]);
-  const steps = [0, 1, 2]
   return (
     <Grid container sx={{ border: '2px dotted red' }} columns={16}>
       <Grid xs={2} />
-      <Grid xs={4} item container columns={16}>
-        <TextField
-          label={t("Nome")}
-          onChange={(ev) => setFormData({ ...formData, name: ev.target.value })}
-          value={formData.name || ''}
-          required
-          fullWidth
-        />
-        <TextField
-          label={t("surname")}
-          onChange={(ev) => setFormData({ ...formData, surname: ev.target.value })}
-          value={formData.surname || ''}
-          required
-          fullWidth
-        />
-        <TextField
-          label={t("email")}
-          onChange={(ev) => setFormData({ ...formData, email: ev.target.value })}
-          value={formData.email || ''}
-          required
-          fullWidth
-        />
-        <TextField
-          label={t("street_name")}
-          onChange={(ev) => setFormData({ ...formData, street_name: ev.target.value })}
-          value={formData.street_name || ''}
-          required
-          fullWidth
-        />
-        <TextField
-          label={t("street_number")}
-          onChange={(ev) => setFormData({ ...formData, street_number: ev.target.value })}
-          value={formData.street_number || ''}
-          required
-          fullWidth
-        />
+      <Grid xs={4} columns={16} item container direction='column'>
+        <PersonalInfo />
+        <AddreddInfo />
+        <DeliverInfo />
       </Grid>
-      <Grid xs={4} item >
-        <PaymentForm setPaymentInfo={setPaymentInfo} />
-        <img src={`data:image/jpeg;base64,${qr_code_base64}`} />
+      <Grid xs={4} item  >
+        <PaymentInfo setPaymentInfo={setPaymentInfo} />
+        <img style={{ maxWidth: "100%" }} src={`data:image/jpeg;base64,${qr_code_base64}`} />
       </Grid>
-      <Grid xs={4} item container direction={'column'}>
+      <Grid xs={4} columns={16} item container direction={'column'}>
         Detalhes
         <Button color="primary" variant="outlined" onClick={() => {
           getIdentificationTypes().then(e => {
@@ -166,12 +121,12 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           }
           addPreference({
             payer: {
-              name: formData.name,
-              surname: formData.surname,
-              email: formData.email,
+              name: personalInfoData.name,
+              surname: personalInfoData.surname,
+              email: personalInfoData.email,
               address: {
-                street_name: formData.street_name || '',
-                street_number: +formData.street_number,
+                street_name: addressInfoData.street_name || '',
+                street_number: +addressInfoData.street_number,
                 zip_code: "5700"
               }
             },
@@ -198,7 +153,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           // setStep(1)
         }}>Proximo</Button>
       </Grid>
-      <Grid xs={2} item >
+      <Grid xs={2}>
       </Grid>
     </Grid>
   );

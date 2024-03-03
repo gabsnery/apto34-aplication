@@ -3,23 +3,20 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "store/store";
-import { Button, Select } from "ui-layout";
+import { Select } from "ui-layout";
 
+import { getPaymentMethods } from '@mercadopago/sdk-react/coreMethods';
+import { PaymentMethods } from "@mercadopago/sdk-react/coreMethods/getPaymentMethods/types";
+import { PayerCost } from "@mercadopago/sdk-react/coreMethods/util/types";
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import { createCardToken, getIdentificationTypes, getIssuers, getPaymentMethods } from '@mercadopago/sdk-react/coreMethods';
-import { useAddPaymentMutation, useGetCardTokenMutation } from "store/api/payment";
-import { Payment } from "@mercadopago/sdk-react";
-import { setSnackbar } from "store/slices/snackbarSlice";
-import { PaymentMethods } from "@mercadopago/sdk-react/coreMethods/getPaymentMethods/types";
-import { PayerCost } from "@mercadopago/sdk-react/coreMethods/util/types";
 interface Props {
   setPaymentInfo: (value: any) => void
 }
-const PaymentForm: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo }) => {
+const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo }) => {
   const { t } = useTranslation(["login", "common"]);
   const dispatch = useAppDispatch();
   const [installments, setInstallments] = useState<PayerCost[]>([])
@@ -42,19 +39,15 @@ const PaymentForm: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
     installments: 0
   })
 
-
-
-
   const [type, setType] = useState<undefined | 'CreditCard' | 'PIX' | 'Invoice'>()
   useEffect(() => {
     if (type === 'CreditCard')
-      if (formData.CREDIT_CARD_NUMBER.length >= 4)
         getPaymentMethods({
           bin: formData.CREDIT_CARD_NUMBER.replaceAll(' ', ''),
         }).then((value?: PaymentMethods) => {
           setInstallments(value?.results[0].payer_costs || [])
         })
-  }, [formData]);
+  }, [formData,type]);
   useEffect(() => {
     if (type == 'Invoice') {
       setPaymentInfo({
@@ -73,7 +66,6 @@ const PaymentForm: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
       setPaymentInfo(formData)
     }
   }, [type]);
-  const steps = [0, 1, 2]
   return (
     <Grid container sx={{ border: '2px dotted red' }}>
 
@@ -158,5 +150,5 @@ const PaymentForm: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
   );
 };
 
-export default PaymentForm;
+export default PaymentInfo;
 
