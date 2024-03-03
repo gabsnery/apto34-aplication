@@ -15,10 +15,20 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
                 };
             },
         }),
-        addPayment: build.mutation<any, ICardPaymentFormData<ICardPaymentBrickPayer> >({
+        addPayment: build.mutation<any, any >({
             query: (payload) => {
                 return {
                     url: "process_payment",
+                    method: 'POST',
+                    body: payload,
+                    formData: true
+                };
+            },
+        }),
+        getCardToken: build.mutation<any, any >({
+            query: (payload) => {
+                return {
+                    url: "card_token",
                     method: 'POST',
                     body: payload,
                     formData: true
@@ -31,4 +41,5 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
 export const {
     useAddPreferenceMutation,
     useAddPaymentMutation,
+    useGetCardTokenMutation,
  } = mercadoPagoApi;

@@ -5,7 +5,7 @@ import ProductsGrid from "components/ProductGrid";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../store/store";
 import CartList from "components/CartList";
-import Payment from "components/Payment";
+import Payment from "components/PaymentSettup";
 import { Button ,Text} from "ui-layout";
 import { useNavigate } from "react-router-dom";
 // import ReCAPTCHA from 'react-google-recaptcha'

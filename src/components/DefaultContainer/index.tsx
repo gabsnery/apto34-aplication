@@ -3,6 +3,7 @@ import React, { FC, Suspense } from "react";
 import Loading from "../Loading";
 import DefaultHeader from "./DefaultHeader";
 import DefaultFooter from "./DefaultFooter";
+import SnackbarHandler from "components/SnackbarHandler";
 
 const DefaultContainer: FC<
   React.PropsWithChildren<{
@@ -17,11 +18,12 @@ const DefaultContainer: FC<
         <Container maxWidth={false} disableGutters={true}
           sx={{
             backgroundColor: theme.palette.background.default,
-            marginTop:'15px',
+            marginTop: '15px',
           }}>
+          <SnackbarHandler />
           {props.children}
         </Container>
-        <DefaultFooter/>
+        <DefaultFooter />
       </Suspense>
     </>
   );

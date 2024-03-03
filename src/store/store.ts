@@ -8,6 +8,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { defaultApi } from './api/default';
 import rootReducer from "./rootReducer";
+import setSnackbarMiddleware from "middlewares/setSnackbarMiddleware";
 
 const migrations = {
   0: (state: PersistedState) => {
@@ -39,7 +40,8 @@ const store = configureStore({
       serializableCheck: false,
       immutableCheck: false,
     }),
-    defaultApi.middleware,
+    setSnackbarMiddleware,
+    defaultApi.middleware
   ],
 });
 
