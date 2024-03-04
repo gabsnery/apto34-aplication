@@ -16,11 +16,13 @@ import PersonalInfo from './personalInfo';
 import PaymentInfo from './paymentInfo';
 import AddreddInfo from './addreddInfo';
 import DeliverInfo from './deliverInfo';
+import { useTypedSelector } from 'hooks';
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const cart = useSelector((st: RootState) => st.cart)
   const [getCardToken, { data: cardToken }] = useGetCardTokenMutation()
+  const { id:userID } = useTypedSelector(({ auth }) => auth)
 
   const dispatch = useAppDispatch();
 
@@ -142,6 +144,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
           })
           addOrder({
+            clienteId:userID,
             endereco: {
               cep: '13400690',
               logradouro: 'rua aqui',

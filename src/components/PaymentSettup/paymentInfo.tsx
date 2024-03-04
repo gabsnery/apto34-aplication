@@ -18,7 +18,7 @@ interface Props {
 }
 const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo }) => {
   const { t } = useTranslation(["login", "common"]);
-  const dispatch = useAppDispatch();
+
   const [installments, setInstallments] = useState<PayerCost[]>([])
   const cart = useSelector((st: RootState) => st.cart)
   const [formData, setFormData] = useState<{
@@ -66,6 +66,10 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
       setPaymentInfo(formData)
     }
   }, [type]);
+  useEffect(() => {
+    setPaymentInfo(formData)
+
+  }, [formData]);
   return (
     <Grid container sx={{ border: '2px dotted red' }}>
 

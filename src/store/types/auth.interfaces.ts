@@ -8,7 +8,11 @@ export interface Login {
 }
 
 export interface AuthState {
+  id: number
   status: status
   admin?: boolean
   token: string;
+  nome: string;
+  sobrenome: string;
+  email: string;
 }

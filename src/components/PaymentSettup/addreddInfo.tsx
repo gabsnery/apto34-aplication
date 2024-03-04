@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import { useTypedSelector } from "hooks";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Text } from "ui-layout";
@@ -7,6 +8,7 @@ interface Props {
 }
 const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
     const { t } = useTranslation(["login", "common"]);
+
     const [formData, setFormData] = useState<{
         street_name: string,
         street_number: string,
@@ -70,7 +72,7 @@ const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
             }
             <Button onClick={() => {
                 setEdit(!edit);
-            } } color={"primary"} variant={"outlined"}>{`${edit?'Salvar':'Editar'}`}</Button>
+            }} color={"primary"} variant={"outlined"}>{`${edit ? 'Salvar' : 'Editar'}`}</Button>
         </>
     );
 };

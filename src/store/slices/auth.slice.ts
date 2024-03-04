@@ -28,9 +28,13 @@ const fetchIpTest = createAsyncThunk('auth/test', async () =>
 
 
 export const initialState: AuthState = {
+  id:0,
   status: 'NotAsked',
   token: '',
-  admin: false
+  admin: false,
+  nome: '',
+  sobrenome: '',
+  email: ''
 }
 
 
@@ -42,22 +46,33 @@ const authSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchLogin.rejected, (state) => {
+      state.id=0
       state.status = 'Error'
       state.token = ''
       state.admin = false
-
+      state.nome = ''
+      state.sobrenome = ''
+      state.email = ''
     })
 
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
+      console.log("🚀 ~ builder.addCase ~ state:", action.payload)
       state.status = 'Done'
+      state.id=action.payload.id
       state.token = action.payload.token
       state.admin = action.payload.admin
+      state.nome = action.payload.nome
+      state.sobrenome = action.payload.sobrenome
+      state.email = action.payload.email
     })
     builder.addCase(reAuth.rejected, (state) => {
+      state.id=0
       state.status = 'Error'
       state.token = ''
       state.admin = false
-
+      state.nome = ''
+      state.sobrenome = ''
+      state.email = ''
     })
 
     builder.addCase(reAuth.fulfilled, (state, action) => {
