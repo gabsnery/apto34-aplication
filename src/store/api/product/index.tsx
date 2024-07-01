@@ -45,6 +45,9 @@ export const productApi = defaultApi.injectEndpoints({
         getProduct: build.query<Product, number>({
             query: (id) => `/api/product/${id}`
         }),
+        getProductImage: build.query<{url:string}, number>({
+            query: (id) => `/api/product/image/${id}`
+        }),
     }),
 });
 export const {
