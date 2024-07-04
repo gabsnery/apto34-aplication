@@ -140,7 +140,6 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
           fullWidth
           value={formData.installments.toString()}
           onChange={(e) => {
-            console.log("🚀 ~ file: index.tsx:20 ~ e:", e)
             setFormData({ ...formData, installments: +(e.target.value as string) })
           }}
           options={installments.filter(i => (cart.total / i.installments >= i.min_allowed_amount))?.map((item) => ({ value: item.installments.toString(), label: item.installments === 0 ? '' : `${item.installments} parcela (${item.installment_rate}%) (${item.installments} * ${(cart.total / item.installments) + ((cart.total / item.installments) * (item.installment_rate / 100))}) (${(cart.total * (((item.installment_rate) / 100) + 1))})` })) || []}

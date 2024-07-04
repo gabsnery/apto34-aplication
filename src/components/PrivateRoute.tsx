@@ -21,9 +21,6 @@ const PrivateRoute: FC<React.PropsWithChildren<PrivateRouteProps>> = (props) => 
   } = props
   const token = useTypedSelector(({ auth }) => auth.token)
   const isAdmin = useTypedSelector(({ auth }) => auth.admin)
-  console.log("🚀 ~ file: PrivateRoute.tsx:22 ~ admin:", admin)
-  console.log("🚀 ~ file: PrivateRoute.tsx:24 ~ isAdmin:", isAdmin)
-  console.log("🚀 ~ file: PrivateRoute.tsx:23 ~ token:", token)
   const status = useTypedSelector(({ auth }) => auth.status)
   const dispatch = useAppDispatch();
 
@@ -32,11 +29,7 @@ useEffect(() => {
   dispatch(reAuth());
   
 }, [admin]);
-useEffect(() => {
-  /* if (status==='Error')
-  dispatch(logout());
-   */console.log("🚀 ~ file: PrivateRoute.tsx:35 ~ status:", status)
-}, [status]);
+
   if (both) {
     return <Outlet />
   }

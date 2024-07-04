@@ -13,7 +13,7 @@ export const ProductsCarroussel: React.FC = () => {
   const quantityToShow = 5
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter)
 
-  const { data } = useGetProductsQuery(sessionFilter,{skip:!sessionFilter})
+  const { data,isSuccess } = useGetProductsQuery({...sessionFilter,start:1,count:6}, { skip: !sessionFilter });
   return (data ?
     <Grid
       container

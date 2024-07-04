@@ -19,7 +19,6 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
   const { data: categorias } = useGetCategoriasQuery()
   const { data:subCategorias  } = useGetSubCategoriasQuery()
 
-  console.log("🚀 ~ file: index.tsx:14 ~ sessionFilter:", sessionFilter)
 
   return (
     <>
@@ -32,7 +31,6 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           type="multiple"
           value={sessionFilter?.category?.map(i => i.toString())}
           onChange={(e) => {
-            console.log("🚀 ~ file: index.tsx:20 ~ e:", e)
             const array = sessionFilter.category
             const index = array.indexOf(+(e.target.value as string));
             if (index >= 0)
@@ -50,7 +48,6 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           type="multiple"
           value={sessionFilter?.type?.map(i => i.toString())}
           onChange={(e) => {
-            console.log("🚀 ~ file: index.tsx:20 ~ e:", e)
             const array = sessionFilter.type
             const index = array.indexOf(+(e.target.value as string));
             if (index >= 0)
@@ -85,7 +82,6 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           type="multiple"
           value={sessionFilter?.size?.map(i => i.toString())}
           onChange={(e) => {
-            console.log("🚀 ~ file: index.tsx:20 ~ e:", e)
             const array = sessionFilter.size
             const index = array.indexOf(+(e.target.value as string));
             if (index >= 0)

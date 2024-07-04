@@ -14,11 +14,7 @@ const { reducer, actions } = createSlice({
   reducers: {
     addProduct: (state, action: PayloadAction<OrderItem>) => {
       const orderItem = state.items.findIndex(item => item.product.id === action.payload.product.id)
-      console.log("🚀 ~ file: cartSlice.ts:17 ~ action.payload.product:", action.payload.product)
-      console.log("🚀 ~ file: cartSlice.ts:17 ~ state.items:", state.items)
-      console.log("🚀 ~ file: cartSlice.ts:17 ~ orderItem:", orderItem)
       let items = [...state.items]
-      console.log("🚀 ~ file: cartSlice.ts:21 ~ items[orderItem]:", items[orderItem])
       if (orderItem >= 0)
         items[orderItem] = { quantity: items[orderItem].quantity + action.payload.quantity, product: items[orderItem].product }
       else {
@@ -27,7 +23,6 @@ const { reducer, actions } = createSlice({
           quantity: action.payload.quantity
         })
       }
-      console.log("🚀 ~ file: cartSlice.ts:29 ~ items:", items)
       return ({
         items: items,
         total: items.reduce((partialSum, a) => partialSum + (a.product.valor_produto*a.quantity), 0),

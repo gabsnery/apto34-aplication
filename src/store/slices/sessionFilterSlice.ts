@@ -23,7 +23,6 @@ const { reducer, actions } = createSlice({
     removeFilter: (state, action: PayloadAction<({filter:keyof SessionFilter,index:number})>) => {
       const item = state
       item[action.payload.filter].splice(action.payload.index, 1);
-      console.log("🚀 ~ file: sessionFilterSlice.ts:28 ~ item:", item)
       return (item)
     },
     clearFilter: () => initialState

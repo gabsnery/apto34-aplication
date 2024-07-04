@@ -5,7 +5,6 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
     endpoints: (build) => ({
         addOrder: build.mutation<any, any>({
             query: (payload) => {
-                console.log("🚀 ~ file: index.tsx:9 ~ payload:", payload)
                 return {
                     url: "api/order",
                     method: 'POST',

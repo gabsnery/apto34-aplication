@@ -56,7 +56,6 @@ const authSlice = createSlice({
     })
 
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      console.log("🚀 ~ builder.addCase ~ state:", action.payload)
       state.status = 'Done'
       state.id=action.payload.id
       state.token = action.payload.token

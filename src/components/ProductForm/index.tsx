@@ -191,7 +191,6 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             fullWidth
                             value={productoColor?.id?.toString() || ''}
                             onChange={(e) => {
-                                console.log("🚀 ~ file: index.tsx:177 ~ ProductoColor:", productoColor)
                                 setProductoColor({ ...productoColor, id: +(e.target.value as string) ,descricao:colors?.filter(s=>s.id===+(e.target.value as string))[0].descricao })
                             }}
                             options={colors?.map((item: any) => ({ value: item.id.toString(), label: item.descricao || '' })) || []}
@@ -225,7 +224,6 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             fullWidth
                             value={productoSize?.id?.toString() || ''}
                             onChange={(e) => {
-                                console.log("🚀 ~ file: index.tsx:177 ~ ProductoColor:", productoSize)
                                 setProductoSize({ ...productoSize, id: +(e.target.value as string),descricao:sizes?.filter(s=>s.id===+(e.target.value as string))[0].descricao })
                             }}
                             options={sizes?.map((item: any) => ({ value: item.id.toString(), label: item.descricao || '' })) || []}

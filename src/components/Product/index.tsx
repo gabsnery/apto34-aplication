@@ -17,7 +17,6 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>()
   const { data } = useGetProductQuery(+(id || 0), { skip: id === undefined })
-  console.log("🚀 ~ file: index.tsx:20 ~ data:", data)
 
 
   const theme = useTheme();

@@ -6,13 +6,11 @@ export const productApi = defaultApi.injectEndpoints({
 
         updateAddProduct: build.mutation<Partial<Product>, ProductPost>({
             query: (payload) => {
-                console.log("🚀 ~ file: index.tsx:8 ~ payload:", payload)
                 const body = new FormData();
                 body.append('json', JSON.stringify(payload.json));
                 payload.files.forEach((file) => {
                     body.append('files', file);
                 });
-                console.log("🚀 ~ file: index.tsx:13 ~ payload.files.forEach ~ body:", body)
                 return {
                     url: "api/product",
                     method: 'POST',
@@ -37,8 +35,8 @@ export const productApi = defaultApi.injectEndpoints({
             invalidatesTags: ['Product']
 
         }),
-        getProducts: build.query<Product[], SessionFilter>({
-            query: (filter) => `/api/product?${filter.category.map(item => `category[]=${item}`).join('&')}&${filter.size.map(item => `size[]=${item}`).join('&')}&${filter.color.map(item => `color[]=${item}`).join('&')}&${filter.type.map(item => `type[]=${item}`).join('&')}
+        getProducts: build.query<Product[], SessionFilter&{start:number,count:number}>({
+            query: (filter) => `/api/product/${filter.start}/${filter.count}?${filter.category.map(item => `category[]=${item}`).join('&')}&${filter.size.map(item => `size[]=${item}`).join('&')}&${filter.color.map(item => `color[]=${item}`).join('&')}&${filter.type.map(item => `type[]=${item}`).join('&')}
             `,
             providesTags: ['Product']
         }),
