@@ -23,6 +23,7 @@ export const ProductsCarroussel: React.FC = () => {
   const { data,isSuccess } = useGetProductsQuery({...sessionFilter,start:1,count:6}, { skip: !sessionFilter });
   return (data ?
     <Grid
+    key={`carrousel-${quantityToShow}`}
       container
       direction="row"
       rowSpacing={2}
