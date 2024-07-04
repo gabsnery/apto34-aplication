@@ -1,4 +1,16 @@
-import { Box, Card, CardActionArea, CardContent, IconButton, CardMedia, Grid, Typography, CardActions, Modal, TextField } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  IconButton,
+  CardMedia,
+  Grid,
+  Typography,
+  CardActions,
+  Modal,
+  TextField,
+} from "@mui/material";
 //import { Link } from 'react-router-dom'
 
 import { useTranslation } from "react-i18next";
@@ -13,13 +25,14 @@ import { useNavigate } from "react-router-dom";
 // import { add, isAfter } from 'date-fns'
 
 export const AddModal: React.FC<{
-  modal: { open: boolean, item: Product | undefined },
-  setModal: (value: { open: boolean, item: Product | undefined }) => void
+  modal: { open: boolean; item: Product | undefined };
+  setModal: (value: { open: boolean; item: Product | undefined }) => void;
 }> = ({ modal, setModal }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
+    console.log("🚀 ~ handleAddToCart ~ modal:", modal)
     if (modal.item) {
       dispatch(addProduct({ product: modal.item, quantity }));
       setModal({ open: false, item: undefined });
@@ -27,29 +40,42 @@ export const AddModal: React.FC<{
   };
 
   return (
-    <Modal open={modal.open} onClose={() => setModal({ open: false, item: undefined })}>
-      <Box sx={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background.paper',
-        boxShadow: 24,
-        p: 4,
-        borderRadius: 4,
-      }}>
+    <Modal
+      open={modal.open}
+      onClose={() => setModal({ open: false, item: undefined })}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 400,
+          bgcolor: "background.paper",
+          boxShadow: 24,
+          p: 4,
+          borderRadius: 4,
+        }}
+      >
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={8}>
             <TextField
-              label={'Quantidade'}
+              label={"Quantidade"}
               onChange={(ev) => setQuantity(+ev.target.value)}
               type="number"
               fullWidth
             />
           </Grid>
-          <Grid item xs={4} sx={{ textAlign: 'right' }}>
-            <IconButton onClick={handleAddToCart} sx={{ color: 'primary.contrastText', backgroundColor: 'primary.main', borderRadius: '2px', p: '8px' }}>
+          <Grid item xs={4} sx={{ textAlign: "right" }}>
+            <IconButton
+              onClick={handleAddToCart}
+              sx={{
+                color: "primary.contrastText",
+                backgroundColor: "primary.main",
+                borderRadius: "2px",
+                p: "8px",
+              }}
+            >
               <AddIcon />
             </IconButton>
           </Grid>
@@ -59,43 +85,73 @@ export const AddModal: React.FC<{
   );
 };
 
-
-
 export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
   const dispatch = useAppDispatch();
-  const [modal, setModal] = useState<{ open: boolean, item: Product | undefined }>({ open: false, item: undefined });
+  const [modal, setModal] = useState<{
+    open: boolean;
+    item: Product | undefined;
+  }>({ open: false, item: undefined });
   const navigate = useNavigate();
-
-  const handleOpenModal = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-    setModal({ open: true, item: value });
-  };
+  const [quantity, setQuantity] = useState<number>(1);
 
   return (
     <>
       <AddModal modal={modal} setModal={setModal} />
       <Box>
         <Card sx={{ borderRadius: 8, boxShadow: 4 }}>
-          <CardActionArea onClick={() => navigate(`/product/${value.id}`)}>
+          <CardActionArea
+            component="a"
+            onClick={() => navigate(`/product/${value.id}`)}
+          >
             <CardMedia
               component="img"
               height="250"
-              image={value.thumbnails.length > 0 ? value.thumbnails[0] : 'https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg'}
+              image={
+                value.thumbnails.length > 0
+                  ? value.thumbnails[0]
+                  : "https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg"
+              }
               alt={value.nome}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div" sx={{ height: 60 }}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{ height: 60 }}
+              >
                 {`${value.nome}`}
               </Typography>
-              <Grid container alignItems="center" mt={3} justifyContent="space-between">
+              <Grid
+                container
+                alignItems="center"
+                mt={3}
+                justifyContent="space-between"
+              >
                 <Grid item xs={6}>
                   <Typography variant="body2" color="text.secondary">
                     {`R$ ${value.valor_produto}`}
                   </Typography>
                 </Grid>
-                <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                <Grid item xs={6} sx={{ textAlign: "right" }}>
+                  <IconButton
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      event.preventDefault();
+                      setModal({ open: true, item: value })
+                    }}
+                    onMouseDown={(event) => event.stopPropagation()}
+                    sx={{
+                      border: "1px solid red",
+                      color: "white",
+                      backgroundColor: "red",
+                      borderRadius: "2px",
+                      py: "2px",
+                      px: "5px",
+                    }}
+                  >
                     <AddIcon />
+                  </IconButton>
                 </Grid>
               </Grid>
             </CardContent>
