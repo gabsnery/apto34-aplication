@@ -84,7 +84,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, [cardToken]);
   return (
-    <Grid container sx={{ border: '2px dotted red' }} columns={16}>
+    <Grid container columns={16}>
       <Grid xs={2} />
       <Grid xs={4} columns={16} item container direction='column'>
         <PersonalInfo />

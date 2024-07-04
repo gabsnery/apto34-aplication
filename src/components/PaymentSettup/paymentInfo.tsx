@@ -71,7 +71,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
 
   }, [formData]);
   return (
-    <Grid container sx={{ border: '2px dotted red' }}>
+    <Grid container >
 
       <FormControl>
         <FormLabel id="demo-radio-buttons-group-label">Tipo de pagamento</FormLabel>

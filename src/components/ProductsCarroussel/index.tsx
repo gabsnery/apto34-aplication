@@ -1,5 +1,5 @@
 import ProductsCard from "components/ProductCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, theme } from "ui-layout";
 import "./style.css";
 import { Grid } from "@mui/material";
@@ -10,8 +10,15 @@ import { RootState } from "store/store";
 
 export const ProductsCarroussel: React.FC = () => {
   const [firstItemToShowIndex, setfirstItemToShowIndex] = useState<number>(0);
-  const quantityToShow = 5
+  const [quantityToShow,setQuantitytoShow] =useState<number>(5);
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter)
+  useEffect(() => {
+    window.matchMedia("(min-width: 1200px)").addEventListener('change', e => setQuantitytoShow(6));
+    window.matchMedia("(min-width: 992px)").addEventListener('change', e => setQuantitytoShow(4));
+    window.matchMedia("(min-width: 768px)").addEventListener('change', e => setQuantitytoShow(3));
+    window.matchMedia("(max-width: 767px)").addEventListener('change', e => setQuantitytoShow(2));
+
+  }, []);
 
   const { data,isSuccess } = useGetProductsQuery({...sessionFilter,start:1,count:6}, { skip: !sessionFilter });
   return (data ?

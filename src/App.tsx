@@ -13,7 +13,6 @@ const App = () => {
         <Box
           sx={{
             backgroundColor: '#F6F6F6',
-            border:'1px red solid',
             height: "100vh",
           }}
         >
