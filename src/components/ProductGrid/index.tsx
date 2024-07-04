@@ -62,7 +62,7 @@ useEffect(() => {
         sx={{
           backgroundColor: theme.palette.background.default,
           height: "inherit",
-          px: "50px",
+          px: { xs: '10px', sm: "50px" },
         }}
       >
         {products?.map((prod, idx) => (

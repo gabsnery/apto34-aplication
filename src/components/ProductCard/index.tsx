@@ -86,9 +86,9 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" sx={{ height: 60 }}>
-                {`${value.id} ${value.nome}`}
+                {`${value.nome}`}
               </Typography>
-              <Grid container alignItems="center" justifyContent="space-between">
+              <Grid container alignItems="center" mt={3} justifyContent="space-between">
                 <Grid item xs={6}>
                   <Typography variant="body2" color="text.secondary">
                     {`R$ ${value.valor_produto}`}
