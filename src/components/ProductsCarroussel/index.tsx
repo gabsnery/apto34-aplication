@@ -2,28 +2,91 @@ import ProductsCard from "components/ProductCard";
 import { useEffect, useState } from "react";
 import { Button, theme } from "ui-layout";
 import "./style.css";
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 import { useGetProductsQuery } from "store/api/product";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 
-
 export const ProductsCarroussel: React.FC = () => {
   const [firstItemToShowIndex, setfirstItemToShowIndex] = useState<number>(0);
-  const [quantityToShow,setQuantitytoShow] =useState<number>(5);
-  const sessionFilter = useSelector((st: RootState) => st.sessionFilter)
+  const [quantityToShow, setQuantitytoShow] = useState<number>(5);
+  const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
+  const matches = useMediaQuery("(max-width:700px)");
   useEffect(() => {
-    window.matchMedia("(min-width: 1200px)").addEventListener('change', e => setQuantitytoShow(6));
-    window.matchMedia("(min-width: 992px)").addEventListener('change', e => setQuantitytoShow(4));
-    window.matchMedia("(min-width: 768px)").addEventListener('change', e => setQuantitytoShow(3));
-    window.matchMedia("(max-width: 767px)").addEventListener('change', e => setQuantitytoShow(2));
+    if (matches) setQuantitytoShow(2);
+  }, [matches]);
 
+  useEffect(() => {
+    var container:any = document.querySelector('.compontent-swipe');
+
+    container?.addEventListener("touchstart", startTouch, false);
+    container?.addEventListener("touchmove", moveTouch, false);
+  
+    // Swipe Up / Down / Left / Right
+    var initialX:any  = null;
+    var initialY:any = null;
+  
+    function startTouch(e:any) {
+      initialX = e.touches[0].clientX;
+      initialY = e.touches[0].clientY;
+    };
+  
+    function moveTouch(e:any) {
+      if (initialX === null) {
+        return;
+      }
+  
+      if (initialY === null) {
+        return;
+      }
+  
+      var currentX = e.touches[0].clientX;
+      var currentY = e.touches[0].clientY;
+  
+      var diffX = initialX - currentX;
+      var diffY = initialY - currentY;
+  
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        // sliding horizontally
+        if (diffX > 0) {
+          // swiped left
+          setfirstItemToShowIndex(
+            firstItemToShowIndex - quantityToShow < 0
+              ? 0
+              : firstItemToShowIndex - quantityToShow
+          );
+        } else {
+          // swiped right
+          if(data){
+            const resto =
+            data?.length - (quantityToShow + firstItemToShowIndex);
+          resto >= quantityToShow
+            ? setfirstItemToShowIndex(quantityToShow + firstItemToShowIndex)
+            : setfirstItemToShowIndex(firstItemToShowIndex + resto);
+          }
+        }  
+      } 
+  
+      initialX = null;
+      initialY = null;
+  
+      e.preventDefault();
+    };
+    return () => {
+
+      container?.removeEventListener("touchstart", startTouch);
+      container?.removeEventListener("touchmove", moveTouch);
+  };
+  
   }, []);
 
-  const { data,isSuccess } = useGetProductsQuery({...sessionFilter,start:1,count:6}, { skip: !sessionFilter });
-  return (data ?
+  const { data, isSuccess } = useGetProductsQuery(
+    { ...sessionFilter, start: 1, count: 10 },
+    { skip: !sessionFilter }
+  );
+  return data ? (
     <Grid
-    key={`carrousel-${quantityToShow}`}
+      key={`carrousel-${quantityToShow}`}
       container
       direction="row"
       rowSpacing={2}
@@ -31,32 +94,88 @@ export const ProductsCarroussel: React.FC = () => {
       sx={{
         backgroundColor: theme.palette.background.default,
         height: "inherit",
-        px: '50px',
-
+        px: {xs:0,sm:'50px'},
       }}
-    >  <Grid item xs={1} sx={{ alignSelf: 'center' }}>
-      <Button disabled={(firstItemToShowIndex - quantityToShow < 0 && firstItemToShowIndex === 0)} variant='contained' color="primary" onClick={() => {
-      setfirstItemToShowIndex(firstItemToShowIndex - quantityToShow < 0 ? 0 : firstItemToShowIndex - quantityToShow)
-    }}> {'<'}</Button></Grid>
-      <Grid item xs={10}> <div className="carousel-container" style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-        <div className="carousel-wrapper">
-          <div className="carousel-content-wrapper">
-            <div className="carousel-content" style={{ transform: `translateX(-${(firstItemToShowIndex * ((100) / quantityToShow))}%)` }}>
-              {data?.map((prod, idx) =>
-                (<div style={{ width: `calc(${(100) / quantityToShow}% - 20px)`, margin: '0 10px' }} key={idx}><ProductsCard value={prod} /></div>))}
+      className="compontent-swipe"
+      id={'compontent-swipe'}
+    >
+      <Grid  sx={{ display: { xs: "none", md: "block" } ,alignSelf: "center"}} item xs={1} >
+        <Button
+         
+          disabled={
+            firstItemToShowIndex - quantityToShow < 0 &&
+            firstItemToShowIndex === 0
+          }
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            setfirstItemToShowIndex(
+              firstItemToShowIndex - quantityToShow < 0
+                ? 0
+                : firstItemToShowIndex - quantityToShow
+            );
+          }}
+        >
+          {"<"}
+        </Button>
+      </Grid>
+      <Grid item xs={12} md={10}>
+        <div
+          className="carousel-container"
+          style={{
+            maxWidth: 1500,
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: 64,
+          }}
+        >
+          <div className="carousel-wrapper">
+            <div className="carousel-content-wrapper">
+              <div
+                className="carousel-content"
+                style={{
+                  transform: `translateX(-${
+                    firstItemToShowIndex * (100 / quantityToShow)
+                  }%)`,
+                }}
+              >
+                {data?.map((prod, idx) => (
+                  <div
+                    style={{
+                      width: `calc(${100 / quantityToShow}% - 20px)`,
+                      margin: "0 10px",
+                    }}
+                    key={idx}
+                  >
+                    <ProductsCard value={prod} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </Grid>
-      <Grid item xs={1} sx={{ alignSelf: 'center' }} textAlign={"right"}>
-        <Button variant='contained' disabled={data?.length <= quantityToShow + firstItemToShowIndex} color="primary" onClick={() => {
-          const resto = data?.length - (quantityToShow + firstItemToShowIndex)
-          resto >= quantityToShow ? setfirstItemToShowIndex(quantityToShow + firstItemToShowIndex) : setfirstItemToShowIndex(firstItemToShowIndex + resto)
-        }}> {'>'}</Button>
+      <Grid item xs={1}  sx={{ display: { xs: "none", md: "block" },alignSelf: "center"  }} textAlign={"right"}>
+        <Button
+         
+          variant="contained"
+          disabled={data?.length <= quantityToShow + firstItemToShowIndex}
+          color="primary"
+          onClick={() => {
+            const resto =
+              data?.length - (quantityToShow + firstItemToShowIndex);
+            resto >= quantityToShow
+              ? setfirstItemToShowIndex(quantityToShow + firstItemToShowIndex)
+              : setfirstItemToShowIndex(firstItemToShowIndex + resto);
+          }}
+        >
+          {" "}
+          {">"}
+        </Button>
       </Grid>
-
-    </Grid>:<></>
+    </Grid>
+  ) : (
+    <></>
   );
 };
 export default ProductsCarroussel;

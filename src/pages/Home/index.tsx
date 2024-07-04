@@ -8,16 +8,21 @@ import Banner from "components/Banner";
 import ProductsCarroussel from "components/ProductsCarroussel";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
-
+import { useEffect } from "react";
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["login", "common"]);
   const dispatch = useAppDispatch();
 
-  const theme = useTheme();
 
-  return <><Banner />
-    <ProductsCarroussel />
-    <ProductsCarroussel />
+
+
+
+  return (
+    <>
+      <Banner />
+      <ProductsCarroussel />
+      <ProductsCarroussel />
     </>
+  );
 };
 export default Home;

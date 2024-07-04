@@ -14,6 +14,7 @@ const App = () => {
           sx={{
             backgroundColor: '#F6F6F6',
             height: "100vh",
+            width: "100vw",
           }}
         >
           <DefaultContainer>
