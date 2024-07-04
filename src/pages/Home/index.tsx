@@ -20,8 +20,8 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <>
       <Banner />
-      <ProductsCarroussel />
-      <ProductsCarroussel />
+      <ProductsCarroussel keyValue={'swipe1'}/>
+      <ProductsCarroussel keyValue={'swipe2'}/>
     </>
   );
 };

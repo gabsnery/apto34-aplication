@@ -7,84 +7,59 @@ import { useGetProductsQuery } from "store/api/product";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 
-export const ProductsCarroussel: React.FC = () => {
+export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
+  keyValue,
+}) => {
   const [firstItemToShowIndex, setfirstItemToShowIndex] = useState<number>(0);
   const [quantityToShow, setQuantitytoShow] = useState<number>(5);
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const matches = useMediaQuery("(max-width:700px)");
+  const rand = (Math.random() * 100).toFixed(0);
   useEffect(() => {
     if (matches) setQuantitytoShow(2);
   }, [matches]);
 
-  useEffect(() => {
-    var container:any = document.querySelector('.compontent-swipe');
-
-    container?.addEventListener("touchstart", startTouch, false);
-    container?.addEventListener("touchmove", moveTouch, false);
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
   
-    // Swipe Up / Down / Left / Right
-    var initialX:any  = null;
-    var initialY:any = null;
+  // the required distance between touchStart and touchEnd to be detected as a swipe
+  const minSwipeDistance = 50 
   
-    function startTouch(e:any) {
-      initialX = e.touches[0].clientX;
-      initialY = e.touches[0].clientY;
-    };
+  const onTouchStart = (e:any) => {
+    setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientX)
+  }
   
-    function moveTouch(e:any) {
-      if (initialX === null) {
-        return;
+  const onTouchMove = (e:any) => setTouchEnd(e.targetTouches[0].clientX)
+  
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+    if (isLeftSwipe) {
+      if(data){
+        const resto =
+        data?.length - (quantityToShow + firstItemToShowIndex);
+      resto >= quantityToShow
+        ? setfirstItemToShowIndex(quantityToShow + firstItemToShowIndex)
+        : setfirstItemToShowIndex(firstItemToShowIndex + resto);
       }
-  
-      if (initialY === null) {
-        return;
-      }
-  
-      var currentX = e.touches[0].clientX;
-      var currentY = e.touches[0].clientY;
-  
-      var diffX = initialX - currentX;
-      var diffY = initialY - currentY;
-  
-      if (Math.abs(diffX) > Math.abs(diffY)) {
-        // sliding horizontally
-        if (diffX > 0) {
-          // swiped left
-          setfirstItemToShowIndex(
-            firstItemToShowIndex - quantityToShow < 0
-              ? 0
-              : firstItemToShowIndex - quantityToShow
-          );
-        } else {
-          // swiped right
-          if(data){
-            const resto =
-            data?.length - (quantityToShow + firstItemToShowIndex);
-          resto >= quantityToShow
-            ? setfirstItemToShowIndex(quantityToShow + firstItemToShowIndex)
-            : setfirstItemToShowIndex(firstItemToShowIndex + resto);
-          }
-        }  
-      } 
-  
-      initialX = null;
-      initialY = null;
-  
-      e.preventDefault();
-    };
-    return () => {
-
-      container?.removeEventListener("touchstart", startTouch);
-      container?.removeEventListener("touchmove", moveTouch);
-  };
-  
-  }, []);
+    }else if(isRightSwipe){
+      setfirstItemToShowIndex(
+        firstItemToShowIndex - quantityToShow < 0
+          ? 0
+          : firstItemToShowIndex - quantityToShow
+      );
+    }
+  }
 
   const { data, isSuccess } = useGetProductsQuery(
     { ...sessionFilter, start: 1, count: 10 },
     { skip: !sessionFilter }
   );
   return data ? (
+    <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
     <Grid
       key={`carrousel-${quantityToShow}`}
       container
@@ -94,14 +69,17 @@ export const ProductsCarroussel: React.FC = () => {
       sx={{
         backgroundColor: theme.palette.background.default,
         height: "inherit",
-        px: {xs:0,sm:'50px'},
+        px: { xs: 0, sm: "50px" },
       }}
-      className="compontent-swipe"
-      id={'compontent-swipe'}
+      className={`compontent-swipe-${keyValue}`}
+      id={`compontent-swipe-${keyValue}`}
     >
-      <Grid  sx={{ display: { xs: "none", md: "block" } ,alignSelf: "center"}} item xs={1} >
+      <Grid
+        sx={{ display: { xs: "none", md: "block" }, alignSelf: "center" }}
+        item
+        xs={1}
+      >
         <Button
-         
           disabled={
             firstItemToShowIndex - quantityToShow < 0 &&
             firstItemToShowIndex === 0
@@ -155,9 +133,13 @@ export const ProductsCarroussel: React.FC = () => {
           </div>
         </div>
       </Grid>
-      <Grid item xs={1}  sx={{ display: { xs: "none", md: "block" },alignSelf: "center"  }} textAlign={"right"}>
+      <Grid
+        item
+        xs={1}
+        sx={{ display: { xs: "none", md: "block" }, alignSelf: "center" }}
+        textAlign={"right"}
+      >
         <Button
-         
           variant="contained"
           disabled={data?.length <= quantityToShow + firstItemToShowIndex}
           color="primary"
@@ -174,6 +156,7 @@ export const ProductsCarroussel: React.FC = () => {
         </Button>
       </Grid>
     </Grid>
+    </div>
   ) : (
     <></>
   );
