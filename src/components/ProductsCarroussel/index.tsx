@@ -59,13 +59,14 @@ export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
     { skip: !sessionFilter }
   );
   return data ? (
-    <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+    <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd} >
     <Grid
       key={`carrousel-${quantityToShow}`}
       container
       direction="row"
       rowSpacing={2}
       columnSpacing={3}
+      pb={2}
       sx={{
         backgroundColor: theme.palette.background.default,
         height: "inherit",
@@ -121,7 +122,7 @@ export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
                   <div
                     style={{
                       width: `calc(${100 / quantityToShow}% - 20px)`,
-                      margin: "0 10px",
+                      margin: "5px 10px",
                     }}
                     key={idx}
                   >

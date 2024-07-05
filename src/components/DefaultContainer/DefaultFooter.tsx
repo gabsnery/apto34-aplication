@@ -34,22 +34,20 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
           minHeight: "300px",
           height: "fit-content",
           marginTop: "30px",
-          paddingTop: "30px",
+          paddingTop: "30px", 
         }}
-        onChange={(event, newValue) => {}}
       >
         <Grid
           container
-          rowSpacing={2}
           direction="row"
           sx={{
             display: "flex",
           }}
         >
-          <Grid item xs={12} md={4} textAlign={"center"}>
+          <Grid item xs={12} sm={4} textAlign={"center"}>
             <img src={logo} alt="logo" style={{ height: 300 }} />
           </Grid>
-          <Grid item container xs={12} md={4} direction={'column'}>
+          <Grid item container xs={12} sm={4} direction={'column'}>
             <Text variant={"h3"} weight={500} color="primary.light">
               {"Contato"}
             </Text>
@@ -59,55 +57,7 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
             <Text variant={"h6"} weight={500} color="primary.light">
               gneri94@gmail.com
             </Text>
-            <Grid
-              container
-              direction="row"
-            >
-              <IconButton
-                onClick={(e) => {
-                  navigate("/cart");
-                }}
-                edge="end"
-                sx={{ color: theme.palette.primary.dark }}
-              >
-                <InstagramIcon
-                  sx={{ fontSize: "50px", color: theme.palette.primary.dark }}
-                />
-              </IconButton>
-              <IconButton
-                onClick={(e) => {
-                  navigate("/cart");
-                }}
-                edge="end"
-                sx={{ color: theme.palette.primary.dark }}
-              >
-                <WhatsAppIcon
-                  sx={{ fontSize: "50px", color: theme.palette.primary.dark }}
-                />
-              </IconButton>
-              <IconButton
-                onClick={(e) => {
-                  navigate("/cart");
-                }}
-                edge="end"
-                sx={{ color: theme.palette.primary.dark }}
-              >
-                <MailOutlineIcon
-                  sx={{ fontSize: "50px", color: theme.palette.primary.dark }}
-                />
-              </IconButton>
-              <IconButton
-                onClick={(e) => {
-                  navigate("/cart");
-                }}
-                edge="end"
-                sx={{ color: theme.palette.primary.dark }}
-              >
-                <FacebookIcon
-                  sx={{ fontSize: "50px", color: theme.palette.primary.dark }}
-                />
-              </IconButton>
-            </Grid>
+         
           </Grid>
           <Grid item xs={12} md={4} >
             <Text variant={"h3"} weight={500} color="primary.light">

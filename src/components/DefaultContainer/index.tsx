@@ -15,19 +15,21 @@ const DefaultContainer: FC<
     <>
       <Suspense fallback={<Loading />}>
         <DefaultHeader />
-        <Container maxWidth={false} disableGutters={true}
+        <Container
+          maxWidth={false}
+          disableGutters={true}
           sx={{
             backgroundColor: theme.palette.background.default,
-            marginTop: '15px',
-          }}>
+            marginTop: "15px",
+          }}
+        >
           <SnackbarHandler />
           {props.children}
         </Container>
-        <DefaultFooter />
       </Suspense>
+        <DefaultFooter />
     </>
   );
 };
 
 export default DefaultContainer;
-

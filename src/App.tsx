@@ -7,20 +7,14 @@ import DefaultContainer from "components/DefaultContainer";
 
 
 const App = () => {
+  
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={muiTheme}>
-        <Box
-          sx={{
-            backgroundColor: '#F6F6F6',
-            height: "100vh",
-            width: "100vw",
-          }}
-        >
+      
           <DefaultContainer>
             <AppRoutes />
           </DefaultContainer>
-        </Box>
       </ThemeProvider>
     </StyledEngineProvider>
   );

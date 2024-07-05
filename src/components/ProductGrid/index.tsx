@@ -66,7 +66,7 @@ useEffect(() => {
         }}
       >
         {products?.map((prod, idx) => (
-          <Grid key={idx} item xs={6} sm={4} md={3} lg={2}>
+          <Grid key={idx} item xs={6} sm={4} md={3} lg={2} >
             <ProductsCard value={prod} />
           </Grid>
         ))}
