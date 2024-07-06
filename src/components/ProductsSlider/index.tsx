@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import ProductsCard from "components/ProductCard";
 import { useMediaQuery } from "@mui/material";
+import useResponsive from "hooks/useResponsive";
 
 
 
@@ -20,9 +21,19 @@ const ProductsSlider: React.FC = () => {
     slidesToScroll: 2,
     arrows: true,
   })
+  const {isSm,isMd,isXs} =useResponsive()
+
   useEffect(() => {
-    if (matches) setSliderSettings({...sliderSettings,slidesToShow:2});
-  }, [matches]);
+    if (isXs) {
+      setSliderSettings({...sliderSettings,slidesToShow:2, arrows:false});
+    }
+    else if (isMd) {
+      setSliderSettings({...sliderSettings,slidesToShow:4, arrows:true});
+    }
+    else{
+      setSliderSettings({...sliderSettings,slidesToShow:6, arrows:true});
+    }
+  }, [isXs,isMd]);
     const handleBeforeChange = useCallback(() => {
         console.log('handleBeforeChange')
         setDragging(true)

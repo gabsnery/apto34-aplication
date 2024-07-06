@@ -64,11 +64,11 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Banner banners={banners} />
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={9}>
         <ProductsSlider/>
         </Grid>
-        <Grid container xs={12} justifyContent={"center"} columnSpacing={3}>
-          <Grid item xs={3} sx={{ height: "350px" }}>
+        <Grid container xs={12} justifyContent={"center"} columnSpacing={3} rowSpacing={1}>
+          <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
               style={{
@@ -81,7 +81,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               </div>
             </div>
           </Grid>
-          <Grid item xs={3} sx={{ height: "350px" }}>
+          <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
               style={{
@@ -94,7 +94,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               </div>
             </div>
           </Grid>
-          <Grid item xs={3} sx={{ height: "350px" }}>
+          <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
               style={{
