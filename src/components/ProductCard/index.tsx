@@ -18,7 +18,7 @@ import { useAppDispatch } from "../../store/store";
 import { Product } from "store/api/product/product.interface";
 import AddIcon from "@mui/icons-material/Add";
 import { addProduct } from "store/slices/cartSlice";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // import ReCAPTCHA from 'react-google-recaptcha'
@@ -85,7 +85,7 @@ export const AddModal: React.FC<{
   );
 };
 
-export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
+export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ value,dragging }) => {
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<{
     open: boolean;
@@ -93,19 +93,27 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
   }>({ open: false, item: undefined });
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(1);
+  const handleOnItemClick = useCallback((e:any) => {
+        console.log('handleOnItemClick')
+        if (dragging) e.stopPropagation()
+    },
+    [dragging]
+) 
 
   return (
     <>
       <AddModal modal={modal} setModal={setModal} />
-      <Box>
+      <Box  onClickCapture={handleOnItemClick}>
         <Card sx={{  boxShadow: 4 }}>
           <CardActionArea
             component="a"
-            onClick={() => navigate(`/product/${value.id}`)}
+            onClick={(e) => {
+              handleOnItemClick(e)
+              navigate(`/product/${value.id}`)}}
           >
             <CardMedia
               component="img"
-              height="250"
+              height="300"
               image={
                 value.thumbnails.length > 0
                   ? value.thumbnails[0]

@@ -17,6 +17,7 @@ const Banner: React.FC<BannerProps> = ({ banners }) => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows:false
   };
 
   return (

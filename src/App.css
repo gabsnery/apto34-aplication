@@ -4,14 +4,15 @@
 .App {
   text-align: center;
 }
-.slick-track
-{
-    display: flex !important;
+.slick-track {
+  display: flex !important;
+  gap: 30px;
 }
-
-.slick-slide
-{
-    height: inherit !important;
+.slick-prev:before, .slick-next:before {
+  color: red;
+}
+.slick-slide {
+  height: inherit !important;
 }
 .App-logo {
   height: 40vmin;
@@ -48,17 +49,11 @@
   }
 }
 
-
-
-
-
 @font-face {
   font-family: "Comfortaa";
   font-weight: 100 300;
   src: url("./assets/fonts/Comfortaa-Medium.ttf") format("opentype");
 }
-
-
 
 @font-face {
   font-family: "Comfortaa";
