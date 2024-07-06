@@ -21,6 +21,7 @@ const DefaultContainer: FC<
           sx={{
             backgroundColor: theme.palette.background.default,
             marginTop: "15px",
+            textAlign: 'center'
           }}
         >
           <SnackbarHandler />

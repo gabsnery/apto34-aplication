@@ -98,7 +98,7 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
     <>
       <AddModal modal={modal} setModal={setModal} />
       <Box>
-        <Card sx={{ borderRadius: 8, boxShadow: 4 }}>
+        <Card sx={{  boxShadow: 4 }}>
           <CardActionArea
             component="a"
             onClick={() => navigate(`/product/${value.id}`)}
@@ -142,9 +142,7 @@ export const ProductsCard: React.FC<{ value: Product }> = ({ value }) => {
                     }}
                     onMouseDown={(event) => event.stopPropagation()}
                     sx={{
-                      border: "1px solid red",
                       color: "white",
-                      backgroundColor: "red",
                       borderRadius: "2px",
                       py: "2px",
                       px: "5px",

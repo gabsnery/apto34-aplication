@@ -1,47 +1,44 @@
 // src/components/Banner.tsx
 import React from "react";
-import Slider from "react-slick";
 import "./BannerStyles.css";
 
 interface BannerProps {
-  banners: {
+  banner: {
     image: string;
     title: string;
     subtitle: string;
-  }[];
+  };
 }
 
-const Banner: React.FC<BannerProps> = ({ banners }) => {
+const MiniBanner: React.FC<BannerProps> = ({ banner }) => {
   const settings = {
     dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
   };
 
   return (
     <div
       style={{
         width: "100%",
+        margin:'50px 0'
       }}
     >
-      <Slider {...settings}>
-        {banners.map((banner, index) => (
-          <div key={index}  className="banner-slide">
+          <div  className="mini-banner-slide">
             <div
-              className="banner-image"
+              className="mini-banner-image"
               style={{ backgroundImage: `url(${banner.image})` }}
             >
-              <div className="banner-text">
+              <div className="mini-banner-text">
                 <h2>{banner.title}</h2>
                 <p>{banner.subtitle}</p>
               </div>
             </div>
           </div>
-        ))}
-      </Slider>
     </div>
   );
 };
 
-export default Banner;
+export default MiniBanner;

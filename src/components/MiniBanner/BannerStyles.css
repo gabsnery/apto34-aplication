@@ -1,11 +1,12 @@
 /* src/components/BannerStyles.css */
 
-.banner-slide {
+.mini-banner-slide {
   position: relative;
-  height: 400px;
+  height: 200px;
+
 }
 
-.banner-image {
+.mini-banner-image {
   background-size: cover;
   background-position: center;
   height: 100%;
@@ -15,13 +16,8 @@
   color: #fff;
 }
 
-.banner-text {
+.mini-banner-text {
   text-align: center;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* semi-transparente para legibilidade */
-  width: 60%;
+  background-color: rgba(    0,    0,    0,    0.5  ); /* semi-transparente para legibilidade */
+  width: 80%;
 }
