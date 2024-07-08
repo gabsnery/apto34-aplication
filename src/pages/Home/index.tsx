@@ -7,61 +7,16 @@ import { useAppDispatch } from "../../store/store";
 import MiniBanner from "components/MiniBanner";
 import { Grid } from "@mui/material";
 import ProductsSlider from "components/ProductsSlider";
+import { useGetBannersQuery } from "store/api/Banner";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const banners = [
-    {
-      image: "https://www.advertserve.com/blog/images/bannerflow.jpg",
-      title: "Novas Coleções de Verão",
-      subtitle: "Descubra as últimas tendências da estação",
-    },
-    {
-      image:
-        "https://www.niit.com/india/sites/default/files/2022-04/HTML_1920x565px.jpg",
-      title: "Descontos de Inverno",
-      subtitle: "Aproveite até 50% de desconto em roupas de inverno",
-    },
-    {
-      image:
-        "https://miro.medium.com/v2/resize:fit:1024/0*L5Hv8vQD_MqEwhRL.png",
-      title: "Nova Linha de Acessórios",
-      subtitle: "Complete seu look com nossos acessórios",
-    },
-    {
-      image: "https://www.advertserve.com/blog/images/bannerflow.jpg",
-      title: "Novas Coleções de Verão",
-      subtitle: "Descubra as últimas tendências da estação",
-    },
-    {
-      image: "https://www.advertserve.com/blog/images/bannerflow.jpg",
-      title: "Novas Coleções de Verão",
-      subtitle: "Descubra as últimas tendências da estação",
-    },
-    {
-      image:
-        "https://www.niit.com/india/sites/default/files/2022-04/HTML_1920x565px.jpg",
-      title: "Descontos de Inverno",
-      subtitle: "Aproveite até 50% de desconto em roupas de inverno",
-    },
-    {
-      image:
-        "https://miro.medium.com/v2/resize:fit:1024/0*L5Hv8vQD_MqEwhRL.png",
-      title: "Nova Linha de Acessórios",
-      subtitle: "Complete seu look com nossos acessórios",
-    },
-    {
-      image: "https://www.advertserve.com/blog/images/bannerflow.jpg",
-      title: "Novas Coleções de Verão",
-      subtitle: "Descubra as últimas tendências da estação",
-    },
-  ];
-
+  const {data:banners}=useGetBannersQuery()
   return (
     <>
       <Grid container justifyContent={"center"} rowGap={2}>
         <Grid item xs={12}>
-          <Banner banners={banners} />
+          <Banner banners={banners?.map(i=>({ image: i.url_image, title: i.title, subtitle: i.description }))||[]} />
         </Grid>
 
         <Grid item xs={12} sm={9}>

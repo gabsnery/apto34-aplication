@@ -1,6 +1,6 @@
 // src/components/Banner.tsx
 import React from "react";
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import "./BannerStyles.css";
 
 interface BannerProps {
@@ -11,19 +11,20 @@ interface BannerProps {
   }[];
 }
 
+
 const Banner: React.FC<BannerProps> = ({ banners }) => {
-  const settings = {
+  const settings:Settings = {
     dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows:false
+    arrows:true,
   };
 
   return (
     <div
       style={{
-        width: "100%",
+        width: '100%'
       }}
     >
       <Slider {...settings}>

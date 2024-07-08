@@ -34,7 +34,7 @@ const baseQueryWithReauth: BaseQueryFn<
 }
 export const defaultApi = createApi({
   reducerPath: 'defaultApi',
-  tagTypes: ['Product','Categoria','Colors','Sizes'],
+  tagTypes: ['Product','Categoria','Colors','Sizes','Banner'],
   keepUnusedDataFor: 240,
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({})
