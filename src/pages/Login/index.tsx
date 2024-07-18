@@ -19,7 +19,12 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: "gneri94890@gmail.com",  // Valor padrão para o email
+      senha: "dshkjhldfshdsjk",  // Valor padrão para a senha
+    }
+  });
 
   //  const classes = getStyles()
   const onSubmit = useCallback(

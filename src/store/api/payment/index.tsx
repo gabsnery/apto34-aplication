@@ -17,7 +17,7 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
         addPayment: build.mutation<any, any >({
             query: (payload) => {
                 return {
-                    url: "process_payment",
+                    url: `process_payment/${payload.id}`,
                     method: 'POST',
                     body: payload,
                     formData: true

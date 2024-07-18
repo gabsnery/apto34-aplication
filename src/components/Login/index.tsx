@@ -15,12 +15,16 @@ interface Props{
 const Login: React.FC<React.PropsWithChildren<Props>> = ({onLogin}) => {
   const { t } = useTranslation(["login", "common"]);
   const dispatch = useAppDispatch();
-
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: "gneri94890@gmail.com",  // Valor padrão para o email
+      senha: "dshkjhldfshdsjk",  // Valor padrão para a senha
+    }
+  });
 
   //  const classes = getStyles()
   const onSubmit = useCallback(
@@ -57,7 +61,7 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({onLogin}) => {
       />
 
       <TextField
-        label={t("common|senha")}
+        label={t("common|senhaee")}
         id="salva-login-senha"
         InputProps={{ ...register("senha", { required: true }) }}
         type="senha"

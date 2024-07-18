@@ -13,10 +13,14 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
                 };
             },
         }),
+        getOrders: build.query<any[], void>({
+            query: (filter) => `/api/order`,
+        }),
  
 
     }),
 });
 export const {
     useAddOrderMutation,
+    useGetOrdersQuery
  } = mercadoPagoApi;
