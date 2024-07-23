@@ -9,17 +9,21 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
                 return {
                     url: "mercado_pago",
                     method: 'POST',
-                    body: payload,
+                    body: {...payload,payer:{...payload.payer,address:{street_number:100}}}, //.payer.address.street_number
                     formData: true
                 };
             },
         }),
         addPayment: build.mutation<any, any >({
+            
             query: (payload) => {
+                const id = payload.id;
+                let body = payload
+                delete body['id']
                 return {
-                    url: `process_payment/${payload.id}`,
+                    url: `process_payment/${id}`,
                     method: 'POST',
-                    body: payload,
+                    body: body,
                     formData: true
                 };
             },

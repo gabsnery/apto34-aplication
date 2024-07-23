@@ -10,7 +10,7 @@ const mid: Middleware = (store) => (next) => (action) => {
           store.dispatch(
             setSnackbar({
               type: 'success',
-              message: successMessage,
+              message: `1-${successMessage}`,
               duration: 4000
             })
           )
@@ -21,7 +21,7 @@ const mid: Middleware = (store) => (next) => (action) => {
           store.dispatch(
             setSnackbar({
               type: 'error',
-              message: JSON.stringify(errorMessage),
+              message: `2-${JSON.stringify(errorMessage)}`,
               duration: 4000
             })
           )
@@ -32,7 +32,7 @@ const mid: Middleware = (store) => (next) => (action) => {
     store.dispatch(
       setSnackbar({
         type: 'error',
-        message: JSON.stringify(mssg),
+        message: `3-${JSON.stringify(mssg)}`,
         duration: 4000
       })
     )

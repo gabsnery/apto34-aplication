@@ -54,7 +54,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
         payer: { email: "admin@gatostecnologia.com", first_name: 'Gabriela', last_name: 'Nery', identification: { type: "CPF", number: "36439183800" } },
         payment_method_id: 'bolbradesco',
         transaction_amount: 200,
-        date_of_expiration: "2024-03-09T22:20:00.000-04:00",
+        date_of_expiration: "2024-08-09T22:20:00.000-04:00",
       })
     } else if (type === 'PIX') {
       setPaymentInfo({

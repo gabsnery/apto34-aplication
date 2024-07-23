@@ -32,7 +32,6 @@ export const AddModal: React.FC<{
   const dispatch = useAppDispatch();
 
   const handleAddToCart = () => {
-    console.log("🚀 ~ handleAddToCart ~ modal:", modal)
     if (modal.item) {
       dispatch(addProduct({ product: modal.item, quantity }));
       setModal({ open: false, item: undefined });
@@ -94,7 +93,6 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(1);
   const handleOnItemClick = useCallback((e:any) => {
-        console.log('handleOnItemClick')
         if (dragging) e.stopPropagation()
     },
     [dragging]

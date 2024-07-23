@@ -35,17 +35,14 @@ const ProductsSlider: React.FC = () => {
     }
   }, [isXs,isMd]);
     const handleBeforeChange = useCallback(() => {
-        console.log('handleBeforeChange')
         setDragging(true)
     }, [setDragging])
 
     const handleAfterChange = useCallback(() => {
-        console.log('handleAfterChange')
         setDragging(false)
     }, [setDragging])
 
     const handleOnItemClick = useCallback((e:any) => {
-            console.log('handleOnItemClick')
             if (dragging) e.stopPropagation()
         },
         [dragging]

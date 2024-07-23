@@ -67,7 +67,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           identification_number: paymentInfo.identity,
         });
       else {
-        addPayment({...paymentInfo,id:1});
+        addPayment({ ...paymentInfo, id: orderResponse.id || 1 });
       }
       addPreference({
         payer: {
@@ -96,27 +96,21 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, [orderResponse]);
   useEffect(() => {
     if (cardToken && orderResponse) {
-      console.log("🚀 ~ useEffect ~ cardToken:", cardToken);
       if (paymentInfo) {
-        console.log("🚀 ~ useEffect ~ paymentInfo:", paymentInfo);
         getPaymentMethods({
           bin: paymentInfo.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
         })
           .then((value) => {
-            console.log("🚀 ~ useEffect ~ value:", value);
             const methods: PaymentMethods = value as PaymentMethods;
-            console.log("🚀 ~ useEffect ~ methods:", methods);
-
             methods &&
               getIssuers({
                 paymentMethodId: methods.results[0].id,
                 bin: paymentInfo.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
               })
                 .then((issuer) => {
-                  console.log("🚀 ~ useEffect ~ issuer:", issuer);
                   issuer &&
                     addPayment({
-                      id:1,
+                      id: orderResponse.id || 1,
                       installments: paymentInfo.installments, //parcelas
                       payer: {
                         email: "admin@gatostecnologia.com",
@@ -162,10 +156,13 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       </Grid>
       <Grid xs={4} item>
         <PaymentInfo setPaymentInfo={setPaymentInfo} />
-        <img
-          style={{ maxWidth: "100%" }}
-          src={`data:image/jpeg;base64,${qr_code_base64}`}
-        />
+        {qr_code_base64}
+        {qr_code_base64 && (
+          <img
+            style={{ maxWidth: "100%" }}
+            src={`data:image/jpeg;base64,${qr_code_base64}`}
+          />
+        )}
       </Grid>
       <Grid xs={4} columns={16} item container direction={"column"}>
         Detalhes
