@@ -20,15 +20,17 @@ const DefaultContainer: FC<
           disableGutters={true}
           sx={{
             backgroundColor: theme.palette.background.default,
-            marginTop: "15px",
-            textAlign: 'center'
+            paddingTop: "15px",
+            paddingBottom: "25px",
+            textAlign: "center",
+            minHeight: "calc(100vh - 460px)"
           }}
         >
           <SnackbarHandler />
           {props.children}
         </Container>
       </Suspense>
-        <DefaultFooter />
+      <DefaultFooter />
     </>
   );
 };

@@ -14,6 +14,8 @@ const { reducer, actions } = createSlice({
   reducers: {
     addProduct: (state, action: PayloadAction<OrderItem>) => {
       const orderItem = state.items.findIndex(item => item.product.id === action.payload.product.id)
+      console.log("🚀 ~ state:", state)
+      console.log("🚀 ~ orderItem:", orderItem)
       let items = [...state.items]
       if (orderItem >= 0)
         items[orderItem] = { quantity: items[orderItem].quantity + action.payload.quantity, product: items[orderItem].product }

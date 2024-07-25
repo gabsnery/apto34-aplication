@@ -1,27 +1,14 @@
 import {
-  AppBar,
-  Badge,
   BottomNavigation,
-  BottomNavigationAction,
   Grid,
-  IconButton,
-  Toolbar,
-  useTheme,
+  useTheme
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import React, { FC } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //import minerva from 'assets/img/minerva-logo-white.png'
-import items, { NavObj } from "./nav";
-import { Button, Text } from "ui-layout";
-import { useSelector } from "react-redux";
-import { RootState } from "store/store";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { Text } from "ui-layout";
 const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -29,12 +16,12 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   return (
     <>
       <BottomNavigation
+      component={'footer'}
         sx={{
           backgroundColor: theme.palette.primary.main,
-          minHeight: "300px",
-          height: "fit-content",
-          marginTop: "30px",
-          paddingTop: "30px", 
+          height: "300px",
+          paddingTop: "30px",
+          paddingBottom: "30px", 
         }}
       >
         <Grid

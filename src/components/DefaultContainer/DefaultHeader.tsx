@@ -36,7 +36,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
         elevation={0}
         position="sticky"
         sx={{
-          height: 100,
+          height: '100px',
           backdropFilter: "blur(6px)",
           backgroundColor: theme.palette.background.default,
           zIndex: (theme) => theme.zIndex.drawer + 1,
