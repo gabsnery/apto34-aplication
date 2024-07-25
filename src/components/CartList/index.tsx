@@ -2,9 +2,12 @@ import {
   Container,
   List,
   ListItem,
-  ListItemText,
   useTheme,
   ListItemAvatar,
+  ListItemButton,
+  ListItemIcon,
+  Grid,
+  IconButton,
 } from "@mui/material";
 import React, { FC, Suspense, useEffect } from "react";
 import Loading from "../Loading";
@@ -12,7 +15,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { Text, Button } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
-import { clearCart } from "store/slices/cartSlice";
+import { clearCart, deleteProduct } from "store/slices/cartSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
@@ -23,23 +27,13 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, [cart]);
   return (
     <>
-      <Button
-        variant="text"
-        color="primary"
-        onClick={() => {
-          dispatch(clearCart());
-        }}
-      >
-        {" "}
-        apaga{" "}
-      </Button>
-      <List>
+      <Grid container sx={{ width: "100%" }} direction={"column"}>
         {cart.items.map((item, idx) => {
           return (
-            <React.Fragment key={idx}>
-              <ListItem title="list-item" divider>
-                <ListItem sx={{width:"200px"}}>
-                 { item.product.thumbnails.length>0&& <img
+            <Grid item container key={idx}>
+              <Grid item xs={4} sm={2}>
+                {item.product.thumbnails.length > 0 && (
+                  <img
                     style={{
                       backgroundImage: `url(${
                         item.product.thumbnails.length > 0
@@ -47,20 +41,38 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
                           : "https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg"
                       })`,
                       width: "100%",
-                      height: "150px",
+                      height: "200px",
                       backgroundPosition: "top",
                       backgroundSize: "cover",
                     }}
-                  />}
-                </ListItem>
-                <ListItemText>{item.product.nome}</ListItemText>
-                <ListItemText>{item.product.valor_produto}</ListItemText>
-                <ListItemText>{item.quantity}</ListItemText>
-              </ListItem>
-            </React.Fragment>
+                  />
+                )}
+              </Grid>
+              <Grid container item xs={8} sm={10}>
+                <Grid item xs={12} sm={6}>
+                  {item.product.nome}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  R${item.product.valor_produto}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  {item.quantity}
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <IconButton
+                    sx={{ cursor: "pointer", justifyContent: "end" }}
+                    onClick={() => {
+                      dispatch(deleteProduct(item.product));
+                    }}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
           );
         })}
-      </List>
+      </Grid>
     </>
   );
 };

@@ -149,12 +149,12 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Grid container columns={16}>
       <Grid xs={2} />
-      <Grid xs={4} columns={16} item container direction="column">
+      <Grid xs={12} md={4} columns={16} item container direction="column">
         <PersonalInfo />
         <AddreddInfo />
         <DeliverInfo />
       </Grid>
-      <Grid xs={4} item>
+      <Grid xs={12} md={4} item>
         <PaymentInfo setPaymentInfo={setPaymentInfo} />
         {qr_code_base64}
         {qr_code_base64 && (
@@ -164,7 +164,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           />
         )}
       </Grid>
-      <Grid xs={4} columns={16} item container direction={"column"}>
+      <Grid xs={12} md={4} columns={16} item container direction={"column"}>
         Detalhes
         <Button
           color="primary"

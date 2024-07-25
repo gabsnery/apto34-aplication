@@ -1,8 +1,4 @@
-import {
-  BottomNavigation,
-  Grid,
-  useTheme
-} from "@mui/material";
+import { BottomNavigation, Grid, useTheme } from "@mui/material";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import React, { FC } from "react";
@@ -16,12 +12,13 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   return (
     <>
       <BottomNavigation
-      component={'footer'}
+        component={"footer"}
         sx={{
           backgroundColor: theme.palette.primary.main,
-          height: "300px",
+          minHeight: "300px",
+          height: "fit-content",
           paddingTop: "30px",
-          paddingBottom: "30px", 
+          paddingBottom: "30px",
         }}
       >
         <Grid
@@ -34,7 +31,7 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
           <Grid item xs={12} sm={4} textAlign={"center"}>
             <img src={logo} alt="logo" style={{ height: 300 }} />
           </Grid>
-          <Grid item container xs={12} sm={4} direction={'column'}>
+          <Grid item container xs={12} sm={4} direction={"column"}>
             <Text variant={"h3"} weight={500} color="primary.light">
               {"Contato"}
             </Text>
@@ -44,9 +41,8 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
             <Text variant={"h6"} weight={500} color="primary.light">
               gneri94@gmail.com
             </Text>
-         
           </Grid>
-          <Grid item xs={12} md={4} >
+          <Grid item xs={12} md={4}>
             <Text variant={"h3"} weight={500} color="primary.light">
               {"Informações"}
             </Text>

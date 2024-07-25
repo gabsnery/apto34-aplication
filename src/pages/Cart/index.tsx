@@ -21,14 +21,14 @@ const Cart: React.FC<React.PropsWithChildren<unknown>> = () => {
   const cart = useSelector((st: RootState) => st.cart);
 
   return (
-    <Grid container sx={{ padding: "0 60px" }} columnSpacing={2}>
-      <Grid item xs={8}>
+    <Grid container sx={{ padding: {xs:0,sm:"0 100px"} }} columnSpacing={2}>
+      <Grid item xs={12} md={8} >
         <CartList />
       </Grid>
-      <Grid item xs={4} sx={{ display: "flex", position: "sticky" }}>
+      <Grid item xs={12}  md={4} sx={{ display: "flex", position: "sticky" }}>
         <div
           style={{
-            height: "50vh",
+            height: "30vh",
             width: "100%",
             position: "sticky",
           }}
