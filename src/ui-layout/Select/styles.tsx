@@ -11,36 +11,25 @@ export const BaseSelect = styled(Select)`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   line-height: normal;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
   &.${outlinedInputClasses.root} {
+    &.Mui-focused fieldset {
+      border-color: ${theme.colors.primary};
+      border-width: 1px;
+      outline: none;
+      box-shadow: 0 0 8px ${theme.colors.primary};
+    }
     line-height: normal;
     padding: 0;
-    border: none;
     & fieldset {
-      border: 1px solid ${theme.colors.primary};
+      border: 1px solid ${theme.colors.gray};
     }
-      
-    &:focus {
-      border-color: red;
-      outline: none;
-      box-shadow: 0 0 8px ${theme.colors.secondary};
-    }
-    .${outlinedInputClasses.input} {
-   border: 5px dotted blue;
 
+    .${outlinedInputClasses.input} {
       min-height: unset;
       padding-top: ${theme.spacing.medium};
       padding-bottom: ${theme.spacing.medium};
       margin-top: 1px;
       margin-bottom: 1px;
     }
-  }
-  &.${outlinedInputClasses.focused}: {
-   border: 5px dotted red;
-  }
-  &:focus {
-    border-color: ${theme.colors.secondary};
-    outline: none;
-    box-shadow: 0 0 8px ${theme.colors.secondary};
   }
 `;

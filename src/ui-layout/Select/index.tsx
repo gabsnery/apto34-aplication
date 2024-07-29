@@ -1,16 +1,19 @@
-import React, { useState,FC } from 'react';
-import {
-  Checkbox, FormControl, ListSubheader, InputLabel, MenuItem, Radio,
-  Select as MUISelect, BottomNavigation, SelectProps as MUISelectPropsProps, Box, TableFooter
-} from '@mui/material';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
+import {
+  Box,
+  Checkbox, FormControl, ListSubheader,
+  MenuItem,
+  SelectProps as MUISelectPropsProps,
+  Radio
+} from '@mui/material';
+import { FC } from 'react';
 
+import styled from 'styled-components';
+import { Button } from '../Button';
 import { Text } from '../Text';
 import {
   BaseSelect
 } from './styles';
-import { Button } from '../Button';
-import styled from 'styled-components';
 
 interface OptionProps {
   icon?: JSX.Element,
@@ -36,7 +39,7 @@ const StyledLabel = styled.label`
   font-size: ${(props) => props.theme.typography.fontSize};
   font-weight: 500;
   text-transform:capitalize;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.grayDarker};
   margin-bottom: ${(props) => props.theme.spacing.small};
 `;
 
@@ -73,7 +76,6 @@ export const Select: FC<_SelectProps> = ({ children, type, mainIcon,label, foote
         }} >
           <Button  variant='primary' color='primary'>Ok</Button>
         </Box>
-        break;
       case 'complete':
         return <Box key={"items_footer"} sx={{
           display: 'flex',
@@ -81,11 +83,8 @@ export const Select: FC<_SelectProps> = ({ children, type, mainIcon,label, foote
           <Button  disabled={false} color='primary' variant='tertiary' >Limpar</Button>
           <Button  variant='primary' color='primary'>Ok</Button>
         </Box>
-        break;
       default:
         return
-        break;
-
     }
   }
 

@@ -10,7 +10,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const StyledInput = styled.input`
   padding: ${(props) => props.theme.spacing.medium};
-  border: 1px solid ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.gray};
   border-radius: 8px;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
@@ -20,9 +20,9 @@ const StyledInput = styled.input`
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:focus {
-    border-color: ${(props) => props.theme.colors.secondary};
+    border-color: ${(props) => props.theme.colors.primary};
     outline: none;
-    box-shadow: 0 0 8px ${(props) => props.theme.colors.secondary};
+    box-shadow: 0 0 8px ${(props) => props.theme.colors.primary};
   }
 `;
 
@@ -38,7 +38,7 @@ const StyledLabel = styled.label`
   font-size: ${(props) => props.theme.typography.fontSize};
   font-weight: 500;
   text-transform:capitalize;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.grayDarker};
   margin-bottom: ${(props) => props.theme.spacing.small};
 `;
 
