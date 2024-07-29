@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material";
+import { Grid, useTheme } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
 import ProductsGrid from "components/ProductGrid";
@@ -12,11 +12,20 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["login", "common"]);
   const dispatch = useAppDispatch();
 
-  const theme = useTheme();
 
-  return <>
-    <FilterBar />
-    <ProductsGrid />
-  </>
+  return (
+    <Grid container sx={{
+      px: { xs: '10px', sm: "30px" },
+    }}
+    columnSpacing={3}
+    >
+      <Grid item xs={2}>
+        <FilterBar />
+      </Grid>
+      <Grid item xs={10}>
+        <ProductsGrid />
+      </Grid>
+    </Grid>
+  );
 };
 export default Products;

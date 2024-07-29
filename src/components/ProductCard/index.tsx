@@ -6,8 +6,6 @@ import {
   IconButton,
   CardMedia,
   Grid,
-  Typography,
-  CardActions,
   Modal,
   TextField,
 } from "@mui/material";
@@ -20,6 +18,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { addProduct } from "store/slices/cartSlice";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Text } from "ui-layout";
 
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
@@ -111,7 +110,7 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
           >
             <CardMedia
               component="img"
-              height="300"
+              height="200"
               image={
                 value.thumbnails.length > 0
                   ? value.thumbnails[0]
@@ -120,14 +119,14 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
               alt={value.nome}
             />
             <CardContent>
-              <Typography
-                gutterBottom
+              <div style={{height:'50px'}}>
+              <Text
+                color="primary"
                 variant="h5"
-                component="div"
-                sx={{ height: 60 }}
               >
                 {`${value.nome}`}
-              </Typography>
+              </Text>
+              </div>
               <Grid
                 container
                 alignItems="center"
@@ -135,9 +134,9 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
                 justifyContent="space-between"
               >
                 <Grid item xs={6}>
-                  <Typography variant="body2" color="text.secondary">
+                  <Text variant="body" color="secondary">
                     {`R$ ${value.valor_produto}`}
-                  </Typography>
+                  </Text>
                 </Grid>
                 <Grid item xs={6} sx={{ textAlign: "right" }}>
                   <IconButton

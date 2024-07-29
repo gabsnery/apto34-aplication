@@ -28,14 +28,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      <Toolbar>
-        <Grid container columnSpacing={'5px'} rowSpacing={'5px'}>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={6} sm={12}>
             <Select
               name={"categoryId"}
               label="Categoria"
               sx={{ backgroundColor: "transparent" }}
-              
+              size={'small'}
               type="multiple"
               value={sessionFilter?.category?.map((i) => i.toString())}
               onChange={(e) => {
@@ -59,12 +57,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={6} sm={12}>
             <Select
               name={"categoryId"}
               label="Tipo"
               sx={{ backgroundColor: "transparent" }}
-              
+              size={'small'}
               type="multiple"
               value={sessionFilter?.type?.map((i) => i.toString())}
               onChange={(e) => {
@@ -88,12 +86,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={6} sm={12}>
             <Select
               name={"categoryId"}
               label="Cor"
               sx={{ backgroundColor: "transparent" }}
-              
+              size={'small'}
               type="multiple"
               value={sessionFilter?.color?.map((i) => i.toString())}
               onChange={(e) => {
@@ -117,12 +115,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={2}>
+          <Grid item xs={6} sm={12}>
             <Select
               name={"categoryId"}
               label="Tamanho"
               sx={{ backgroundColor: "transparent" }}
-              
+              size={'small'}
               type="multiple"
               value={sessionFilter?.size?.map((i) => i.toString())}
               onChange={(e) => {
@@ -146,7 +144,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={1}>
+          <Grid item xs={6} sm={12}>
             <Button
               variant="tertiary" 
               
@@ -154,12 +152,9 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
                 dispatch(clearFilter());
               }}
             >
-              {" "}
-              apaga{" "}
+              apagar
             </Button>
           </Grid>
-        </Grid>
-      </Toolbar>
     </>
   );
 };

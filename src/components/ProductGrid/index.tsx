@@ -63,9 +63,7 @@ useEffect(() => {
         rowSpacing={2}
         columnSpacing={3}
         sx={{
-          backgroundColor: theme.palette.background.default,
           height: "inherit",
-          px: { xs: '10px', sm: "50px" },
         }}
       >
         {products?.map((prod, idx) => (

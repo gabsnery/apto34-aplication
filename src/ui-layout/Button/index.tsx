@@ -6,6 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   onClick?: () => void;
   variant?: "primary" | "secondary" | "tertiary";
+  size?: "small" | "medium" | "large";
 }
 
 const variantStyles = {

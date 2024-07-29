@@ -1,11 +1,11 @@
 import { outlinedInputClasses, Select, styled } from "@mui/material";
 import { lightTheme as theme } from "../theme";
+import { css } from "styled-components";
 
 export const BaseSelect = styled(Select)`
   padding: ${theme.spacing.medium};
   border-radius: 8px;
   font-family: ${theme.typography.fontFamily};
-  font-size: ${theme.typography.fontSize};
   background-color: ${theme.colors.white};
   color: ${theme.colors.black};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -26,10 +26,27 @@ export const BaseSelect = styled(Select)`
 
     .${outlinedInputClasses.input} {
       min-height: unset;
-      padding-top: ${theme.spacing.medium};
-      padding-bottom: ${theme.spacing.medium};
       margin-top: 1px;
       margin-bottom: 1px;
+    }
+  }
+`;
+
+export const SmallSelect = styled(BaseSelect)`
+  font-size: 12px;
+  &.${outlinedInputClasses.root} {
+    .${outlinedInputClasses.input} {
+      padding-top: ${theme.spacing.small};
+      padding-bottom: ${theme.spacing.small};
+    }
+  }
+`;
+export const MediumSelect = styled(BaseSelect)`
+  font-size: ${theme.typography.fontSize};
+  &.${outlinedInputClasses.root} {
+    .${outlinedInputClasses.input} {
+      padding-top: ${theme.spacing.medium};
+      padding-bottom: ${theme.spacing.medium};
     }
   }
 `;
