@@ -84,8 +84,8 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             <img src={logo} alt="logo" style={{ height: 100, marginTop: 10 }} />
           </RouterLink>
           <Button
-            variant="text"
-            color="primary"
+            variant="tertiary" 
+            
             onClick={() => {
               dispatch(logout());
             }}
@@ -107,8 +107,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 <Grid display={{ xs: "none", sm: "block" }} item key={idx}>
                   <Button
                     key={idx}
-                    sx={{ padding: "13px" }}
-                    variant="text"
+                    variant="tertiary" 
                     color={"primary"}
                     onClick={() => {
                       navigate(item.link);
@@ -123,14 +122,14 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             })}
 
             <Grid item>
-              <Badge badgeContent={cart.items.length} color="primary">
+              <Badge badgeContent={cart.items.length} >
                 <IconButton
                   onClick={(e) => {
                     navigate("/cart");
                   }}
                   edge="end"
                   size="large"
-                  color="primary"
+                  
                 >
                   <ShoppingCartIcon
                     height={25}
@@ -158,7 +157,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 }}
                 edge="end"
                 size="large"
-                color="primary"
+                
               >
                 <MenuIcon height={25} width={25} fontSize="inherit" />
               </IconButton>

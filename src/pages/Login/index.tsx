@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, useTheme,Button,TextField } from "@mui/material";
+import { Box, Grid, Typography, useTheme,TextField } from "@mui/material";
 import { useCallback } from "react";
 //import { Link } from 'react-router-dom'
 
@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Login as LoginEntity } from "../../store/types/auth.interfaces";
 import { fetchLogin } from "../../store/slices/auth.slice";
 import { useAppDispatch } from "../../store/store";
+import { Button } from "ui-layout";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 
@@ -76,7 +77,7 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
               }}
               error={!!errors.email}
               helperText={errors.email && t(errors.email?.message as string)}
-              fullWidth
+              
             />
 
             <TextField
@@ -87,16 +88,18 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
               name="password"
               error={!!errors.senha}
               helperText={errors.senha && t(errors.senha?.message as string)}
-              fullWidth
+              
             />
  
             <Button
               id="salva-login-submit"
               value="submit"
-              variant="contained"
+              variant="secondary"
               color="secondary"
               type="submit"
-              fullWidth
+              onClick={()=>{
+                console.log('Logal')
+              }}
             >
               <Typography sx={{
                 padding: '5px'

@@ -35,35 +35,35 @@ const OrderResume: React.FC<React.PropsWithChildren<Props>> = () => {
                 onChange={(ev) => setFormData({ ...formData, name: ev.target.value })}
                 value={formData.name || ''}
                 required
-                fullWidth
+                
             />
             <TextField
                 label={t("surname")}
                 onChange={(ev) => setFormData({ ...formData, surname: ev.target.value })}
                 value={formData.surname || ''}
                 required
-                fullWidth
+                
             />
             <TextField
                 label={t("email")}
                 onChange={(ev) => setFormData({ ...formData, email: ev.target.value })}
                 value={formData.email || ''}
                 required
-                fullWidth
+                
             />
             <TextField
                 label={t("street_name")}
                 onChange={(ev) => setFormData({ ...formData, street_name: ev.target.value })}
                 value={formData.street_name || ''}
                 required
-                fullWidth
+                
             />
             <TextField
                 label={t("street_number")}
                 onChange={(ev) => setFormData({ ...formData, street_number: ev.target.value })}
                 value={formData.street_number || ''}
                 required
-                fullWidth
+                
             />
         </Grid>
     );

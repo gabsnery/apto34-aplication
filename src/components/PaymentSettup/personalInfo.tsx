@@ -63,7 +63,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
             {
                 token ? null : <Button onClick={() => {
                     handleOpen()
-                }} color={"primary"} variant={"outlined"}>{`Logar`}</Button>
+                }} color={"primary"} variant="secondary" >{`Logar`}</Button>
             }
             {
                 edit ? <>
@@ -72,21 +72,21 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
                         onChange={(ev) => setFormData({ ...formData, name: ev.target.value })}
                         value={formData.name || ''}
                         required
-                        fullWidth
+                        
                     />
                     <TextField
                         label={t("surname")}
                         onChange={(ev) => setFormData({ ...formData, surname: ev.target.value })}
                         value={formData.surname || ''}
                         required
-                        fullWidth
+                        
                     />
                     <TextField
                         label={t("email")}
                         onChange={(ev) => setFormData({ ...formData, email: ev.target.value })}
                         value={formData.email || ''}
                         required
-                        fullWidth
+                        
                     />
 
                 </> : <>
@@ -97,7 +97,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
             }
             {token ? <Button onClick={() => {
                 setEdit(!edit);
-            }} color={"primary"} variant={"outlined"}>{`${edit ? 'Salvar' : 'Editar'}`}</Button> : null}
+            }} color={"primary"} variant="secondary" >{`${edit ? 'Salvar' : 'Editar'}`}</Button> : null}
 
         </>
     );

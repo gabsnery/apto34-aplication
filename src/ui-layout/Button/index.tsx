@@ -1,57 +1,57 @@
-import React, { FC, forwardRef } from "react";
-import {
-  Button as MUIButton,
-  ButtonProps as MUIButtonProps,
-  CircularProgress,
-  Link
-} from "@mui/material";
+// src/components/Button.tsx
+import React, { ButtonHTMLAttributes } from 'react';
+import styled, { css } from 'styled-components';
 
-import { StyledComponent } from "@emotion/styled"
-import { BaseButton, PrimaryTextButton, PrimaryButton, SecondaryButton } from "./styles";
-import { theme } from "../theme";
-
-interface ButtonProps extends Omit<MUIButtonProps, "variant"> {
-  color: "primary" | "secondary";
-  variant: "contained" | "outlined" | "text" | "soft";
-  isLoading?: boolean
-  component?: string
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: 'primary' | 'secondary' | 'tertiary';
 }
 
-const StyledButtonsDictionary = {
-  primarytone_outlined: BaseButton,
-  primary_outlined: PrimaryButton,
-  primary_contained: PrimaryButton,
-  secondary_outlined: SecondaryButton,
-  secondary_contained: SecondaryButton,
-  primary_text: PrimaryTextButton,
-  secondary_text: SecondaryButton,
-  primary_soft: PrimaryButton,
-  secondary_soft: SecondaryButton
-} as Record<string, StyledComponent<MUIButtonProps>>;
 
-const getStyledComponent: (
-  props: ButtonProps
-) => StyledComponent<MUIButtonProps> = ({ color, variant }) =>
-    StyledButtonsDictionary[`${color}_${variant}`] ?? MUIButton;
+const variantStyles = {
+  primary: css`
+    background-color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.onPrimary};
 
-export const Button: FC<ButtonProps> = forwardRef(({
-  children,
-  variant,
-  isLoading, 
-  color,
-  ...buttonProps
-}, ref) => {
-  const StyledButton = getStyledComponent({ color, variant });
-  return (
-    <StyledButton {...buttonProps} sx={{
-      ...buttonProps.sx, textTransform: 'none',
-      backgroundColor: (color === 'primary' && variant !== 'text') ? theme.palette.primary['main'] : undefined
+    &:hover {
+      background-color: ${(props) => props.theme.colors.primaryVariant};
     }
-    } >
+  `,
+  secondary: css`
+    background-color: ${(props) => props.theme.colors.secondary};
+    color: ${(props) => props.theme.colors.onSecondary};
 
-      {isLoading ? (
-        <CircularProgress data-testid="loadingIcon" color="info" size={24} />
-      ) : children}
-    </StyledButton>
-  );
-});
+    &:hover {
+      background-color: ${(props) => props.theme.colors.secondaryVariant};
+    }
+  `,
+  tertiary: css`
+    background-color: transparent;
+    color: ${(props) => props.theme.colors.primary};
+    border: 1px solid ${(props) => props.theme.colors.primary};
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.onPrimary};
+    }
+  `,
+};
+
+
+
+const StyledButton = styled.button<ButtonProps>`
+  padding: ${(props) => props.theme.spacing.medium};
+  border: none;
+  border-radius: 4px;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.fontSize};
+  cursor: pointer;
+
+  ${(props) => variantStyles[props.variant || 'primary']}
+`;
+
+export const Button: React.FC<ButtonProps> = ({ children, onClick },props) => {
+  return <StyledButton onClick={onClick} {...props}>{children}</StyledButton>;
+};
+

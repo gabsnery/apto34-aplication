@@ -58,15 +58,15 @@ export const Select: FC<_SelectProps> = ({ children, type, mainIcon, footer, opt
         return <Box key={"items_footer"} sx={{
           display: 'flex'
         }} >
-          <Button sx={{ margin: '10px 10px 10px auto', color: 'white' }} variant='outlined' color='primary'>Ok</Button>
+          <Button  variant='primary' color='primary'>Ok</Button>
         </Box>
         break;
       case 'complete':
         return <Box key={"items_footer"} sx={{
           display: 'flex',
         }} >
-          <Button sx={{ margin: '10px auto 10px 10px', color: 'white', textDecoration: 'underline' }} disabled={false} color='primary' variant='text' >Limpar</Button>
-          <Button sx={{ margin: '10px 10px 10px auto', color: 'white' }} variant='outlined' color='primary'>Ok</Button>
+          <Button  disabled={false} color='primary' variant='tertiary' >Limpar</Button>
+          <Button  variant='primary' color='primary'>Ok</Button>
         </Box>
         break;
       default:
@@ -133,9 +133,7 @@ const renderItem = (item: OptionProps, selectedValue: unknown | unknown[], type?
     return <><Text variant={'body'}  color={'secondary'} sx={{ color: '#DADBAD', marginTop: '16px' }}>{item.label ?? item.group}</Text></>
   switch (type) {
     case 'multiple':
-      return <>{item.icon ?? ''}<Text variant='body' style={{
-        width: 'calc(100% - 32px)'
-      }} >{item.label ?? item.group}</Text>
+      return <>{item.icon ?? ''}<Text variant='body'  >{item.label ?? item.group}</Text>
         <Checkbox sx={
           {
             width: '32px',
@@ -145,9 +143,7 @@ const renderItem = (item: OptionProps, selectedValue: unknown | unknown[], type?
           }
         } checked={(selectedValue as unknown[]).indexOf(item.value) > -1} /></>
     case 'radio':
-      return <>{item.icon ?? ''}<Text variant='body' style={{
-        width: 'calc(100% - 32px)'
-      }} >{item.label ?? item.group}</Text>
+      return <>{item.icon ?? ''}<Text variant='body'  >{item.label ?? item.group}</Text>
         <Radio sx={
           {
             width: '32px',

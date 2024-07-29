@@ -3,9 +3,8 @@ import {
   getIssuers,
   initMercadoPago,
 } from "@mercadopago/sdk-react";
-import { Grid, TextField, useTheme } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useAddOrderMutation } from "store/api/Order";
 import {
@@ -19,12 +18,12 @@ import { useAppDispatch } from "../../store/store";
 
 import { getPaymentMethods } from "@mercadopago/sdk-react/coreMethods";
 import { PaymentMethods } from "@mercadopago/sdk-react/coreMethods/getPaymentMethods/types";
+import { useTypedSelector } from "hooks";
 import { setSnackbar } from "store/slices/snackbarSlice";
-import PersonalInfo from "./personalInfo";
-import PaymentInfo from "./paymentInfo";
 import AddreddInfo from "./addreddInfo";
 import DeliverInfo from "./deliverInfo";
-import { useTypedSelector } from "hooks";
+import PaymentInfo from "./paymentInfo";
+import PersonalInfo from "./personalInfo";
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const cart = useSelector((st: RootState) => st.cart);
@@ -147,9 +146,8 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, [cardToken]);
   return (
-    <Grid container columns={16}>
-      <Grid xs={2} />
-      <Grid xs={12} md={4} columns={16} item container direction="column">
+    <Grid container  paddingX={{xs:'20px',md:'200px'}} columnSpacing={2}>
+      <Grid xs={12} md={4} item container direction="column">
         <PersonalInfo />
         <AddreddInfo />
         <DeliverInfo />
@@ -164,11 +162,11 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           />
         )}
       </Grid>
-      <Grid xs={12} md={4} columns={16} item container direction={"column"}>
+      <Grid xs={12} md={4}  item container direction={"column"}>
         Detalhes
         <Button
-          color="primary"
-          variant="outlined"
+          
+          variant="secondary" 
           onClick={() => {
             getIdentificationTypes().then((e) => {
               console.log("eee", e);

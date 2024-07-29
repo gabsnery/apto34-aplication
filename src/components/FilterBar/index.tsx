@@ -35,7 +35,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               name={"categoryId"}
               label="Categoria"
               sx={{ backgroundColor: "transparent" }}
-              fullWidth
+              
               type="multiple"
               value={sessionFilter?.category?.map((i) => i.toString())}
               onChange={(e) => {
@@ -64,7 +64,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               name={"categoryId"}
               label="Tipo"
               sx={{ backgroundColor: "transparent" }}
-              fullWidth
+              
               type="multiple"
               value={sessionFilter?.type?.map((i) => i.toString())}
               onChange={(e) => {
@@ -93,7 +93,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               name={"categoryId"}
               label="Cor"
               sx={{ backgroundColor: "transparent" }}
-              fullWidth
+              
               type="multiple"
               value={sessionFilter?.color?.map((i) => i.toString())}
               onChange={(e) => {
@@ -122,7 +122,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               name={"categoryId"}
               label="Tamanho"
               sx={{ backgroundColor: "transparent" }}
-              fullWidth
+              
               type="multiple"
               value={sessionFilter?.size?.map((i) => i.toString())}
               onChange={(e) => {
@@ -148,8 +148,8 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           </Grid>
           <Grid item xs={6} sm={1}>
             <Button
-              variant="text"
-              color="primary"
+              variant="tertiary" 
+              
               onClick={() => {
                 dispatch(clearFilter());
               }}

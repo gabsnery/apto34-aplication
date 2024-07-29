@@ -62,7 +62,7 @@ export const AddModal: React.FC<{
               label={"Quantidade"}
               onChange={(ev) => setQuantity(+ev.target.value)}
               type="number"
-              fullWidth
+              
             />
           </Grid>
           <Grid item xs={4} sx={{ textAlign: "right" }}>

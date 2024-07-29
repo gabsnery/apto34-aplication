@@ -1,20 +1,17 @@
-import { ThemeProvider, Theme, StyledEngineProvider, Box } from "@mui/material";
-import { muiTheme } from "./ui-layout/theme";
+import { Theme, StyledEngineProvider, Box } from "@mui/material";
 import AppRoutes from "./Routes";
-import { useTheme } from '@mui/material';
+import { useTheme } from "@mui/material";
 import "./App.css";
 import DefaultContainer from "components/DefaultContainer";
-
+import ThemeProvider from "ui-layout/teamProvider";
 
 const App = () => {
-  
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={muiTheme}>
-      
-          <DefaultContainer>
-            <AppRoutes />
-          </DefaultContainer>
+      <ThemeProvider>
+        <DefaultContainer>
+          <AppRoutes />
+        </DefaultContainer>
       </ThemeProvider>
     </StyledEngineProvider>
   );

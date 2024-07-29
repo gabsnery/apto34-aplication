@@ -32,35 +32,35 @@ const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
                     onChange={(ev) => setFormData({ ...formData, street_name: ev.target.value })}
                     value={formData.street_name || ''}
                     required
-                    fullWidth
+                    
                 />
                 <TextField
                     label={t("street_number")}
                     onChange={(ev) => setFormData({ ...formData, street_number: ev.target.value })}
                     value={formData.street_number || ''}
                     required
-                    fullWidth
+                    
                 />
                 <TextField
                     label={t("street_zip_code")}
                     onChange={(ev) => setFormData({ ...formData, street_zip_code: ev.target.value })}
                     value={formData.street_zip_code || ''}
                     required
-                    fullWidth
+                    
                 />
                 <TextField
                     label={t("street_city")}
                     onChange={(ev) => setFormData({ ...formData, street_city: ev.target.value })}
                     value={formData.street_city || ''}
                     required
-                    fullWidth
+                    
                 />
                 <TextField
                     label={t("street_state")}
                     onChange={(ev) => setFormData({ ...formData, street_state: ev.target.value })}
                     value={formData.street_state || ''}
                     required
-                    fullWidth
+                    
                 /></>
                 : <>
                     <Text variant={"body"}>{formData.street_name || ''}</Text>
@@ -72,7 +72,7 @@ const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
             }
             <Button onClick={() => {
                 setEdit(!edit);
-            }} color={"primary"} variant={"outlined"}>{`${edit ? 'Salvar' : 'Editar'}`}</Button>
+            }} color={"primary"} variant="secondary" >{`${edit ? 'Salvar' : 'Editar'}`}</Button>
         </>
     );
 };

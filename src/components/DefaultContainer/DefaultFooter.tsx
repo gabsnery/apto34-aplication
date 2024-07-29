@@ -32,27 +32,27 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
             <img src={logo} alt="logo" style={{ height: 300 }} />
           </Grid>
           <Grid item container xs={12} sm={4} direction={"column"}>
-            <Text variant={"h3"} weight={500} color="primary.light">
+            <Text variant={"h3"} weight={500} color="primary">
               {"Contato"}
             </Text>
-            <Text variant={"h6"} weight={500} color="primary.light">
+            <Text variant={"h6"} weight={500} color="primary">
               (19) 98262-8074
             </Text>
-            <Text variant={"h6"} weight={500} color="primary.light">
+            <Text variant={"h6"} weight={500} color="primary">
               gneri94@gmail.com
             </Text>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Text variant={"h3"} weight={500} color="primary.light">
+            <Text variant={"h3"} weight={500} color="primary">
               {"Informações"}
             </Text>
-            <Text variant={"h6"} weight={500} color="primary.light">
+            <Text variant={"h6"} weight={500} color="primary">
               {"Produtos"}
             </Text>
-            <Text variant={"h6"} weight={500} color="primary.light">
+            <Text variant={"h6"} weight={500} color="primary">
               {"Consultoria"}
             </Text>
-            <Text variant={"h6"} weight={500} color="primary.light">
+            <Text variant={"h6"} weight={500} color="primary">
               {"Sobre nós"}
             </Text>
           </Grid>

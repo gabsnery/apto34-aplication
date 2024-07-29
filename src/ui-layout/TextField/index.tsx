@@ -1,31 +1,61 @@
-import React, { useState, FC } from 'react';
-import { TextFieldProps as MUITextFieldProps } from '@mui/material'
-import { StyledTextField } from './styles'
+// src/components/TextInput.tsx
+import React, { InputHTMLAttributes } from "react";
+import styled from "styled-components";
 
-interface TextFieldProps extends Omit<MUITextFieldProps, 'variant'> {
-  measuringUnit?: string
-  variant?: 'outlined' | 'filled' | 'standard' | undefined
+interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  value: string | any;
+  label: string | any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const TextField: FC<TextFieldProps> = React.forwardRef(({
-  children,
-  measuringUnit, variant,
-  ...textFieldProps
-}, ref) => {
+const StyledInput = styled.input`
+  padding: ${(props) => props.theme.spacing.medium};
+  border: 1px solid ${(props) => props.theme.colors.primary};
+  border-radius: 8px;
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.fontSize};
+  background-color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.black};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: ${(props) => props.theme.colors.secondary};
+    outline: none;
+    box-shadow: 0 0 8px ${(props) => props.theme.colors.secondary};
+  }
+`;
+
+const StyledComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: ${(props) => props.theme.spacing.large};
+`;
+
+const StyledLabel = styled.label`
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.fontSize};
+  font-weight: 500;
+  text-transform:capitalize;
+  color: ${(props) => props.theme.colors.primary};
+  margin-bottom: ${(props) => props.theme.spacing.small};
+`;
+
+export const TextField: React.FC<TextInputProps> = (
+  { value, onChange, label },
+  props
+) => {
   return (
-    <StyledTextField
-      variant={variant ? variant : "outlined"}
-      
-      InputProps={{
-        ...textFieldProps.InputProps,
-        endAdornment: measuringUnit,
-      }}
-      InputLabelProps={{
-        shrink:true
-      }}
-      {...textFieldProps}
-    >
-      {children}
-    </StyledTextField>
-  )
-})
+    <StyledComponent>
+      <StyledLabel>{label}</StyledLabel>
+      <StyledInput
+        type="text"
+        aria-label={label}
+        value={value}
+        onChange={onChange}
+        {...props}
+      />
+    </StyledComponent>
+  );
+};

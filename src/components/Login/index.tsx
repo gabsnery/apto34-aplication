@@ -57,7 +57,7 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({onLogin}) => {
         }}
         error={!!errors.email}
         helperText={errors.email && t(errors.email?.message as string)}
-        fullWidth
+        
       />
 
       <TextField
@@ -68,16 +68,16 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({onLogin}) => {
         name="password"
         error={!!errors.senha}
         helperText={errors.senha && t(errors.senha?.message as string)}
-        fullWidth
+        
       />
 
       <Button
         id="salva-login-submit"
         value="submit"
-        variant="contained"
+        variant="secondary"
         color="secondary"
         type="submit"
-        fullWidth
+        
       >
         <Typography sx={{
           padding: '5px'

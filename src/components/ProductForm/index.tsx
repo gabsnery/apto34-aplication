@@ -82,7 +82,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             <Chip
                                 label={file.name}
                                 onDelete={() => setFile(undefined)}
-                                color="primary"
+                                
                             />
                         )}
                         <Input inputProps={{ ...getInputPropsCapa() }} />
@@ -108,7 +108,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             return <Chip
                                 label={file.name}
                                 onDelete={() => setFiles(files.filter((_, i) => i !== index))}
-                                color="primary"
+                                
                             />
                         })}
                         <Input inputProps={{ ...getInputProps() }} />
@@ -124,7 +124,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                         onChange={(ev) => setFormData({ ...formData, nome: ev.target.value })}
                         value={formData.nome || ''}
                         required
-                        fullWidth
+                        
                     />
                 </Grid>
                 <Grid item xs={4} >
@@ -135,7 +135,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                         onChange={(ev) => setFormData({ ...formData, quantity: +ev.target.value })}
                         value={formData.quantity || ''}
                         required
-                        fullWidth
+                        
                     />
                 </Grid>
                 <Grid item xs={4} >
@@ -145,7 +145,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                         onChange={(ev) => setFormData({ ...formData, descricao: ev.target.value })}
                         value={formData.descricao || ''}
                         required
-                        fullWidth
+                        
                     />
                 </Grid>
                 <Grid item xs={4} >
@@ -155,7 +155,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                         onChange={(ev) => setFormData({ ...formData, valor_produto: +ev.target.value })}
                         value={formData.valor_produto || ''}
                         required
-                        fullWidth
+                        
                     />
                 </Grid>
                 <Grid item xs={4} >
@@ -163,7 +163,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                         name={'categoryId'}
                         label="Tipo"
                         sx={{ backgroundColor: 'transparent' }}
-                        fullWidth
+                        
                         type="multiple"
                         value={formData.produtoSubcategoria?.map(i => i.id?.toString()) || []}
                         onChange={(e) => {
@@ -188,7 +188,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             name={'categoryId'}
                             label="Cor"
                             sx={{ backgroundColor: 'transparent' }}
-                            fullWidth
+                            
                             value={productoColor?.id?.toString() || ''}
                             onChange={(e) => {
                                 setProductoColor({ ...productoColor, id: +(e.target.value as string) ,descricao:colors?.filter(s=>s.id===+(e.target.value as string))[0].descricao })
@@ -203,11 +203,11 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             onChange={(ev) => setProductoColor({ ...productoColor, quantidade: +(ev.target.value as string) })}
                             value={productoColor.quantidade || 0}
                             required
-                            fullWidth
+                            
                         />
                     </Grid>
                     <Grid item xs={4} >
-                        <Button variant="contained" color="primary" onClick={() => {
+                        <Button variant="secondary"  onClick={() => {
                             const cores = formData['cores'] || []
                             setFormData({ ...formData, cores: [...cores, productoColor] })
                             setProductoSize({})
@@ -221,7 +221,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             name={'categoryId'}
                             label="Temanho"
                             sx={{ backgroundColor: 'transparent' }}
-                            fullWidth
+                            
                             value={productoSize?.id?.toString() || ''}
                             onChange={(e) => {
                                 setProductoSize({ ...productoSize, id: +(e.target.value as string),descricao:sizes?.filter(s=>s.id===+(e.target.value as string))[0].descricao })
@@ -236,11 +236,11 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             onChange={(ev) => setProductoSize({ ...productoSize, quantidade: +(ev.target.value as string) })}
                             value={productoSize.quantidade || 0}
                             required
-                            fullWidth
+                            
                         />
                     </Grid>
                     <Grid item xs={4} >
-                        <Button variant="contained" color="primary" onClick={() => {
+                        <Button variant="secondary"  onClick={() => {
                             const tamanhos = formData['tamanhos'] || []
                             setFormData({ ...formData, tamanhos: [...tamanhos, productoSize] })
                             setProductoSize({})
@@ -252,7 +252,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
             </Grid>
             <Grid item xs={12} textAlign={'right'}>
 
-                <Button variant="contained" color="primary" onClick={() => {
+                <Button variant="secondary"  onClick={() => {
                     updateAddProduct({ files: ([file] || []).concat(files) as any[], json: formData })
                 }}>SALVAR</Button>
             </Grid>

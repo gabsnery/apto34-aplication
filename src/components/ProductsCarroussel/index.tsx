@@ -1,6 +1,6 @@
 import ProductsCard from "components/ProductCard";
 import { useEffect, useState } from "react";
-import { Button, theme } from "ui-layout";
+import { Button } from "ui-layout";
 import "./style.css";
 import { Grid, useMediaQuery } from "@mui/material";
 import { useGetProductsQuery } from "store/api/product";
@@ -68,7 +68,7 @@ export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
       columnSpacing={3}
       pb={2}
       sx={{
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: 'pink',
         height: "inherit",
         px: { xs: 0, sm: "50px" },
       }}
@@ -85,8 +85,8 @@ export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
             firstItemToShowIndex - quantityToShow < 0 &&
             firstItemToShowIndex === 0
           }
-          variant="contained"
-          color="primary"
+          variant="secondary"
+          
           onClick={() => {
             setfirstItemToShowIndex(
               firstItemToShowIndex - quantityToShow < 0
@@ -141,9 +141,9 @@ export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
         textAlign={"right"}
       >
         <Button
-          variant="contained"
+          variant="secondary"
           disabled={data?.length <= quantityToShow + firstItemToShowIndex}
-          color="primary"
+          
           onClick={() => {
             const resto =
               data?.length - (quantityToShow + firstItemToShowIndex);

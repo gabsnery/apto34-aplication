@@ -1,8 +1,8 @@
-import { Grid, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "store/store";
+import { RootState } from "store/store";
 import { Select } from "ui-layout";
 
 import { getPaymentMethods } from '@mercadopago/sdk-react/coreMethods';
@@ -49,7 +49,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
         })
   }, [formData,type]);
   useEffect(() => {
-    if (type == 'Invoice') {
+    if (type === 'Invoice') {
       setPaymentInfo({
         payer: { email: "admin@gatostecnologia.com", first_name: 'Gabriela', last_name: 'Nery', identification: { type: "CPF", number: "36439183800" } },
         payment_method_id: 'bolbradesco',
@@ -71,9 +71,9 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
 
   }, [formData]);
   return (
-    <Grid container >
+    <>
 
-      <FormControl>
+      <FormControl sx={{width:'100%'}}>
         <FormLabel id="demo-radio-buttons-group-label">Tipo de pagamento</FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
@@ -96,48 +96,48 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
           onChange={(ev) => setFormData({ ...formData, CARDHOLDER_NAME: ev.target.value })}
           value={formData.CARDHOLDER_NAME || ''}
           required
-          fullWidth
+          
         />
         <TextField
           label={t("CREDIT_CARD_NUMBER")}
           onChange={(ev) => setFormData({ ...formData, CREDIT_CARD_NUMBER: ev.target.value })}
           value={formData.CREDIT_CARD_NUMBER || ''}
           required
-          fullWidth
+          
         />
         <TextField
           label={t("cardExpirationMonth")}
           onChange={(ev) => setFormData({ ...formData, cardExpirationMonth: ev.target.value })}
           value={formData.cardExpirationMonth || ''}
           required
-          fullWidth
+          
         />
         <TextField
           label={t("cardExpirationYear")}
           onChange={(ev) => setFormData({ ...formData, cardExpirationYear: ev.target.value })}
           value={formData.cardExpirationYear || ''}
           required
-          fullWidth
+          
         />
         <TextField
           label={t("securityCode")}
           onChange={(ev) => setFormData({ ...formData, securityCode: ev.target.value })}
           value={formData.securityCode || ''}
           required
-          fullWidth
+          
         />
         <TextField
           label={t("identity")}
           onChange={(ev) => setFormData({ ...formData, identity: ev.target.value })}
           value={formData.identity || ''}
           required
-          fullWidth
+          
         />
         {installments.length > 0 && <Select
           name={'categoryId'}
           label="Categoria"
           sx={{ backgroundColor: 'transparent' }}
-          fullWidth
+          
           value={formData.installments.toString()}
           onChange={(e) => {
             setFormData({ ...formData, installments: +(e.target.value as string) })
@@ -149,7 +149,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({ setPaymentInfo 
       }
 
 
-    </Grid >
+    </>
   );
 };
 

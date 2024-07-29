@@ -59,32 +59,32 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Grid>
         <Grid item xs={8}>
           <Grid item xs={12}>
-            <Text variant="h2" color="primary">
+            <Text variant="h2" >
               {data?.nome}
             </Text>
           </Grid>
           <Grid item xs={12}>
-            <Text variant="h4" color="primary">
+            <Text variant="h4" >
               {data?.descricao}
             </Text>
           </Grid>
           <Grid item xs={12}>
             {data?.produtoSubcategoria.map((item, idx) => (
-              <Text key={idx} variant="body" color="primary">
+              <Text key={idx} variant="body" >
                 {item.subcategoria}
               </Text>
             ))}
           </Grid>
           <Grid item xs={12}>
             {data?.cores.map((item, idx) => (
-              <Text key={idx} variant="body" color="primary">
+              <Text key={idx} variant="body" >
                 {item.descricao}
               </Text>
             ))}
           </Grid>
           <Grid item xs={12}>
             {data?.tamanhos.map((item, idx) => (
-              <Text key={idx} variant="body" color="primary">
+              <Text key={idx} variant="body" >
                 {item.descricao}|
               </Text>
             ))}
@@ -95,7 +95,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               onChange={(ev) => setQuantity(+ev.target.value)}
               value={quantity}
               required
-              fullWidth
+              
             />
             <IconButton
               onClick={handleAddToCart}

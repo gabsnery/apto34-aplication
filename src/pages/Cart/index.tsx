@@ -34,24 +34,23 @@ const Cart: React.FC<React.PropsWithChildren<unknown>> = () => {
           }}
         >
           <div style={{ margin: "20px 0" }}>
-            <Text variant="h2" color="primary">
+            <Text variant="h2" >
               RESUMO DA COMPRA
             </Text>
           </div>
           <div style={{ margin: "20px 0" }}>
-            <Text variant="h3" color="primary">
+            <Text variant="h3" >
               Total: R${cart.total}
             </Text>
           </div>
           <Button
             color={"primary"}
-            fullWidth
-            variant={"contained"}
+            variant={"primary"}
             onClick={() => {
               navigate("/close-order");
             }}
           >
-            <Text variant={"h4"} color={"grey.700"}>
+            <Text variant={"h4"}>
               IR PARA PAGAMENTO
             </Text>
           </Button>
