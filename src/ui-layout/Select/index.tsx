@@ -1,5 +1,4 @@
 import React, { useState,FC } from 'react';
-import { StyledComponent } from '@emotion/styled';
 import {
   Checkbox, FormControl, ListSubheader, InputLabel, MenuItem, Radio,
   Select as MUISelect, BottomNavigation, SelectProps as MUISelectPropsProps, Box, TableFooter
@@ -11,6 +10,7 @@ import {
   BaseSelect
 } from './styles';
 import { Button } from '../Button';
+import styled from 'styled-components';
 
 interface OptionProps {
   icon?: JSX.Element,
@@ -25,9 +25,22 @@ interface _SelectProps extends MUISelectPropsProps {
   variation?: 'filled' | 'composed',
   footer?: 'basic' | 'complete',
 }
+const StyledComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: ${(props) => props.theme.spacing.large};
+`;
+const StyledLabel = styled.label`
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.fontSize};
+  font-weight: 500;
+  text-transform:capitalize;
+  color: ${(props) => props.theme.colors.primary};
+  margin-bottom: ${(props) => props.theme.spacing.small};
+`;
 
-
-export const Select: FC<_SelectProps> = ({ children, type, mainIcon, footer, options, ...SelectProps }) => {
+export const Select: FC<_SelectProps> = ({ children, type, mainIcon,label, footer, options, ...SelectProps }) => {
 
   const renderItems = (_options: OptionProps[] | undefined) => {
     let { grouped, options } = sortedOptions(_options);
@@ -79,52 +92,31 @@ export const Select: FC<_SelectProps> = ({ children, type, mainIcon, footer, opt
   return <FormControl fullWidth sx={{width: '100%'}}
     variant="outlined" 
   >
-    <InputLabel sx={{
-      //marginLeft: '20px',
-      '&.MuiFormLabel-filled': {
-        fontSize: "14px",
-        fontWeight:700,
-        letterSpacing:'2px',
-        '& .MuiSvgIcon-root': {
-          display: 'none'
-        }
-      },
-    }}>
-      <Box display="flex">
-        {mainIcon ?? ''}
-        {SelectProps.label}
-      </Box>
-    </InputLabel>
+    <StyledComponent>
+         <StyledLabel>{label}</StyledLabel>
+
     <BaseSelect 
       IconComponent={KeyboardArrowDown}
       fullWidth
       renderValue={(value:any) => renderValue(value, options ?? [], type)}
-      MenuProps={{
-        sx: {
-          '& .MuiList-root': {
-            paddingBottom: footer ? '0' : '15px',
-            color: 'rgb(242, 242, 242)',
-          
-          }
-        }
-      }}
       {...SelectProps}>{
         renderItems(options)}
     </BaseSelect >
+    </StyledComponent>
   </FormControl >
 }
 
 const renderValue = (value: unknown, options: OptionProps[], type?: 'multiple' | 'radio',) => {
   switch (type) {
     case 'multiple':
-      return <><Text sx={{ verticalAlign: 'middle' }} variant='body' >{(value as []).map(i => options.find(j => j.value === i)?.label).join(', ')}</Text>
+      return <>{(value as []).map(i => options.find(j => j.value === i)?.label).join(', ')}
       </>
       break;
     case 'radio':
-      return <><Text sx={{ verticalAlign: 'middle' }} variant='body' >{(options.find(j => j.value === value)?.label)}</Text></>
+      return <>{(options.find(j => j.value === value)?.label)}</>
       break;
     default:
-      return <><Text sx={{ verticalAlign: 'middle' }} variant='body' >{(options.find(j => j.value === value)?.label)}</Text></>
+      return <>{(options.find(j => j.value === value)?.label)}</>
       break;
   }
 }

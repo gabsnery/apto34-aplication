@@ -1,7 +1,8 @@
 // src/tokens.ts
 export const tokens = {
   colors: {
-    primary: '#573D2E',
+    primary: '#BA977B',
+    primaryLight: '#FFEDDE',
     primaryVariant: '#8A7353',
     secondary: '#4E7E6A',
     background: '#FFFFFF',
@@ -14,7 +15,7 @@ export const tokens = {
     onError: '#FFFFFF',
     grayLight: '#F5F5F5',
     gray: '#CCCCCC',
-    grayMedium: '#999999',
+    grayMedium: '#595959',
     grayDark: '#666666',
     grayDarker: '#333333',
     black: '#000000',

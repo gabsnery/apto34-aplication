@@ -1,21 +1,62 @@
 // src/components/Text.tsx
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 interface TextProps {
   children: React.ReactNode;
   weight?: number;
-  color?:string;
-  variant?: 'body' | 'heading'|string;
-  sx?:any;
+  color?: "primary" | "secondary" | "terciary";
+  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body";
+  sx?: any;
 }
+const variantStyles = {
+  h1: css`
+    font-size: 32px;
+  `,
+  h2: css`
+    font-size: 28px;
+  `,
+  h3: css`
+    font-size: 24px;
+  `,
+  h4: css`
+    font-size: 20px;
+  `,
+  h5: css`
+    font-size: 16px;
+  `,
+  h6: css`
+    font-size: 14px;
+  `,
+  body: css`
+    font-size: 16px;
+  `,
+};
+const colorStyles = {
+  primary: css`
+    color: ${(props) => props.theme.colors.grayDarker};
+  `,
+  secondary: css`
+    color: ${(props) => props.theme.colors.grayMedium};
+  `,
+  terciary: css`
+    color: ${(props) => props.theme.colors.primaryLight};
+  `,
+};
+
 const StyledText = styled.span<TextProps>`
   font-family: ${(props) => props.theme.typography.fontFamily};
-  font-size: ${(props) => (props.variant === 'heading' ? '24px' : props.theme.typography.fontSize)};
-  font-weight: ${(props) => (props.variant === 'heading' ? 'bold' : props.theme.typography.fontWeight)};
-  color: ${(props) => props.theme.colors.onBackground};
+  ${(props) => variantStyles[props.variant || "body"]};
+  ${(props) => colorStyles[props.color || "secondary"]};
 `;
 
-export const Text: React.FC<TextProps> = ({ children, variant = 'body' }, props) => {
-  return <StyledText variant={variant} {...props}>{children}</StyledText>;
+export const Text: React.FC<TextProps> = (
+  { children, variant = "body" },
+  props
+) => {
+  return (
+    <StyledText variant={variant} {...props}>
+      {children}
+    </StyledText>
+  );
 };

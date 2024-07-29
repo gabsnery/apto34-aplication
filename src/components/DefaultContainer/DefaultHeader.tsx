@@ -85,7 +85,6 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
           </RouterLink>
           <Button
             variant="tertiary" 
-            
             onClick={() => {
               dispatch(logout());
             }}
@@ -108,14 +107,11 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                   <Button
                     key={idx}
                     variant="tertiary" 
-                    color={"primary"}
                     onClick={() => {
                       navigate(item.link);
                     }}
                   >
-                    <Text variant={"h5"} weight={500} color="grey.700">
                       {item.name}
-                    </Text>
                   </Button>
                 </Grid>
               );
@@ -145,7 +141,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 sx={{ padding: "13px", display: { xs: "none", md: "block" } }}
                 variant={"h5"}
                 weight={900}
-                color="grey.700"
+                color="secondary"
               >
                 {`Olá, ${"Fulana"}`}
               </Text>
