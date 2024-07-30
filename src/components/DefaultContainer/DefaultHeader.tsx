@@ -8,8 +8,10 @@ import {
   useTheme,
   List,
   ListItemButton,
+  BadgeProps,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { lightTheme as theme } from "ui-layout/theme";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import React, { FC, useState } from "react";
@@ -21,25 +23,32 @@ import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "store/store";
 import { logout } from "store/slices/logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import styled from "@emotion/styled";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
-  const theme = useTheme();
+  const mui_theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
   const [drawerIsOpen, setdrawerIsOpen] = useState<boolean>(false);
   const drawerWidth = 300;
-
+  const StyledBadge = styled(Badge)<BadgeProps>(() => ({
+    "& .MuiBadge-badge": {
+      right: 3,
+      top: 13,
+      backgroundColor: theme.colors.primary,
+    },
+  }));
   return (
     <>
       <AppBar
         elevation={0}
         position="sticky"
         sx={{
-          height: '100px',
+          height: "100px",
           backdropFilter: "blur(6px)",
-          backgroundColor: theme.palette.background.default,
-          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: mui_theme.palette.background.default,
+          zIndex: (mui_theme) => mui_theme.zIndex.drawer + 1,
         }}
       >
         <Drawer
@@ -72,7 +81,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       padding: "0 20px",
                     }}
                   >
-                      {item.name}
+                    {item.name}
                   </ListItemButton>
                 </React.Fragment>
               );
@@ -84,7 +93,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             <img src={logo} alt="logo" style={{ height: 100, marginTop: 10 }} />
           </RouterLink>
           <Button
-            variant="tertiary" 
+            variant="tertiary"
             onClick={() => {
               dispatch(logout());
             }}
@@ -103,57 +112,62 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
           >
             {items.map((item: NavObj, idx: number) => {
               return (
-                <Grid display={{ xs: "none", sm: "block" }} item key={idx}>
+                <Grid
+                  display={{ xs: "none", sm: "block" }}
+                  sx={{
+                    alignContent: "center",
+                  }}
+                  item
+                  key={idx}
+                >
                   <Button
                     key={idx}
-                    variant="tertiary" 
+                    variant="tertiary"
                     onClick={() => {
                       navigate(item.link);
                     }}
                   >
-                      {item.name}
+                    {item.name}
                   </Button>
                 </Grid>
               );
             })}
-
-            <Grid item>
-              <Badge badgeContent={cart.items.length} >
+            <Grid item mx={2}>
+              <StyledBadge badgeContent={cart.items.length}>
                 <IconButton
                   onClick={(e) => {
                     navigate("/cart");
                   }}
                   edge="end"
                   size="large"
-                  
                 >
-                  <ShoppingCartIcon
-                    height={25}
-                    width={25}
-                    fontSize="inherit"
-                    color="action"
-                  />
+                  <ShoppingCartIcon fontSize="inherit" color="action" />
                 </IconButton>
-              </Badge>
+              </StyledBadge>
             </Grid>
-            <Grid item>
-              <Text
-                sx={{ padding: "13px", display: { xs: "none", md: "block" } }}
-                variant={"h5"}
-                weight={900}
-                color="secondary"
-              >
-                {`Olá, ${"Fulana"}`}
-              </Text>
-            </Grid>
-            <Grid item sx={{ padding: "13px", display: { xs: "block", md: "none" } }}>
+      {/*       <Grid
+              item
+              sx={{
+                alignContent: "center",
+              }}
+            >
+              <Text color="secondary">{`Olá, ${"Fulana"}`}</Text>
+            </Grid> */}
+
+            <Grid
+              item
+              sx={{
+                padding: "13px",
+                display: { xs: "block", md: "none" },
+                alignContent: "center",
+              }}
+            >
               <IconButton
                 onClick={(e) => {
                   setdrawerIsOpen(!drawerIsOpen);
                 }}
                 edge="end"
                 size="large"
-                
               >
                 <MenuIcon height={25} width={25} fontSize="inherit" />
               </IconButton>

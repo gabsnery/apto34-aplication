@@ -41,7 +41,7 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
                           : "https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg"
                       })`,
                       width: "100%",
-                      height: "200px",
+                      height: "150px",
                       backgroundPosition: "top",
                       backgroundSize: "cover",
                     }}
@@ -49,16 +49,18 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
                 )}
               </Grid>
               <Grid container item xs={8} sm={10}>
-                <Grid item xs={12} sm={6}>
-                  {item.product.nome}
+                <Grid item xs={12} sm={6} alignContent={'center'}>
+                  <Text variant={'h5'}>{item.product.nome}</Text>
+                  
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                  R${item.product.valor_produto}
+                <Grid item xs={12} sm={2} alignContent={'center'}>
+                  <Text variant={'h5'}>R${(+item.product.valor_produto).toFixed(2)}</Text>
+                  
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                  {item.quantity}
+                <Grid item xs={12} sm={2} alignContent={'center'}>
+                <Text variant={'h5'}>{item.quantity}</Text>
                 </Grid>
-                <Grid item xs={12} sm={2}>
+                <Grid item xs={12} sm={2} alignContent={'center'}>
                   <IconButton
                     sx={{ cursor: "pointer", justifyContent: "end" }}
                     onClick={() => {

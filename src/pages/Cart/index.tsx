@@ -9,6 +9,7 @@ import Payment from "components/PaymentSettup";
 import { Button, Text } from "ui-layout";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CartOverview from "components/CartOverview";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 
@@ -26,36 +27,9 @@ const Cart: React.FC<React.PropsWithChildren<unknown>> = () => {
         <CartList />
       </Grid>
       <Grid item xs={12}  md={4} sx={{ display: "flex", position: "sticky" }}>
-        <div
-          style={{
-            height: "30vh",
-            width: "100%",
-            position: "sticky",
-          }}
-        >
-          <div style={{ margin: "20px 0" }}>
-            <Text variant="h2" >
-              RESUMO DA COMPRA
-            </Text>
-          </div>
-          <div style={{ margin: "20px 0" }}>
-            <Text variant="h3" >
-              Total: R${cart.total}
-            </Text>
-          </div>
-          <Button
-            color={"primary"}
-            variant={"primary"}
-            onClick={() => {
-              navigate("/close-order");
-            }}
-          >
-            <Text variant={"h4"}>
-              IR PARA PAGAMENTO
-            </Text>
-          </Button>
-        </div>
+        <CartOverview/>
       </Grid>
+
     </Grid>
   );
 };

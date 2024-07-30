@@ -13,6 +13,7 @@ const variantStyles = {
   primary: css`
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.onPrimary};
+    border: 1px solid ${(props) => props.theme.colors.primaryVariant};
 
     &:hover {
       background-color: ${(props) => props.theme.colors.primaryVariant};
@@ -20,12 +21,12 @@ const variantStyles = {
   `,
   secondary: css`
     background-color: transparent;
-    border: 1px solid ${(props) => props.theme.colors.secondary};
-    color: ${(props) => props.theme.colors.secondary};
+    border: 2px solid ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.grayMedium};
 
     &:hover {
-      background-color: ${(props) => props.theme.colors.secondary};
-      color: ${(props) => props.theme.colors.onSecondary};
+      background-color: ${(props) => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.onPrimary};
     }
   `,
   tertiary: css`
@@ -40,7 +41,9 @@ const variantStyles = {
 };
 
 const StyledButton = styled.button<ButtonProps>`
-  padding: ${(props) => props.theme.spacing.medium};
+  padding: ${(props) => props.theme.spacing.small};
+  font-family: ${(props) => props.theme.typography.fontFamily};
+  font-size: ${(props) => props.theme.typography.fontSize};
   border-radius: 4px;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
