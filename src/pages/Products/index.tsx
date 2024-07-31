@@ -5,6 +5,7 @@ import ProductsGrid from "components/ProductGrid";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../store/store";
 import FilterBar from "components/FilterBar";
+import { lightTheme } from "ui-layout/theme";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 
@@ -15,7 +16,7 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <Grid container sx={{
-      px: { xs: '10px', sm: "30px" },
+      px: { xs: lightTheme.spacing.small , sm: lightTheme.spacing.extraLarge },
     }}
     columnSpacing={3}
     >

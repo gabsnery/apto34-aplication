@@ -11,10 +11,6 @@ import Payment from "components/PaymentSettup";
 
 const CloseOrder: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["login", "common"]);
-  const dispatch = useAppDispatch();
-
-  const theme = useTheme();
-
   return <>
     <Payment />
   </>

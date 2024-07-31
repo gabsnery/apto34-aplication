@@ -20,22 +20,20 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const handleAddToCart = () => {
     if (id && data) {
-      console.log("🚀 ~ handleAddToCart ~ data:", data)
-      console.log("🚀 ~ handleAddToCart ~ id:", id)
       dispatch(addProduct({ product: data, quantity }))
     }
   };
 
   return (
     <>
-      <Grid item container p={2} columnSpacing={2}>
-        <Grid item xs={4}>
+      <Grid item container columnSpacing={2}>
+        <Grid item xs={3}>
           <Grid item xs={12}>
             <img
               style={{
                 backgroundImage: `url(${data?.thumbnails[0]})`,
                 width: "100%",
-                height: "500px",
+                height: "400px",
                 backgroundPosition: "top",
                 backgroundSize: "cover",
               }}

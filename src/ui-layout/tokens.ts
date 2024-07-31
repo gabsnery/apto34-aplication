@@ -25,6 +25,7 @@ export const tokens = {
     small: '8px',
     medium: '16px',
     large: '24px',
+    extraLarge: '100px',
   },
   typography: {
     fontFamily: '"Inter", sans-serif',

@@ -165,8 +165,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       <Grid xs={12} md={4}  item container direction={"column"}>
         Detalhes
         <Button
-          
-          variant="secondary" 
+          variant="primary" 
           onClick={() => {
             getIdentificationTypes().then((e) => {
               console.log("eee", e);

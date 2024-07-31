@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material";
 import ProductView from "components/Product";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../store/store";
+import { lightTheme } from "ui-layout/theme";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 
@@ -13,8 +14,8 @@ const Product: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const theme = useTheme();
 
-  return <>
+      return <div style={{paddingLeft:lightTheme.spacing.extraLarge,paddingRight:lightTheme.spacing.extraLarge}}>
     <ProductView />
-  </>
+  </div>
 };
 export default Product;

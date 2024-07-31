@@ -26,6 +26,7 @@ const Banner: React.FC<BannerProps> = ({ banners }) => {
       style={{
         width: '100%'
       }}
+      className="slider-container"
     >
       <Slider {...settings}>
         {banners.map((banner, index) => (

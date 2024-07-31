@@ -14,8 +14,6 @@ import { useGetOrdersQuery } from "store/api/Order";
 // import { add, isAfter } from 'date-fns'
 const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["login", "common"]);
-  const {data:ordersQuery}=useGetOrdersQuery()
-
   const dispatch = useAppDispatch();
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const [products,setProducts]=useState<Product[]>([])
@@ -23,14 +21,14 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
 useEffect(() => {
   if(data){
-    setProducts([...products,...data,...data])
+    setProducts([...products,...data])
   }
 }, [data]);
 useEffect(() => {
   setProducts([])
-  if(data){
+/*   if(data){
     setProducts([...products,...data])
-  }
+  } */
 }, [sessionFilter]);
   return (
     <InfiniteScroll
