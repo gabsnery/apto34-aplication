@@ -36,6 +36,7 @@ export const SmallSelect = styled(BaseSelect)`
   font-size: 12px;
   &.${outlinedInputClasses.root} {
     .${outlinedInputClasses.input} {
+      height: 14px;
       padding-top: ${theme.spacing.small};
       padding-bottom: ${theme.spacing.small};
     }
@@ -45,6 +46,7 @@ export const MediumSelect = styled(BaseSelect)`
   font-size: ${theme.typography.fontSize};
   &.${outlinedInputClasses.root} {
     .${outlinedInputClasses.input} {
+      height: 18px;
       padding-top: ${theme.spacing.medium};
       padding-bottom: ${theme.spacing.medium};
     }

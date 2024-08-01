@@ -1,9 +1,9 @@
-import { Modal, TextField, Typography, Box } from "@mui/material";
+import { Modal,  Box } from "@mui/material";
 import Login from "components/Login";
 import { useTypedSelector } from "hooks";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Text } from "ui-layout";
+import { Button, Text,TextField } from "ui-layout";
 
 interface Props {
 }

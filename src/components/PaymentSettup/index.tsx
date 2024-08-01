@@ -3,7 +3,7 @@ import {
   getIssuers,
   initMercadoPago,
 } from "@mercadopago/sdk-react";
-import { Grid } from "@mui/material";
+import { Box, Grid, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAddOrderMutation } from "store/api/Order";
@@ -24,11 +24,13 @@ import AddreddInfo from "./addreddInfo";
 import DeliverInfo from "./deliverInfo";
 import PaymentInfo from "./paymentInfo";
 import PersonalInfo from "./personalInfo";
+const steps = ["identity", "deliver", "payment"];
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const cart = useSelector((st: RootState) => st.cart);
   const [getCardToken, { data: cardToken }] = useGetCardTokenMutation();
   const { id: userID } = useTypedSelector(({ auth }) => auth);
+  const [activeStep, setActiveStep] = React.useState(0);
 
   const dispatch = useAppDispatch();
 
@@ -39,7 +41,14 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [addOrder, { data: orderResponse }] = useAddOrderMutation();
   const [addPayment, { data: payment }] = useAddPaymentMutation();
   const [qr_code_base64, setqQr_code_base64] = useState<string>("");
+  const handleNext = () => {
+    activeStep < steps.length - 1 &&
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
+  const handleBack = () => {
+    activeStep > 0 && setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
   useEffect(() => {
     if (process.env.REACT_APP_MERCADOLIVRE_TOKEN)
       initMercadoPago(process.env.REACT_APP_MERCADOLIVRE_TOKEN);
@@ -146,26 +155,57 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, [cardToken]);
   return (
-    <Grid container  paddingX={{xs:'20px',md:'200px'}} columnSpacing={2}>
-      <Grid xs={12} md={4} item container direction="column">
-        <PersonalInfo />
-        <AddreddInfo />
-        <DeliverInfo />
+    <Grid container paddingX={{ xs: "20px", md: "200px" }} columnSpacing={2}>
+      <Grid xs={12} md={8} container item justifyContent={'space-between'}> 
+        <Grid xs={12} md={12} item>
+          <Stepper activeStep={activeStep}>
+            {steps.map((label, index) => {
+              const stepProps: { completed?: boolean } = {};
+              const labelProps: {
+                optional?: React.ReactNode;
+              } = {};
+
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel {...labelProps}>{label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+        </Grid>
+
+        <Grid xs={12} md={12} item container direction="column" style={{minHeight:'500px'}}>
+          {activeStep === 0 && <PersonalInfo />}
+          {activeStep === 1 && <AddreddInfo />}
+          {activeStep === 1 && <DeliverInfo />}
+          {activeStep === 2 && (
+            <Grid xs={12} md={12} item>
+              <PaymentInfo setPaymentInfo={setPaymentInfo} />
+              {qr_code_base64}
+              {qr_code_base64 && (
+                <img
+                  style={{ maxWidth: "100%" }}
+                  src={`data:image/jpeg;base64,${qr_code_base64}`}
+                />
+              )}
+            </Grid>
+          )}
+        </Grid>
+          <Grid xs={12} md={4} item>
+            <Button disabled={activeStep === 0} onClick={handleBack}>
+              Back
+            </Button>
+          </Grid>{" "}
+          <Grid xs={12} md={4} item>
+            <Button onClick={handleNext}>
+              {activeStep === steps.length - 1 ? "Finish" : "Next"}
+            </Button>{" "}
+          </Grid>
       </Grid>
-      <Grid xs={12} md={4} item>
-        <PaymentInfo setPaymentInfo={setPaymentInfo} />
-        {qr_code_base64}
-        {qr_code_base64 && (
-          <img
-            style={{ maxWidth: "100%" }}
-            src={`data:image/jpeg;base64,${qr_code_base64}`}
-          />
-        )}
-      </Grid>
-      <Grid xs={12} md={4}  item container direction={"column"}>
+      <Grid xs={12} md={2} item container direction={"column"}>
         Detalhes
         <Button
-          variant="primary" 
+          variant="primary"
           onClick={() => {
             getIdentificationTypes().then((e) => {
               console.log("eee", e);

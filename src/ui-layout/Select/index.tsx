@@ -13,7 +13,7 @@ import { FC } from "react";
 import styled, { css } from "styled-components";
 import { Button } from "../Button";
 import { Text } from "../Text";
-import { BaseSelect, SmallSelect } from "./styles";
+import { MediumSelect, SmallSelect } from "./styles";
 import { StyledComponent as MUIStyledComponent } from "@emotion/styled";
 
 interface OptionProps {
@@ -64,7 +64,7 @@ const sizeStyles = {
 
 const StyledTypographiesDictionary = {
   small: SmallSelect,
-  medium: BaseSelect,
+  medium: MediumSelect,
 } as Record<string, MUIStyledComponent<_SelectProps>>;
 
 const getStyledComponent: (props: string) => MUIStyledComponent<any> = (size) =>

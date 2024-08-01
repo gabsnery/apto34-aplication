@@ -2,7 +2,8 @@
 import React, { InputHTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
-interface TextInputProps  extends Omit<InputHTMLAttributes<Omit<HTMLInputElement, "size">>, "size"> {
+interface TextInputProps
+  extends Omit<InputHTMLAttributes<Omit<HTMLInputElement, "size">>, "size"> {
   value: string | any;
   label: string | any;
   size?: "small" | "medium";
@@ -11,15 +12,18 @@ interface TextInputProps  extends Omit<InputHTMLAttributes<Omit<HTMLInputElement
 const sizeStyles = {
   small: css`
     font-size: 12px;
+    height: 14px;
     padding-top: ${(props) => props.theme.spacing.small};
-    padding-bottom: ${(props) => props.theme.spacing.small};  `,
+    padding-bottom: ${(props) => props.theme.spacing.small};
+  `,
   medium: css`
+    height: 18px;
     font-size: ${(props) => props.theme.typography.fontSize};
     padding-top: ${(props) => props.theme.spacing.medium};
     padding-bottom: ${(props) => props.theme.spacing.medium};
   `,
 };
-const StyledInput = styled.input<{ size: 'small' | 'medium' }>`
+const StyledInput = styled.input<{ size: "small" | "medium" }>`
   padding: ${(props) => props.theme.spacing.medium};
   border: 1px solid ${(props) => props.theme.colors.gray};
   border-radius: 8px;
@@ -44,7 +48,7 @@ const StyledComponent = styled.div`
   margin-bottom: ${(props) => props.theme.spacing.large};
 `;
 
-const StyledLabel = styled.label<{size:"small" | "medium"}>`
+const StyledLabel = styled.label<{ size: "small" | "medium" }>`
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
   font-weight: 500;
@@ -57,14 +61,14 @@ const StyledLabel = styled.label<{size:"small" | "medium"}>`
 const labelSizeStyles = {
   small: css`
     font-size: 12px;
-    `,
+  `,
   medium: css`
     font-size: ${(props) => props.theme.typography.fontSize};
   `,
 };
 
 export const TextField: React.FC<TextInputProps> = (
-  { value, onChange, label, size='medium' },
+  { value, onChange, label, size = "medium" },
   props
 ) => {
   return (
