@@ -28,7 +28,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
               label="Categoria"
@@ -57,7 +57,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
               label="Tipo"
@@ -86,7 +86,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
               label="Cor"
@@ -115,7 +115,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
               label="Tamanho"
@@ -144,7 +144,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
               }
             />
           </Grid>
-          <Grid item xs={6} sm={12}>
+          <Grid item xs={12} sm={6} md={12}>
             <Button
               variant="tertiary" 
               

@@ -2,10 +2,10 @@ import { Grid, IconButton, useTheme } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useGetProductQuery } from "store/api/product";
+import { useGetImageQuery, useGetProductQuery } from "store/api/product";
 import { addProduct } from "store/slices/cartSlice";
 import { Button, Text, TextField } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
@@ -15,6 +15,8 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const { data } = useGetProductQuery(+(id || 0), { skip: id === undefined });
+  const [photoId, setPhotoId] = useState<string|undefined>();
+  const { data:photoData } = useGetImageQuery((photoId|| ''), { skip: photoId === undefined });
   const [quantity, setQuantity] = useState<number>(0);
 
   const theme = useTheme();
@@ -23,18 +25,24 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
       dispatch(addProduct({ product: data, quantity }))
     }
   };
+  useEffect(() => {
+    if(data){
+    setPhotoId(data.photos[0])
+  }
+  
+  }, [data]);
 
   return (
     <>
-      <Grid item container columnSpacing={2}>
-        <Grid item xs={3}>
+      <Grid item container columnSpacing={2} >
+        <Grid item xs={12} sm={4}>
           <Grid item xs={12}>
             <img
               style={{
-                backgroundImage: `url(${data?.thumbnails[0]})`,
+                backgroundImage: `url(${photoData?.url||''})`,
                 width: "100%",
-                height: "400px",
-                backgroundPosition: "top",
+                height: "500px",
+                backgroundPosition: "center",
                 backgroundSize: "cover",
               }}
             />
@@ -45,7 +53,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
             ))}
           </Grid>
         </Grid>
-        <Grid item container xs={8} >
+        <Grid item container xs={12}  sm={8}>
           <div style={{ width: "100%" }}>
             <Grid container item xs={12} textAlign={"left"}>
               <Grid

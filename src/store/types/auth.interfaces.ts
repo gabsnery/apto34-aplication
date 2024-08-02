@@ -7,7 +7,7 @@ export interface Login {
   refreshToken?: string
 }
 
-export interface AuthState {
+export interface IClient {
   id: number
   status: status
   admin?: boolean

@@ -2,7 +2,7 @@ import {
   createAsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit'
-import { AuthState, Login } from '../types/auth.interfaces'
+import { IClient, Login } from '../types/auth.interfaces'
 
 import { get, save } from '../../services/requests'
 import { logout } from './logout'
@@ -27,7 +27,7 @@ const fetchIpTest = createAsyncThunk('auth/test', async () =>
 )
 
 
-export const initialState: AuthState = {
+export const initialState: IClient = {
   id:0,
   status: 'NotAsked',
   token: '',

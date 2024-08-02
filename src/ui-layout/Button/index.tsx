@@ -13,11 +13,16 @@ const variantStyles = {
   primary: css`
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.onPrimary};
-    border: 1px solid ${(props) => props.theme.colors.primaryVariant};
-
+    border: 2px solid ${(props) => props.theme.colors.primaryVariant};
     &:hover {
       background-color: ${(props) => props.theme.colors.primaryVariant};
     }
+  `,
+  primaryDisabled: css`
+    background-color: ${(props) => props.theme.colors.gray};
+    color: ${(props) => props.theme.colors.grayMedium};
+    border: 2px solid ${(props) => props.theme.colors.grayDark};
+    cursor:unset;
   `,
   secondary: css`
     background-color: transparent;
@@ -29,6 +34,12 @@ const variantStyles = {
       color: ${(props) => props.theme.colors.onPrimary};
     }
   `,
+  secondaryDisabled: css`
+    background-color: transparent;
+    border: 2px solid ${(props) => props.theme.colors.grayDark};
+    color: ${(props) => props.theme.colors.grayMedium};
+    cursor:unset;
+  `,
   tertiary: css`
     background-color: transparent;
     color: ${(props) => props.theme.colors.primary};
@@ -37,6 +48,12 @@ const variantStyles = {
     &:hover {
       color: ${(props) => props.theme.colors.primaryVariant};
     }
+  `,
+  tertiaryDisabled: css`
+    background-color: transparent;
+    color: ${(props) => props.theme.colors.grayDark};
+    border: none;
+    cursor:unset;
   `,
 };
 
@@ -48,15 +65,15 @@ const StyledButton = styled.button<ButtonProps>`
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
   cursor: pointer;
-  ${(props) => variantStyles[props.variant || "primary"]}
+  ${(props) => variantStyles[`${props.variant || "primary"}${props.disabled?'Disabled':''}` ]}
 `;
 
 export const Button: React.FC<ButtonProps> = (
-  { children, onClick, variant = "primary" },
+  { children, onClick, variant = "primary",disabled },
   props
 ) => {
   return (
-    <StyledButton onClick={onClick} variant={variant} {...props}>
+    <StyledButton onClick={onClick} variant={variant} disabled={disabled} {...props}>
       {children}
     </StyledButton>
   );

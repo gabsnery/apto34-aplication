@@ -1,3 +1,4 @@
+import { Text } from "ui-layout";
 import {
   getIdentificationTypes,
   getIssuers,
@@ -33,6 +34,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const dispatch = useAppDispatch();
+  const token = useTypedSelector(({ auth }) => auth.token)
 
   const [paymentInfo, setPaymentInfo] = useState<any>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
@@ -156,7 +158,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, [cardToken]);
   return (
     <Grid container paddingX={{ xs: "20px", md: "200px" }} columnSpacing={2}>
-      <Grid xs={12} md={8} container item justifyContent={'space-between'}> 
+      <Grid xs={12} md={10} container item justifyContent={'space-between'}> 
         <Grid xs={12} md={12} item>
           <Stepper activeStep={activeStep}>
             {steps.map((label, index) => {
@@ -191,41 +193,20 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
             </Grid>
           )}
         </Grid>
-          <Grid xs={12} md={4} item>
-            <Button disabled={activeStep === 0} onClick={handleBack}>
+          <Grid xs={6}  item>
+            <Button disabled={activeStep === 0}  onClick={handleBack} variant={'tertiary'}>
               Back
             </Button>
           </Grid>{" "}
-          <Grid xs={12} md={4} item>
-            <Button onClick={handleNext}>
+          <Grid xs={6}  item>
+            <Button onClick={handleNext} disabled={activeStep===0?!token:false} variant={'tertiary'}>
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>{" "}
+            </Button>
           </Grid>
       </Grid>
       <Grid xs={12} md={2} item container direction={"column"}>
-        Detalhes
-        <Button
-          variant="primary"
-          onClick={() => {
-            getIdentificationTypes().then((e) => {
-              console.log("eee", e);
-            });
-
-            addOrder({
-              clienteId: userID,
-              endereco: {
-                cep: "13400690",
-                logradouro: "rua aqui",
-                numero: "55",
-                complemento: "qq",
-                bairro: "qqs",
-              },
-            });
-            // setStep(1)
-          }}
-        >
-          Proximo
-        </Button>
+        <Text> Detalhes</Text>
+       
       </Grid>
       <Grid xs={2}></Grid>
     </Grid>

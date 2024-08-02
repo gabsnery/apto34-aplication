@@ -20,10 +20,10 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
     }}
     columnSpacing={3}
     >
-      <Grid item xs={2}>
+      <Grid item container xs={12} sm={12} md={3} lg={2} sx={{height:'min-content'}} columnSpacing={2}>
         <FilterBar />
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={12} sm={12} md={9} lg={10}>
         <ProductsGrid />
       </Grid>
     </Grid>
