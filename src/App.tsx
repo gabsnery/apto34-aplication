@@ -15,7 +15,10 @@ const App = () => {
   useEffect(() => {
     const userLang = navigator.language
     console.log("🚀 ~ useEffect ~ userLang:", userLang)
-    i18n.changeLanguage(userLang)
+    const language = localStorage.getItem("@app:activeLanguage") as "pt-BR" | "en-US"
+    console.log("🚀 ~ useEffect ~ language:", language)
+
+    i18n.changeLanguage(language?language:userLang)
   }, []);
   return (
     <StyledEngineProvider injectFirst>

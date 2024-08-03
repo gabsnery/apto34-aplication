@@ -69,11 +69,11 @@ const StyledButton = styled.button<ButtonProps>`
 `;
 
 export const Button: React.FC<ButtonProps> = (
-  { children, onClick, variant = "primary",disabled },
   props
 ) => {
+  const { children, onClick, variant = "primary",disabled, ...rest } = props; 
   return (
-    <StyledButton onClick={onClick} variant={variant} disabled={disabled} {...props}>
+    <StyledButton onClick={onClick} variant={variant} disabled={disabled} {...rest}>
       {children}
     </StyledButton>
   );

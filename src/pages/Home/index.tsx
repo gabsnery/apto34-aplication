@@ -22,7 +22,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Grid item xs={12} sm={9}>
         <ProductsSlider/>
         </Grid>
-        <Grid container xs={12} justifyContent={"center"} columnSpacing={3} rowSpacing={1}>
+        <Grid container justifyContent={"center"} columnSpacing={3} rowSpacing={1}>
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"

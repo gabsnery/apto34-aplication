@@ -51,11 +51,11 @@ const StyledText = styled.span<TextProps>`
 `;
 
 export const Text: React.FC<TextProps> = (
-  { children, variant = "body",color='primary' },
   props
 ) => {
+  const { children,variant = "body",color='primary', ...rest } = props; 
   return (
-    <StyledText variant={variant} color={color} {...props}>
+    <StyledText variant={variant} color={color} {...rest}>
       {children}
     </StyledText>
   );

@@ -9,6 +9,8 @@ import {
   List,
   ListItemButton,
   BadgeProps,
+  ToggleButtonGroup,
+  ToggleButton,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { lightTheme as theme } from "ui-layout/theme";
@@ -28,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const { t } = useTranslation();
-
+  const userLang = ['pt-BR','en-US'].includes(navigator.language) ?navigator.language:'en-US';
   const mui_theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
@@ -42,6 +44,8 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
       backgroundColor: theme.colors.primary,
     },
   }));
+  const language = localStorage.getItem("@app:activeLanguage") as "pt-BR" | "en-US"
+
   return (
     <>
       <AppBar
@@ -101,7 +105,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
               dispatch(logout());
             }}
           >
-            {t('logout')}
+            {t("logout")}
           </Button>
           <Grid
             container
@@ -135,6 +139,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 </Grid>
               );
             })}
+    
             <Grid item mx={2}>
               <StyledBadge badgeContent={cart.items.length}>
                 <IconButton
@@ -148,7 +153,23 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 </IconButton>
               </StyledBadge>
             </Grid>
-      {/*       <Grid
+            <Grid item mx={2}>
+              <ToggleButtonGroup
+              size="small" 
+                value={language?language:userLang}
+                exclusive
+                onChange={(ev,newAlignment) => {
+                  console.log("🚀 ~ ev:", ev)
+                  localStorage.setItem("@app:activeLanguage",newAlignment)
+                  window.location.reload();
+                }}
+                aria-label="Platform"
+              >
+                <ToggleButton value="pt-BR">pt-BR</ToggleButton>
+                <ToggleButton value="en-US">en-US</ToggleButton>
+              </ToggleButtonGroup>
+            </Grid>
+            {/*       <Grid
               item
               sx={{
                 alignContent: "center",
