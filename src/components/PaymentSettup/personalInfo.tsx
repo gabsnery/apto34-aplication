@@ -69,9 +69,6 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
           <Grid item xs={6}>
             <Text variant={"h3"}>{t('login')}</Text>
             <Login
-              onLogin={function (value: boolean): void {
-                throw new Error("Function not implemented.");
-              }}
             />
           </Grid>
         )}
@@ -79,11 +76,11 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
         <Grid container item xs={6} direction={"column"}>
           {!token && (
             <Text variant={"h3"}>
-              {`${token ? t('edit') : t('create')}}`} {t('user')}
+              {`${token ? t('edit') : t('create')}`} {t('user')}
             </Text>
           )}
           <TextField
-            label={t("Nome")}
+            label={t("name")}
             onChange={(ev) =>
               setFormData({ ...formData, name: ev.target.value })
             }
@@ -121,7 +118,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
               addClient(formData);
             }}
             variant="secondary"
-          >{`Salvar`}</Button>
+          >{t('save')}</Button>
         </Grid>
       </Grid>
     </>

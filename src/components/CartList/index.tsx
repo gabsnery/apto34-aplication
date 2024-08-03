@@ -17,8 +17,11 @@ import { Text, Button } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 import { clearCart, deleteProduct } from "store/slices/cartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useTranslation } from "react-i18next";
 
 const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { t } = useTranslation(['product',  'translation']);
+
   const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
@@ -50,7 +53,7 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Grid>
               <Grid container item xs={8} sm={10}>
                 <Grid item xs={12} sm={6} alignContent={'center'}>
-                  <Text variant={'h5'}>{item.product.nome}</Text>
+                  <Text variant={'h5'}>{t(`product:name_${item.product.id}`)}</Text>
                   
                 </Grid>
                 <Grid item xs={12} sm={2} alignContent={'center'}>

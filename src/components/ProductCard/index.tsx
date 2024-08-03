@@ -85,6 +85,8 @@ export const AddModal: React.FC<{
 
 export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ value,dragging }) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation(['product',  'translation']);
+
   const [modal, setModal] = useState<{
     open: boolean;
     item: Product | undefined;
@@ -124,7 +126,7 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
                 color="primary"
                 variant="h5"
               >
-                {`${value.nome}`}
+                {t(`name_${value.id}`)}
               </Text>
               </div>
               <Grid

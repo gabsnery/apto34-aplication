@@ -117,7 +117,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         <Grid container columnSpacing={2}>
           <Grid item xs={6}>
             <TextField
-              label={t("card:name")}
+              label={t("card.name")}
               onChange={(ev) =>
                 setFormData({ ...formData, CARDHOLDER_NAME: ev.target.value })
               }
@@ -127,7 +127,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           </Grid>
           <Grid item xs={6}>
             <TextField
-              label={t("card:number")}
+              label={t("card.number")}
               onChange={(ev) =>
                 setFormData({
                   ...formData,
@@ -140,7 +140,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label={t("card:expiryDate")}
+              label={t("card.expiryDate")}
               onChange={(ev) =>
                 setFormData({
                   ...formData,
@@ -153,7 +153,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label={t("card:expiryDate")}
+              label={t("card.expiryDate")}
               onChange={(ev) =>
                 setFormData({
                   ...formData,
@@ -166,7 +166,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label={t("card:cvv")}
+              label={t("card.cvv")}
               onChange={(ev) =>
                 setFormData({ ...formData, securityCode: ev.target.value })
               }
@@ -176,7 +176,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           </Grid>
           <Grid item xs={6}>
             <TextField
-              label={t("card:identity")}
+              label={t("card.identity")}
               onChange={(ev) =>
                 setFormData({ ...formData, identity: ev.target.value })
               }

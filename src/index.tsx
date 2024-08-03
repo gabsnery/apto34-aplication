@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./i18n"
 
@@ -17,6 +17,7 @@ Sentry.init({
  */
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <Suspense fallback={<div />}>
   <Provider store={store}>
     <PersistGate persistor={persistor}>
         <BrowserRouter>
@@ -24,4 +25,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         </BrowserRouter>
     </PersistGate>
   </Provider>
+  </Suspense>
 );

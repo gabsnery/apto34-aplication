@@ -34,27 +34,24 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
           </Grid>
           <Grid item container xs={12} sm={4} direction={"column"}>
             <Text variant={"h3"} weight={500} color="primary">
-              {"Contato"}
+              {t('footer.contactLabel')}
             </Text>
             <Text variant={"h6"} weight={500} color="primary">
-              {t('footer:phone')}
+              {t('footer.phone')}
             </Text>
             <Text variant={"h6"} weight={500} color="primary">
-              {t('footer:email')}
+              {t('footer.email')}
             </Text>
           </Grid>
           <Grid item container xs={12} md={4} direction={'column'}>
             <Text variant={"h3"} weight={500} color="primary">
-              {"Informações"}
+              {t('footer.infoLabel')}
             </Text>
             <Text variant={"h5"} weight={500} color="primary">
-              {"Produtos"}
+              {t('footer.productsLabel')}
             </Text>
             <Text variant={"h5"} weight={500} color="primary">
-              {"Consultoria"}
-            </Text>
-            <Text variant={"h5"} weight={500} color="primary">
-              {"Sobre nós"}
+              {t('footer.aboutUsLabel')}
             </Text>
           </Grid>
         </Grid>

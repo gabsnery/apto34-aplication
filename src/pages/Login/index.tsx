@@ -1,39 +1,17 @@
-import { Box, Grid, Typography, useTheme,TextField } from "@mui/material";
-import { useCallback } from "react";
+import { Box, Grid, useTheme } from "@mui/material";
 //import { Link } from 'react-router-dom'
-
-import { useForm } from "react-hook-form";
+import {Text} from 'ui-layout'
+import LoginComponent from "components/Login";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { Login as LoginEntity } from "../../store/types/auth.interfaces";
-import { fetchLogin } from "../../store/slices/auth.slice";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/store";
-import { Button } from "ui-layout";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 
 const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      email: "gneri94890@gmail.com",  // Valor padrão para o email
-      senha: "dshkjhldfshdsjk",  // Valor padrão para a senha
-    }
-  });
-
-  //  const classes = getStyles()
-  const onSubmit = useCallback(
-    (data: LoginEntity) => {
-      dispatch(fetchLogin(data));
-    },
-    [dispatch]
-  );
+  const navigate = useNavigate();
 
   const theme = useTheme();
 
@@ -47,66 +25,16 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
         height: "inherit",
       }}
     >
-      <Grid item
-        xs={false}
-        md={3}
-        xl={4}
-      />
+      <Grid item xs={false} md={3} xl={4} />
 
-      <Grid item container
-        xs={12}
-        md={6}
-        xl={4}
-        alignContent="center">
+      <Grid item container xs={12} md={6} xl={4} alignContent="center">
         <Box sx={{ padding: { md: 10, sm: 0 }, width: "100%" }}>
-       
-            {t("login")}
-          <form
-            onSubmit={handleSubmit(({ email, senha }:any) => {
-              return onSubmit({ email, senha });
-            })}
-          >
-            <TextField
-              label={t("email")}
-              id="salva-login-email"
-              sx={{ margin: "10px 0" }}
-              InputProps={{
-                ...register("email", {
-                  required: true,
-                })
-              }}
-              error={!!errors.email}
-              helperText={errors.email && t(errors.email?.message as string)}
-              
-            />
-
-            <TextField
-              label={t("common|senha")}
-              id="salva-login-senha"
-              InputProps={{ ...register("senha", { required: true }) }}
-              type="senha"
-              name="password"
-              error={!!errors.senha}
-              helperText={errors.senha && t(errors.senha?.message as string)}
-              
-            />
- 
-            <Button
-              id="salva-login-submit"
-              value="submit"
-              variant="secondary"
-              color="secondary"
-              type="submit"
-              onClick={()=>{
-                console.log('Logal')
-              }}
-            >
-              <Typography sx={{
-                padding: '5px'
-              }} variant="h6">{t("common|enter")}</Typography>
-            </Button>
-          </form>
-
+          <Text variant={"h3"}>{t("login")}</Text>
+          <LoginComponent
+            onLogin={() => {
+              navigate("/");
+            }}
+          />
         </Box>
       </Grid>
     </Grid>

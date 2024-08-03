@@ -1,51 +1,40 @@
 {
-  "translation": {
-    "category": "Category",
-    "type": "Type",
-    "color": "Color",
-    "clear": "Clear",
-    "deliverDetails": "Delivery Details",
-    "size": "Size",
-    "proceedToCheckout": "PROCEED TO CHECKOUT",
-    "totalAmount": "Total: ${{value}}",
-    "purchaseSummary": "PURCHASE SUMMARY",
-    "logout": "Logout",
-    "login": "Login",
-    "store": "Store",
-    "admin": "Admin",
-    "quantity": "Quantity",
-    "add": "Add",
-    "save": "Save",
-    "value": "Value",
-    "description": "Description",
-    "name": "Name",
-    "addToCart": "Add to Cart",
-    "buyNow": "Buy Now",
-    "dragFileHere": "Drag file here",
-    "edit": "Edit",
-    "create": "Create",
-    "user": "User",
-    "identity": "Identity",
-    "payment": "Payment",
-    "deliver": "Delivery",
-    "paymentType": "Payment Type",
-    "personalInfo": "Personal Information",
-    "deliverType": "Shipping Methods",
-    "details": "Shipping Methods",
-    "back": "Back",
-    "next": "Next",
-    "finish": "Finish",
-    "password": "Password",
-    "card": {
-      "number": "Card Number",
-      "cvv": "CVV",
-      "expiryDate": "Expiry Date",
-      "name": "Name",
-      "identity": "Document"
-    },
-    "footer": {
-      "phone": "19 98262-8074",
-      "email": "gneri94@gmail.com"
-    }
-  }
+  "name_237": "DryFit Sports T-Shirt",
+  "description_237": "Lightweight and breathable t-shirt, perfect for physical activities.",
+  
+  "name_238": "Ultra Running Shoes",
+  "description_238": "Shoes with advanced cushioning, perfect for long runs.",
+  
+  "name_239": "Waterproof Windbreaker Jacket",
+  "description_239": "Lightweight and water-resistant jacket, ideal for outdoor activities.",
+  
+  "name_240": "Pulse Smartwatch",
+  "description_240": "Smartwatch with health monitoring and smart notifications.",
+  
+  "name_241": "Compact Executive Backpack",
+  "description_241": "Compact and functional backpack, ideal for daily work use.",
+  
+  "name_242": "Bluetooth Headphones",
+  "description_242": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_243": "Bluetooth Headphones",
+  "description_243": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_244": "Bluetooth Headphones",
+  "description_244": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_245": "Bluetooth Headphones",
+  "description_245": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_246": "Bluetooth Headphones",
+  "description_246": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_247": "Bluetooth Headphones",
+  "description_247": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_248": "Bluetooth Headphones",
+  "description_248": "Wireless headphones with high-quality sound and long battery life.",
+  
+  "name_249": "wwww",
+  "description_249": "333"
 }

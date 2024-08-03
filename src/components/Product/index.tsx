@@ -11,7 +11,7 @@ import { Button, Text, TextField } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 
 const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['product',  'translation']);
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const { data } = useGetProductQuery(+(id || 0), { skip: id === undefined });
@@ -64,10 +64,10 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 rowSpacing={2}
               >
                 <Grid item xs={12}>
-                  <Text variant="h2">{data?.nome}</Text>
+                  <Text variant="h2">{t(`product:name_${data?.id}`)}</Text>
                 </Grid>
                 <Grid item xs={12} mt={2}>
-                  <Text variant="h4">{data?.descricao}</Text>
+                  <Text variant="h4">{t(`product:description_${data?.id}`)}</Text>
                 </Grid>
                 <Grid item xs={12}>
                   {data?.produtoSubcategoria.map((item, idx) => (
@@ -90,7 +90,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
             ))}
             <Grid item container xs={3} mt={5} rowGap={1}>
               <TextField
-                label={t("quantity")}
+                label={t("translation:quantity")}
                 size={"small"}
                 onChange={(ev) => setQuantity(+ev.target.value)}
                 value={quantity}
@@ -98,10 +98,10 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               />
 
               <Button onClick={handleAddToCart} variant="secondary">
-                  {t("addToCart")}
+                  {t("translation:addToCart")}
               </Button>
               <Button onClick={handleAddToCart} >
-               {t("buyNow")}
+               {t("translation:buyNow")}
               </Button>
             </Grid>
           </div>
