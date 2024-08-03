@@ -33,8 +33,9 @@
     "deliverType": "Formas de envio",
     "details": "Formas de envio",
     "back": "Voltar",
-    "next": "Proximo",
+    "next": "Próximo",
     "finish": "Finalizar",
+    "password": "Senha",
     "card":{
       "number": "Número do cartão",
       "cvv": "CVV",

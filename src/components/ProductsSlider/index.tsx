@@ -31,7 +31,7 @@ const ProductsSlider: React.FC = () => {
       setSliderSettings({...sliderSettings,slidesToShow:4, arrows:true});
     }
     else{
-      setSliderSettings({...sliderSettings,slidesToShow:6, arrows:true});
+      setSliderSettings({...sliderSettings,slidesToShow:5, arrows:true});
     }
   }, [isXs,isMd]);
     const handleBeforeChange = useCallback(() => {

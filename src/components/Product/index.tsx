@@ -11,7 +11,7 @@ import { Button, Text, TextField } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 
 const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const { data } = useGetProductQuery(+(id || 0), { skip: id === undefined });

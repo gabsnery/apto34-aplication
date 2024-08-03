@@ -135,7 +135,7 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
               >
                 <Grid item xs={6}>
                   <Text variant="body" color="secondary">
-                    {`R$ ${value.valor_produto}`}
+                    {`R$ ${(+value.valor_produto).toFixed(2)}`}
                   </Text>
                 </Grid>
                 <Grid item xs={6} sx={{ textAlign: "right" }}>

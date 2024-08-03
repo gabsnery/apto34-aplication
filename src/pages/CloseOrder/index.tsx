@@ -10,7 +10,7 @@ import Payment from "components/PaymentSettup";
 // import { add, isAfter } from 'date-fns'
 
 const CloseOrder: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
+  
   return <>
     <Payment />
   </>

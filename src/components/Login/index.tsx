@@ -13,7 +13,7 @@ interface Props {
   onLogin: (value: boolean) => void;
 }
 const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
-  const { t } = useTranslation(["login", "common"]);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<{
     email: string;
@@ -27,7 +27,7 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
     <>
       <Grid container direction={"column"}>
         <TextField
-          label={t("common|email")}
+          label={t("email")}
           onChange={(ev) =>
             setFormData({ ...formData, email: ev.target.value })
           }
@@ -35,7 +35,7 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
         />
 
         <TextField
-          label={t("common|senha")}
+          label={t("password")}
           type="password"
           name="password"
           onChange={(ev) =>
@@ -51,7 +51,7 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
             dispatch(fetchLogin(formData));
           }}
         >
-          {t("common|enter")}
+          {t("enter")}
         </Button>
       </Grid>
     </>

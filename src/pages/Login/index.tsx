@@ -13,7 +13,7 @@ import { Button } from "ui-layout";
 // import { add, isAfter } from 'date-fns'
 
 const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const {
@@ -60,14 +60,14 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
         alignContent="center">
         <Box sx={{ padding: { md: 10, sm: 0 }, width: "100%" }}>
        
-            {t("common|login")}
+            {t("login")}
           <form
             onSubmit={handleSubmit(({ email, senha }:any) => {
               return onSubmit({ email, senha });
             })}
           >
             <TextField
-              label={t("common|email")}
+              label={t("email")}
               id="salva-login-email"
               sx={{ margin: "10px 0" }}
               InputProps={{

@@ -14,7 +14,7 @@ import CartOverview from "components/CartOverview";
 // import { add, isAfter } from 'date-fns'
 
 const Cart: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const theme = useTheme();

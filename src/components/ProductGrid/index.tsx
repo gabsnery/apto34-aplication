@@ -14,7 +14,7 @@ import { SessionFilter } from "store/types/sessionFilters.interfaces";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const [products, setProducts] = useState<Product[]>([]);
