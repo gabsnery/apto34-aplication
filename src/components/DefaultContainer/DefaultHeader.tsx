@@ -192,10 +192,10 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 aria-label="Platform"
               >
                 <ToggleButton value="pt-BR" sx={{ borderColor: theme.text.secondary }}>
-                  <Text color={'secondary'}>pt-BR</Text>
+                  <Text variant={"body2"} color={'secondary'}>pt</Text>
                 </ToggleButton>
                 <ToggleButton value="en-US" sx={{ borderColor: theme.text.secondary }}>
-                  <Text color={'secondary'}>en-US</Text>
+                  <Text variant={"body2"} color={'secondary'}>en</Text>
                 </ToggleButton>
               </ToggleButtonGroup>
             </Grid>

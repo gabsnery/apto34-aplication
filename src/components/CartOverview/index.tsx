@@ -1,24 +1,13 @@
 import {
-  Container,
-  List,
-  ListItem,
-  useTheme,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemIcon,
-  Grid,
-  IconButton,
+  useTheme
 } from "@mui/material";
-import React, { FC, Suspense, useEffect } from "react";
-import Loading from "../Loading";
-import { useSelector } from "react-redux";
-import { RootState } from "store/store";
-import { Text, Button } from "ui-layout";
-import { useAppDispatch } from "../../store/store";
-import { clearCart, deleteProduct } from "store/slices/cartSlice";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RootState } from "store/store";
+import { Button, Text } from "ui-layout";
+import { useAppDispatch } from "../../store/store";
 
 const CartOverview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();

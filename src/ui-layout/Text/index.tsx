@@ -6,7 +6,7 @@ interface TextProps {
   children: React.ReactNode;
   weight?: number;
   color?: "primary" | "secondary" | "terciary";
-  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body";
+  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body" | "body2";
   sx?: any;
 }
 const variantStyles = {
@@ -31,6 +31,9 @@ const variantStyles = {
   body: css`
     font-size: 16px;
   `,
+  body2: css`
+    font-size: 12px;
+  `,
 };
 const colorStyles = {
   primary: css`
@@ -50,10 +53,8 @@ const StyledText = styled.span<TextProps>`
   ${(props) => colorStyles[props.color || "secondary"]};
 `;
 
-export const Text: React.FC<TextProps> = (
-  props
-) => {
-  const { children,variant = "body",color='primary', ...rest } = props; 
+export const Text: React.FC<TextProps> = (props) => {
+  const { children, variant = "body", color = "primary", ...rest } = props;
   return (
     <StyledText variant={variant} color={color} {...rest}>
       {children}

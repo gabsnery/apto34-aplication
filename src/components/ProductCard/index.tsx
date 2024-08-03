@@ -7,7 +7,6 @@ import {
   CardMedia,
   Grid,
   Modal,
-  TextField,
 } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
@@ -18,7 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { addProduct } from "store/slices/cartSlice";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Text } from "ui-layout";
+import { Text,TextField } from "ui-layout";
 import { useTheme } from "styled-components";
 
 // import ReCAPTCHA from 'react-google-recaptcha'
@@ -30,6 +29,8 @@ export const AddModal: React.FC<{
 }> = ({ modal, setModal }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const dispatch = useAppDispatch();
+  const theme = useTheme();
+  const { t } = useTranslation(["product", "translation"]);
 
   const handleAddToCart = () => {
     if (modal.item) {
@@ -50,7 +51,7 @@ export const AddModal: React.FC<{
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: 400,
-          bgcolor: "background.paper",
+          bgcolor: theme.paper.default,
           boxShadow: 24,
           p: 4,
           borderRadius: 4,
@@ -59,7 +60,8 @@ export const AddModal: React.FC<{
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={8}>
             <TextField
-              label={"Quantidade"}
+              label={t('quantity')}
+              value={quantity}
               onChange={(ev) => setQuantity(+ev.target.value)}
               type="number"
             />
