@@ -1,4 +1,4 @@
-import { Grid, useTheme } from "@mui/material";
+import { Grid } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
 import ProductsGrid from "components/ProductGrid";
@@ -10,10 +10,6 @@ import { lightTheme } from "ui-layout/theme";
 // import { add, isAfter } from 'date-fns'
 
 const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const { t } = useTranslation(["login", "common"]);
-  const dispatch = useAppDispatch();
-
-
   return (
     <Grid container sx={{
       px: { xs: lightTheme.spacing.small , sm: lightTheme.spacing.extraLarge },

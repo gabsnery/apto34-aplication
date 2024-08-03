@@ -2,11 +2,13 @@ import { BottomNavigation, Grid } from "@mui/material";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import React, { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Text } from "ui-layout";
 import { lightTheme } from "ui-layout/theme";
 const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -35,10 +37,10 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
               {"Contato"}
             </Text>
             <Text variant={"h6"} weight={500} color="primary">
-              (19) 98262-8074
+              {t('footer:phone')}
             </Text>
             <Text variant={"h6"} weight={500} color="primary">
-              gneri94@gmail.com
+              {t('footer:email')}
             </Text>
           </Grid>
           <Grid item container xs={12} md={4} direction={'column'}>

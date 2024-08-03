@@ -1,10 +1,5 @@
-import { Text } from "ui-layout";
-import {
-  getIdentificationTypes,
-  getIssuers,
-  initMercadoPago,
-} from "@mercadopago/sdk-react";
-import { Box, Grid, Step, StepLabel, Stepper } from "@mui/material";
+import { getIssuers, initMercadoPago } from "@mercadopago/sdk-react";
+import { Grid, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAddOrderMutation } from "store/api/Order";
@@ -14,7 +9,7 @@ import {
   useGetCardTokenMutation,
 } from "store/api/payment";
 import { RootState } from "store/store";
-import { Button } from "ui-layout";
+import { Button, Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 
 import { getPaymentMethods } from "@mercadopago/sdk-react/coreMethods";
@@ -25,16 +20,17 @@ import AddreddInfo from "./addreddInfo";
 import DeliverInfo from "./deliverInfo";
 import PaymentInfo from "./paymentInfo";
 import PersonalInfo from "./personalInfo";
+import { useTranslation } from "react-i18next";
 const steps = ["identity", "deliver", "payment"];
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const cart = useSelector((st: RootState) => st.cart);
   const [getCardToken, { data: cardToken }] = useGetCardTokenMutation();
-  const { id: userID } = useTypedSelector(({ auth }) => auth);
   const [activeStep, setActiveStep] = React.useState(0);
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
-  const token = useTypedSelector(({ auth }) => auth.token)
+  const token = useTypedSelector(({ auth }) => auth.token);
 
   const [paymentInfo, setPaymentInfo] = useState<any>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
@@ -158,7 +154,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, [cardToken]);
   return (
     <Grid container paddingX={{ xs: "20px", md: "200px" }} columnSpacing={2}>
-      <Grid xs={12} md={10} container item justifyContent={'space-between'}> 
+      <Grid xs={12} md={10} container item justifyContent={"space-between"}>
         <Grid xs={12} md={12} item>
           <Stepper activeStep={activeStep}>
             {steps.map((label, index) => {
@@ -169,14 +165,20 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
               return (
                 <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{label}</StepLabel>
+                  <StepLabel {...labelProps}>{t(`${label}`)}</StepLabel>
                 </Step>
               );
             })}
           </Stepper>
         </Grid>
-
-        <Grid xs={12} md={12} item container direction="column" style={{minHeight:'500px'}}>
+        <Grid
+          xs={12}
+          md={12}
+          item
+          container
+          direction="column"
+          style={{ minHeight: "500px" }}
+        >
           {activeStep === 0 && <PersonalInfo />}
           {activeStep === 1 && <AddreddInfo />}
           {activeStep === 1 && <DeliverInfo />}
@@ -193,20 +195,27 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
             </Grid>
           )}
         </Grid>
-          <Grid xs={6}  item>
-            <Button disabled={activeStep === 0}  onClick={handleBack} variant={'tertiary'}>
-              Back
-            </Button>
-          </Grid>{" "}
-          <Grid xs={6}  item>
-            <Button onClick={handleNext} disabled={activeStep===0?!token:false} variant={'tertiary'}>
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Grid>
+        <Grid xs={6} item>
+          <Button
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            variant={"tertiary"}
+          >
+            {t("back")}
+          </Button>
+        </Grid>{" "}
+        <Grid xs={6} item>
+          <Button
+            onClick={handleNext}
+            disabled={activeStep === 0 ? !token : false}
+            variant={"tertiary"}
+          >
+            {activeStep === steps.length - 1 ? t("finish") : t("next")}
+          </Button>
+        </Grid>
       </Grid>
       <Grid xs={12} md={2} item container direction={"column"}>
-        <Text> Detalhes</Text>
-       
+        <Text> {t("details")}</Text>
       </Grid>
       <Grid xs={2}></Grid>
     </Grid>

@@ -7,7 +7,7 @@ import { Button, Text,TextField } from "ui-layout";
 interface Props {
 }
 const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
-    const { t } = useTranslation(["login", "common"]);
+    const { t } = useTranslation();
 
     const [formData, setFormData] = useState<{
         street_name: string,
@@ -25,7 +25,7 @@ const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
     const [edit, setEdit] = useState<boolean>(false)
     return (
         <>
-            <Text variant={"h4"}>Detalhes da entrega</Text>
+            <Text variant={"h4"}>{t('deliverDetails')}</Text>
             {edit ? <Grid container columnSpacing={2}>
                 <Grid item xs={6}>
                 <TextField

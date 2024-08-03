@@ -52,10 +52,10 @@ useEffect(() => {
       pullDownToRefresh
       pullDownToRefreshThreshold={50}
       pullDownToRefreshContent={
-        <h3 style={{ textAlign: "center" }}>&#8595; Pull down to refresh</h3>
+        <h3 style={{ textAlign: "center" }}></h3>
       }
       releaseToRefreshContent={
-        <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
+        <h3 style={{ textAlign: "center" }}></h3>
       }
     >
       <Grid

@@ -1,0 +1,50 @@
+{
+  "translation": {
+    "category": "Categoria",
+    "type": "Tipo",
+    "color": "Cor",
+    "clear": "Apagar",
+    "deliverDetails": "Detalhes da entrega",
+    "size": "Tamanho",
+    "proceedToCheckout": "IR PARA PAGAMENTO",
+    "totalAmount": "Total: R${{value}}",
+    "purchaseSummary": "RESUMO DA COMPRA",
+    "logout": "Sair",
+    "login": "Logar",
+    "store": "Store",
+    "admin": "admin",
+    "quantity": "Quantidade",
+    "add": "Adicionar",
+    "save": "Salvar",
+    "value": "Valor",
+    "description": "Descrição",
+    "name": "Nome",
+    "addToCart": "Adicionar à sacola",
+    "buyNow": " Comprar agora",
+    "dragFileHere": "Arraste o arquivo aqui",
+    "edit": "Editar",
+    "create": "Criar",
+    "user": "Usuário",
+    "identity":"Identificação",
+    "payment":"Pagamento",
+    "deliver":"Entrega",
+    "paymentType": "Tipo de pagamento",
+    "personalInfo": "Informações pessoais",
+    "deliverType": "Formas de envio",
+    "details": "Formas de envio",
+    "back": "Voltar",
+    "next": "Proximo",
+    "finish": "Finalizar",
+    "card":{
+      "number": "Número do cartão",
+      "cvv": "CVV",
+      "expiryDate": "Data de expiração",
+      "name":"Nome",
+      "identity":"Documento"
+    },
+    "footer":{
+      "phone": "19 98262-8074",
+      "email": "gneri94@gmail.com"
+    }
+  }
+}

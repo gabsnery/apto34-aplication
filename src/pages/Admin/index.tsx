@@ -11,6 +11,6 @@ export const Admin: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
 
   return <>
-    aqui é só admin
+   
   </>
 };

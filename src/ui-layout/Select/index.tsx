@@ -9,6 +9,7 @@ import {
   Radio,
 } from "@mui/material";
 import { FC } from "react";
+import { useTranslation } from 'react-i18next'
 
 import styled, { css } from "styled-components";
 import { Button } from "../Button";
@@ -80,6 +81,8 @@ export const Select: FC<_SelectProps> = ({
   size = "medium",
   ...SelectProps
 }) => {
+  const { t } = useTranslation();
+
   const renderItems = (_options: OptionProps[] | undefined) => {
     let { grouped, options } = sortedOptions(_options);
     if (grouped) {
@@ -129,7 +132,7 @@ export const Select: FC<_SelectProps> = ({
             }}
           >
             <Button variant="primary" color="primary">
-              Ok
+              {t("ok")}
             </Button>
           </Box>
         );
@@ -142,10 +145,10 @@ export const Select: FC<_SelectProps> = ({
             }}
           >
             <Button disabled={false} color="primary" variant="tertiary">
-              Limpar
+            {t("clear")}
             </Button>
             <Button variant="primary" color="primary">
-              Ok
+            {t("ok")}
             </Button>
           </Box>
         );

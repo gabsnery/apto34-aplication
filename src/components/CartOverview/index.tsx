@@ -18,12 +18,14 @@ import { useAppDispatch } from "../../store/store";
 import { clearCart, deleteProduct } from "store/slices/cartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CartOverview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     console.log("🚀 ~ useEffect ~ cart:", cart);
@@ -38,12 +40,12 @@ const CartOverview: React.FC<React.PropsWithChildren<unknown>> = () => {
     >
       <div style={{ margin: "20px 0" }}>
         <Text variant="h3" >
-          RESUMO DA COMPRA
+          {t('purchaseSummary')}
         </Text>
       </div>
       <div style={{ margin: "20px 0" }}>
         <Text variant="h4" >
-          Total: R${cart.total.toFixed(2)}
+        {t('totalAmount',{value:cart.total.toFixed(2)})}
         </Text>
       </div>
       <Button
@@ -54,7 +56,7 @@ const CartOverview: React.FC<React.PropsWithChildren<unknown>> = () => {
           navigate("/close-order");
         }}
       >
-          IR PARA PAGAMENTO
+         {t('proceedToCheckout')}
       </Button>
     </div>
   </>

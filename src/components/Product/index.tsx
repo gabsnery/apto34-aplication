@@ -98,10 +98,10 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               />
 
               <Button onClick={handleAddToCart} variant="secondary">
-                Adicionar à sacola
+                  {t("addToCart")}
               </Button>
               <Button onClick={handleAddToCart} >
-                Comprar agora
+               {t("buyNow")}
               </Button>
             </Grid>
           </div>

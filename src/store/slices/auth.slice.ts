@@ -5,7 +5,6 @@ import {
 import { IClient, Login } from '../types/auth.interfaces'
 
 import { get, save } from '../../services/requests'
-import { logout } from './logout'
 
 export const reAuth = createAsyncThunk(
   'auth/reAuth',

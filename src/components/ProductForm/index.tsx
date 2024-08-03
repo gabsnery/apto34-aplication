@@ -15,7 +15,7 @@ import { useGetSizesQuery } from "store/api/size";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
-    const { t } = useTranslation(["login", "common"]);
+    const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const [formData, setFormData] = useState<Partial<Product>>({})
     const [productoColors, setProductoColors] = useState<ProductoColor[]>([])
@@ -112,7 +112,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             />
                         })}
                         <Input inputProps={{ ...getInputProps() }} />
-                        <Text variant="body">{'Arraste o arquivo aqui'}</Text>
+                        <Text variant="body">{t('dragFileHere')}</Text>
                     </Container>
                 </Grid>
             </Grid>
@@ -141,7 +141,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                 <Grid item xs={4} >
 
                     <TextField
-                        label={t("descricao")}
+                        label={t("description")}
                         onChange={(ev) => setFormData({ ...formData, descricao: ev.target.value })}
                         value={formData.descricao || ''}
                         required
@@ -161,9 +161,8 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                 <Grid item xs={4} >
                     <Select
                         name={'categoryId'}
-                        label="Tipo"
+                        label={t("type")}
                         sx={{ backgroundColor: 'transparent' }}
-                        
                         type="multiple"
                         value={formData.produtoSubcategoria?.map(i => i.id?.toString()) || []}
                         onChange={(e) => {
@@ -186,7 +185,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                     <Grid item xs={4} >
                         <Select
                             name={'categoryId'}
-                            label="Cor"
+                            label={t("color")}
                             sx={{ backgroundColor: 'transparent' }}
                             
                             value={productoColor?.id?.toString() || ''}
@@ -198,7 +197,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                     </Grid>
                     <Grid item xs={4} >
                         <TextField
-                            label={t("Quantidade")}
+                            label={t("quantity")}
                             type="number"
                             onChange={(ev) => setProductoColor({ ...productoColor, quantidade: +(ev.target.value as string) })}
                             value={productoColor.quantidade || 0}
@@ -211,7 +210,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             const cores = formData['cores'] || []
                             setFormData({ ...formData, cores: [...cores, productoColor] })
                             setProductoSize({})
-                        }}> add</Button>
+                        }}> {t('add')}</Button>
                     </Grid>
                 </Grid>
                 <Grid item container xs={12} rowSpacing={2}
@@ -219,7 +218,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                     <Grid item xs={4} >
                         <Select
                             name={'categoryId'}
-                            label="Temanho"
+                            label={t("size")}
                             sx={{ backgroundColor: 'transparent' }}
                             
                             value={productoSize?.id?.toString() || ''}
@@ -231,7 +230,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                     </Grid>
                     <Grid item xs={4} >
                         <TextField
-                            label={t("Quantidade")}
+                            label={t("quantity")}
                             type="number"
                             onChange={(ev) => setProductoSize({ ...productoSize, quantidade: +(ev.target.value as string) })}
                             value={productoSize.quantidade || 0}
@@ -244,7 +243,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             const tamanhos = formData['tamanhos'] || []
                             setFormData({ ...formData, tamanhos: [...tamanhos, productoSize] })
                             setProductoSize({})
-                        }}> add</Button>
+                        }}> {t("add")}</Button>
                     </Grid>
                 </Grid>
                 {formData.cores?.map(item => <><Text sx={{display:'contents'}} variant="h4" >{item.id}-{item.descricao}-{item.quantidade}</Text><br /></>)}
@@ -254,7 +253,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
 
                 <Button variant="secondary"  onClick={() => {
                     updateAddProduct({ files: ([file] || []).concat(files) as any[], json: formData })
-                }}>SALVAR</Button>
+                }}>{t("save")}</Button>
             </Grid>
         </Grid >
     );

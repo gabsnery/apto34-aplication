@@ -16,9 +16,10 @@ import {
   useGetCategoriasQuery,
   useGetSubCategoriasQuery,
 } from "store/api/category";
+import { useTranslation } from "react-i18next";
 
 const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
-  const theme = useTheme();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const { data: colors } = useGetColorsQuery();
@@ -31,7 +32,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
-              label="Categoria"
+              label={t("category")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
@@ -60,7 +61,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
-              label="Tipo"
+              label={t("type")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
@@ -89,7 +90,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
-              label="Cor"
+              label={t("color")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
@@ -118,7 +119,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={12}>
             <Select
               name={"categoryId"}
-              label="Tamanho"
+              label={t("size")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
@@ -152,7 +153,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
                 dispatch(clearFilter());
               }}
             >
-              apagar
+              {t('clear')}
             </Button>
           </Grid>
     </>

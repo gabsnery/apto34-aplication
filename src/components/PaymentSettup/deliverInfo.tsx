@@ -1,13 +1,16 @@
 import { FormControl, FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Text } from "ui-layout";
 interface Props {
 }
 const DeliverInfo: React.FC<React.PropsWithChildren<Props>> = () => {
+    const { t } = useTranslation();
+
     const [type, setType] = useState<undefined | 'SedexCorreios' | 'PACCorreios' | 'JADLOG'>()
     return (
         <>
-            <Text variant={"h4"}>Formas de envio</Text>
+            <Text variant={"h4"}>{t('deliverType')}</Text>
             <FormControl>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"

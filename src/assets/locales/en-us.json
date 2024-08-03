@@ -1,0 +1,14 @@
+{
+  "translation": {
+    "category": "Category",
+    "type": "Type",
+    "color": "Color",
+    "size": "Size",
+    "proceedToCheckout": "PROCEED TO CHECKOUT",
+    "totalAmount": "Total: $",
+    "purchaseSummary": "PURCHASE SUMMARY",
+    "logout": "Logout",
+    "store": "Store",
+    "admin": "Admin"
+  }
+}

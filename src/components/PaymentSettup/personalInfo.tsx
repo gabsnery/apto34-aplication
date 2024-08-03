@@ -9,7 +9,7 @@ import { Button, Text, TextField } from "ui-layout";
 interface Props {}
 
 const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
-  const { t } = useTranslation(["login", "common"]);
+  const { t } = useTranslation();
   const { token, nome, sobrenome, email } = useTypedSelector(
     ({ auth }) => auth
   );
@@ -67,7 +67,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
       <Grid container columnSpacing={2}>
         {token ? null : (
           <Grid item xs={6}>
-            <Text variant={"h3"}>Logar</Text>
+            <Text variant={"h3"}>{t('login')}</Text>
             <Login
               onLogin={function (value: boolean): void {
                 throw new Error("Function not implemented.");
@@ -79,7 +79,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
         <Grid container item xs={6} direction={"column"}>
           {!token && (
             <Text variant={"h3"}>
-              {`${token ? "Editar" : "Criar"}`} usuario
+              {`${token ? t('edit') : t('create')}}`} {t('user')}
             </Text>
           )}
           <TextField

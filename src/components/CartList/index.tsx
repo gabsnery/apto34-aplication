@@ -54,7 +54,7 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
                   
                 </Grid>
                 <Grid item xs={12} sm={2} alignContent={'center'}>
-                  <Text variant={'h5'}>R${(+item.product.valor_produto).toFixed(2)}</Text>
+                  <Text variant={'h5'}>{(+item.product.valor_produto).toFixed(2)}</Text>
                   
                 </Grid>
                 <Grid item xs={12} sm={2} alignContent={'center'}>

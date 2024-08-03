@@ -24,8 +24,11 @@ import { RootState, useAppDispatch } from "store/store";
 import { logout } from "store/slices/logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
+import { useTranslation } from "react-i18next";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
+  const { t } = useTranslation();
+
   const mui_theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
@@ -98,7 +101,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
               dispatch(logout());
             }}
           >
-            Sair
+            {t('logout')}
           </Button>
           <Grid
             container

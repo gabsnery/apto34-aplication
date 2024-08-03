@@ -20,7 +20,7 @@ import CloseOrder from "pages/CloseOrder";
 ) */
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<div>carregando</div>}>
+    <Suspense fallback={<div></div>}>
       <Routes>
         <Route path="/admin/product"  element={<PrivateRoute admin={true} path="/login" />}>
           <Route path="/admin/product" element={<ProdAdm />} />

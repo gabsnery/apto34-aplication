@@ -9,7 +9,7 @@ import { PayerCost } from "@mercadopago/sdk-react/coreMethods/util/types";
 interface Props {
 }
 const OrderResume: React.FC<React.PropsWithChildren<Props>> = () => {
-    const { t } = useTranslation(["login", "common"]);
+    const { t } = useTranslation();
     const dispatch = useAppDispatch();
     const [installments, setInstallments] = useState<PayerCost[]>([])
     const cart = useSelector((st: RootState) => st.cart)
@@ -29,7 +29,7 @@ const OrderResume: React.FC<React.PropsWithChildren<Props>> = () => {
 
     return (
         <Grid xs={4} item container columns={16}>
-            <Text variant={"h4"}>Informações pessoais</Text>
+            <Text variant={"h4"}>{t('personalInfo')}</Text>
             <TextField
                 label={t("Nome")}
                 onChange={(ev) => setFormData({ ...formData, name: ev.target.value })}
