@@ -19,6 +19,7 @@ import { addProduct } from "store/slices/cartSlice";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Text } from "ui-layout";
+import { useTheme } from "styled-components";
 
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
@@ -61,7 +62,6 @@ export const AddModal: React.FC<{
               label={"Quantidade"}
               onChange={(ev) => setQuantity(+ev.target.value)}
               type="number"
-              
             />
           </Grid>
           <Grid item xs={4} sx={{ textAlign: "right" }}>
@@ -83,32 +83,36 @@ export const AddModal: React.FC<{
   );
 };
 
-export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ value,dragging }) => {
+export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
+  value,
+  dragging,
+}) => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation(['product',  'translation']);
-
+  const { t } = useTranslation(["product", "translation"]);
+  const theme = useTheme();
   const [modal, setModal] = useState<{
     open: boolean;
     item: Product | undefined;
   }>({ open: false, item: undefined });
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState<number>(1);
-  const handleOnItemClick = useCallback((e:any) => {
-        if (dragging) e.stopPropagation()
+  const handleOnItemClick = useCallback(
+    (e: any) => {
+      if (dragging) e.stopPropagation();
     },
     [dragging]
-) 
+  );
 
   return (
     <>
       <AddModal modal={modal} setModal={setModal} />
-      <Box  onClickCapture={handleOnItemClick}>
-        <Card sx={{  boxShadow: 4 }}>
+      <Box onClickCapture={handleOnItemClick}>
+        <Card sx={{ boxShadow: 4, backgroundColor: theme.paper.default }}>
           <CardActionArea
             component="a"
             onClick={(e) => {
-              handleOnItemClick(e)
-              navigate(`/product/${value.id}`)}}
+              handleOnItemClick(e);
+              navigate(`/product/${value.id}`);
+            }}
           >
             <CardMedia
               component="img"
@@ -121,13 +125,10 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
               alt={value.nome}
             />
             <CardContent>
-              <div style={{height:'50px'}}>
-              <Text
-                color="primary"
-                variant="h5"
-              >
-                {t(`name_${value.id}`)}
-              </Text>
+              <div style={{ height: "50px" }}>
+                <Text color="primary" variant="h5">
+                  {t(`name_${value.id}`)}
+                </Text>
               </div>
               <Grid
                 container
@@ -145,7 +146,7 @@ export const ProductsCard: React.FC<{ value: Product,dragging?:boolean }> = ({ v
                     onClick={(event) => {
                       event.stopPropagation();
                       event.preventDefault();
-                      setModal({ open: true, item: value })
+                      setModal({ open: true, item: value });
                     }}
                     onMouseDown={(event) => event.stopPropagation()}
                     sx={{

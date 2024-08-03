@@ -27,9 +27,7 @@ const CartOverview: React.FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    console.log("🚀 ~ useEffect ~ cart:", cart);
-  }, [cart]);
+
   return (<>
     <div
       style={{

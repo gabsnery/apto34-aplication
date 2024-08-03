@@ -11,18 +11,35 @@ import { useGetBannersQuery } from "store/api/Banner";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
-  const {data:banners}=useGetBannersQuery()
+  const { data: banners, isLoading: isBannerLoading } = useGetBannersQuery();
   return (
     <>
-      <Grid container justifyContent={"center"} rowGap={2}>
+      <Grid container justifyContent={"center"} rowGap={3}>
         <Grid item xs={12}>
-          <Banner banners={banners?.map(i=>({ image: i.url_image, title: i.title, subtitle: i.description }))||[]} />
+          {isBannerLoading ? (
+            <></>
+          ) : (
+            <Banner
+              banners={
+                banners?.map((i) => ({
+                  image: i.url_image,
+                  title: i.title,
+                  subtitle: i.description,
+                })) || []
+              }
+            />
+          )}
         </Grid>
 
         <Grid item xs={12} sm={9}>
-        <ProductsSlider/>
+          <ProductsSlider />
         </Grid>
-        <Grid container justifyContent={"center"} columnSpacing={3} rowSpacing={1}>
+        <Grid
+          container
+          justifyContent={"center"}
+          columnSpacing={3}
+          rowSpacing={1}
+        >
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
@@ -75,7 +92,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Grid>
 
         <Grid item xs={9}>
-        <ProductsSlider/>
+          <ProductsSlider />
         </Grid>
       </Grid>
     </>

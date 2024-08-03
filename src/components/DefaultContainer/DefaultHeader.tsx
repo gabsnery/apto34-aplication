@@ -5,15 +5,13 @@ import {
   IconButton,
   Drawer,
   Toolbar,
-  useTheme,
   List,
   ListItemButton,
   BadgeProps,
   ToggleButtonGroup,
-  ToggleButton,
+  ToggleButton as MuiToggleButton,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { lightTheme as theme } from "ui-layout/theme";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import React, { FC, useState } from "react";
@@ -27,24 +25,46 @@ import { logout } from "store/slices/logout";
 import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
 import { useTranslation } from "react-i18next";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import LightMode from "@mui/icons-material/LightMode";
+import { useTheme } from "styled-components";
+import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
+import { styled as MUIStyled } from "@mui/material/styles";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const { t } = useTranslation();
-  const userLang = ['pt-BR','en-US'].includes(navigator.language) ?navigator.language:'en-US';
-  const mui_theme = useTheme();
+  const userLang = ["pt-BR", "en-US"].includes(navigator.language)
+    ? navigator.language
+    : "en-US";
+  const theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
+  const activeTheme =
+    (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
   const [drawerIsOpen, setdrawerIsOpen] = useState<boolean>(false);
   const drawerWidth = 300;
   const StyledBadge = styled(Badge)<BadgeProps>(() => ({
     "& .MuiBadge-badge": {
-      right: 3,
-      top: 13,
+      right: 0,
+      top: 3,
+      fontSize: "10px",
+      height: "16px",
+      minHeight: "16px",
+      width: "16px",
+      minWidth: "16px",
       backgroundColor: theme.colors.primary,
     },
   }));
-  const language = localStorage.getItem("@app:activeLanguage") as "pt-BR" | "en-US"
+  const ToggleButton = MUIStyled(MuiToggleButton)({
+    "&.Mui-selected, &.Mui-selected:hover": {
+      color: "white",
+      backgroundColor: theme.paper.selected,
+    }
+  });
+  const language = localStorage.getItem("@app:activeLanguage") as
+    | "pt-BR"
+    | "en-US";
 
   return (
     <>
@@ -52,9 +72,9 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
         elevation={0}
         position="sticky"
         sx={{
-          height: "100px",
+          height: "auto",
           backdropFilter: "blur(6px)",
-          backgroundColor: mui_theme.palette.background.default,
+          backgroundColor: theme.colors.background,
           zIndex: (mui_theme) => mui_theme.zIndex.drawer + 1,
         }}
       >
@@ -97,7 +117,11 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
         </Drawer>
         <Toolbar>
           <RouterLink to="/">
-            <img src={logo} alt="logo" style={{ height: 100, marginTop: 10 }} />
+            <img
+              src={activeTheme === "light" ? logo : logoDark}
+              alt="logo"
+              style={{ height: 60, marginTop: 10, marginBottom: 5 }}
+            />
           </RouterLink>
           <Button
             variant="tertiary"
@@ -139,7 +163,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 </Grid>
               );
             })}
-    
+
             <Grid item mx={2}>
               <StyledBadge badgeContent={cart.items.length}>
                 <IconButton
@@ -147,27 +171,51 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                     navigate("/cart");
                   }}
                   edge="end"
-                  size="large"
+                  size="medium"
                 >
-                  <ShoppingCartIcon fontSize="inherit" color="action" />
+                  <ShoppingCartIcon
+                    fontSize="inherit"
+                    sx={{ color: theme.icon.primary }}
+                  />
                 </IconButton>
               </StyledBadge>
             </Grid>
             <Grid item mx={2}>
               <ToggleButtonGroup
-              size="small" 
-                value={language?language:userLang}
+                size="small"
+                value={language ? language : userLang}
                 exclusive
-                onChange={(ev,newAlignment) => {
-                  console.log("🚀 ~ ev:", ev)
-                  localStorage.setItem("@app:activeLanguage",newAlignment)
+                onChange={(ev, newAlignment) => {
+                  localStorage.setItem("@app:activeLanguage", newAlignment);
                   window.location.reload();
                 }}
                 aria-label="Platform"
               >
-                <ToggleButton value="pt-BR">pt-BR</ToggleButton>
-                <ToggleButton value="en-US">en-US</ToggleButton>
+                <ToggleButton value="pt-BR" sx={{ borderColor: theme.text.secondary }}>
+                  <Text color={'secondary'}>pt-BR</Text>
+                </ToggleButton>
+                <ToggleButton value="en-US" sx={{ borderColor: theme.text.secondary }}>
+                  <Text color={'secondary'}>en-US</Text>
+                </ToggleButton>
               </ToggleButtonGroup>
+            </Grid>
+            <Grid item mx={2}>
+              <IconButton
+                sx={{ cursor: "pointer" }}
+                onClick={() => {
+                  localStorage.setItem(
+                    "@app:activeTheme",
+                    activeTheme === "light" ? "dark" : "light"
+                  );
+                  window.location.reload();
+                }}
+              >
+                {activeTheme === "light" ? (
+                  <LightModeOutlinedIcon sx={{ color: theme.icon.primary }} />
+                ) : (
+                  <LightMode sx={{ color: theme.icon.primary }} />
+                )}
+              </IconButton>
             </Grid>
             {/*       <Grid
               item

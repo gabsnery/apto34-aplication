@@ -25,9 +25,6 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
-  useEffect(() => {
-    console.log("🚀 ~ useEffect ~ cart:", cart);
-  }, [cart]);
   return (
     <>
       <Grid container sx={{ width: "100%" }} direction={"column"}>

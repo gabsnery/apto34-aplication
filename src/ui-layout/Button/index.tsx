@@ -27,7 +27,7 @@ const variantStyles = {
   secondary: css`
     background-color: transparent;
     border: 2px solid ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.grayMedium};
+    color: ${(props) => props.theme.text.primary};
 
     &:hover {
       background-color: ${(props) => props.theme.colors.primary};

@@ -10,11 +10,7 @@ const nav: NavObj[] = [
   {
     name: 'Store',
     link: '/store',
-  },
-  {
-    name: 'admin',
-    link: '/admin/product',
-  },
+  }
 ]
 
 export default nav

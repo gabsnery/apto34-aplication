@@ -129,7 +129,6 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
                     });
                 })
                 .catch((e) => {
-                  console.log("erro", e);
                   dispatch(
                     setSnackbar({
                       type: "error",
@@ -140,7 +139,6 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
                 });
           })
           .catch((e) => {
-            console.log("erro", e);
             dispatch(
               setSnackbar({
                 type: "error",
@@ -165,7 +163,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
               return (
                 <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}>{t(`${label}`)}</StepLabel>
+                  <StepLabel {...labelProps}> <Text variant="body" color={'secondary'}>{t(`${label}`)}</Text></StepLabel>
                 </Step>
               );
             })}

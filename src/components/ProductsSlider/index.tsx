@@ -51,7 +51,7 @@ const ProductsSlider: React.FC = () => {
 
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
 
-  const { data, isSuccess } = useGetProductsQuery(
+  const { data, isLoading: isProductsLoading } = useGetProductsQuery(
     { ...sessionFilter, start: 1, count: 10 },
     { skip: !sessionFilter }
   );
@@ -62,7 +62,7 @@ const ProductsSlider: React.FC = () => {
         width: "100%",
       }}
     >
-      <Slider {...sliderSettings} beforeChange={handleBeforeChange}
+      {isProductsLoading?<></>:<Slider {...sliderSettings} beforeChange={handleBeforeChange}
           afterChange={handleAfterChange}>
         {data?.map((prod, idx) => (
           <div
@@ -74,7 +74,7 @@ const ProductsSlider: React.FC = () => {
             <ProductsCard value={prod} dragging={dragging}/>
           </div>
         ))}
-      </Slider>
+      </Slider>}
     </div>
   );
 };

@@ -16,9 +16,9 @@ export const tokens = {
     grayLight: '#F5F5F5',
     gray: '#CCCCCC',
     grayMedium: '#595959',
-    grayDark: '#666666',
-    grayDarker: '#333333',
-    black: '#000000',
+    grayDark: '#333333',
+    grayDarker: '#202020',
+    black: '#0F0F0F',
     white: '#FFFFFF',
   },
   spacing: {

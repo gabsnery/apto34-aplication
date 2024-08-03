@@ -34,13 +34,13 @@ const variantStyles = {
 };
 const colorStyles = {
   primary: css`
-    color: ${(props) => props.theme.colors.grayDarker};
+    color: ${(props) => props.theme.text.primary};
   `,
   secondary: css`
-    color: ${(props) => props.theme.colors.grayMedium};
+    color: ${(props) => props.theme.text.secondary};
   `,
   terciary: css`
-    color: ${(props) => props.theme.colors.primaryLight};
+    color: ${(props) => props.theme.text.terciary};
   `,
 };
 

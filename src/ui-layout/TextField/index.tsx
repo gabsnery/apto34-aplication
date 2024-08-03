@@ -29,8 +29,8 @@ const StyledInput = styled.input<{ size: "small" | "medium" }>`
   border-radius: 8px;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
-  background-color: ${(props) => props.theme.colors.white};
-  color: ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.paper.default};
+  color: ${(props) => props.theme.text.primary};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   ${(props) => sizeStyles[props.size]};
@@ -53,7 +53,7 @@ const StyledLabel = styled.label<{ size: "small" | "medium" }>`
   font-size: ${(props) => props.theme.typography.fontSize};
   font-weight: 500;
   text-transform: capitalize;
-  color: ${(props) => props.theme.colors.grayDarker};
+  color: ${(props) => props.theme.text.primary};
   margin-bottom: ${(props) => props.theme.spacing.small};
   ${(props) => labelSizeStyles[props.size]};
 `;

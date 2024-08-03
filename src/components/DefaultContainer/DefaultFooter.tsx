@@ -1,21 +1,24 @@
 import { BottomNavigation, Grid } from "@mui/material";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
+import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
 import { Text } from "ui-layout";
-import { lightTheme } from "ui-layout/theme";
 const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-
+  const theme = useTheme();
+  const activeTheme =
+    (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
   return (
     <>
       <BottomNavigation
         component={"footer"}
         sx={{
-          backgroundColor: lightTheme.colors.primary,
+          backgroundColor: theme.paper.primaryDark,
           minHeight: "300px",
           height: "fit-content",
           paddingTop: "30px",
@@ -30,7 +33,7 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
           }}
         >
           <Grid item xs={12} sm={4} textAlign={"center"}>
-            <img src={logo} alt="logo" style={{ height: 300 }} />
+            <img src={activeTheme==='light'? logo:logoDark} alt="logo" style={{ height: 300 }} />
           </Grid>
           <Grid item container xs={12} sm={4} direction={"column"}>
             <Text variant={"h3"} weight={500} color="primary">

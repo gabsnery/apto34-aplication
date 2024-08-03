@@ -36,6 +36,7 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
       <Grid container direction={"column"}>
         <TextField
           label={t("email")}
+          name="email"
           onChange={(ev) =>
             setFormData({ ...formData, email: ev.target.value })
           }

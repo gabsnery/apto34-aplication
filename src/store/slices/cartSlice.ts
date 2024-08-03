@@ -15,8 +15,6 @@ const { reducer, actions } = createSlice({
       const orderItem = state.items.findIndex(
         (item) => item.product.id === action.payload.product.id
       );
-      console.log("🚀 ~ state:", state);
-      console.log("🚀 ~ orderItem:", orderItem);
       let items = [...state.items];
       if (orderItem >= 0)
         items[orderItem] = {
@@ -38,16 +36,13 @@ const { reducer, actions } = createSlice({
       };
     },
     deleteProduct: (state, action: PayloadAction<Product>) => {
-      console.log("🚀 ~ action:", action);
       const orderItem = state.items.findIndex(
         (item) => item.product.id === action.payload.id
       );
-      console.log("🚀 ~ orderItem:", orderItem);
       let items = [...state.items];
       if (orderItem >= 0) {
         items.splice(orderItem,1);
       }
-      console.log("🚀 ~ items:", items);
       return {
         items: items,
         total: items.reduce(

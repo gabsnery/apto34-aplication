@@ -14,10 +14,7 @@ const App = () => {
   
   useEffect(() => {
     const userLang = navigator.language
-    console.log("🚀 ~ useEffect ~ userLang:", userLang)
     const language = localStorage.getItem("@app:activeLanguage") as "pt-BR" | "en-US"
-    console.log("🚀 ~ useEffect ~ language:", language)
-
     i18n.changeLanguage(language?language:userLang)
   }, []);
   return (

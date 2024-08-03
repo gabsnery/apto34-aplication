@@ -9,9 +9,9 @@ import {
   Radio,
 } from "@mui/material";
 import { FC } from "react";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { Button } from "../Button";
 import { Text } from "../Text";
 import { MediumSelect, SmallSelect } from "./styles";
@@ -41,7 +41,7 @@ const StyledLabel = styled.label<{ size: "small" | "medium" }>`
   font-size: ${(props) => props.theme.typography.fontSize};
   font-weight: 500;
   text-transform: capitalize;
-  color: ${(props) => props.theme.colors.grayDarker};
+  color: ${(props) => props.theme.text.primary};
   margin-bottom: ${(props) => props.theme.spacing.small};
   ${(props) => labelSizeStyles[props.size]};
 `;
@@ -66,7 +66,7 @@ const sizeStyles = {
 const StyledTypographiesDictionary = {
   small: SmallSelect,
   medium: MediumSelect,
-} as Record<string, MUIStyledComponent<_SelectProps>>;
+} as unknown as Record<string, MUIStyledComponent<_SelectProps>>;
 
 const getStyledComponent: (props: string) => MUIStyledComponent<any> = (size) =>
   StyledTypographiesDictionary[`${size}`] ?? <></>;
@@ -82,7 +82,7 @@ export const Select: FC<_SelectProps> = ({
   ...SelectProps
 }) => {
   const { t } = useTranslation();
-
+  const theme = useTheme();
   const renderItems = (_options: OptionProps[] | undefined) => {
     let { grouped, options } = sortedOptions(_options);
     if (grouped) {
@@ -145,10 +145,10 @@ export const Select: FC<_SelectProps> = ({
             }}
           >
             <Button disabled={false} color="primary" variant="tertiary">
-            {t("clear")}
+              {t("clear")}
             </Button>
             <Button variant="primary" color="primary">
-            {t("ok")}
+              {t("ok")}
             </Button>
           </Box>
         );
@@ -164,6 +164,15 @@ export const Select: FC<_SelectProps> = ({
         <StyledLabel size={size}>{label}</StyledLabel>
 
         <StyledSelect
+          inputProps={{
+            MenuProps: {
+              PaperProps: {
+                sx: {
+                  backgroundColor: theme.paper.default,
+                },
+              },
+            },
+          }}
           IconComponent={KeyboardArrowDown}
           fullWidth
           renderValue={(value: any) => renderValue(value, options ?? [], type)}
@@ -184,16 +193,16 @@ const renderValue = (
   switch (type) {
     case "multiple":
       return (
-        <>
+        <Text>
           {(value as [])
             .map((i) => options.find((j) => j.value === i)?.label)
             .join(", ")}
-        </>
+        </Text>
       );
     case "radio":
       return <>{options.find((j) => j.value === value)?.label}</>;
     default:
-      return <>{options.find((j) => j.value === value)?.label}</>;
+      return <Text>{options.find((j) => j.value === value)?.label}</Text>;
   }
 };
 const renderItem = (

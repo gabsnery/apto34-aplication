@@ -8,15 +8,19 @@ const ThemeContext = createContext<any>(null);
 export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState(lightTheme);
+  const activeTheme = localStorage.getItem("@app:activeTheme") as "dark" | "light"
 
   const toggleTheme = () => {
-    setTheme((prevTheme:any) => (prevTheme === lightTheme ? darkTheme : lightTheme));
+    localStorage.setItem(
+      "@app:activeTheme",
+      activeTheme === "light" ? "dark" : "light"
+    );
+    window.location.reload();
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+    <ThemeContext.Provider value={{theme:activeTheme === "dark"?darkTheme:lightTheme, toggleTheme }}>
+      <StyledThemeProvider theme={activeTheme === "dark"?darkTheme:lightTheme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );
 };
