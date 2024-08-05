@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
-import { Select, TextField } from "ui-layout";
+import { Select, TextField, Text } from "ui-layout";
 
 import { getPaymentMethods } from "@mercadopago/sdk-react/coreMethods";
 import { PaymentMethods } from "@mercadopago/sdk-react/coreMethods/getPaymentMethods/types";
 import { PayerCost } from "@mercadopago/sdk-react/coreMethods/util/types";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { Grid } from "@mui/material";
+import { useTheme } from "styled-components";
 interface Props {
   setPaymentInfo: (value: any) => void;
 }
@@ -20,7 +20,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   setPaymentInfo,
 }) => {
   const { t } = useTranslation();
-
+  const theme = useTheme();
   const [installments, setInstallments] = useState<PayerCost[]>([]);
   const cart = useSelector((st: RootState) => st.cart);
   const [formData, setFormData] = useState<{
@@ -84,9 +84,8 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <>
       <FormControl sx={{ width: "100%" }}>
-        <FormLabel id="demo-radio-buttons-group-label">
-          {t('paymentType')}
-        </FormLabel>
+        <Text variant={"h4"}>{t("paymentType")}</Text>
+
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           name="radio-buttons-group"
@@ -101,12 +100,19 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           }}
         >
           <FormControlLabel
+            sx={{color:theme.text.primary}}
             value="CreditCard"
             control={<Radio />}
             label="CreditCard"
           />
-          <FormControlLabel value="PIX" control={<Radio />} label="PIX" />
           <FormControlLabel
+            sx={{color:theme.text.primary}}
+            value="PIX"
+            control={<Radio />}
+            label="PIX"
+          />
+          <FormControlLabel
+            sx={{color:theme.text.primary}}
             value="Invoice"
             control={<Radio />}
             label="Invoice"
@@ -115,7 +121,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
       </FormControl>
       {type === "CreditCard" && (
         <Grid container columnSpacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <TextField
               label={t("card.name")}
               onChange={(ev) =>
@@ -125,7 +131,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               required
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <TextField
               label={t("card.number")}
               onChange={(ev) =>
@@ -138,9 +144,9 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               required
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6} sm={6} md={4}>
             <TextField
-              label={t("card.expiryDate")}
+              label={`${t("card.expiryDate")} (${t("month")})`}
               onChange={(ev) =>
                 setFormData({
                   ...formData,
@@ -151,9 +157,9 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               required
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6} sm={6} md={4}>
             <TextField
-              label={t("card.expiryDate")}
+              label={`${t("card.expiryDate")} (${t("year")})`}
               onChange={(ev) =>
                 setFormData({
                   ...formData,
@@ -164,7 +170,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               required
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={4} sm={3} md={4}>
             <TextField
               label={t("card.cvv")}
               onChange={(ev) =>
@@ -174,7 +180,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               required
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={8} sm={5} md={6}>
             <TextField
               label={t("card.identity")}
               onChange={(ev) =>
@@ -185,10 +191,10 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
             />
           </Grid>
           {installments.length > 0 && (
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={4} md={6}>
               <Select
-                name={"categoryId"}
-                label={t("category")}
+                name={"installments"}
+                label={t("installments")}
                 value={formData.installments.toString()}
                 onChange={(e) => {
                   setFormData({

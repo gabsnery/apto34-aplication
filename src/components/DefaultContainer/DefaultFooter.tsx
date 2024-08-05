@@ -1,4 +1,4 @@
-import { BottomNavigation, Grid } from "@mui/material";
+import { BottomNavigation,Box, Grid } from "@mui/material";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
@@ -15,7 +15,7 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
     (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
   return (
     <>
-      <BottomNavigation
+      <Box
         component={"footer"}
         sx={{
           backgroundColor: theme.paper.primaryDark,
@@ -36,29 +36,29 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
             <img src={activeTheme==='light'? logo:logoDark} alt="logo" style={{ height: 300 }} />
           </Grid>
           <Grid item container xs={12} sm={4} direction={"column"}>
-            <Text variant={"h3"} weight={500} color="primary">
+            <Text variant={"h3"}  color="primary">
               {t('footer.contactLabel')}
             </Text>
-            <Text variant={"h6"} weight={500} color="primary">
+            <Text variant={"h6"}  color="primary">
               {t('footer.phone')}
             </Text>
-            <Text variant={"h6"} weight={500} color="primary">
+            <Text variant={"h6"}  color="primary">
               {t('footer.email')}
             </Text>
           </Grid>
           <Grid item container xs={12} md={4} direction={'column'}>
-            <Text variant={"h3"} weight={500} color="primary">
+            <Text variant={"h3"}  color="primary">
               {t('footer.infoLabel')}
             </Text>
-            <Text variant={"h5"} weight={500} color="primary">
+            <Text variant={"h5"}  color="primary">
               {t('footer.productsLabel')}
             </Text>
-            <Text variant={"h5"} weight={500} color="primary">
+            <Text variant={"h5"}  color="primary">
               {t('footer.aboutUsLabel')}
             </Text>
           </Grid>
         </Grid>
-      </BottomNavigation>
+      </Box>
     </>
   );
 };

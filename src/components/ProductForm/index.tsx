@@ -160,7 +160,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Grid>
                 <Grid item xs={4} >
                     <Select
-                        name={'categoryId'}
+                        name={'type'}
                         label={t("type")}
                         sx={{ backgroundColor: 'transparent' }}
                         type="multiple"
@@ -184,7 +184,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                     columnSpacing={2}>
                     <Grid item xs={4} >
                         <Select
-                            name={'categoryId'}
+                            name={'color'}
                             label={t("color")}
                             sx={{ backgroundColor: 'transparent' }}
                             
@@ -217,7 +217,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                     columnSpacing={2}>
                     <Grid item xs={4} >
                         <Select
-                            name={'categoryId'}
+                            name={'size'}
                             label={t("size")}
                             sx={{ backgroundColor: 'transparent' }}
                             

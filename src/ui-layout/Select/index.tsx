@@ -207,7 +207,7 @@ const renderValue = (
 };
 const renderItem = (
   item: OptionProps,
-  selectedValue: unknown | unknown[],
+  selectedValue?: unknown | unknown[],
   type?: "multiple" | "radio",
   parent?: boolean
 ) => {
@@ -236,7 +236,7 @@ const renderItem = (
                 color: "white",
               },
             }}
-            checked={(selectedValue as unknown[]).indexOf(item.value) > -1}
+            checked={selectedValue?(selectedValue as unknown[]).indexOf(item.value) > -1:false}
           />
         </>
       );

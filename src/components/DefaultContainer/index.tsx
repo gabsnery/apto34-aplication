@@ -31,7 +31,7 @@ const DefaultContainer: FC<
           {props.children}
         </Container>
       </Suspense>
-      <DefaultFooter />
+   <DefaultFooter /> 
     </>
   );
 };

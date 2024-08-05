@@ -151,7 +151,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, [cardToken]);
   return (
-    <Grid container paddingX={{ xs: "20px", md: "200px" }} columnSpacing={2}>
+    <Grid container item paddingX={{ xs: "20px", md: "200px" }} columnSpacing={2}>
       <Grid xs={12} md={10} container item justifyContent={"space-between"}>
         <Grid xs={12} md={12} item>
           <Stepper activeStep={activeStep}>
@@ -179,7 +179,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
         >
           {activeStep === 0 && <PersonalInfo />}
           {activeStep === 1 && <AddreddInfo />}
-          {activeStep === 1 && <DeliverInfo />}
+          {/* {activeStep === 1 && <DeliverInfo />} */}
           {activeStep === 2 && (
             <Grid xs={12} md={12} item>
               <PaymentInfo setPaymentInfo={setPaymentInfo} />
@@ -215,7 +215,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       <Grid xs={12} md={2} item container direction={"column"}>
         <Text> {t("details")}</Text>
       </Grid>
-      <Grid xs={2}></Grid>
+      <Grid item xs={2}></Grid>
     </Grid>
   );
 };

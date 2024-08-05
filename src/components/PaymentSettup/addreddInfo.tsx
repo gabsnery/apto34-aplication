@@ -16,9 +16,9 @@ const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
         street_city: string,
         street_state: string,
     }>({
-        street_name: 'Rua São Franscisco',
-        street_number: '515',
-        street_zip_code: '13400-590',
+        street_name: 'P.O. Box 696, 4419 Nunc Avenue',
+        street_number: '696',
+        street_zip_code: '11400-520',
         street_city: 'Piracicaba',
         street_state: 'São Paulo',
     })
@@ -71,9 +71,9 @@ const AddreddInfo: React.FC<React.PropsWithChildren<Props>> = () => {
                     <Text variant={"body"}>{formData.street_state || ''}</Text>
                 </>
             }
-            <Button onClick={() => {
+{/*             <Button onClick={() => {
                 setEdit(!edit);
-            }} color={"primary"} variant="secondary" >{`${edit ? 'Salvar' : 'Editar'}`}</Button>
+            }} color={"primary"} variant="secondary" >{`${edit ? 'Salvar' : 'Editar'}`}</Button> */}
         </>
     );
 };

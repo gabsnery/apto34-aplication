@@ -51,7 +51,8 @@ const StyledText = styled.span<TextProps>`
   font-family: ${(props) => props.theme.typography.fontFamily};
   ${(props) => variantStyles[props.variant || "body"]};
   ${(props) => colorStyles[props.color || "secondary"]};
-`;
+`
+StyledText.shouldForwardProp = prop => !['variant'].includes(prop)
 
 export const Text: React.FC<TextProps> = (props) => {
   const { children, variant = "body", color = "primary", ...rest } = props;

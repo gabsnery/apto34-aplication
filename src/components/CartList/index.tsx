@@ -1,23 +1,16 @@
-import {
-  Container,
-  List,
-  ListItem,
-  useTheme,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemIcon,
-  Grid,
-  IconButton,
-} from "@mui/material";
-import React, { FC, Suspense, useEffect } from "react";
-import Loading from "../Loading";
-import { useSelector } from "react-redux";
-import { RootState } from "store/store";
-import { Text, Button } from "ui-layout";
-import { useAppDispatch } from "../../store/store";
-import { clearCart, deleteProduct } from "store/slices/cartSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {
+  Grid,
+  IconButton
+} from "@mui/material";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { deleteProduct } from "store/slices/cartSlice";
+import { RootState } from "store/store";
+import { Text } from "ui-layout";
+import { useAppDispatch } from "../../store/store";
+import { useTheme } from "styled-components";
 
 const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(['product',  'translation']);
@@ -62,7 +55,8 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Grid>
                 <Grid item xs={12} sm={2} alignContent={'center'}>
                   <IconButton
-                    sx={{ cursor: "pointer", justifyContent: "end" }}
+                    sx={{ cursor: "pointer", justifyContent: "end",color:theme.text.primary
+           }}
                     onClick={() => {
                       dispatch(deleteProduct(item.product));
                     }}

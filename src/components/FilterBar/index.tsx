@@ -31,12 +31,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
     <>
           <Grid item xs={12} sm={6} md={12}>
             <Select
-              name={"categoryId"}
+              name={"category"}
               label={t("category")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
-              value={sessionFilter?.category?.map((i) => i.toString())}
+              value={sessionFilter?.category.length>0?sessionFilter?.category?.map((i) => i.toString()):''}
               onChange={(e) => {
                 const array = sessionFilter.category;
                 const index = array.indexOf(+(e.target.value as string));
@@ -60,12 +60,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={12}>
             <Select
-              name={"categoryId"}
+              name={"type"}
               label={t("type")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
-              value={sessionFilter?.type?.map((i) => i.toString())}
+              value={sessionFilter?.type.length>0?sessionFilter?.type?.map((i) => i.toString()):''}
               onChange={(e) => {
                 const array = sessionFilter.type;
                 const index = array.indexOf(+(e.target.value as string));
@@ -89,12 +89,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={12}>
             <Select
-              name={"categoryId"}
+              name={"color"}
               label={t("color")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
-              value={sessionFilter?.color?.map((i) => i.toString())}
+              value={sessionFilter?.color?.length>0?sessionFilter?.color?.map((i) => i.toString()):''}
               onChange={(e) => {
                 const array = sessionFilter.color;
                 const index = array.indexOf(+(e.target.value as string));
@@ -118,12 +118,12 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={12}>
             <Select
-              name={"categoryId"}
+              name={"size"}
               label={t("size")}
               sx={{ backgroundColor: "transparent" }}
               size={'small'}
               type="multiple"
-              value={sessionFilter?.size?.map((i) => i.toString())}
+              value={sessionFilter?.size?.length>0?sessionFilter?.size?.map((i) => i.toString()):''}
               onChange={(e) => {
                 const array = sessionFilter.size;
                 const index = array.indexOf(+(e.target.value as string));

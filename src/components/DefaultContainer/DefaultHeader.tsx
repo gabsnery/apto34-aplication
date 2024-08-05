@@ -210,11 +210,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                   window.location.reload();
                 }}
               >
-                {activeTheme === "light" ? (
-                  <LightModeOutlinedIcon sx={{ color: theme.icon.primary }} />
-                ) : (
                   <LightMode sx={{ color: theme.icon.primary }} />
-                )}
               </IconButton>
             </Grid>
             {/*       <Grid

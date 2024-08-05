@@ -29,7 +29,7 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
       <Grid item container xs={12} md={6} xl={4} alignContent="center">
         <Box sx={{ padding: { md: 10, sm: 0 }, width: "100%" }}>
           <Text variant={"h3"}>{t("login")}</Text>
-          <LoginComponent
+         <LoginComponent
             onLogin={() => {
               navigate("/");
             }}

@@ -67,6 +67,7 @@ const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   ${(props) => variantStyles[`${props.variant || "primary"}${props.disabled?'Disabled':''}` ]}
 `;
+StyledButton.shouldForwardProp = prop => !['variant'].includes(prop)
 
 export const Button: React.FC<ButtonProps> = (
   props
