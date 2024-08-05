@@ -1,6 +1,57 @@
-# Getting Started with Create React App
+# Apto34 Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![node](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+
+Apto34 is an e-commerce application developed with React and Node.js.
+
+## 📋 Table of Contents
+
+- [🤖 Introduction](#-introduction)
+- [⚙️ Tech Stack](#️-tech-stack)
+- [🔋 Features](#-features)
+- [🤸 Quick Start](#-quick-start)
+
+## 🤖 Introduction
+
+Apto34 is an e-commerce application designed to provide a seamless and intuitive online shopping experience. Using modern technologies like React, Redux, and Node.js, the application offers a rich and responsive interface with advanced features such as global state management and integration with external APIs.
+
+## ⚙️ Tech Stack
+
+- **Front-end:** React, Redux, TypeScript, Styled-components
+- **Back-end:** Node.js, Express, Sequelize
+- **Database:** MySQL
+- **Tools:** ESLint, Prettier, Webpack
+
+## 🔋 Features
+
+- **Home Page:** Displays featured products and promotions.
+- **Product Catalog:** Product listing with filters by category, price, and other criteria.
+- **Shopping Cart:** Add and remove items from the cart, calculate subtotal and total.
+- **Authentication:** User registration and login with JWT.
+- **Admin Dashboard:** Interface for managing products, categories, and orders.
+- **Responsiveness:** Adaptive layout for different devices.
+
+## 🤸 Quick Start
+
+Follow these steps to set up the project locally on your machine.
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- Git
+- Node.js
+- npm (Node Package Manager)
+
+### Cloning the Repository
+
+```bash
+git clone https://github.com/gabsnery/apto34-aplication.git
+cd apto34-aplication
+
 
 ## Available Scripts
 
