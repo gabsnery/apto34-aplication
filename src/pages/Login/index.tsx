@@ -21,7 +21,6 @@ const Login: React.FC<React.PropsWithChildren<unknown>> = () => {
       direction="row"
       rowSpacing={2}
       sx={{
-        backgroundColor: theme.palette.background.default,
         height: "inherit",
       }}
     >

@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { fetchLogin } from "../../store/slices/auth.slice";
 import { Login as LoginEntity } from "../../store/types/auth.interfaces";
 import { useTypedSelector } from "hooks";
+import { PasswordField } from "ui-layout/PasswordField";
 
 interface Props {
   onLogin?: (value: boolean) => void;
@@ -43,9 +44,8 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
           value={formData.email || ""}
         />
 
-        <TextField
+        <PasswordField
           label={t("password")}
-          type="password"
           name="password"
           onChange={(ev) =>
             setFormData({ ...formData, senha: ev.target.value })

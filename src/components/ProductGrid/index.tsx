@@ -22,7 +22,7 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
     size: [],
     color: [],
     type: []});
-  const { data, isSuccess } = useGetProductsQuery(
+  const { data, isSuccess,isLoading:isProductsLoading,isError:isProductError } = useGetProductsQuery(
     { ...filter, start: 0, count: 50 },
     { skip: !filter }
   );
@@ -67,6 +67,8 @@ useEffect(() => {
           height: "inherit",
         }}
       >
+        {isProductsLoading&&<div>loading</div>}
+        {isProductError&&<div>loading</div>}
         {products?.map((prod, idx) => (
           <Grid key={idx} item xs={6} sm={4} md={4} lg={3}>
             <ProductsCard value={prod} />

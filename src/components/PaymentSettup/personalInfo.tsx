@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAddClientMutation } from "store/api/Client";
 import { Button, Text, TextField } from "ui-layout";
+import { PasswordField } from "ui-layout/PasswordField";
 
 interface Props {}
 
@@ -104,7 +105,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
             required
           />
           {!token && (
-            <TextField
+            <PasswordField
               label={t("password")}
               onChange={(ev) =>
                 setFormData({ ...formData, password: ev.target.value })
