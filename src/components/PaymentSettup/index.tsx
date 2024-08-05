@@ -1,4 +1,8 @@
-import { getIssuers, initMercadoPago } from "@mercadopago/sdk-react";
+import {
+  getIdentificationTypes,
+  getIssuers,
+  initMercadoPago,
+} from "@mercadopago/sdk-react";
 import { Grid, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -21,6 +25,7 @@ import DeliverInfo from "./deliverInfo";
 import PaymentInfo from "./paymentInfo";
 import PersonalInfo from "./personalInfo";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 const steps = ["identity", "deliver", "payment"];
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -31,6 +36,8 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const dispatch = useAppDispatch();
   const token = useTypedSelector(({ auth }) => auth.token);
+  const { id: userID } = useTypedSelector(({ auth }) => auth);
+  const navigate = useNavigate();
 
   const [paymentInfo, setPaymentInfo] = useState<any>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
@@ -42,8 +49,29 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const handleNext = () => {
     activeStep < steps.length - 1 &&
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
 
+    if (activeStep === steps.length - 1) {
+      getIdentificationTypes().then((e) => {
+        console.log("eee", e);
+      });
+
+      addOrder({
+        clienteId: userID,
+        endereco: {
+          cep: "13400690",
+          logradouro: "rua aqui",
+          numero: "55",
+          complemento: "qq",
+          bairro: "qqs",
+        },
+      });
+    }
+  };
+  useEffect(() => {
+    if (data) {
+      if (data.init_point) window.open(data.init_point, "_blank");
+    }
+  }, [data]);
   const handleBack = () => {
     activeStep > 0 && setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -77,9 +105,9 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
       addPreference({
         payer: {
-          name: personalInfoData.name,
-          surname: personalInfoData.surname,
-          email: personalInfoData.email,
+          name: "Douglas Ian",
+          surname: "Ruad de Oliveira",
+          email: "gabrielanerysilva@gmail.com",
           address: {
             street_name: addressInfoData.street_name || "",
             street_number: +addressInfoData.street_number,
@@ -150,8 +178,13 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
     }
   }, [cardToken]);
-  return (
-    <Grid container item paddingX={{ xs: "20px", md: "200px" }} columnSpacing={2}>
+  return cart.items?.length > 0 ? (
+    <Grid
+      container
+      item
+      paddingX={{ xs: "20px", md: "200px" }}
+      columnSpacing={2}
+    >
       <Grid xs={12} md={10} container item justifyContent={"space-between"}>
         <Grid xs={12} md={12} item>
           <Stepper activeStep={activeStep}>
@@ -163,7 +196,12 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
               return (
                 <Step key={label} {...stepProps}>
-                  <StepLabel {...labelProps}> <Text variant="body" color={'secondary'}>{t(`${label}`)}</Text></StepLabel>
+                  <StepLabel {...labelProps}>
+                    {" "}
+                    <Text variant="body" color={"secondary"}>
+                      {t(`${label}`)}
+                    </Text>
+                  </StepLabel>
                 </Step>
               );
             })}
@@ -216,6 +254,13 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Text> {t("details")}</Text>
       </Grid>
       <Grid item xs={2}></Grid>
+    </Grid>
+  ) : (
+    <Grid container justifyContent={"center"} rowSpacing={2}>
+      <Grid item xs={12} ><Text variant={"h3"}> {t("emptyCart")}</Text></Grid>
+      <Grid item xs={12} ><Button onClick={()=>{
+          navigate("/store");
+        }}>{t('goto_store')}</Button></Grid>
     </Grid>
   );
 };

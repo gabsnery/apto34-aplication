@@ -56,20 +56,20 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
     if (type === "Invoice") {
       setPaymentInfo({
         payer: {
-          email: "admin@gatostecnologia.com",
-          first_name: "Gabriela",
-          last_name: "Nery",
+          email: "gabrielanerysilva@gmail.com",
+          first_name: "Douglas Ian",
+          last_name: "Ruas de Oliveira",
           identification: { type: "CPF", number: "36439183800" },
         },
         payment_method_id: "bolbradesco",
         transaction_amount: 200,
-        date_of_expiration: "2024-08-09T22:20:00.000-04:00",
+        date_of_expiration: "2024-08-20T22:20:00.000-04:00",
       });
     } else if (type === "PIX") {
       setPaymentInfo({
         payer: {
-          email: "admin@gatostecnologia.com",
-          identification: { type: "CPF", number: "12345678909" },
+          email: "gabrielanerysilva@gmail.com",
+          identification: { type: "CPF", number: "36439183800" },
         },
         payment_method_id: "pix",
         transaction_amount: 0.1,
@@ -119,6 +119,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           />
         </RadioGroup>
       </FormControl>
+      {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" color={'error'}>{t(`payment_type_detail_${type}`)}</Text>}
       {type === "CreditCard" && (
         <Grid container columnSpacing={2}>
           <Grid item xs={12} sm={12} md={6}>

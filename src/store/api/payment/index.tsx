@@ -1,10 +1,10 @@
 import { ICardPaymentBrickPayer, ICardPaymentFormData } from "@mercadopago/sdk-react/bricks/cardPayment/type";
 import { defaultApi } from "../default";
-import { Preference } from "./mercadoPago.interface";
+import { IPaymentResponse, Preference } from "./mercadoPago.interface";
 
 export const mercadoPagoApi = defaultApi.injectEndpoints({
     endpoints: (build) => ({
-        addPreference: build.mutation<string, Preference>({
+        addPreference: build.mutation<IPaymentResponse, Preference>({
             query: (payload) => {
                 return {
                     url: "mercado_pago",
