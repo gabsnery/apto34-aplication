@@ -67,8 +67,6 @@ useEffect(() => {
           height: "inherit",
         }}
       >
-        {isProductsLoading&&<div>loading</div>}
-        {isProductError&&<div>loading</div>}
         {products?.map((prod, idx) => (
           <Grid key={idx} item xs={6} sm={4} md={4} lg={3}>
             <ProductsCard value={prod} />
