@@ -14,7 +14,7 @@ const DefaultContainer: FC<
   const theme = useTheme();
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      <Suspense >
         <DefaultHeader />
         <Container
           maxWidth={false}

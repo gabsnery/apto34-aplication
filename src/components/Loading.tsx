@@ -1,6 +1,8 @@
-import { LinearProgress, useTheme } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
+import { useTheme } from 'styled-components';
+import { tokens } from 'ui-layout/tokens';
 
 const Loading: FC<React.PropsWithChildren<{
   progress?: number;
@@ -14,13 +16,13 @@ const Loading: FC<React.PropsWithChildren<{
   //   config: { duration: 3000, ...config.stiff },
   //   reset: true
   // })
-  const theme = useTheme();
   return (
     <Box
       display="flex"
       width="100%"
       maxWidth="100%"
       height="100%"
+      marginTop={'200px'}
       maxHeight="100%"
       alignItems="center"
       justifyContent="center"
@@ -31,9 +33,8 @@ const Loading: FC<React.PropsWithChildren<{
           borderRadius: 60,
           width: 380,
           height: 32,
-          backgroundColor: theme.palette.info.light}}
+          backgroundColor: tokens.colors.primary}}
         variant={progress ? 'determinate' : 'indeterminate'}
-        color="secondary"
         value={progress}
       />
     </Box>

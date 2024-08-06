@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./i18n"
+import Loading from "components/Loading";
+import { useTranslation } from "react-i18next";
 
 /* 
 Sentry.init({
@@ -16,8 +18,10 @@ Sentry.init({
 })
  */
 
+
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Suspense fallback={<div />}>
+  <Suspense fallback={<Loading />}>
   <Provider store={store}>
     <PersistGate persistor={persistor}>
         <BrowserRouter>

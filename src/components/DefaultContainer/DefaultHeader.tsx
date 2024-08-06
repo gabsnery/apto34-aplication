@@ -108,7 +108,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       padding: "0 20px",
                     }}
                   >
-                    {item.name}
+                     {t(item.name)}
                   </ListItemButton>
                 </React.Fragment>
               );
@@ -158,7 +158,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       navigate(item.link);
                     }}
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Button>
                 </Grid>
               );
