@@ -60,7 +60,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
     "&.Mui-selected, &.Mui-selected:hover": {
       color: "white",
       backgroundColor: theme.paper.selected,
-    }
+    },
   });
   const language = localStorage.getItem("@app:activeLanguage") as
     | "pt-BR"
@@ -87,6 +87,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             flexShrink: 0,
             [`& .MuiDrawer-paper`]: {
               width: drawerWidth,
+              backgroundColor:theme.colors.background,
               boxSizing: "border-box",
             },
           }}
@@ -108,11 +109,38 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       padding: "0 20px",
                     }}
                   >
-                     {t(item.name)}
+                   <Text variant={"body"} color={"secondary"}> {t(item.name)}</Text>
                   </ListItemButton>
                 </React.Fragment>
               );
             })}
+            <ToggleButtonGroup
+              size="small"
+              value={language ? language : userLang}
+              exclusive
+              onChange={(ev, newAlignment) => {
+                localStorage.setItem("@app:activeLanguage", newAlignment);
+                window.location.reload();
+              }}
+              aria-label="Platform"
+            >
+              <ToggleButton
+                value="pt-BR"
+                sx={{ borderColor: theme.text.secondary }}
+              >
+                <Text variant={"body2"} color={"secondary"}>
+                  {t("pt")}
+                </Text>
+              </ToggleButton>
+              <ToggleButton
+                value="en-US"
+                sx={{ borderColor: theme.text.secondary }}
+              >
+                <Text variant={"body2"} color={"secondary"}>
+                  {t("en")}
+                </Text>
+              </ToggleButton>
+            </ToggleButtonGroup>
           </List>
         </Drawer>
         <Toolbar>
@@ -180,7 +208,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 </IconButton>
               </StyledBadge>
             </Grid>
-            <Grid item mx={2}>
+            <Grid item mx={2} display={{ xs: "none", sm: "block" }}>
               <ToggleButtonGroup
                 size="small"
                 value={language ? language : userLang}
@@ -191,11 +219,21 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 }}
                 aria-label="Platform"
               >
-                <ToggleButton value="pt-BR" sx={{ borderColor: theme.text.secondary }}>
-                  <Text variant={"body2"} color={'secondary'}>{t('pt')}</Text>
+                <ToggleButton
+                  value="pt-BR"
+                  sx={{ borderColor: theme.text.secondary }}
+                >
+                  <Text variant={"body2"} color={"secondary"}>
+                    {t("pt")}
+                  </Text>
                 </ToggleButton>
-                <ToggleButton value="en-US" sx={{ borderColor: theme.text.secondary }}>
-                  <Text variant={"body2"} color={'secondary'}>{t('en')}</Text>
+                <ToggleButton
+                  value="en-US"
+                  sx={{ borderColor: theme.text.secondary }}
+                >
+                  <Text variant={"body2"} color={"secondary"}>
+                    {t("en")}
+                  </Text>
                 </ToggleButton>
               </ToggleButtonGroup>
             </Grid>
@@ -210,7 +248,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                   window.location.reload();
                 }}
               >
-                  <LightMode sx={{ color: theme.icon.primary }} />
+                <LightMode sx={{ color: theme.icon.primary }} />
               </IconButton>
             </Grid>
             {/*       <Grid
@@ -237,7 +275,12 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 edge="end"
                 size="large"
               >
-                <MenuIcon height={25} width={25} fontSize="inherit" />
+                <MenuIcon
+                  height={25}
+                  width={25}
+                  fontSize="inherit"
+                  sx={{ color: theme.icon.primary }}
+                />
               </IconButton>
             </Grid>
           </Grid>

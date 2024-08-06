@@ -27,7 +27,7 @@ const AboutUs: React.FC<React.PropsWithChildren<unknown>> = () => {
         textAlign={"left"}
         direction={"column"}
         rowGap={4}
-        padding={`0 ${theme.spacing.extraLarge}`}
+        padding={{xs:`0 ${theme.spacing.small}`,sm:`0 ${theme.spacing.medium}`,md:`0 ${theme.spacing.extraLarge}`}}
         sx={{ whiteSpace: "pre-line" }}
       >
         <Text variant={"h2"}>{t("title")}</Text>
@@ -73,7 +73,7 @@ const AboutUs: React.FC<React.PropsWithChildren<unknown>> = () => {
         </StyledList>
         <Text variant={"h2"}>{t("next_steps")}</Text>
         <StyledList>
-          {Array.from(Array(10).keys()).map((i) => {
+          {Array.from(Array(15).keys()).map((i) => {
             return i18n.exists(`about_us:next_steps_${i + 1}`) && (
               <StyledListItem key={i}>
                 <Text variant={"body"}>
