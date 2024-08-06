@@ -48,7 +48,7 @@ const AppRoutes = () => {
         <Route path="/admin" element={<PrivateRoute admin />}>
           <Route path="/admin" element={<Admin />} />
         </Route>
-        <Route path="/aboutUs" element={<PrivateRoute />}>
+        <Route path="/aboutUs" element={<PrivateRoute both />}>
           <Route path="/aboutUs" element={<AboutUs />} />
         </Route>
       </Routes>
