@@ -24,7 +24,9 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   const { t } = useTranslation();
   const theme = useTheme();
   const [installments, setInstallments] = useState<PayerCost[]>([]);
+  const [email, setEmail] = useState<string>('');
   const cart = useSelector((st: RootState) => st.cart);
+  const disabled =true
   const [formData, setFormData] = useState<{
     CREDIT_CARD_NUMBER: string;
     CARDHOLDER_NAME: string;
@@ -52,7 +54,6 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         bin: formData.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
       }).then((value?: PaymentMethods) => {
         setInstallments(value?.results[0].payer_costs || []);
-        setAllowFinish(true);
       });
   }, [formData, type]);
   useEffect(() => {
@@ -129,6 +130,13 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         </RadioGroup>
       </FormControl>
       {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" color={'error'}>{t(`payment_type_detail_${type}`)}</Text>}
+
+      <Grid container columnSpacing={2} margin={'10px 0'}>
+      {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" >{t(`email_sended`)}</Text>}
+      </Grid>
+      <Grid container columnSpacing={2} margin={'10px 0'}>
+      {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" >{t(`sorry_message`)}</Text>}
+      </Grid>
       {type === "CreditCard" && (
         <Grid container columnSpacing={2}>
           <Grid item xs={12} sm={12} md={6}>
@@ -137,6 +145,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               onChange={(ev) =>
                 setFormData({ ...formData, CARDHOLDER_NAME: ev.target.value })
               }
+              disabled={disabled}
               value={formData.CARDHOLDER_NAME || ""}
               required
             />
@@ -150,6 +159,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
                   CREDIT_CARD_NUMBER: ev.target.value,
                 })
               }
+              disabled={disabled}
               value={formData.CREDIT_CARD_NUMBER || ""}
               required
             />
@@ -163,6 +173,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
                   cardExpirationMonth: ev.target.value,
                 })
               }
+              disabled={disabled}
               value={formData.cardExpirationMonth || ""}
               required
             />
@@ -176,6 +187,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
                   cardExpirationYear: ev.target.value,
                 })
               }
+              disabled={disabled}
               value={formData.cardExpirationYear || ""}
               required
             />
@@ -186,6 +198,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               onChange={(ev) =>
                 setFormData({ ...formData, securityCode: ev.target.value })
               }
+              disabled={disabled}
               value={formData.securityCode || ""}
               required
             />
@@ -196,6 +209,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
               onChange={(ev) =>
                 setFormData({ ...formData, identity: ev.target.value })
               }
+              disabled={disabled}
               value={formData.identity || ""}
               required
             />
@@ -207,6 +221,9 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
                 label={t("installments")}
                 value={formData.installments.toString()}
                 onChange={(e) => {
+                  if(+(e.target.value as string)>0)
+                  setAllowFinish(true);
+
                   setFormData({
                     ...formData,
                     installments: +(e.target.value as string),

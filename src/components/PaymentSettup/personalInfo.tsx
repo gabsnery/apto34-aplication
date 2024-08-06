@@ -114,12 +114,12 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
               required
             />
           )}
-          <Button
+  {/*         <Button
             onClick={() => {
               addClient(formData);
             }}
             variant="secondary"
-          >{t('save')}</Button>
+          >{t('save')}</Button> */}
         </Grid>
       </Grid>
     </>

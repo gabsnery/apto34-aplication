@@ -37,7 +37,7 @@ useEffect(() => {
   setFilter(sessionFilter)
 }, [sessionFilter]);
   return (
-    <InfiniteScroll
+/*     <InfiniteScroll
       dataLength={10} //This is important field to render the next data
       next={() => {
         console.log("next");
@@ -57,7 +57,7 @@ useEffect(() => {
       releaseToRefreshContent={
         <h3 style={{ textAlign: "center" }}></h3>
       }
-    >
+    > */
       <Grid
         container
         direction="row"
@@ -73,7 +73,7 @@ useEffect(() => {
           </Grid>
         ))}
       </Grid>
-    </InfiniteScroll>
+/*     </InfiniteScroll> */
   );
 };
 export default ProductsGrid;

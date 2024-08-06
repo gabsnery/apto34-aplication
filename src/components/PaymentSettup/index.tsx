@@ -38,6 +38,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const token = useTypedSelector(({ auth }) => auth.token);
   const { id: userID } = useTypedSelector(({ auth }) => auth);
   const navigate = useNavigate();
+  const [email, setEmail] = useState<string>('');
 
   const [paymentInfo, setPaymentInfo] = useState<any>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});

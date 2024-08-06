@@ -1,9 +1,6 @@
 import { Grid } from "@mui/material";
 //import { Link } from 'react-router-dom'
-
 import ProductsGrid from "components/ProductGrid";
-import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../store/store";
 import FilterBar from "components/FilterBar";
 import { lightTheme } from "ui-layout/theme";
 // import ReCAPTCHA from 'react-google-recaptcha'

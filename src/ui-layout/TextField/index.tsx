@@ -68,7 +68,7 @@ const labelSizeStyles = {
 };
 
 export const TextField: React.FC<TextInputProps> = (
-  { value, onChange, label, size = "medium" },
+  { value, onChange, label, size = "medium" ,disabled},
   props
 ) => {
   return (
@@ -80,7 +80,8 @@ export const TextField: React.FC<TextInputProps> = (
         size={size}
         aria-label={label}
         value={value}
-        onChange={onChange}
+        disabled={disabled}
+        onChange={disabled!=true&&onChange}
         {...props}
       />
     </StyledComponent>

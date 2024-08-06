@@ -23,8 +23,8 @@ const Login: React.FC<React.PropsWithChildren<Props>> = ({ onLogin }) => {
     email: string;
     senha: string;
   }>({
-    email: "",
-    senha: "",
+    email: "gneri94@gmail.com",
+    senha: "apto34-password-HIRE-ME",
   });
 
   useEffect(() => {
