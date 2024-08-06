@@ -67,14 +67,14 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
       </Modal>
       <Grid container columnSpacing={2}>
         {token ? null : (
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <Text variant={"h3"}>{t('login')}</Text>
             <Login
             />
           </Grid>
         )}
 
-        <Grid container item xs={6} direction={"column"}>
+        <Grid container item xs={12} sm={12} md={6} direction={"column"}>
           {!token && (
             <Text variant={"h3"}>
               {`${token ? t('edit') : t('create')}`} {t('user')}
