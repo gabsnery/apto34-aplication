@@ -5,7 +5,6 @@ import DefaultHeader from "./DefaultHeader";
 import DefaultFooter from "./DefaultFooter";
 import SnackbarHandler from "components/SnackbarHandler";
 import { useTheme } from "styled-components";
-
 const DefaultContainer: FC<
   React.PropsWithChildren<{
     children: NonNullable<React.ReactNode>;
