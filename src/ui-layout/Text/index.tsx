@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 interface TextProps {
   children: React.ReactNode;
   weight?: number;
-  color?: "primary" | "secondary" | "terciary";
+  color?: "primary" | "secondary" | "terciary" | "error";
   variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "body" | "body2";
   sx?: any;
 }
@@ -45,13 +45,17 @@ const colorStyles = {
   terciary: css`
     color: ${(props) => props.theme.text.terciary};
   `,
+  error: css`
+    color: ${(props) => props.theme.colors.error};
+  `,
 };
 
 const StyledText = styled.span<TextProps>`
   font-family: ${(props) => props.theme.typography.fontFamily};
   ${(props) => variantStyles[props.variant || "body"]};
   ${(props) => colorStyles[props.color || "secondary"]};
-`;
+`
+StyledText.shouldForwardProp = prop => !['variant'].includes(prop)
 
 export const Text: React.FC<TextProps> = (props) => {
   const { children, variant = "body", color = "primary", ...rest } = props;

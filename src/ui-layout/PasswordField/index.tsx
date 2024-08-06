@@ -1,6 +1,9 @@
 // src/components/TextInput.tsx
-import React, { InputHTMLAttributes } from "react";
-import styled, { css } from "styled-components";
+import React, { InputHTMLAttributes, useState } from "react";
+import styled, { css, useTheme } from "styled-components";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { IconButton } from "@mui/material";
 
 interface TextInputProps
   extends Omit<InputHTMLAttributes<Omit<HTMLInputElement, "size">>, "size"> {
@@ -24,6 +27,7 @@ const sizeStyles = {
   `,
 };
 const StyledInput = styled.input<{ size: "small" | "medium" }>`
+  padding-right: 30px;
   padding: ${(props) => props.theme.spacing.medium};
   border: 1px solid ${(props) => props.theme.colors.gray};
   border-radius: 8px;
@@ -32,7 +36,9 @@ const StyledInput = styled.input<{ size: "small" | "medium" }>`
   background-color: ${(props) => props.theme.paper.default};
   color: ${(props) => props.theme.text.primary};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   ${(props) => sizeStyles[props.size]};
   &:focus {
     border-color: ${(props) => props.theme.colors.primary};
@@ -42,6 +48,7 @@ const StyledInput = styled.input<{ size: "small" | "medium" }>`
 `;
 
 const StyledComponent = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -67,15 +74,28 @@ const labelSizeStyles = {
   `,
 };
 
-export const TextField: React.FC<TextInputProps> = (
+const ShowPasswordButton = styled.button`
+  position: absolute;
+  top: 70%;
+  right: 5px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+`;
+
+export const PasswordField: React.FC<TextInputProps> = (
   { value, onChange, label, size = "medium" },
   props
 ) => {
+  const theme = useTheme();
+
+  const [passVisible, setPassVisible] = useState<boolean>(false);
   return (
     <StyledComponent>
       <StyledLabel size={size}>{label}</StyledLabel>
       <StyledInput
-        type="text"
+        type={passVisible ? "text" : "password"}
         name={label}
         size={size}
         aria-label={label}
@@ -83,6 +103,17 @@ export const TextField: React.FC<TextInputProps> = (
         onChange={onChange}
         {...props}
       />
+      <ShowPasswordButton
+        onClick={() => {
+          setPassVisible(!passVisible);
+        }}
+      >
+        {!passVisible ? (
+          <VisibilityIcon sx={{ color: theme.icon.primary }} fontSize={size}/>
+        ) : (
+          <VisibilityOffIcon sx={{ color: theme.icon.primary }} fontSize={size}/>
+        )}
+      </ShowPasswordButton>
     </StyledComponent>
   );
 };

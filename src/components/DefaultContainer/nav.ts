@@ -8,7 +8,7 @@ export interface NavObj {
 
 const nav: NavObj[] = [
   {
-    name: 'Store',
+    name: 'store',
     link: '/store',
   }
 ]

@@ -35,7 +35,7 @@ useEffect(() => {
   }
   else if ((token) && (!admin || (admin && isAdmin))) { //logado
     if (unprivate) {
-      return <Navigate to="/Dashboard" />
+      return <Navigate to="/store" />
     }
     else
       return <Outlet />

@@ -108,7 +108,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       padding: "0 20px",
                     }}
                   >
-                    {item.name}
+                     {t(item.name)}
                   </ListItemButton>
                 </React.Fragment>
               );
@@ -158,7 +158,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       navigate(item.link);
                     }}
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Button>
                 </Grid>
               );
@@ -192,10 +192,10 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 aria-label="Platform"
               >
                 <ToggleButton value="pt-BR" sx={{ borderColor: theme.text.secondary }}>
-                  <Text variant={"body2"} color={'secondary'}>pt</Text>
+                  <Text variant={"body2"} color={'secondary'}>{t('pt')}</Text>
                 </ToggleButton>
                 <ToggleButton value="en-US" sx={{ borderColor: theme.text.secondary }}>
-                  <Text variant={"body2"} color={'secondary'}>en</Text>
+                  <Text variant={"body2"} color={'secondary'}>{t('en')}</Text>
                 </ToggleButton>
               </ToggleButtonGroup>
             </Grid>
@@ -210,11 +210,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                   window.location.reload();
                 }}
               >
-                {activeTheme === "light" ? (
-                  <LightModeOutlinedIcon sx={{ color: theme.icon.primary }} />
-                ) : (
                   <LightMode sx={{ color: theme.icon.primary }} />
-                )}
               </IconButton>
             </Grid>
             {/*       <Grid

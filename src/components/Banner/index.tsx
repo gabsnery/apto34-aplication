@@ -8,6 +8,7 @@ interface BannerProps {
     image: string;
     title: string;
     subtitle: string;
+    url: string;
   }[];
 }
 
@@ -30,7 +31,9 @@ const Banner: React.FC<BannerProps> = ({ banners }) => {
     >
       <Slider {...settings}>
         {banners.map((banner, index) => (
-          <div key={index}  className="banner-slide">
+          <div key={index}  className="banner-slide" onClick={()=>{
+            window.open(banner.url, "_blank")
+          }}>
             <div
               className="banner-image"
               style={{ backgroundImage: `url(${banner.image})` }}

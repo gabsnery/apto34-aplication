@@ -22,7 +22,7 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
     size: [],
     color: [],
     type: []});
-  const { data, isSuccess } = useGetProductsQuery(
+  const { data, isSuccess,isLoading:isProductsLoading,isError:isProductError } = useGetProductsQuery(
     { ...filter, start: 0, count: 50 },
     { skip: !filter }
   );

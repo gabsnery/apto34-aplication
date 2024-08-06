@@ -1,16 +1,16 @@
-//import { Link } from 'react-router-dom'
-
-import Banner from "components/Banner";
-import ProductsCarroussel from "components/ProductsCarroussel";
-import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../store/store";
-import MiniBanner from "components/MiniBanner";
 import { Grid } from "@mui/material";
+import Banner from "components/Banner";
+import MiniBanner from "components/MiniBanner";
 import ProductsSlider from "components/ProductsSlider";
+import { useTranslation } from "react-i18next";
 import { useGetBannersQuery } from "store/api/Banner";
+import { useTheme } from "styled-components";
+import { Text,Button } from 'ui-layout';
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
+  const { t } = useTranslation();
+  const theme = useTheme();
   const { data: banners, isLoading: isBannerLoading } = useGetBannersQuery();
   return (
     <>
@@ -25,12 +25,15 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
                   image: i.url_image,
                   title: i.title,
                   subtitle: i.description,
+                  url:'/aboutUs'
                 })) || []
               }
             />
           )}
         </Grid>
-
+        <Grid item xs={12}  sx={{ height: "100px", backgroundColor:theme.colors.primaryLight, p:3}}>
+              <Button variant="tertiary">{t('footer.aboutUsLabel')}</Button>
+          </Grid>
         <Grid item xs={12} sm={9}>
           <ProductsSlider />
         </Grid>

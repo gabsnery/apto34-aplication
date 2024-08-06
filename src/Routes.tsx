@@ -10,6 +10,8 @@ import {Product as ProdAdm} from "pages/Admin/Product" ;
 import Product from "pages/Product" ;
 import {Admin} from "pages/Admin" ;
 import CloseOrder from "pages/CloseOrder";
+import AboutUs from "pages/AboutUs";
+import Loading from "components/Loading";
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -20,7 +22,7 @@ import CloseOrder from "pages/CloseOrder";
 ) */
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense >
       <Routes>
         <Route path="/admin/product"  element={<PrivateRoute admin={true} path="/login" />}>
           <Route path="/admin/product" element={<ProdAdm />} />
@@ -45,6 +47,9 @@ const AppRoutes = () => {
         </Route>
         <Route path="/admin" element={<PrivateRoute admin />}>
           <Route path="/admin" element={<Admin />} />
+        </Route>
+        <Route path="/aboutUs" element={<PrivateRoute />}>
+          <Route path="/aboutUs" element={<AboutUs />} />
         </Route>
       </Routes>
     </Suspense>
