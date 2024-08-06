@@ -15,10 +15,11 @@ import { useAppDispatch } from "../../store/store";
 import { Product } from "store/api/product/product.interface";
 import AddIcon from "@mui/icons-material/Add";
 import { addProduct } from "store/slices/cartSlice";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Text,TextField } from "ui-layout";
+import { Text, TextField } from "ui-layout";
 import { useTheme } from "styled-components";
+import { useGetImageQuery } from "store/api/product";
 
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
@@ -60,7 +61,7 @@ export const AddModal: React.FC<{
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={8}>
             <TextField
-              label={t('quantity')}
+              label={t("quantity")}
               value={quantity}
               onChange={(ev) => setQuantity(+ev.target.value)}
               type="number"
@@ -103,7 +104,18 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
     },
     [dragging]
   );
-
+  const [photoId, setPhotoId] = useState<string | undefined>();
+  const { data: photoData, isLoading: isPhotoLoading } = useGetImageQuery(
+    photoId || "",
+    {
+      skip: photoId === undefined,
+    }
+  );
+  useEffect(() => {
+    if (value) {
+      setPhotoId(value.thumbnails[0]);
+    }
+  }, [value]);
   return (
     <>
       <AddModal modal={modal} setModal={setModal} />
@@ -116,16 +128,14 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
               navigate(`/product/${value.id}`);
             }}
           >
-            <CardMedia
-              component="img"
-              height="200"
-              image={
-                value.thumbnails.length > 0
-                  ? value.thumbnails[0]
-                  : "https://www.futuraexpress.com.br/blog/wp-content/uploads/2020/03/JPG-Alta-Qualidade.jpg"
-              }
-              alt={value.nome}
-            />
+            {photoData && (
+              <CardMedia
+                component="img"
+                height="300"
+                image={photoData?.url}
+                alt={value.nome}
+              />
+            )}
             <CardContent>
               <div style={{ height: "50px" }}>
                 <Text color="primary" variant="h5">
