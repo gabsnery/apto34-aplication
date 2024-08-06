@@ -42,6 +42,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [paymentInfo, setPaymentInfo] = useState<any>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
   const [addressInfoData, setAddressInfoData] = useState<any>({});
+  const [allowFinish, setAllowFinish] = useState<boolean>(false);
   const [addPreference, { isSuccess, data }] = useAddPreferenceMutation();
   const [addOrder, { data: orderResponse }] = useAddOrderMutation();
   const [addPayment, { data: payment }] = useAddPaymentMutation();
@@ -220,7 +221,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           {/* {activeStep === 1 && <DeliverInfo />} */}
           {activeStep === 2 && (
             <Grid xs={12} md={12} item>
-              <PaymentInfo setPaymentInfo={setPaymentInfo} />
+              <PaymentInfo setPaymentInfo={setPaymentInfo} setAllowFinish={setAllowFinish} />
               {qr_code_base64}
               {qr_code_base64 && (
                 <img
@@ -243,7 +244,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Grid xs={6} item>
           <Button
             onClick={handleNext}
-            disabled={activeStep === 0 ? !token : false}
+            disabled={activeStep === 0 ? !token : activeStep === 2?!allowFinish:false }
             variant={"tertiary"}
           >
             {activeStep === steps.length - 1 ? t("finish") : t("next")}

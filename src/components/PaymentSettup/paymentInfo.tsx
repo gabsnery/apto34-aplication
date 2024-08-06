@@ -15,9 +15,11 @@ import { Grid } from "@mui/material";
 import { useTheme } from "styled-components";
 interface Props {
   setPaymentInfo: (value: any) => void;
+  setAllowFinish: (value: boolean)=>void
 }
 const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   setPaymentInfo,
+  setAllowFinish
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -50,6 +52,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         bin: formData.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
       }).then((value?: PaymentMethods) => {
         setInstallments(value?.results[0].payer_costs || []);
+        setAllowFinish(true);
       });
   }, [formData, type]);
   useEffect(() => {
@@ -65,6 +68,8 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         transaction_amount: 200,
         date_of_expiration: "2024-08-20T22:20:00.000-04:00",
       });
+      setAllowFinish(true);
+
     } else if (type === "PIX") {
       setPaymentInfo({
         payer: {
@@ -74,7 +79,11 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         payment_method_id: "pix",
         transaction_amount: 0.1,
       });
+      setAllowFinish(true);
+
     } else {
+      setAllowFinish(false);
+
       setPaymentInfo(formData);
     }
   }, [type]);
