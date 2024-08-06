@@ -30,6 +30,7 @@ import LightMode from "@mui/icons-material/LightMode";
 import { useTheme } from "styled-components";
 import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
 import { styled as MUIStyled } from "@mui/material/styles";
+import { useTypedSelector } from "hooks";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const { t } = useTranslation();
@@ -39,6 +40,8 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
+  const token = useTypedSelector(({ auth }) => auth.token)
+
   const dispatch = useAppDispatch();
   const activeTheme =
     (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
@@ -87,7 +90,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             flexShrink: 0,
             [`& .MuiDrawer-paper`]: {
               width: drawerWidth,
-              backgroundColor:theme.colors.background,
+              backgroundColor: theme.colors.background,
               boxSizing: "border-box",
             },
           }}
@@ -101,6 +104,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 <React.Fragment key={idx}>
                   <ListItemButton
                     onClick={() => {
+                      setdrawerIsOpen(false);
                       navigate(item.link);
                     }}
                     sx={{
@@ -109,7 +113,9 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                       padding: "0 20px",
                     }}
                   >
-                   <Text variant={"body"} color={"secondary"}> {t(item.name)}</Text>
+                    <Text variant={"body"} color={"secondary"}>
+                      {t(item.name)}
+                    </Text>
                   </ListItemButton>
                 </React.Fragment>
               );
@@ -151,14 +157,14 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
               style={{ height: 60, marginTop: 10, marginBottom: 5 }}
             />
           </RouterLink>
-          <Button
+          {token&&<Button
             variant="tertiary"
             onClick={() => {
               dispatch(logout());
             }}
           >
             {t("logout")}
-          </Button>
+          </Button>}
           <Grid
             container
             rowSpacing={2}

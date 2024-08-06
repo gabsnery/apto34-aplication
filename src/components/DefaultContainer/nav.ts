@@ -8,8 +8,16 @@ export interface NavObj {
 
 const nav: NavObj[] = [
   {
+    name: 'home',
+    link: '/',
+  },
+  {
     name: 'store',
     link: '/store',
+  },
+  {
+    name: 'about_us',
+    link: '/aboutUs',
   }
 ]
 
