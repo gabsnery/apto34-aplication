@@ -51,7 +51,7 @@ export const AddModal: React.FC<{
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: {xs:'70%',sm:'70%',md:'50%'},
+          width: {xs:'70%',sm:'70%',md:'50%',lg:'20%'},
           bgcolor: theme.paper.default,
           boxShadow: 24,
           p: 4,
