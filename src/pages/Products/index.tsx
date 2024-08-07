@@ -69,7 +69,9 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
         sx={{
           px: {
             xs: lightTheme.spacing.small,
-            sm: lightTheme.spacing.extraLarge,
+            sm: lightTheme.spacing.medium,
+            ms: lightTheme.spacing.large,
+            ld: lightTheme.spacing.extraLarge,
           },
         }}
         columnSpacing={3}

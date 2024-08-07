@@ -65,7 +65,7 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
           <Login onLogin={(v) => {}} />
         </Box>
       </Modal>
-      <Grid container columnSpacing={2}>
+      <Grid container columnSpacing={2} rowSpacing={2}>
         {token ? null : (
           <Grid item xs={12} sm={12} md={6}>
             <Text variant={"h3"}>{t('login')}</Text>

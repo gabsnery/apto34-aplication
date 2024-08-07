@@ -23,7 +23,6 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
         component={"footer"}
         sx={{
           backgroundColor: theme.paper.primaryDark,
-          minHeight: "300px",
           height: "fit-content",
           paddingTop: "30px",
           paddingBottom: "30px",
@@ -32,15 +31,15 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
         <Grid
           container
           direction="row"
-          p={theme.spacing.large} 
+          paddingX={{xs:theme.spacing.medium , md:theme.spacing.extraLarge}} 
           sx={{
             display: "flex",
           }}
         >
-          <Grid item xs={3} sm={4} textAlign={"center"}>
-            <img src={activeTheme==='light'? logo:logoDark} alt="logo" style={{ height: isXs?100:200 }} />
+          <Grid item xs={12} sm={3} textAlign={"left"}>
+            <img src={activeTheme==='light'? logo:logoDark} alt="logo" style={{ height: isXs?60:isSm?100:150 }} />
           </Grid>
-          <Grid item container xs={9} sm={4}  direction={"column"}>
+          <Grid item container xs={12} sm={3} textAlign={"right"}  direction={"column"}>
             <Text variant={"h3"}  color="primary">
               {t('footer.contactLabel')}
             </Text>
@@ -51,7 +50,18 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
               {t('footer.email')}
             </Text>
           </Grid>
-          <Grid item container xs={12} md={4}  direction={'column'}>
+          <Grid item container xs={12} sm={3} textAlign={"right"}  direction={"column"}>
+            <Text variant={"h3"}  color="primary">
+              {t('footer.contactLabel')}
+            </Text>
+            <Text variant={"h6"}  color="primary">
+              {t('footer.phone')}
+            </Text>
+            <Text variant={"h6"}  color="primary">
+              {t('footer.email')}
+            </Text>
+          </Grid>
+          <Grid item container xs={12} md={3}  textAlign={"right"} direction={'column'}>
             <Text variant={"h3"}  color="primary">
               {t('footer.infoLabel')}
             </Text>

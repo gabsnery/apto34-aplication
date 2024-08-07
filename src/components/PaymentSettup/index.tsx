@@ -241,7 +241,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           >
             {t("back")}
           </Button>
-        </Grid>{" "}
+        </Grid>
         <Grid xs={6} item>
           <Button
             onClick={handleNext}
@@ -251,6 +251,9 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
             {activeStep === steps.length - 1 ? t("finish") : t("next")}
           </Button>
         </Grid>
+        <Grid xs={12} item><Button variant={'tertiary'} onClick={()=>{
+          navigate("/store");
+        }}>Cancelar</Button></Grid>
       </Grid>
       <Grid xs={12} md={2} item container direction={"column"}>
         <Text> {t("details")}</Text>
