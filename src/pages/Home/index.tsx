@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import Banner from "components/Banner";
+import CategorySelector from "components/CategorySelector";
 import MiniBanner from "components/MiniBanner";
 import ProductsSlider from "components/ProductsSlider";
 import { useTranslation } from "react-i18next";
@@ -15,6 +16,9 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <>
       <Grid container justifyContent={"center"} rowGap={3}>
+      <Grid item container xs={12} columnSpacing={2}>
+        <CategorySelector />
+      </Grid>
         <Grid item xs={12}>
           {isBannerLoading ? (
             <></>

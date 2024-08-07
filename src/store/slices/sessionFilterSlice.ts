@@ -20,9 +20,19 @@ const { reducer, actions } = createSlice({
       item[action.payload.filter]?.push(action.payload.value)
       return (item)
     },
+    setFilter: (state, action: PayloadAction<({filter:keyof SessionFilter,value:number})>) => {
+      let item = state
+      item[action.payload.filter]=[action.payload.value]
+      return (item)
+    },
     removeFilter: (state, action: PayloadAction<({filter:keyof SessionFilter,index:number})>) => {
       const item = state
       item[action.payload.filter].splice(action.payload.index, 1);
+      return (item)
+    },
+    clearOneFilter: (state, action: PayloadAction<({filter:keyof SessionFilter})>) => {
+      const item = state
+      item[action.payload.filter]=[]
       return (item)
     },
     clearFilter: () => initialState
@@ -30,4 +40,4 @@ const { reducer, actions } = createSlice({
 })
 
 export default reducer
-export const { addFilter, clearFilter,removeFilter } = actions
+export const { addFilter,setFilter,clearOneFilter, clearFilter,removeFilter } = actions

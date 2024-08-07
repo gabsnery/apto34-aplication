@@ -33,6 +33,9 @@ const AppRoutes = () => {
         <Route path="/login" element={<PrivateRoute unprivate path="/login" />}>
           <Route path="/login" element={<Login />} />
         </Route>
+        <Route path="/store/:category" element={<PrivateRoute both />}>
+          <Route path="/store/:category" element={<Products />} />
+        </Route>
         <Route path="/store" element={<PrivateRoute both />}>
           <Route path="/store" element={<Products />} />
         </Route>

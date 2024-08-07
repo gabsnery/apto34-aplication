@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import {
   addFilter,
   clearFilter,
+  clearOneFilter,
   removeFilter,
 } from "store/slices/sessionFilterSlice";
 import { useGetColorsQuery } from "store/api/color";
@@ -17,6 +18,7 @@ import {
   useGetSubCategoriasQuery,
 } from "store/api/category";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
@@ -26,6 +28,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
   const { data: sizes } = useGetSizesQuery();
   const { data: categorias } = useGetCategoriasQuery();
   const { data: subCategorias } = useGetSubCategoriasQuery();
+  const { category } = useParams<{ category: string }>();
 
   return (
     <>
@@ -80,9 +83,9 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
                   );
               }}
               options={
-                subCategorias?.map((item) => ({
+                subCategorias?.filter(item=>category===""||item.categoria?.categoria===category).map((item) => ({
                   value: item.id.toString(),
-                  label: item.descricao_subcategoria,
+                  label: `${item.subcategoria}`,
                 })) || []
               }
             />
@@ -148,9 +151,10 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={12}>
             <Button
               variant="tertiary" 
-              
               onClick={() => {
-                dispatch(clearFilter());
+                dispatch(clearOneFilter({filter:'type'}));
+                dispatch(clearOneFilter({filter:'color'}));
+                dispatch(clearOneFilter({filter:'size'}));
               }}
             >
               {t('clear')}
