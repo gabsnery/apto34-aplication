@@ -2,6 +2,7 @@ import { BottomNavigation,Box, Grid } from "@mui/material";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
+import useResponsive from "hooks/useResponsive";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,9 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   const theme = useTheme();
   const activeTheme =
     (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
+
+  const {isSm,isMd,isXs} =useResponsive()
+
   return (
     <>
       <Box
@@ -28,14 +32,15 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
         <Grid
           container
           direction="row"
+          p={theme.spacing.large} 
           sx={{
             display: "flex",
           }}
         >
-          <Grid item xs={12} sm={4} textAlign={"center"}>
-            <img src={activeTheme==='light'? logo:logoDark} alt="logo" style={{ height: 300 }} />
+          <Grid item xs={3} sm={4} textAlign={"center"}>
+            <img src={activeTheme==='light'? logo:logoDark} alt="logo" style={{ height: isXs?100:200 }} />
           </Grid>
-          <Grid item container xs={12} sm={4} direction={"column"}>
+          <Grid item container xs={9} sm={4}  direction={"column"}>
             <Text variant={"h3"}  color="primary">
               {t('footer.contactLabel')}
             </Text>
@@ -46,7 +51,7 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
               {t('footer.email')}
             </Text>
           </Grid>
-          <Grid item container xs={12} md={4} direction={'column'}>
+          <Grid item container xs={12} md={4}  direction={'column'}>
             <Text variant={"h3"}  color="primary">
               {t('footer.infoLabel')}
             </Text>
