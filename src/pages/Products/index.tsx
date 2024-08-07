@@ -47,10 +47,10 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
         anchor={"right"}
         open={filterOpen}
         sx={{
-          width: "400px",
+          width: 300,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: "400px",
+            width: 300,
             paddingTop: theme.spacing.large,
             paddingLeft: theme.spacing.medium,
             paddingRight: theme.spacing.medium,
