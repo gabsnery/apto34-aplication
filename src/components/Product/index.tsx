@@ -1,41 +1,43 @@
-import {
-  CircularProgress,
-  Grid,
-  IconButton,
-  Skeleton,
-  useTheme,
-} from "@mui/material";
+import { Grid, Skeleton } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
-import AddIcon from "@mui/icons-material/Add";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetImageQuery, useGetProductQuery } from "store/api/product";
 import { addProduct } from "store/slices/cartSlice";
-import { Button, Text, TextField } from "ui-layout";
+import { Button, Text } from "ui-layout";
+import { NumberField } from "ui-layout/NumberField";
 import { useAppDispatch } from "../../store/store";
-import { isPending } from "@reduxjs/toolkit";
+import SignedThumbnail from "./signedThumbnail";
+import { setConfirmationModal } from "store/slices/confirmationModalSlice";
+import ConfirmationModal from "./ConfirmationModal";
 
 const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["product", "translation"], {
     useSuspense: true,
   });
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useGetProductQuery(+(id || 0), {
     skip: id === undefined,
   });
   const [photoId, setPhotoId] = useState<string | undefined>();
-  const { data: photoData,isLoading:isPhotoLoading } = useGetImageQuery(photoId || "", {
-    skip: photoId === undefined,
-  });
+  const [confirmModal, setConfirmModal] = useState<boolean>(false);
+  const { data: photoData, isLoading: isPhotoLoading } = useGetImageQuery(
+    photoId || "",
+    {
+      skip: photoId === undefined,
+    }
+  );
   const [quantity, setQuantity] = useState<number>(0);
 
-  const theme = useTheme();
   const handleAddToCart = () => {
     if (id && data) {
       dispatch(addProduct({ product: data, quantity }));
+      setConfirmModal(true);
     }
   };
   useEffect(() => {
@@ -46,24 +48,36 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
+      <ConfirmationModal
+        confirmModal={confirmModal}
+        setConfirmModal={setConfirmModal}
+        category={data?.produtoSubcategoria[0]?.categoria?.categoria}
+      />
       <Grid item container columnSpacing={2}>
         <Grid item xs={12} sm={4}>
           <Grid item xs={12}>
             {isPhotoLoading ? (
-                      <Skeleton variant="rectangular" width="100%" height="500px"/>
-                    ) : <img
-              style={{
-                backgroundImage: `url(${photoData?.url || ""})`,
-                width: "100%",
-                height: "500px",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            />}
+              <Skeleton variant="rectangular" width="100%" height="500px" />
+            ) : (
+              <img
+                style={{
+                  backgroundImage: `url(${photoData?.url || ""})`,
+                  width: "100%",
+                  height: "500px",
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              />
+            )}
           </Grid>
           <Grid item xs={12}>
             {data?.thumbnails.map((item, idx) => (
-              <img key={idx} src={item} style={{ width: `20%` }} />
+              <SignedThumbnail
+                imageId={item}
+                onClick={() => {
+                  setPhotoId(item);
+                }}
+              />
             ))}
           </Grid>
         </Grid>
@@ -72,15 +86,16 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
             <Grid container item xs={12} textAlign={"left"}>
               <Grid
                 item
+                container
                 xs={12}
                 display={"flex"}
-                direction={"column"}
+                direction={"row"}
                 rowSpacing={2}
               >
                 <Grid item xs={12}>
                   <Text variant="h2">
                     {isLoading ? (
-                      <Skeleton width="50%"/>
+                      <Skeleton width="50%" />
                     ) : (
                       data && t(`product:name_${data?.id}`)
                     )}
@@ -89,7 +104,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 <Grid item xs={12} mt={2}>
                   <Text variant="h4">
                     {isLoading ? (
-                      <Skeleton width="60%"/>
+                      <Skeleton width="60%" />
                     ) : (
                       data && t(`product:description_${data?.id}`)
                     )}
@@ -97,7 +112,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Grid>
                 <Grid item xs={12}>
                   {isLoading ? (
-                    <Skeleton width="30%"/>
+                    <Skeleton width="30%" />
                   ) : (
                     data?.produtoSubcategoria.map((item, idx) => (
                       <Text key={idx} variant="body">
@@ -109,13 +124,15 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Grid>
             </Grid>
             <Grid item xs={12}>
-            {isLoading ? (
-                    <Skeleton width="30%" />
-                  ) : data?.cores.map((item, idx) => (
-                <Text key={idx} variant="body">
-                  {item.descricao}
-                </Text>
-              ))}
+              {isLoading ? (
+                <Skeleton width="30%" />
+              ) : (
+                data?.cores.map((item, idx) => (
+                  <Text key={idx} variant="body">
+                    {item.descricao}
+                  </Text>
+                ))
+              )}
             </Grid>
             <Grid item xs={12}>
               {data?.tamanhos.map((item, idx) => (
@@ -125,11 +142,11 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               ))}
             </Grid>
 
-            <Grid item container xs={3} mt={5} rowGap={1} direction={'column'}>
-              <TextField
+            <Grid item container xs={3} mt={5} rowGap={1} direction={"column"}>
+              <NumberField
                 label={t("translation:quantity")}
-                size={"small"}
-                onChange={(ev) => setQuantity(+ev.target.value)}
+                showIcons={true}
+                onNumberChange={(value) => setQuantity(value)}
                 value={quantity}
                 required
               />
@@ -137,7 +154,15 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               <Button onClick={handleAddToCart} variant="action2">
                 {t("translation:addToCart")}
               </Button>
-              <Button onClick={handleAddToCart} variant="action">
+              <Button
+                onClick={() => {
+                  if (quantity > 0 && data) {
+                    dispatch(addProduct({ product: data, quantity }));
+                    navigate('/cart')
+                  }
+                }}
+                variant="action"
+              >
                 {t("translation:buyNow")}
               </Button>
             </Grid>
