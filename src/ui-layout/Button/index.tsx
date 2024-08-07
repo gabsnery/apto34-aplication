@@ -25,8 +25,8 @@ const variantStyles = {
     }
   `,
   primaryDisabled: css`
-    background-color: ${(props) => props.theme.colors.gray};
-    color: ${(props) => props.theme.colors.grayMedium};
+    background-color: ${(props) => props.theme.colors.grayMedium};
+    color: ${(props) => props.theme.colors.black};
     border: 2px solid ${(props) => props.theme.colors.grayDark};
     cursor: unset;
   `,
@@ -110,6 +110,8 @@ const variantStyles = {
 
 const StyledButton = styled.button<ButtonProps>`
   padding: ${(props) => props.theme.spacing.small};
+  min-width:100px;
+  letter-spacing: 0.08em;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
   border-radius: 4px;

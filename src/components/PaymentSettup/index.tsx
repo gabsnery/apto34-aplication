@@ -237,7 +237,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Button
             disabled={activeStep === 0}
             onClick={handleBack}
-            variant={"tertiary"}
+            variant={"secondary"}
           >
             {t("back")}
           </Button>
@@ -246,9 +246,9 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Button
             onClick={handleNext}
             disabled={activeStep === 0 ? !token : activeStep === 2?!allowFinish:false }
-            variant={"tertiary"}
+            variant={"primary"}
           >
-            {activeStep === steps.length - 1 ? t("finish") : t("next")}
+            {activeStep === steps.length - 1 ? t("pay") : t("next")}
           </Button>
         </Grid>
         <Grid xs={12} item><Button variant={'tertiary'} onClick={()=>{

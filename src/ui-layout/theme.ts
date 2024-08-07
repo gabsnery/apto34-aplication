@@ -48,7 +48,7 @@ export const darkTheme = {
     primary:tokens.colors.gray
   },
   actions:{
-    success:tokens.colors.successHover ,
+    success:tokens.colors.successHover,
     successHover:tokens.colors.success,
     danger:tokens.colors.error
   },
