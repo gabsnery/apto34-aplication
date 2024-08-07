@@ -9,7 +9,6 @@ const locizeOptions = {
 i18n.use(Backend)
 .use(initReactI18next) .init({
   compatibilityJSON: 'v4', 
-  fallbackLng: "pt-BR",
   supportedLngs: ['pt-BR','en-US'],
   partialBundledLanguages: true,
   interpolation: {

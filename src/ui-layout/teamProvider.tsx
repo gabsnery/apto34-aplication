@@ -2,25 +2,20 @@
 import React, { createContext, useContext, useState } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './theme';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store/store';
 
 const ThemeContext = createContext<any>(null);
 
 export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const activeTheme = localStorage.getItem("@app:activeTheme") as "dark" | "light"
+  const theme = useSelector((st: RootState) => st.theme);
 
-  const toggleTheme = () => {
-    localStorage.setItem(
-      "@app:activeTheme",
-      activeTheme === "light" ? "dark" : "light"
-    );
-    window.location.reload();
-  };
 
   return (
-    <ThemeContext.Provider value={{theme:activeTheme === "dark"?darkTheme:lightTheme, toggleTheme }}>
-      <StyledThemeProvider theme={activeTheme === "dark"?darkTheme:lightTheme}>{children}</StyledThemeProvider>
+    <ThemeContext.Provider value={{theme:theme === "dark"?darkTheme:lightTheme }}>
+      <StyledThemeProvider theme={theme === "dark"?darkTheme:lightTheme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );
 };

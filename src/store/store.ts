@@ -27,7 +27,7 @@ const persistConfig = {
   storage,
   migrate: createMigrate(migrations, { debug: false }),
   whitelist: [
-    "auth","cart"
+    "auth","cart",'theme','language'
   ],
 };
 

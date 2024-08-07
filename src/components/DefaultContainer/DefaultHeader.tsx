@@ -14,7 +14,7 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 //import minerva from 'assets/img/minerva-logo-white.png'
 import items, { NavObj } from "./nav";
@@ -31,6 +31,8 @@ import { useTheme } from "styled-components";
 import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
 import { styled as MUIStyled } from "@mui/material/styles";
 import { useTypedSelector } from "hooks";
+import { changeTheme } from "store/slices/themeSlice";
+import { changeLanguage } from "store/slices/languageSlice";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const { t } = useTranslation();
@@ -41,12 +43,15 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
   const token = useTypedSelector(({ auth }) => auth.token)
+  const userTheme = useSelector((st: RootState) => st.theme);
 
   const dispatch = useAppDispatch();
   const activeTheme =
     (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
   const [drawerIsOpen, setdrawerIsOpen] = useState<boolean>(false);
   const drawerWidth = 300;
+
+
   const StyledBadge = styled(Badge)<BadgeProps>(() => ({
     "& .MuiBadge-badge": {
       right: 0,
@@ -220,8 +225,8 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
                 value={language ? language : userLang}
                 exclusive
                 onChange={(ev, newAlignment) => {
-                  localStorage.setItem("@app:activeLanguage", newAlignment);
-                  window.location.reload();
+                  dispatch(changeLanguage(newAlignment));
+
                 }}
                 aria-label="Platform"
               >
@@ -247,11 +252,11 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
               <IconButton
                 sx={{ cursor: "pointer" }}
                 onClick={() => {
-                  localStorage.setItem(
+                /*   localStorage.setItem(
                     "@app:activeTheme",
                     activeTheme === "light" ? "dark" : "light"
-                  );
-                  window.location.reload();
+                  ); */
+              dispatch(changeTheme(userTheme === "light" ? "dark" : "light"));
                 }}
               >
                 <LightMode sx={{ color: theme.icon.primary }} />

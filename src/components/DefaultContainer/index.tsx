@@ -23,7 +23,7 @@ const DefaultContainer: FC<
             paddingTop: "15px",
             paddingBottom: "25px",
             textAlign: "center",
-            minHeight: "calc(100vh - 460px)"
+            minHeight: "calc(100vh - 293px)"
           }}
         >
           <SnackbarHandler />
