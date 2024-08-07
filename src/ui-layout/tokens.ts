@@ -8,6 +8,8 @@ export const tokens = {
     background: '#FFFFFF',
     surface: '#FFFFFF',
     error: '#B00020',
+    success: '#13B007',
+    successHover: '#0E7F05',
     onPrimary: '#FFFFFF',
     onSecondary: '#000000',
     onBackground: '#000000',

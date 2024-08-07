@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-
 const { reducer, actions } = createSlice({
   name: "language",
-  initialState: '',
+  initialState: ["pt-BR", "en-US"].includes(navigator.language)
+  ? navigator.language
+  : "en-US",
   reducers: {
     changeLanguage: (state, action: PayloadAction<'pt-BR'|'en-US'>) => {
       const value = action.payload
-      console.log("🚀 ~ value:", value)
       return value
     },
   },

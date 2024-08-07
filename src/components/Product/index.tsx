@@ -125,7 +125,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               ))}
             </Grid>
 
-            <Grid item container xs={3} mt={5} rowGap={1}>
+            <Grid item container xs={3} mt={5} rowGap={1} direction={'column'}>
               <TextField
                 label={t("translation:quantity")}
                 size={"small"}
@@ -134,10 +134,10 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 required
               />
 
-              <Button onClick={handleAddToCart} variant="secondary">
+              <Button onClick={handleAddToCart} variant="action2">
                 {t("translation:addToCart")}
               </Button>
-              <Button onClick={handleAddToCart}>
+              <Button onClick={handleAddToCart} variant="action">
                 {t("translation:buyNow")}
               </Button>
             </Grid>

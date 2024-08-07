@@ -1,4 +1,5 @@
-import { BottomNavigation,Box, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import { useSelector } from "react-redux";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
@@ -6,14 +7,14 @@ import useResponsive from "hooks/useResponsive";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "store/store";
 import { useTheme } from "styled-components";
 import { Text } from "ui-layout";
 const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
-  const activeTheme =
-    (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
+    const activeTheme = useSelector((st: RootState) => st.theme);
 
   const {isSm,isMd,isXs} =useResponsive()
 

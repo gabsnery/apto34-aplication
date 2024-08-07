@@ -12,8 +12,6 @@ import { RootState } from "store/store";
 const App = () => {
   const { t, i18n } = useTranslation()
   const language = useSelector((st: RootState) => st.language);
-
- 
   
   useEffect(() => {
     const userLang = navigator.language

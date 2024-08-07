@@ -36,8 +36,7 @@ const CartOverview: React.FC<React.PropsWithChildren<unknown>> = () => {
         </Text>
       </div>
       <Button
-        color={"primary"}
-        variant={"primary"}
+        variant={"action"}
         disabled={cart.total===0}
         onClick={() => {
           navigate("/close-order");

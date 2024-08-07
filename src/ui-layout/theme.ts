@@ -17,6 +17,11 @@ export const lightTheme = {
   icon:{
     primary:tokens.colors.grayDark
   },
+  actions:{
+    success:tokens.colors.success,
+    successHover:tokens.colors.successHover,
+    danger:tokens.colors.error
+  },
   colors: {
     ...tokens.colors,
     background: "#ffffff",
@@ -41,6 +46,11 @@ export const darkTheme = {
   },
   icon:{
     primary:tokens.colors.gray
+  },
+  actions:{
+    success:tokens.colors.successHover ,
+    successHover:tokens.colors.success,
+    danger:tokens.colors.error
   },
   colors: {
     ...tokens.colors,

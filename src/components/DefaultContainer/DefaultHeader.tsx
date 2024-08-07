@@ -36,9 +36,8 @@ import { changeLanguage } from "store/slices/languageSlice";
 
 const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const { t } = useTranslation();
-  const userLang = ["pt-BR", "en-US"].includes(navigator.language)
-    ? navigator.language
-    : "en-US";
+  const language = useSelector((st: RootState) => st.language);
+
   const theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
@@ -46,8 +45,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
   const userTheme = useSelector((st: RootState) => st.theme);
 
   const dispatch = useAppDispatch();
-  const activeTheme =
-    (localStorage.getItem("@app:activeTheme") as "light" | "dark") || "light";
+
   const [drawerIsOpen, setdrawerIsOpen] = useState<boolean>(false);
   const drawerWidth = 300;
 
@@ -70,9 +68,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
       backgroundColor: theme.paper.selected,
     },
   });
-  const language = localStorage.getItem("@app:activeLanguage") as
-    | "pt-BR"
-    | "en-US";
+
 
   return (
     <>
@@ -127,7 +123,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             })}
             <ToggleButtonGroup
               size="small"
-              value={language ? language : userLang}
+              value={language }
               exclusive
               onChange={(ev, newAlignment) => {
                 localStorage.setItem("@app:activeLanguage", newAlignment);
@@ -157,7 +153,7 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
         <Toolbar>
           <RouterLink to="/">
             <img
-              src={activeTheme === "light" ? logo : logoDark}
+              src={userTheme === "light" ? logo : logoDark}
               alt="logo"
               style={{ height: 60, marginTop: 10, marginBottom: 5 }}
             />
@@ -222,11 +218,10 @@ const DefaultHeader: FC<React.PropsWithChildren<{}>> = () => {
             <Grid item mx={2} display={{ xs: "none", sm: "block" }}>
               <ToggleButtonGroup
                 size="small"
-                value={language ? language : userLang}
+                value={language}
                 exclusive
                 onChange={(ev, newAlignment) => {
                   dispatch(changeLanguage(newAlignment));
-
                 }}
                 aria-label="Platform"
               >
