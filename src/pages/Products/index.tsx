@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useGetCategoriasQuery } from "store/api/category";
-import { addFilter, setFilter } from "store/slices/sessionFilterSlice";
+import { addFilter, clearOneFilter, setFilter } from "store/slices/sessionFilterSlice";
 import { RootState, useAppDispatch } from "store/store";
 import { useTheme } from "styled-components";
 import { Button } from "ui-layout";
@@ -25,10 +25,16 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   useEffect(() => {
     setfilterOpen(false);
-    console.log("🚀 ~ sessionFilter:", sessionFilter)
   }, [sessionFilter]);
 
   useEffect(() => {
+    if(category===""||category===undefined){
+      dispatch(
+        clearOneFilter({
+          filter: "category",
+        })
+      );
+    }
     if (category !== "" && categorias) {
       const index = categorias.findIndex((i) => i.categoria === category);
       if (index >= 0)

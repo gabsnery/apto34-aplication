@@ -8,7 +8,6 @@ const { reducer, actions } = createSlice({
   reducers: {
     changeTheme: (state, action: PayloadAction<'dark'|'light'>) => {
       const value = action.payload
-      console.log("🚀 ~ value:", value)
       return value
     },
   },

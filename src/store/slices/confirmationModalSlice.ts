@@ -1,14 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 export interface ConfirmationModal {
   open: boolean
   message: string
-  onConfirm?:()=>void
+  title?: string
+  danger?: boolean
+  yesText?: string
+  noText?: string
+  onConfirm?: () => void
 }
 
 const initialState: ConfirmationModal = {
   open: false,
+  title: '',
   message: '',
+  yesText: '',
+  noText: '',
+  danger: false,
   onConfirm: undefined
 }
 
@@ -16,9 +24,13 @@ const { reducer, actions } = createSlice({
   name: 'confirmationModal',
   initialState: initialState,
   reducers: {
-    setConfirmationModal: (state, action) => ({
+    setConfirmationModal: (state, action: PayloadAction<ConfirmationModal>) => ({
       open: action.payload.open ?? false,
-      message: action.payload.message ?? 'common:error',
+      title: action.payload.title ?? 'common|error',
+      message: action.payload.message ?? 'common|error',
+      danger: action.payload.danger ?? false,
+      yesText: action.payload.yesText ?? 'Cancelar',
+      noText: action.payload.noText ?? 'Confirmar',
       onConfirm: action.payload.onConfirm ?? undefined
     }),
     clearConfirmationModal: () => initialState

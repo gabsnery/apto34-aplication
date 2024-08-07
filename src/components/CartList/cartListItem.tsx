@@ -10,6 +10,7 @@ import { useAppDispatch } from "../../store/store";
 import { useTheme } from "styled-components";
 import { Product } from "store/api/product/product.interface";
 import { useGetImageQuery } from "store/api/product";
+import { useNavigate } from "react-router-dom";
 interface IProps {
   item: Product;
   quantity: number;
@@ -21,6 +22,7 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
   idx,
 }) => {
   const { t } = useTranslation(["product", "translation"]);
+  const navigate = useNavigate();
 
   const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart);
@@ -38,8 +40,16 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
     }
   }, [item]);
   return (
-    <Grid item container key={idx}>
-      <Grid item xs={4} sm={2}>
+    <Grid item container>
+      <Grid
+        item
+        xs={4}
+        sm={2}
+        sx={{ cursor: "pointer" }}
+        onClick={() => {
+          navigate(`/product/${item.id}`);
+        }}
+      >
         {photoData && (
           <img
             style={{
@@ -53,7 +63,16 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
         )}
       </Grid>
       <Grid container item xs={8} sm={10}>
-        <Grid item xs={12} sm={6} alignContent={"center"}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          alignContent={"center"}
+          sx={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate(`/product/${item.id}`);
+          }}
+        >
           <Text variant={"h5"}>{t(`product:name_${item.id}`)}</Text>
         </Grid>
         <Grid item xs={12} sm={2} alignContent={"center"}>

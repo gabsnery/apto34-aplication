@@ -18,11 +18,19 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
   const dispatch = useAppDispatch();
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const [products, setProducts] = useState<Product[]>([]);
-  const [filter, setFilter] = useState<SessionFilter>({  category: [],
+  const [filter, setFilter] = useState<SessionFilter>({
+    category: [],
     size: [],
     color: [],
-    type: []});
-  const { data, isSuccess,isLoading:isProductsLoading,isError:isProductError } = useGetProductsQuery(
+    type: [],
+  });
+  const {
+    data,
+    isSuccess,
+    refetch,
+    isLoading: isProductsLoading,
+    isError: isProductError,
+  } = useGetProductsQuery(
     { ...filter, start: 0, count: 50 },
     { skip: !filter }
   );
@@ -32,12 +40,13 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
       setProducts([...products, ...data]);
     }
   }, [data]);
-useEffect(() => {
-  setProducts([]);
-  setFilter(sessionFilter)
-}, [sessionFilter]);
+  useEffect(() => {
+    setProducts([]);
+    setFilter(sessionFilter);
+    refetch()
+  }, [sessionFilter]);
   return (
-/*     <InfiniteScroll
+    /*     <InfiniteScroll
       dataLength={10} //This is important field to render the next data
       next={() => {
         console.log("next");
@@ -58,22 +67,22 @@ useEffect(() => {
         <h3 style={{ textAlign: "center" }}></h3>
       }
     > */
-      <Grid
-        container
-        direction="row"
-        rowSpacing={2}
-        columnSpacing={3}
-        sx={{
-          height: "inherit",
-        }}
-      >
-        {products?.map((prod, idx) => (
-          <Grid key={idx} item xs={6} sm={4} md={4} lg={3}>
-            <ProductsCard value={prod} />
-          </Grid>
-        ))}
-      </Grid>
-/*     </InfiniteScroll> */
+    <Grid
+      container
+      direction="row"
+      rowSpacing={2}
+      columnSpacing={3}
+      sx={{
+        height: "inherit",
+      }}
+    >
+      {products?.map((prod, idx) => (
+        <Grid key={idx} item xs={6} sm={4} md={4} lg={3}>
+          <ProductsCard value={prod} />
+        </Grid>
+      ))}
+    </Grid>
+    /*     </InfiniteScroll> */
   );
 };
 export default ProductsGrid;
