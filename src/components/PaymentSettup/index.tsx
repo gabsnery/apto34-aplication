@@ -59,6 +59,8 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       addOrder({
         clienteId: userID,
+        total:cart.total,
+        produtos:cart.items.map((product) =>({id: product.product.id,quantidade: product.quantity})),
         endereco: {
           cep: "13400690",
           logradouro: "rua aqui",

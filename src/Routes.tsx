@@ -13,6 +13,7 @@ import CloseOrder from "pages/CloseOrder";
 import AboutUs from "pages/AboutUs";
 import Loading from "components/Loading";
 import ConfirmationModalHandler from "components/ConfirmationModalHandler";
+import Orders from "pages/Orders";
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -54,6 +55,9 @@ const AppRoutes = () => {
         </Route>
         <Route path="/aboutUs" element={<PrivateRoute both />}>
           <Route path="/aboutUs" element={<AboutUs />} />
+        </Route>
+        <Route path="/orders" element={<PrivateRoute  />}>
+          <Route path="/orders" element={<Orders />} />
         </Route>
       </Routes>
       <ConfirmationModalHandler/>

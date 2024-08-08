@@ -35,7 +35,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleAddToCart = () => {
-    if (id && data) {
+    if (id && data && quantity>0) {
       dispatch(addProduct({ product: data, quantity }));
       setConfirmModal(true);
     }
