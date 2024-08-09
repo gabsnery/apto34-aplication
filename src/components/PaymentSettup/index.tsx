@@ -3,7 +3,7 @@ import {
   getIssuers,
   initMercadoPago,
 } from "@mercadopago/sdk-react";
-import { Grid, Step, StepLabel, Stepper } from "@mui/material";
+import { Drawer, Grid, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAddOrderMutation } from "store/api/Order";
@@ -26,6 +26,9 @@ import PaymentInfo from "./paymentInfo";
 import PersonalInfo from "./personalInfo";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "styled-components";
+import { clearCart } from "store/slices/cartSlice";
+import { useGetClientQuery } from "store/api/Client";
 const steps = ["identity", "deliver", "payment"];
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -35,10 +38,11 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
+  const { email } = useTypedSelector(({ auth }) => auth);
   const token = useTypedSelector(({ auth }) => auth.token);
   const { id: userID } = useTypedSelector(({ auth }) => auth);
+  const {data:clientData} = useGetClientQuery()
   const navigate = useNavigate();
-  const [email, setEmail] = useState<string>('');
 
   const [paymentInfo, setPaymentInfo] = useState<any>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
@@ -48,6 +52,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [addOrder, { data: orderResponse }] = useAddOrderMutation();
   const [addPayment, { data: payment }] = useAddPaymentMutation();
   const [qr_code_base64, setqQr_code_base64] = useState<string>("");
+
   const handleNext = () => {
     activeStep < steps.length - 1 &&
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -59,8 +64,11 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
 
       addOrder({
         clienteId: userID,
-        total:cart.total,
-        produtos:cart.items.map((product) =>({id: product.product.id,quantidade: product.quantity})),
+        total: cart.total,
+        produtos: cart.items.map((product) => ({
+          id: product.product.id,
+          quantidade: product.quantity,
+        })),
         endereco: {
           cep: "13400690",
           logradouro: "rua aqui",
@@ -85,6 +93,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, []);
   useEffect(() => {
     if (payment?.pix_qrcode !== "") setqQr_code_base64(payment?.pix_qrcode);
+    if (payment) dispatch(clearCart());
   }, [payment]);
   useEffect(() => {
     if (orderResponse) {
@@ -109,9 +118,9 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       }
       addPreference({
         payer: {
-          name: "Douglas Ian",
-          surname: "Ruad de Oliveira",
-          email: "gabrielanerysilva@gmail.com",
+          name: clientData?.nome||'',
+          surname: clientData?.sobrenome||'',
+          email: clientData?.email||'',
           address: {
             street_name: addressInfoData.street_name || "",
             street_number: +addressInfoData.street_number,
@@ -151,8 +160,8 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
                       id: orderResponse.id || 1,
                       installments: paymentInfo.installments, //parcelas
                       payer: {
-                        email: "admin@gatostecnologia.com",
-                        identification: { type: "CPF", number: "12345678909" },
+                        email: email,
+                        identification: { type: "CPF", number: document },
                       },
                       payment_method_id: methods.results[0].id,
                       issuer_id: issuer[0].id,
@@ -224,7 +233,10 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
           {/* {activeStep === 1 && <DeliverInfo />} */}
           {activeStep === 2 && (
             <Grid xs={12} md={12} item>
-              <PaymentInfo setPaymentInfo={setPaymentInfo} setAllowFinish={setAllowFinish} />
+              <PaymentInfo
+                setPaymentInfo={setPaymentInfo}
+                setAllowFinish={setAllowFinish}
+              />
               {qr_code_base64}
               {qr_code_base64 && (
                 <img
@@ -247,15 +259,28 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Grid xs={6} item>
           <Button
             onClick={handleNext}
-            disabled={activeStep === 0 ? !token : activeStep === 2?!allowFinish:false }
+            disabled={
+              activeStep === 0
+                ? !token
+                : activeStep === 2
+                  ? !allowFinish
+                  : false
+            }
             variant={"primary"}
           >
             {activeStep === steps.length - 1 ? t("pay") : t("next")}
           </Button>
         </Grid>
-        <Grid xs={12} item><Button variant={'tertiary'} onClick={()=>{
-          navigate("/store");
-        }}>Cancelar</Button></Grid>
+        <Grid xs={12} item>
+          <Button
+            variant={"tertiary"}
+            onClick={() => {
+              navigate("/store");
+            }}
+          >
+            Cancelar
+          </Button>
+        </Grid>
       </Grid>
       <Grid xs={12} md={2} item container direction={"column"}>
         <Text> {t("details")}</Text>
@@ -264,10 +289,18 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     </Grid>
   ) : (
     <Grid container justifyContent={"center"} rowSpacing={2}>
-      <Grid item xs={12} ><Text variant={"h3"}> {t("emptyCart")}</Text></Grid>
-      <Grid item xs={12} ><Button onClick={()=>{
-          navigate("/store");
-        }}>{t('goto_store')}</Button></Grid>
+      <Grid item xs={12}>
+        <Text variant={"h3"}> {t("emptyCart")}</Text>
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          onClick={() => {
+            navigate("/store");
+          }}
+        >
+          {t("goto_store")}
+        </Button>
+      </Grid>
     </Grid>
   );
 };

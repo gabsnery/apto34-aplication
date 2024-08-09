@@ -15,4 +15,5 @@ export interface IClient {
   nome: string;
   sobrenome: string;
   email: string;
+  cpf?: string;
 }

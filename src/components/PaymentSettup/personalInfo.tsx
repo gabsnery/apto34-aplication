@@ -3,7 +3,7 @@ import Login from "components/Login";
 import { useTypedSelector } from "hooks";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useAddClientMutation } from "store/api/Client";
+import { useAddClientMutation, useGetClientQuery } from "store/api/Client";
 import { Button, Text, TextField } from "ui-layout";
 import { PasswordField } from "ui-layout/PasswordField";
 
@@ -14,17 +14,20 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
   const { token, nome, sobrenome, email } = useTypedSelector(
     ({ auth }) => auth
   );
-  const [addClient, { data: clientData }] = useAddClientMutation();
+  const [addClient] = useAddClientMutation();
+  const { data: clientData } = useGetClientQuery();
 
   const [formData, setFormData] = useState<{
     name: string;
     surname: string;
     email: string;
     password: string;
+    cpf: string;
   }>({
     name: nome || "",
     surname: sobrenome || "",
     email: email || "",
+    cpf: "",
     password: "",
   });
   const [edit, setEdit] = useState<boolean>(false);
@@ -46,13 +49,15 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
     if (token) handleClose();
   }, [token]);
   useEffect(() => {
-    setFormData({
-      name: nome || "",
-      surname: sobrenome || "",
-      email: email || "",
-      password: email || "",
-    });
-  }, [nome, sobrenome, email]);
+    if (clientData)
+      setFormData({
+        name: clientData.nome || "",
+        surname: clientData.sobrenome || "",
+        email: clientData.email || "",
+        password: clientData.email || "",
+        cpf: clientData.cpf || "",
+      });
+  }, [clientData]);
   return (
     <>
       <Modal
@@ -68,16 +73,15 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
       <Grid container columnSpacing={2} rowSpacing={2}>
         {token ? null : (
           <Grid item xs={12} sm={12} md={6}>
-            <Text variant={"h3"}>{t('login')}</Text>
-            <Login
-            />
+            <Text variant={"h3"}>{t("login")}</Text>
+            <Login />
           </Grid>
         )}
 
         <Grid container item xs={12} sm={12} md={6} direction={"column"}>
           {!token && (
             <Text variant={"h3"}>
-              {`${token ? t('edit') : t('create')}`} {t('user')}
+              {`${token ? t("edit") : t("create")}`} {t("user")}
             </Text>
           )}
           <TextField
@@ -94,6 +98,14 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
               setFormData({ ...formData, surname: ev.target.value })
             }
             value={formData.surname || ""}
+            required
+          />
+          <TextField
+            label={t("cpf")}
+            onChange={(ev) =>
+              setFormData({ ...formData, cpf: ev.target.value })
+            }
+            value={formData.cpf || ""}
             required
           />
           <TextField
@@ -114,12 +126,14 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
               required
             />
           )}
-  {/*         <Button
+          <Button
             onClick={() => {
               addClient(formData);
             }}
             variant="secondary"
-          >{t('save')}</Button> */}
+          >
+            {t("save")}
+          </Button>
         </Grid>
       </Grid>
     </>

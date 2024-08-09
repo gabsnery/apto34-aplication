@@ -13,6 +13,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { Grid } from "@mui/material";
 import { useTheme } from "styled-components";
+import { useGetClientQuery } from "store/api/Client";
 interface Props {
   setPaymentInfo: (value: any) => void;
   setAllowFinish: (value: boolean)=>void
@@ -27,6 +28,8 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   const [email, setEmail] = useState<string>('');
   const cart = useSelector((st: RootState) => st.cart);
   const disabled =true
+  const {data:clientData,refetch} = useGetClientQuery()
+
   const [formData, setFormData] = useState<{
     CREDIT_CARD_NUMBER: string;
     CARDHOLDER_NAME: string;
@@ -58,24 +61,25 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   }, [formData, type]);
   useEffect(() => {
     if (type === "Invoice") {
+      const today = new Date()
       setPaymentInfo({
         payer: {
-          email: "gabrielanerysilva@gmail.com",
-          first_name: "Douglas Ian",
-          last_name: "Ruas de Oliveira",
-          identification: { type: "CPF", number: "36439183800" },
+          email: clientData?.email||'',
+          first_name: clientData?.nome||'',
+          last_name: clientData?.sobrenome||'',
+          identification: { type: "CPF", number: clientData?.cpf||'' },
         },
         payment_method_id: "bolbradesco",
         transaction_amount: 200,
-        date_of_expiration: "2024-08-20T22:20:00.000-04:00",
+        date_of_expiration:  new Date(today. setDate(today. getDate() + 3)) 
       });
       setAllowFinish(true);
 
     } else if (type === "PIX") {
       setPaymentInfo({
         payer: {
-          email: "gabrielanerysilva@gmail.com",
-          identification: { type: "CPF", number: "36439183800" },
+          email: clientData?.email||'',
+          identification: { type: "CPF", number: clientData?.cpf||'' },
         },
         payment_method_id: "pix",
         transaction_amount: 0.1,

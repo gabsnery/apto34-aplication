@@ -16,7 +16,7 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
         getOrders: build.query<any[], void>({
             query: (filter) => `/api/order`,
         }),
-        getOrder: build.query<any[], number>({
+        getOrder: build.query<any, number>({
             query: (item) => `/api/order/${item}`,
         }),
  
