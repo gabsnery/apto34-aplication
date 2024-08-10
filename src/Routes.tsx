@@ -26,7 +26,7 @@ const AppRoutes = () => {
   return (
     <Suspense >
       <Routes>
-        <Route path="/admin/product"  element={<PrivateRoute admin={true} path="/login" />}>
+        <Route path="/admin/product"  element={<PrivateRoute  path="/login" />}>
           <Route path="/admin/product" element={<ProdAdm />} />
         </Route>
         <Route path="/" element={<PrivateRoute both path="/login" />}>

@@ -81,7 +81,10 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   };
   useEffect(() => {
     if (data) {
-      if (data.init_point) window.open(data.init_point, "_blank");
+      if (data.init_point){
+        console.log("🚀 ~ useEffect ~ data.init_point:", data.init_point)
+        
+        window.open(data.init_point, "_blank");}
     }
   }, [data]);
   const handleBack = () => {
@@ -117,6 +120,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
         addPayment({ ...paymentInfo, id: orderResponse.id || 1 });
       }
       addPreference({
+        orderId:orderResponse.id,
         payer: {
           name: clientData?.nome||'',
           surname: clientData?.sobrenome||'',

@@ -67,7 +67,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           email: clientData?.email||'',
           first_name: clientData?.nome||'',
           last_name: clientData?.sobrenome||'',
-          identification: { type: "CPF", number: clientData?.cpf||'' },
+          identification: { type: "CPF", number: clientData?.cpf||'02570199010' },
         },
         payment_method_id: "bolbradesco",
         transaction_amount: 200,
@@ -79,7 +79,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
       setPaymentInfo({
         payer: {
           email: clientData?.email||'',
-          identification: { type: "CPF", number: clientData?.cpf||'' },
+          identification: { type: "CPF", number: clientData?.cpf||'02570199010' },
         },
         payment_method_id: "pix",
         transaction_amount: 0.1,
