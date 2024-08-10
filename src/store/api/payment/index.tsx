@@ -3,7 +3,7 @@ import {
   ICardPaymentFormData,
 } from "@mercadopago/sdk-react/bricks/cardPayment/type";
 import { defaultApi } from "../default";
-import { IPaymentResponse, Preference } from "./mercadoPago.interface";
+import { IPayment, IPaymentResponse, Preference } from "./mercadoPago.interface";
 
 export const mercadoPagoApi = defaultApi.injectEndpoints({
   endpoints: (build) => ({
@@ -21,7 +21,7 @@ export const mercadoPagoApi = defaultApi.injectEndpoints({
         };
       },
     }),
-    addPayment: build.mutation<any, any>({
+    addPayment: build.mutation<any, IPayment>({
       query: (payload) => {
         const id = payload.id;
         let body = payload;

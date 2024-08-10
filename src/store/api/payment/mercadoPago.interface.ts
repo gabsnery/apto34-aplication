@@ -89,14 +89,14 @@ interface IPayerIdentification {
 }
 
 interface IPayer {
-  phone: IPayerPhone;
-  address: IPayerAddress;
+  phone?: IPayerPhone;
+  address?: IPayerAddress;
   email: string;
   identification: IPayerIdentification;
-  name: string;
-  surname: string;
-  date_created: string | null;
-  last_purchase: string | null;
+  first_name: string;
+  last_name: string;  
+  date_created?: string | null;
+  last_purchase?: string | null;
 }
 
 interface IPaymentMethod {
@@ -169,4 +169,18 @@ export interface IPaymentResponse {
   total_amount: number | null;
   last_updated: string | null;
   financing_group: string;
+}
+
+
+
+
+export interface IPayment {
+  id?:string;
+  issuer_id?:string;
+  payer: IPayer;
+  payment_method_id?: string;
+  transaction_amount: number;
+  date_of_expiration?: Date; 
+  installments?: number;
+  card_token?: string;
 }

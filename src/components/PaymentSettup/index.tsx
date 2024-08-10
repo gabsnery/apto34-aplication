@@ -1,9 +1,8 @@
 import {
   getIdentificationTypes,
-  getIssuers,
-  initMercadoPago,
+  initMercadoPago
 } from "@mercadopago/sdk-react";
-import { Drawer, Grid, Step, StepLabel, Stepper } from "@mui/material";
+import { Grid, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useAddOrderMutation } from "store/api/Order";
@@ -16,19 +15,15 @@ import { RootState } from "store/store";
 import { Button, Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 
-import { getPaymentMethods } from "@mercadopago/sdk-react/coreMethods";
-import { PaymentMethods } from "@mercadopago/sdk-react/coreMethods/getPaymentMethods/types";
 import { useTypedSelector } from "hooks";
-import { setSnackbar } from "store/slices/snackbarSlice";
-import AddreddInfo from "./addreddInfo";
-import DeliverInfo from "./deliverInfo";
-import PaymentInfo from "./paymentInfo";
-import PersonalInfo from "./personalInfo";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "styled-components";
-import { clearCart } from "store/slices/cartSlice";
 import { useGetClientQuery } from "store/api/Client";
+import { IPayment } from "store/api/payment/mercadoPago.interface";
+import { clearCart } from "store/slices/cartSlice";
+import AddreddInfo from "./addreddInfo";
+import PaymentInfo from "./paymentInfo";
+import PersonalInfo from "./personalInfo";
 const steps = ["identity", "deliver", "payment"];
 
 const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -41,10 +36,10 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { email } = useTypedSelector(({ auth }) => auth);
   const token = useTypedSelector(({ auth }) => auth.token);
   const { id: userID } = useTypedSelector(({ auth }) => auth);
-  const {data:clientData} = useGetClientQuery()
+  const { data: clientData } = useGetClientQuery();
   const navigate = useNavigate();
 
-  const [paymentInfo, setPaymentInfo] = useState<any>();
+  const [paymentInfo, setPaymentInfo] = useState<IPayment|undefined>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
   const [addressInfoData, setAddressInfoData] = useState<any>({});
   const [allowFinish, setAllowFinish] = useState<boolean>(false);
@@ -81,10 +76,11 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   };
   useEffect(() => {
     if (data) {
-      if (data.init_point){
-        console.log("🚀 ~ useEffect ~ data.init_point:", data.init_point)
-        
-        window.open(data.init_point, "_blank");}
+      if (data.init_point) {
+        console.log("🚀 ~ useEffect ~ data.init_point:", data.init_point);
+
+        window.open(data.init_point, "_blank");
+      }
     }
   }, [data]);
   const handleBack = () => {
@@ -100,31 +96,15 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, [payment]);
   useEffect(() => {
     if (orderResponse) {
-      if (
-        paymentInfo.hasOwnProperty("CREDIT_CARD_NUMBER") &&
-        paymentInfo.hasOwnProperty("cardExpirationMonth") &&
-        paymentInfo.hasOwnProperty("cardExpirationYear") &&
-        paymentInfo.hasOwnProperty("CARDHOLDER_NAME") &&
-        paymentInfo.hasOwnProperty("identity")
-      )
-        getCardToken({
-          card_number: paymentInfo.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
-          security_code: paymentInfo.securityCode,
-          card_expiration_month: paymentInfo.cardExpirationMonth,
-          card_expiration_year: paymentInfo.cardExpirationYear,
-          card_holder_name: paymentInfo.CARDHOLDER_NAME,
-          identification_type: "CPF",
-          identification_number: paymentInfo.identity,
-        });
-      else {
-        addPayment({ ...paymentInfo, id: orderResponse.id || 1 });
-      }
+      if(paymentInfo)
+      addPayment({ ...paymentInfo, id: orderResponse.id || 1 });
+
       addPreference({
-        orderId:orderResponse.id,
+        orderId: orderResponse.id,
         payer: {
-          name: clientData?.nome||'',
-          surname: clientData?.sobrenome||'',
-          email: clientData?.email||'',
+          name: clientData?.nome || "",
+          surname: clientData?.sobrenome || "",
+          email: clientData?.email || "",
           address: {
             street_name: addressInfoData.street_name || "",
             street_number: +addressInfoData.street_number,
@@ -145,56 +125,18 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       });
     }
   }, [orderResponse]);
-  useEffect(() => {
-    if (cardToken && orderResponse) {
-      if (paymentInfo) {
-        getPaymentMethods({
-          bin: paymentInfo.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
-        })
-          .then((value) => {
-            const methods: PaymentMethods = value as PaymentMethods;
-            methods &&
-              getIssuers({
-                paymentMethodId: methods.results[0].id,
-                bin: paymentInfo.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
-              })
-                .then((issuer) => {
-                  issuer &&
-                    addPayment({
-                      id: orderResponse.id || 1,
-                      installments: paymentInfo.installments, //parcelas
-                      payer: {
-                        email: email,
-                        identification: { type: "CPF", number: document },
-                      },
-                      payment_method_id: methods.results[0].id,
-                      issuer_id: issuer[0].id,
-                      token: cardToken.id,
-                      transaction_amount: cart.total,
-                    });
-                })
-                .catch((e) => {
-                  dispatch(
-                    setSnackbar({
-                      type: "error",
-                      message: JSON.stringify(e),
-                      duration: 4000,
-                    })
-                  );
-                });
-          })
-          .catch((e) => {
-            dispatch(
-              setSnackbar({
-                type: "error",
-                message: JSON.stringify(e),
-                duration: 4000,
-              })
-            );
-          });
-      }
-    }
-  }, [cardToken]);
+/*   addPayment({
+    id: orderResponse.id || 1,
+    installments: paymentInfo.installments, //parcelas
+    payer: {
+      email: email,
+      identification: { type: "CPF", number: document },
+    },
+    payment_method_id: methods.results[0].id,
+    issuer_id: issuer[0].id,
+    token: cardToken.id,
+    transaction_amount: cart.total,
+  }); */
   return cart.items?.length > 0 ? (
     <Grid
       container
@@ -240,6 +182,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
               <PaymentInfo
                 setPaymentInfo={setPaymentInfo}
                 setAllowFinish={setAllowFinish}
+                paymentInfo={paymentInfo}
               />
               {qr_code_base64}
               {qr_code_base64 && (

@@ -14,12 +14,16 @@ import RadioGroup from "@mui/material/RadioGroup";
 import { Grid } from "@mui/material";
 import { useTheme } from "styled-components";
 import { useGetClientQuery } from "store/api/Client";
+import { CreditCardComponent } from "./PaymentDataInput/CreditCard";
+import { IPayment } from "store/api/payment/mercadoPago.interface";
 interface Props {
-  setPaymentInfo: (value: any) => void;
+  setPaymentInfo: (value: IPayment) => void;
+  paymentInfo?: IPayment;
   setAllowFinish: (value: boolean) => void;
 }
 const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   setPaymentInfo,
+  paymentInfo,
   setAllowFinish,
 }) => {
   const { t } = useTranslation();
@@ -30,35 +34,10 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   const disabled = true;
   const { data: clientData, refetch } = useGetClientQuery();
 
-  const [formData, setFormData] = useState<{
-    CREDIT_CARD_NUMBER: string;
-    CARDHOLDER_NAME: string;
-    cardExpirationMonth: string;
-    cardExpirationYear: string;
-    securityCode: string;
-    identity: string;
-    installments: number;
-  }>({
-    CREDIT_CARD_NUMBER: "5031 4332 1540 6351",
-    CARDHOLDER_NAME: "APRO",
-    cardExpirationMonth: "11",
-    cardExpirationYear: "25",
-    securityCode: "123",
-    identity: "12345678909",
-    installments: 0,
-  });
-
   const [type, setType] = useState<
     undefined | "CreditCard" | "PIX" | "Invoice"
   >();
-  useEffect(() => {
-    if (type === "CreditCard")
-      getPaymentMethods({
-        bin: formData.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
-      }).then((value?: PaymentMethods) => {
-        setInstallments(value?.results[0].payer_costs || []);
-      });
-  }, [formData, type]);
+
   useEffect(() => {
     if (type === "Invoice") {
       const today = new Date();
@@ -73,7 +52,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           },
         },
         payment_method_id: "bolbradesco",
-        transaction_amount: cart.total,
+        transaction_amount: 200,
         date_of_expiration: new Date(today.setDate(today.getDate() + 3)),
       });
       setAllowFinish(true);
@@ -81,33 +60,20 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
       setPaymentInfo({
         payer: {
           email: clientData?.email || "",
+          first_name: clientData?.nome || "",
+          last_name: clientData?.sobrenome || "",
           identification: {
             type: "CPF",
             number: clientData?.cpf || "02570199010",
           },
         },
         payment_method_id: "pix",
-        transaction_amount: cart.total,
+        transaction_amount: 0.1,
       });
       setAllowFinish(true);
-    } else {
-      setAllowFinish(false);
-
-      setPaymentInfo({
-        ...formData,
-        payer: {
-          email: clientData?.email || "",
-          identification: {
-            type: "CPF",
-            number: clientData?.cpf || "02570199010",
-          },
-        },
-      });
     }
   }, [type]);
-  useEffect(() => {
-    setPaymentInfo(formData);
-  }, [formData]);
+
   return (
     <>
       <FormControl sx={{ width: "100%" }}>
@@ -163,121 +129,30 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         )}
       </Grid>
       {type === "CreditCard" && (
-        <Grid container columnSpacing={2}>
-          <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              label={t("card.name")}
-              onChange={(ev) =>
-                setFormData({ ...formData, CARDHOLDER_NAME: ev.target.value })
-              }
-              disabled={disabled}
-              value={formData.CARDHOLDER_NAME || ""}
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              label={t("card.number")}
-              onChange={(ev) =>
-                setFormData({
-                  ...formData,
-                  CREDIT_CARD_NUMBER: ev.target.value,
-                })
-              }
-              disabled={disabled}
-              value={formData.CREDIT_CARD_NUMBER || ""}
-              required
-            />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4}>
-            <TextField
-              label={`${t("card.expiryDate")} (${t("month")})`}
-              onChange={(ev) =>
-                setFormData({
-                  ...formData,
-                  cardExpirationMonth: ev.target.value,
-                })
-              }
-              disabled={disabled}
-              value={formData.cardExpirationMonth || ""}
-              required
-            />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4}>
-            <TextField
-              label={`${t("card.expiryDate")} (${t("year")})`}
-              onChange={(ev) =>
-                setFormData({
-                  ...formData,
-                  cardExpirationYear: ev.target.value,
-                })
-              }
-              disabled={disabled}
-              value={formData.cardExpirationYear || ""}
-              required
-            />
-          </Grid>
-          <Grid item xs={4} sm={3} md={4}>
-            <TextField
-              label={t("card.cvv")}
-              onChange={(ev) =>
-                setFormData({ ...formData, securityCode: ev.target.value })
-              }
-              disabled={disabled}
-              value={formData.securityCode || ""}
-              required
-            />
-          </Grid>
-          <Grid item xs={8} sm={5} md={6}>
-            <TextField
-              label={t("card.identity")}
-              onChange={(ev) =>
-                setFormData({ ...formData, identity: ev.target.value })
-              }
-              disabled={disabled}
-              value={formData.identity || ""}
-              required
-            />
-          </Grid>
-          {installments.length > 0 && (
-            <Grid item xs={12} sm={4} md={6}>
-              <Select
-                name={"installments"}
-                label={t("installments")}
-                value={formData.installments.toString()}
-                onChange={(e) => {
-                  if (+(e.target.value as string) > 0) setAllowFinish(true);
-
-                  setFormData({
-                    ...formData,
-                    installments: +(e.target.value as string),
-                  });
-                }}
-                options={
-                  installments
-                    .filter(
-                      (i) => cart.total / i.installments >= i.min_allowed_amount
-                    )
-                    ?.map((item) => ({
-                      value: item.installments.toString(),
-                      label:
-                        item.installments === 0
-                          ? ""
-                          : `${item.installments} parcela (${
-                              item.installment_rate
-                            }%) (${item.installments} * ${
-                              cart.total / item.installments +
-                              (cart.total / item.installments) *
-                                (item.installment_rate / 100)
-                            }) (${
-                              cart.total * (item.installment_rate / 100 + 1)
-                            })`,
-                    })) || []
-                }
-              />
-            </Grid>
-          )}
-        </Grid>
+        <CreditCardComponent
+          setAllowFinish={setAllowFinish}
+          setPaymentInfo={({
+            token,
+            installments,
+            payment_method_id,
+            issuer_id,
+          }) => {
+            setPaymentInfo({
+              installments: installments || paymentInfo?.installments, //parcelas
+              payer: {
+                email: email,
+                first_name: clientData?.nome || "",
+                last_name: clientData?.sobrenome || "",
+                identification: { type: "CPF", number: clientData?.cpf || "" },
+              },
+              payment_method_id:
+                payment_method_id || paymentInfo?.payment_method_id,
+              issuer_id: issuer_id || paymentInfo?.issuer_id,
+              card_token: token || paymentInfo?.card_token,
+              transaction_amount: cart.total,
+            });
+          }}
+        />
       )}
     </>
   );
