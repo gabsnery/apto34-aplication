@@ -16,19 +16,19 @@ import { useTheme } from "styled-components";
 import { useGetClientQuery } from "store/api/Client";
 interface Props {
   setPaymentInfo: (value: any) => void;
-  setAllowFinish: (value: boolean)=>void
+  setAllowFinish: (value: boolean) => void;
 }
 const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   setPaymentInfo,
-  setAllowFinish
+  setAllowFinish,
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const [installments, setInstallments] = useState<PayerCost[]>([]);
-  const [email, setEmail] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
   const cart = useSelector((st: RootState) => st.cart);
-  const disabled =true
-  const {data:clientData,refetch} = useGetClientQuery()
+  const disabled = true;
+  const { data: clientData, refetch } = useGetClientQuery();
 
   const [formData, setFormData] = useState<{
     CREDIT_CARD_NUMBER: string;
@@ -61,35 +61,48 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   }, [formData, type]);
   useEffect(() => {
     if (type === "Invoice") {
-      const today = new Date()
+      const today = new Date();
       setPaymentInfo({
         payer: {
-          email: clientData?.email||'',
-          first_name: clientData?.nome||'',
-          last_name: clientData?.sobrenome||'',
-          identification: { type: "CPF", number: clientData?.cpf||'02570199010' },
+          email: clientData?.email || "",
+          first_name: clientData?.nome || "",
+          last_name: clientData?.sobrenome || "",
+          identification: {
+            type: "CPF",
+            number: clientData?.cpf || "02570199010",
+          },
         },
         payment_method_id: "bolbradesco",
-        transaction_amount: 200,
-        date_of_expiration:  new Date(today. setDate(today. getDate() + 3)) 
+        transaction_amount: cart.total,
+        date_of_expiration: new Date(today.setDate(today.getDate() + 3)),
       });
       setAllowFinish(true);
-
     } else if (type === "PIX") {
       setPaymentInfo({
         payer: {
-          email: clientData?.email||'',
-          identification: { type: "CPF", number: clientData?.cpf||'02570199010' },
+          email: clientData?.email || "",
+          identification: {
+            type: "CPF",
+            number: clientData?.cpf || "02570199010",
+          },
         },
         payment_method_id: "pix",
-        transaction_amount: 0.1,
+        transaction_amount: cart.total,
       });
       setAllowFinish(true);
-
     } else {
       setAllowFinish(false);
 
-      setPaymentInfo(formData);
+      setPaymentInfo({
+        ...formData,
+        payer: {
+          email: clientData?.email || "",
+          identification: {
+            type: "CPF",
+            number: clientData?.cpf || "02570199010",
+          },
+        },
+      });
     }
   }, [type]);
   useEffect(() => {
@@ -114,32 +127,40 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           }}
         >
           <FormControlLabel
-            sx={{color:theme.text.primary}}
+            sx={{ color: theme.text.primary }}
             value="CreditCard"
             control={<Radio />}
             label="CreditCard"
           />
           <FormControlLabel
-            sx={{color:theme.text.primary}}
+            sx={{ color: theme.text.primary }}
             value="PIX"
             control={<Radio />}
             label="PIX"
           />
           <FormControlLabel
-            sx={{color:theme.text.primary}}
+            sx={{ color: theme.text.primary }}
             value="Invoice"
             control={<Radio />}
             label="Invoice"
           />
         </RadioGroup>
       </FormControl>
-      {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" color={'error'}>{t(`payment_type_detail_${type}`)}</Text>}
+      {process.env.REACT_APP_ENV !== "production" && type !== undefined && (
+        <Text variant="body" color={"error"}>
+          {t(`payment_type_detail_${type}`)}
+        </Text>
+      )}
 
-      <Grid container columnSpacing={2} margin={'10px 0'}>
-      {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" >{t(`email_sended`)}</Text>}
+      <Grid container columnSpacing={2} margin={"10px 0"}>
+        {process.env.REACT_APP_ENV !== "production" && type !== undefined && (
+          <Text variant="body">{t(`email_sended`)}</Text>
+        )}
       </Grid>
-      <Grid container columnSpacing={2} margin={'10px 0'}>
-      {(process.env.REACT_APP_ENV!=='production' && type!==undefined)&&<Text variant="body" >{t(`sorry_message`)}</Text>}
+      <Grid container columnSpacing={2} margin={"10px 0"}>
+        {process.env.REACT_APP_ENV !== "production" && type !== undefined && (
+          <Text variant="body">{t(`sorry_message`)}</Text>
+        )}
       </Grid>
       {type === "CreditCard" && (
         <Grid container columnSpacing={2}>
@@ -225,8 +246,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
                 label={t("installments")}
                 value={formData.installments.toString()}
                 onChange={(e) => {
-                  if(+(e.target.value as string)>0)
-                  setAllowFinish(true);
+                  if (+(e.target.value as string) > 0) setAllowFinish(true);
 
                   setFormData({
                     ...formData,
