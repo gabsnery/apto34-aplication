@@ -140,7 +140,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
             setPaymentInfo({
               installments: installments || paymentInfo?.installments, //parcelas
               payer: {
-                email: email,
+                email: email||'gneri94@gmail.com',
                 first_name: clientData?.nome || "",
                 last_name: clientData?.sobrenome || "",
                 identification: { type: "CPF", number: clientData?.cpf || "" },
