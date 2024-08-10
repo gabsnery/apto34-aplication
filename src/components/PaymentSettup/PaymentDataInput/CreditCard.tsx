@@ -30,8 +30,10 @@ export const CreditCardComponent = (props: {
 }) => {
   const { setAllowFinish, setPaymentInfo } = props;
   const [installments, setInstallments] = useState<PayerCost[]>([]);
-  const [issuer, setInssuer] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
+  const [installment, setInstallment] = useState<number>(0);
+  const [issuerId, setIssuerId] = useState<string>("");
+  const [token, setToken] = useState<string>("");
+  const [payment_method_id, setPayment_method_id] = useState<string>("");
   const cart = useSelector((st: RootState) => st.cart);
   const { t } = useTranslation();
   const theme = useTheme();
@@ -52,7 +54,22 @@ export const CreditCardComponent = (props: {
     identity: "12345678909",
     installments: 0,
   });
-
+  useEffect(() => {
+    if (
+      installment !== 0 &&
+      issuerId !== "" &&
+      token !== "" &&
+      payment_method_id !== ""
+    ) {
+      setPaymentInfo({
+        token,
+        installments: installment,
+        payment_method_id: payment_method_id,
+        issuer_id: issuerId,
+      });
+      setAllowFinish(true);
+    }
+  }, [installment, issuerId, token, payment_method_id]);
   const disabled = true;
   useEffect(() => {
     getPaymentMethods({
@@ -65,31 +82,31 @@ export const CreditCardComponent = (props: {
           bin: formData.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
         }).then((issuer) => {
           if (issuer) {
-            setPaymentInfo({
-              issuer_id: issuer[0].id,
-              payment_method_id: methods?.results[0].id,
-            });
+            setPayment_method_id(methods?.results[0].id);
+            setIssuerId(issuer[0].id);
           }
         });
       }
     });
+    if (formData.CREDIT_CARD_NUMBER.length > 6)
+      createCardToken({
+        cardNumber: formData.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
+        securityCode: formData.securityCode,
+        cardExpirationMonth: formData.cardExpirationMonth,
+        cardExpirationYear: formData.cardExpirationYear,
+        cardholderName: formData.CARDHOLDER_NAME,
+        identificationType: "CPF",
+        identificationNumber: formData.identity,
+      })
+        .then((card_token) => {
+          console.log("🚀 ~ useEffect ~ card_token:", card_token);
+          if (card_token?.id) setToken(card_token?.id.toString());
+        })
+        .catch((err) => {
+          console.log("🚀 ~ useEffect ~ err:", err);
+        });
   }, [formData]);
-  useEffect(() => {
-    if(formData.CREDIT_CARD_NUMBER.length > 6) 
-    createCardToken({
-      cardNumber: formData.CREDIT_CARD_NUMBER.replaceAll(" ", ""),
-      securityCode: formData.securityCode,
-      cardExpirationMonth: formData.cardExpirationMonth,
-      cardExpirationYear: formData.cardExpirationYear,
-      cardholderName: formData.CARDHOLDER_NAME,
-      identificationType: "CPF",
-      identificationNumber: formData.identity,
-    }).then(card_token => {
-      console.log("🚀 ~ useEffect ~ card_token:", card_token)
-      setPaymentInfo({token:card_token?.id})
-      
-    })
-  }, [formData]);
+  useEffect(() => {}, [formData]);
 
   return (
     <Grid container columnSpacing={2}>
@@ -175,13 +192,15 @@ export const CreditCardComponent = (props: {
             label={t("installments")}
             value={formData.installments.toString()}
             onChange={(e) => {
-              if (+(e.target.value as string) > 0) setAllowFinish(true);
+              if (+(e.target.value as string) > 0) {
+                setAllowFinish(true);
 
-              setFormData({
-                ...formData,
-                installments: +(e.target.value as string),
-              });
-              setPaymentInfo({ installments: +(e.target.value as string) });
+                setFormData({
+                  ...formData,
+                  installments: +(e.target.value as string),
+                });
+                setInstallment(+(e.target.value as string));
+              }
             }}
             options={
               installments

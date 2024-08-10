@@ -94,6 +94,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     if (payment?.pix_qrcode !== "") setqQr_code_base64(payment?.pix_qrcode);
     if (payment) dispatch(clearCart());
   }, [payment]);
+  
   useEffect(() => {
     if (orderResponse) {
       if(paymentInfo)
@@ -125,6 +126,10 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       });
     }
   }, [orderResponse]);
+  useEffect(() => {
+    
+    console.log("🚀 ~ useEffect ~ paymentInfo:", paymentInfo)
+  }, [paymentInfo]);
 /*   addPayment({
     id: orderResponse.id || 1,
     installments: paymentInfo.installments, //parcelas

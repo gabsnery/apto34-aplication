@@ -43,7 +43,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
       const today = new Date();
       setPaymentInfo({
         payer: {
-          email: clientData?.email || "",
+          email: clientData?.email || "gneri94@gmail.com",
           first_name: clientData?.nome || "",
           last_name: clientData?.sobrenome || "",
           identification: {
@@ -59,7 +59,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
     } else if (type === "PIX") {
       setPaymentInfo({
         payer: {
-          email: clientData?.email || "",
+          email: clientData?.email ||  "gneri94@gmail.com",
           first_name: clientData?.nome || "",
           last_name: clientData?.sobrenome || "",
           identification: {
@@ -137,6 +137,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
             payment_method_id,
             issuer_id,
           }) => {
+            
             setPaymentInfo({
               installments: installments || paymentInfo?.installments, //parcelas
               payer: {
