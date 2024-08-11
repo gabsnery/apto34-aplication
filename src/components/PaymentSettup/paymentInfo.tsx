@@ -52,7 +52,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           },
         },
         payment_method_id: "bolbradesco",
-        transaction_amount: 200,
+        transaction_amount: cart.total,
         date_of_expiration: new Date(today.setDate(today.getDate() + 3)),
       });
       setAllowFinish(true);
@@ -68,7 +68,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           },
         },
         payment_method_id: "pix",
-        transaction_amount: 0.1,
+        transaction_amount: cart.total,
       });
       setAllowFinish(true);
     }
