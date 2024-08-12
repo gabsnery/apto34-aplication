@@ -2,6 +2,7 @@ import {
   ICardPaymentBrickPayer,
   ICardPaymentFormData,
 } from "@mercadopago/sdk-react/bricks/cardPayment/type";
+
 import { defaultApi } from "../default";
 import { IPayment, IPaymentResponse, Preference } from "./mercadoPago.interface";
 

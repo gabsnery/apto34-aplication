@@ -77,7 +77,7 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
       }}
     >
       {products?.map((prod, idx) => (
-        <Grid key={idx} item xs={6} sm={4} md={4} lg={3}>
+        <Grid key={idx} item xs={6} sm={4} md={3} lg={2}>
           <ProductsCard value={prod} />
         </Grid>
       ))}

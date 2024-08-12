@@ -92,7 +92,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, []);
   useEffect(() => {
     if (payment?.pix_qrcode !== "") setqQr_code_base64(payment?.pix_qrcode);
-    if (payment) dispatch(clearCart());
+    //if (payment) dispatch(clearCart());
   }, [payment]);
   
   useEffect(() => {
