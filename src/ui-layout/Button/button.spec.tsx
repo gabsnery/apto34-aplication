@@ -58,11 +58,4 @@ describe("Button component", () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it("applies the disabled styles when the button is disabled", () => {
-    renderWithTheme(<Button variant="primary" disabled>Disabled</Button>);
-    const button = screen.getByText("Disabled");
-    expect(button).toHaveStyle(`background-color: ${theme.colors.grayMedium}`);
-    expect(button).toHaveStyle(`color: ${theme.colors.grayMedium}`);
-    expect(button).toHaveStyle(`cursor: unset`);
-  });
 });

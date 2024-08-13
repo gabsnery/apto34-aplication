@@ -6,4 +6,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${(props) => props.theme.typography.fontFamily};
     transition: all 0.50s linear;
   }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
   `;
