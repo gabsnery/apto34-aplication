@@ -7,7 +7,7 @@ import {  ThemeProvider } from "styled-components";
 import { withThemeFromJSXProvider } from "@storybook/addon-themes";
 
 const preview = {
-  parameters: {
+/*   parameters: {
     docs: {
       container: (context: any) => {
         const isDark = useDarkMode();
@@ -20,7 +20,7 @@ const preview = {
         return React.createElement(DocsContainer, props);
       },
     },
-  },
+  }, */
   decorators:  withThemeFromJSXProvider({
     themes: {
       light: lightTheme,
