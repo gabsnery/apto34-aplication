@@ -115,7 +115,6 @@ const StyledButton = styled.button<ButtonProps>`
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
   border-radius: 4px;
-  font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
   cursor: pointer;
   ${(props) =>
