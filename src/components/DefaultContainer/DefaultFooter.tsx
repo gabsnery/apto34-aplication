@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "store/store";
 import { useTheme } from "styled-components";
-import { Text } from "ui-layout";
+import { Button, Text } from "ui-layout";
 const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -42,14 +42,15 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
           </Grid>
           <Grid item container xs={12} sm={3} textAlign={"right"}  direction={"column"}>
             <Text variant={"h3"}  color="primary">
-              {t('footer.contactLabel')}
+              {t('footer.documentation')}
             </Text>
-            <Text variant={"h6"}  color="primary">
-              {t('footer.phone')}
-            </Text>
-            <Text variant={"h6"}  color="primary">
-              {t('footer.email')}
-            </Text>
+            <Button variant={'tertiary'} onClick={()=>{
+              navigate('https://66bad33b77c851ae114b8747-klnuntyxco.chromatic.com/')
+            }}>{t('footer.storybook')}</Button>
+            <Button variant={'tertiary'} onClick={()=>{
+              navigate('https://www.figma.com/design/ILO04OH2SekErWcaDYEzt8/Untitled?node-id=0-1')
+            }}>{t('footer.figma')}</Button>
+          
           </Grid>
           <Grid item container xs={12} sm={3} textAlign={"right"}  direction={"column"}>
             <Text variant={"h3"}  color="primary">
