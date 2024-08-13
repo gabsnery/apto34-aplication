@@ -5,7 +5,7 @@ import {
   FormControl,
   ListSubheader,
   MenuItem,
-  SelectProps as MUISelectPropsProps,
+  BaseSelectProps as MUISelectPropsProps,
   Radio,
 } from "@mui/material";
 import { FC } from "react";
@@ -72,7 +72,6 @@ const getStyledComponent: (props: string) => MUIStyledComponent<any> = (size) =>
   StyledTypographiesDictionary[`${size}`] ?? <></>;
 
 export const Select: FC<_SelectProps> = ({
-  children,
   type,
   mainIcon,
   label,
