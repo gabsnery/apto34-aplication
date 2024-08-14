@@ -112,19 +112,19 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
           />
         </RadioGroup>
       </FormControl>
-      {process.env.REACT_APP_ENV !== "production" && type !== undefined && (
+      {import.meta.env.VITE_ENV !== "production" && type !== undefined && (
         <Text variant="body" color={"error"}>
           {t(`payment_type_detail_${type}`)}
         </Text>
       )}
 
       <Grid container columnSpacing={2} margin={"10px 0"}>
-        {process.env.REACT_APP_ENV !== "production" && type !== undefined && (
+        {import.meta.env.VITE_ENV !== "production" && type !== undefined && (
           <Text variant="body">{t(`email_sended`)}</Text>
         )}
       </Grid>
       <Grid container columnSpacing={2} margin={"10px 0"}>
-        {process.env.REACT_APP_ENV !== "production" && type !== undefined && (
+        {import.meta.env.VITE_ENV !== "production" && type !== undefined && (
           <Text variant="body">{t(`sorry_message`)}</Text>
         )}
       </Grid>

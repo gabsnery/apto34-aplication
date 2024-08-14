@@ -10,6 +10,8 @@ import { RootState } from "store/store";
 import { lightTheme, darkTheme } from './ui-layout';
 import { GlobalStyles } from "components/globalStyles";
 import {ThemeProvider} from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const App = () => {
   const { t, i18n } = useTranslation()

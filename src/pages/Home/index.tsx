@@ -50,9 +50,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
-              style={{
-                backgroundImage: `url(https://storage.googleapis.com/apto34/assets/markus-spiske-5UJbKYUjFCk-unsplash.jpg)`,
-              }}
             >
               <div className="banner-text">
                 <h2>{"banner.title"}</h2>
@@ -63,9 +60,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
-              style={{
-                backgroundImage: `url(https://storage.googleapis.com/apto34/assets/artem-beliaikin-49mCO5ZRQDk-unsplash.jpg)`,
-              }}
             >
               <div className="banner-text">
                 <h2>{"banner.title"}</h2>
@@ -76,9 +70,6 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
             <div
               className="banner-image"
-              style={{
-                backgroundImage: `url(https://storage.googleapis.com/apto34/assets/andrew-knechel-gG6yehL64fo-unsplash.jpg)`,
-              }}
             >
               <div className="banner-text">
                 <h2>{"banner.title"}</h2>

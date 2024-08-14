@@ -2,6 +2,7 @@
   "name": "apto34-aplication",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -17,6 +18,7 @@
     "@types/node": "^16.18.37",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react-swc": "^3.7.0",
     "axios": "^1.4.0",
     "i18next": "^23.12.2",
     "i18next-http-backend": "^2.5.2",
@@ -31,7 +33,6 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "5.0.1",
     "react-slick": "^0.30.2",
     "redux-mock-store": "^1.5.4",
     "redux-persist": "^6.0.0",
@@ -39,6 +40,9 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.11",
     "typescript": "^4.9.5",
+    "vite": "^5.4.0",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-tsconfig-paths": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
   "jest": {
@@ -51,11 +55,9 @@
   },
   "scripts": {
     "lint": "eslint src/**/*.{js,ts,tsx}",
-    "start": "serve -s build",
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -80,6 +82,7 @@
     "@types/redux-mock-store": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^2.0.5",
     "ajv": "^7.2.4",
     "chromatic": "^11.7.0",
     "eslint": "^8.57.0",
@@ -90,7 +93,9 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-react": "^7.35.0",
+    "jsdom": "^24.1.1",
     "prop-types": "^15.8.1",
+    "vitest": "^2.0.5",
     "webpack": "^5.93.0"
   }
 }

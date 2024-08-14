@@ -87,8 +87,8 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     activeStep > 0 && setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   useEffect(() => {
-    if (process.env.REACT_APP_MERCADOLIVRE_TOKEN)
-      initMercadoPago(process.env.REACT_APP_MERCADOLIVRE_TOKEN);
+    if (import.meta.env.VITE_MERCADOLIVRE_TOKEN)
+      initMercadoPago(import.meta.env.VITE_MERCADOLIVRE_TOKEN);
   }, []);
   useEffect(() => {
     if (payment?.pix_qrcode !== "") setqQr_code_base64(payment?.pix_qrcode);

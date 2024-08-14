@@ -2,8 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import Backend from 'i18next-locize-backend'
 const locizeOptions = {
-  projectId:process.env.REACT_APP_I18N_PROJECTID ,
-  apiKey: process.env.REACT_APP_I18N_APIKEY ,
+  projectId:import.meta.env.VITE_I18N_PROJECTID ,
+  apiKey: import.meta.env.VITE_I18N_APIKEY ,
 }
 
 i18n.use(Backend)

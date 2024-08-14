@@ -8,7 +8,7 @@ import {
 import { logout } from '../slices/logout'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.REACT_APP_API_URL,
+  baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: (headers, { getState }) => {
     const {
       auth: { token }
