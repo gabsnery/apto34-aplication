@@ -26,5 +26,8 @@
     "react": {
       "version": "detect"
     }
-  }
+  },
+  "extends": [
+    "plugin:storybook/recommended"
+  ]
 }
