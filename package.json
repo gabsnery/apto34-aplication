@@ -45,6 +45,9 @@
     "vite-tsconfig-paths": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "engines": {
+    "node": ">=20.16.0"
+  },
   "scripts": {
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "dev": "vite",
