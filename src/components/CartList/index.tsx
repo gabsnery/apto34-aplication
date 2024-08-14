@@ -4,7 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { deleteProduct } from "store/slices/cartSlice";
-import { RootState } from "store/store";
+import { RootState } from "store";
 import { Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 import { useTheme } from "styled-components";

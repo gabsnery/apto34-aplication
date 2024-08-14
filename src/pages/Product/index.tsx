@@ -4,8 +4,8 @@ import { useTheme } from "@mui/material";
 import ProductView from "components/Product";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "../../store/store";
-import { lightTheme } from "ui-layout/theme";
-import useResponsive from "hooks/useResponsive";
+import { lightTheme } from "ui-layout";
+import {useResponsive} from "hooks";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 

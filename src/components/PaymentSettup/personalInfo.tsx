@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAddClientMutation, useGetClientQuery } from "store/api/Client";
 import { Button, Text, TextField } from "ui-layout";
-import { PasswordField } from "ui-layout/PasswordField";
+import { PasswordField } from "ui-layout";
 
 interface Props {}
 

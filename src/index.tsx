@@ -1,12 +1,11 @@
-import store, { persistor } from "store/store";
+import { persistor, store } from "store";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import "./i18n"
-import Loading from "components/Loading";
+import "./i18n";
 import { useTranslation } from "react-i18next";
 
 /* 
@@ -18,16 +17,14 @@ Sentry.init({
 })
  */
 
-
-
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Suspense fallback={<Loading />}>
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
+  <Suspense >
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
         <BrowserRouter>
-      <App />
+          <App />
         </BrowserRouter>
-    </PersistGate>
-  </Provider>
+      </PersistGate>
+    </Provider>
   </Suspense>
 );

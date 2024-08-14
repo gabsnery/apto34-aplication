@@ -1,6 +1,6 @@
 import { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
 import axios from 'axios'
-import store from '../store/store'
+import {store} from '../store'
 
 const configAuthorizationHeader = async (config: InternalAxiosRequestConfig) => {
   const token = store.getState().auth?.token

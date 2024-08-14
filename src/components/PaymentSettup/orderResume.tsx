@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Text } from "ui-layout";
-import { RootState, useAppDispatch } from "store/store";
+import { RootState, useAppDispatch } from "store";
 
 import { PayerCost } from "@mercadopago/sdk-react/coreMethods/util/types";
 interface Props {

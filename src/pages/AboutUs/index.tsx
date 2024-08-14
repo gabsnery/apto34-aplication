@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from "@mui/material";
 import Banner from "components/Banner";
-import Loading from "components/Loading";
+import { Loading } from "components/Loading";
 import MiniBanner from "components/MiniBanner";
 import ProductsSlider from "components/ProductsSlider";
 import { Suspense } from "react";
@@ -27,7 +27,11 @@ const AboutUs: React.FC<React.PropsWithChildren<unknown>> = () => {
         textAlign={"left"}
         direction={"column"}
         rowGap={4}
-        padding={{xs:`0 ${theme.spacing.small}`,sm:`0 ${theme.spacing.medium}`,md:`0 ${theme.spacing.extraLarge}`}}
+        padding={{
+          xs: `0 ${theme.spacing.small}`,
+          sm: `0 ${theme.spacing.medium}`,
+          md: `0 ${theme.spacing.extraLarge}`,
+        }}
         sx={{ whiteSpace: "pre-line" }}
       >
         <Text variant={"h2"}>{t("title")}</Text>
@@ -36,12 +40,12 @@ const AboutUs: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Text variant={"h2"}>{t("our_tech")}</Text>
         <StyledList>
           {Array.from(Array(10).keys()).map((i) => {
-            return i18n.exists(`about_us:our_tech_${i + 1}`) && (
-              <StyledListItem key={i}>
-                <Text variant={"body"}>
-                  {t(`our_tech_${i + 1}`)}{" "}
-                </Text>
-              </StyledListItem>
+            return (
+              i18n.exists(`about_us:our_tech_${i + 1}`) && (
+                <StyledListItem key={i}>
+                  <Text variant={"body"}>{t(`our_tech_${i + 1}`)} </Text>
+                </StyledListItem>
+              )
             );
           })}
         </StyledList>
@@ -49,12 +53,12 @@ const AboutUs: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Text variant={"h2"}>{t("featuresTitle")}</Text>
         <StyledList>
           {Array.from(Array(10).keys()).map((i) => {
-            return i18n.exists(`about_us:features_${i + 1}`) && (
-              <StyledListItem key={i}>
-                <Text variant={"body"}>
-                  {t(`features_${i + 1}`)}{" "}
-                </Text>
-              </StyledListItem>
+            return (
+              i18n.exists(`about_us:features_${i + 1}`) && (
+                <StyledListItem key={i}>
+                  <Text variant={"body"}>{t(`features_${i + 1}`)} </Text>
+                </StyledListItem>
+              )
             );
           })}
         </StyledList>
@@ -62,24 +66,24 @@ const AboutUs: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Text variant={"h2"}>{t("setupTitle")}</Text>
         <StyledList>
           {Array.from(Array(10).keys()).map((i) => {
-            return i18n.exists(`about_us:setup_${i + 1}`) && (
-              <StyledListItem key={i}>
-                <Text variant={"body"}>
-                  {t(`setup_${i + 1}`)}{" "}
-                </Text>
-              </StyledListItem>
+            return (
+              i18n.exists(`about_us:setup_${i + 1}`) && (
+                <StyledListItem key={i}>
+                  <Text variant={"body"}>{t(`setup_${i + 1}`)} </Text>
+                </StyledListItem>
+              )
             );
           })}
         </StyledList>
         <Text variant={"h2"}>{t("next_steps")}</Text>
         <StyledList>
           {Array.from(Array(15).keys()).map((i) => {
-            return i18n.exists(`about_us:next_steps_${i + 1}`) && (
-              <StyledListItem key={i}>
-                <Text variant={"body"}>
-                  {t(`next_steps_${i + 1}`)}{" "}
-                </Text>
-              </StyledListItem>
+            return (
+              i18n.exists(`about_us:next_steps_${i + 1}`) && (
+                <StyledListItem key={i}>
+                  <Text variant={"body"}>{t(`next_steps_${i + 1}`)} </Text>
+                </StyledListItem>
+              )
             );
           })}
         </StyledList>

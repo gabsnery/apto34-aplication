@@ -28,7 +28,7 @@ import { useSelector } from "react-redux";
 import { changeLanguage } from "store/slices/languageSlice";
 import { logout } from "store/slices/logout";
 import { changeTheme } from "store/slices/themeSlice";
-import { RootState, useAppDispatch } from "store/store";
+import { RootState, useAppDispatch } from "store";
 import { useTheme } from "styled-components";
 import { Button, Text } from "ui-layout";
 import items, { NavObj } from "./nav";

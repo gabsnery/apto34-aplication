@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import React, { FC, Suspense } from "react";
-import Loading from "../Loading";
+import { Loading } from "components/Loading";
 import DefaultHeader from "./DefaultHeader";
 import DefaultFooter from "./DefaultFooter";
 import SnackbarHandler from "components/SnackbarHandler";

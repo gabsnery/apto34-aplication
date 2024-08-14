@@ -8,10 +8,10 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useGetCategoriasQuery } from "store/api/category";
 import { addFilter, clearOneFilter, setFilter } from "store/slices/sessionFilterSlice";
-import { RootState, useAppDispatch } from "store/store";
+import { RootState, useAppDispatch } from "store";
 import { useTheme } from "styled-components";
 import { Button } from "ui-layout";
-import { lightTheme } from "ui-layout/theme";
+import { lightTheme } from "ui-layout";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 

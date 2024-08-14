@@ -5,7 +5,7 @@ import "./style.css";
 import { Grid, useMediaQuery } from "@mui/material";
 import { useGetProductsQuery } from "store/api/product";
 import { useSelector } from "react-redux";
-import { RootState } from "store/store";
+import { RootState } from "store";
 
 export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
   keyValue,

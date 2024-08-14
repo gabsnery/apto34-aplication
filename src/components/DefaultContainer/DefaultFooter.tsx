@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 
 import logo from "assets/img/logo-sl-horizontal.svg";
 import logoDark from "assets/img/logo-sl-horizontal_dark.svg";
-import useResponsive from "hooks/useResponsive";
+import {useResponsive} from "hooks";
 import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "store/store";
+import { RootState } from "store";
 import { useTheme } from "styled-components";
 import { Button, Text } from "ui-layout";
 const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {

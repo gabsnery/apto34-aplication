@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { fetchLogin } from "../../store/slices/auth.slice";
 import { Login as LoginEntity } from "../../store/types/auth.interfaces";
 import { useTypedSelector } from "hooks";
-import { PasswordField } from "ui-layout/PasswordField";
+import { PasswordField } from "ui-layout";
 
 interface Props {
   onLogin?: (value: boolean) => void;

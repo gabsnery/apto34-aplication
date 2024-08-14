@@ -6,18 +6,19 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'), // Alias para a pasta `src`
-      'pages': path.resolve(__dirname, 'src/pages'),
-      'components': path.resolve(__dirname, 'src/components'),
-      'i18n': path.resolve(__dirname, 'src/i18n'),
-      'store': path.resolve(__dirname, 'src/store'),
-      'middlewares': path.resolve(__dirname, 'src/middlewares'),
-      'ui-layout': path.resolve(__dirname, 'src/ui-layout'),
-      'hooks': path.resolve(__dirname, 'src/hooks'),
-      'utils': path.resolve(__dirname, 'src/utils'),
-      'assets': path.resolve(__dirname, 'src/assets'),
-    },
+    alias: [
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+      { find: 'pages', replacement: path.resolve(__dirname, 'src/pages') },
+      { find: 'store', replacement: path.resolve(__dirname, 'src/store') },
+      { find: 'components', replacement: path.resolve(__dirname, 'src/components') },
+      { find: 'middlewares', replacement: path.resolve(__dirname, 'src/middlewares') },
+      { find: 'hooks', replacement: path.resolve(__dirname, 'src/hooks') },
+      { find: 'utils', replacement: path.resolve(__dirname, 'src/utils') },
+      { find: 'assets', replacement: path.resolve(__dirname, 'src/assets') },
+      { find: 'i18n', replacement: path.resolve(__dirname, 'src/i18n') },
+      { find: 'ui-layout', replacement: path.resolve(__dirname, 'src/ui-layout') },
+      { find: '@types', replacement: path.resolve(__dirname, 'src/@types') },
+  ],
   },
   server: {
     open: true,

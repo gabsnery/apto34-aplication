@@ -11,7 +11,7 @@ import {
   useAddPreferenceMutation,
   useGetCardTokenMutation,
 } from "store/api/payment";
-import { RootState } from "store/store";
+import { RootState } from "store";
 import { Button, Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 

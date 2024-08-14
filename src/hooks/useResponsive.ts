@@ -1,6 +1,6 @@
 import { useMediaQuery } from '@mui/material';
 
-const useResponsive = () => {
+export const useResponsive = () => {
   const isXs = useMediaQuery('(max-width: 600px)');  // Dispositivos pequenos (smartphones)
   const isSm = useMediaQuery('(min-width: 601px) and (max-width: 960px)');  // Tablets e dispositivos móveis grandes
   const isMd = useMediaQuery('(min-width: 961px) and (max-width: 1280px)');  // Laptops e desktops pequenos
@@ -9,5 +9,3 @@ const useResponsive = () => {
 
   return { isXs, isSm, isMd, isLg, isXl };
 };
-
-export default useResponsive;

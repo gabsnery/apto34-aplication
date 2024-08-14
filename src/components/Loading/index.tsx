@@ -2,9 +2,9 @@ import { LinearProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
 import { useTheme } from 'styled-components';
-import { tokens } from 'ui-layout/tokens';
+import { tokens } from 'ui-layout';
 
-const Loading: FC<React.PropsWithChildren<{
+export const Loading: FC<React.PropsWithChildren<{
   progress?: number;
 }>> = ({ progress }) => {
   // const springL = useSpring({
@@ -41,4 +41,3 @@ const Loading: FC<React.PropsWithChildren<{
   );
 };
 
-export default Loading;

@@ -5,7 +5,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "store/store";
+import { RootState } from "store";
 import { Button, Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 

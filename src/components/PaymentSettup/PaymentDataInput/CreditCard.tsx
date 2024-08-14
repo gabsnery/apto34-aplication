@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { RootState } from "store/store";
+import { RootState } from "store";
 import { Select, TextField, Text, Button } from "ui-layout";
 
 import {

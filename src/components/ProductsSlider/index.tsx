@@ -4,10 +4,10 @@ import Slider, { Settings } from "react-slick";
 import "./BannerStyles.css";
 import { useGetProductsQuery } from "store/api/product";
 import { useSelector } from "react-redux";
-import { RootState } from "store/store";
+import { RootState } from "store";
 import ProductsCard from "components/ProductCard";
 import { useMediaQuery } from "@mui/material";
-import useResponsive from "hooks/useResponsive";
+import {useResponsive} from "hooks";
 
 
 

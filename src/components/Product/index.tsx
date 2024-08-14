@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetImageQuery, useGetProductQuery } from "store/api/product";
 import { addProduct } from "store/slices/cartSlice";
 import { Button, Text } from "ui-layout";
-import { NumberField } from "ui-layout/NumberField";
+import { NumberField } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 import SignedThumbnail from "./signedThumbnail";
 import { setConfirmationModal } from "store/slices/confirmationModalSlice";
