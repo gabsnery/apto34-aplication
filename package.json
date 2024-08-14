@@ -58,7 +58,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "serve dist -s"
+    "start": "serve build -s"
   },
   "eslintConfig": {
     "extends": [
