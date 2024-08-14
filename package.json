@@ -55,9 +55,10 @@
   },
   "scripts": {
     "lint": "eslint src/**/*.{js,ts,tsx}",
-    "start": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "preview": "vite preview",
+    "start": "serve dist -s"
   },
   "eslintConfig": {
     "extends": [
