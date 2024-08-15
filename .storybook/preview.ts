@@ -1,15 +1,24 @@
-import type { Preview } from "@storybook/react";
+import { lightTheme, darkTheme } from "../src/ui-layout";
+import { GlobalStyles } from "../src/components/globalStyles";
+import {  ThemeProvider } from "styled-components";
+import { withThemeFromJSXProvider } from "@storybook/addon-themes";
 
-const preview: Preview = {
-  parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+const preview = {
+   parameters: {
+    previewTabs: {
+      "storybook/docs/panel": { hidden: true },
     },
-  },
+    docs: { disable: true }
+  }, 
+  decorators:  [withThemeFromJSXProvider({
+    themes: {
+      light: lightTheme,
+      dark: darkTheme,
+    },
+    defaultTheme: "light",
+    Provider: ThemeProvider,
+    GlobalStyles,
+  })]
 };
 
 export default preview;
