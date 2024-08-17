@@ -13,6 +13,7 @@ import CloseOrder from "./pages/CloseOrder";
 import AboutUs from "./pages/AboutUs";
 import ConfirmationModalHandler from "./components/ConfirmationModalHandler";
 import Orders from "./pages/Orders";
+import { GApageView } from "utils";
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -22,6 +23,9 @@ import Orders from "./pages/Orders";
     )
 ) */
 const AppRoutes = () => {
+  useEffect(() => {
+    GApageView(location.pathname);
+  }, [location.pathname]);
   return (
     <Suspense>
       <Routes>
