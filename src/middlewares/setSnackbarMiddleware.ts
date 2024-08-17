@@ -28,8 +28,6 @@ const mid: Middleware = (store) => (next) => (action) => {
       }
   }
   if (action?.error && action?.error.name !== 'ConditionError') {
-    console.log("🚀 ~ action:", action)
-    console.log("🚀 ~ import.meta.env:", import.meta.env)
     const mssg = action?.payload?.status === 401 ? 'common|expiredSession' : action?.payload?.data? action?.payload?.data :(action?.error?.message) ?? 'common|error'
     store.dispatch(
       setSnackbar({
