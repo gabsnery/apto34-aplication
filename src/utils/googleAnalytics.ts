@@ -5,14 +5,17 @@ export const GApageView = async (page: string) => {
 };
 
 export const GAInitializate = (userId?: string) => {
-  if (!ReactGA.isInitialized)
-    ReactGA.initialize(`${import.meta.env.VITE_REACT_APP_GOOGLE_ANALYTICS}`, {
-      gaOptions: {
-        userId: userId || 999999,
-      },
-      testMode:true
-    });
-    
+ 
+  if (!ReactGA.isInitialized) {
+    ReactGA.initialize(
+      `${import.meta.env.VITE_REACT_APP_GOOGLE_ANALYTICS}`,
+      {
+        gaOptions: {
+          userId: userId || 999999,
+        },
+      }
+    );
+  }
 };
 /*export const GAmodalView = (modal: string) => {
   ReactGA.modalview(modal)
