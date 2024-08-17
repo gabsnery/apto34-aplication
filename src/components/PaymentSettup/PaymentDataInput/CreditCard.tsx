@@ -99,7 +99,6 @@ export const CreditCardComponent = (props: {
         identificationNumber: formData.identity,
       })
         .then((card_token) => {
-          console.log("🚀 ~ useEffect ~ card_token:", card_token);
           if (card_token?.id) setToken(card_token?.id.toString());
         })
         .catch((err) => {

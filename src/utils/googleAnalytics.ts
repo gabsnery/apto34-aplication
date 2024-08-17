@@ -10,7 +10,9 @@ export const GAInitializate = (userId?: string) => {
       gaOptions: {
         userId: userId || 999999,
       },
+      testMode:true
     });
+    
 };
 /*export const GAmodalView = (modal: string) => {
   ReactGA.modalview(modal)
