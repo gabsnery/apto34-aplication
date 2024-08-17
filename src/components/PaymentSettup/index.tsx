@@ -53,9 +53,6 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
     if (activeStep === steps.length - 1) {
-      getIdentificationTypes().then((e) => {
-        console.log("eee", e);
-      });
 
       addOrder({
         clienteId: userID,
@@ -77,8 +74,6 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   useEffect(() => {
     if (data) {
       if (data.init_point) {
-        console.log("🚀 ~ useEffect ~ data.init_point:", data.init_point);
-
         window.open(data.init_point, "_blank");
       }
     }
@@ -126,10 +121,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       });
     }
   }, [orderResponse]);
-  useEffect(() => {
-    
-    console.log("🚀 ~ useEffect ~ paymentInfo:", paymentInfo)
-  }, [paymentInfo]);
+
 /*   addPayment({
     id: orderResponse.id || 1,
     installments: paymentInfo.installments, //parcelas

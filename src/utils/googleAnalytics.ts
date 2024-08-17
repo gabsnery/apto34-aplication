@@ -5,10 +5,6 @@ export const GApageView = async (page: string) => {
 };
 
 export const GAInitializate = (userId?: string) => {
-  console.log(
-    "🚀 ~ GAInitializate ~ ReactGA.isInitialized:",
-    ReactGA.isInitialized
-  );
   if (!ReactGA.isInitialized)
     ReactGA.initialize(`${import.meta.env.REACT_APP_GOOGLE_ANALYTICS}`, {
       gaOptions: {
