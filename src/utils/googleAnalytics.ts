@@ -6,9 +6,13 @@ export const GApageView = async (page: string) => {
   ReactGA.send({ hitType: "pageview", page: page,title:page});
 }
 
-export const GAInitializate= () => {
+export const GAInitializate= (userId?: string) => {
   if(!ReactGA.isInitialized)
-  ReactGA.initialize(`${process.env.REACT_APP_GOOGLE_ANALYTICS}`);
+  ReactGA.initialize(`${import.meta.env.REACT_APP_GOOGLE_ANALYTICS}`,{
+    gaOptions:{
+      userId:userId||999999
+    }
+  });
   
 }
 /*export const GAmodalView = (modal: string) => {

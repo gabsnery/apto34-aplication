@@ -5,8 +5,8 @@ const googleAnalyticsMiddleware: Middleware = () => (next) => (action) => {
   const actionType = action?.type.split("/");
   console.log("🚀 ~ actionType:", actionType);
   GAevent(
-    actionType[2],
     actionType[1],
+    actionType[0],
     JSON.stringify(action?.meta?.arg || "")
   );
 
