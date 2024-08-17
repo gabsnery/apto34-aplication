@@ -12,6 +12,7 @@ import { GlobalStyles } from "./components/globalStyles";
 import {ThemeProvider} from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { GAInitializate } from "utils";
 
 const App = () => {
   const { t, i18n } = useTranslation()
@@ -23,6 +24,9 @@ const App = () => {
     const userLang = navigator.language
     i18n.changeLanguage(language?language:userLang)
   }, [language]);
+  useEffect(() => {
+    GAInitializate()
+  }, []);
   return (
     <StyledEngineProvider injectFirst>
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

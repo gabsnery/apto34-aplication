@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path';
+import { configDefaults } from 'vitest/config';
 
 
 export default defineConfig({
@@ -25,5 +26,15 @@ export default defineConfig({
   },
   build:{
     outDir: "build"
-  }
+  },
+  test: {
+    globals: true, // Permite usar variáveis globais de teste como "describe" e "it"
+    environment: 'jsdom', // Define o ambiente de teste como jsdom para simular o DOM
+    setupFiles: './vitest.setup.ts', // Arquivo para configurações e mocks globais
+    exclude: [...configDefaults.exclude, 'e2e/*'], // Exclui diretórios específicos dos testes
+    coverage: {
+      provider: 'v8', // Usar o provedor de cobertura "v8"
+      reporter: ['text', 'json', 'html'], // Tipos de relatórios de cobertura gerados
+    },
+  },
 });

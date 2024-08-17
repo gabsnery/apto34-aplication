@@ -9,6 +9,7 @@ import storage from "redux-persist/lib/storage";
 import { defaultApi } from './api/default';
 import rootReducer from "./rootReducer";
 import setSnackbarMiddleware from "middlewares/setSnackbarMiddleware";
+import googleAnalyticsMiddleware from "middlewares/googleAnalyticsMiddleware";
 
 const migrations = {
   0: (state: PersistedState) => {
@@ -41,6 +42,7 @@ export const store = configureStore({
       immutableCheck: false,
     }),
     setSnackbarMiddleware,
+    googleAnalyticsMiddleware,
     defaultApi.middleware
   ],
 });

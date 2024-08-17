@@ -125,7 +125,7 @@ const StyledButton = styled.button<ButtonProps>`
 StyledButton.shouldForwardProp = (prop) => !["variant"].includes(prop);
 
 export const Button: React.FC<ButtonProps> = (props) => {
-  const { children, onClick, variant = "primary", disabled, ...rest } = props;
+  const { children, onClick, variant = "primary", disabled=false, ...rest } = props;
   return (
     <StyledButton
       onClick={onClick}

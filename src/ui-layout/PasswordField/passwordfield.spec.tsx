@@ -1,12 +1,6 @@
-import React, { ReactNode } from "react";
-import {
-  render,
-  screen,
-  fireEvent,
-  RenderResult,
-  act,
-} from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest"; // Importações para Vitest
 import { ThemeProvider } from "styled-components";
 import { PasswordField } from ".";
 import userEvent from "@testing-library/user-event";
@@ -33,9 +27,12 @@ const theme = {
   paper: {
     default: "#fff",
   },
+  icon: {
+    primary: "#fff",
+  },
 };
 
-const renderWithTheme = (component: any) => {
+const renderWithTheme = (component: React.ReactElement) => {
   return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
 };
 
@@ -67,11 +64,10 @@ describe("PasswordField component", () => {
   });
 
   it("calls the onChange handler", () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn(); // Substitua jest.fn() por vi.fn()
     renderWithTheme(<PasswordField label="Name" value="" onChange={onChange} />);
-    const input = screen.getByRole('input')
+    const input = screen.getByLabelText("Name") as HTMLInputElement;
     fireEvent.change(input, { target: { value: "Jane Doe" } });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
-
 });
