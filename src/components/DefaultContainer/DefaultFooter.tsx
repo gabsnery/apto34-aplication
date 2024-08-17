@@ -45,10 +45,10 @@ const DefaultFooter: FC<React.PropsWithChildren<{}>> = () => {
               {t('footer.documentation')}
             </Text>
             <Button variant={'tertiary'} onClick={()=>{
-              navigate('https://66bad33b77c851ae114b8747-klnuntyxco.chromatic.com/')
+              window.open('https://66bad33b77c851ae114b8747-klnuntyxco.chromatic.com/', "_blank", "noreferrer");
             }}>{t('footer.storybook')}</Button>
             <Button variant={'tertiary'} onClick={()=>{
-              navigate('https://www.figma.com/design/ILO04OH2SekErWcaDYEzt8/Untitled?node-id=0-1')
+              window.open('https://www.figma.com/design/ILO04OH2SekErWcaDYEzt8/Untitled?node-id=0-1', "_blank", "noreferrer");
             }}>{t('footer.figma')}</Button>
           
           </Grid>

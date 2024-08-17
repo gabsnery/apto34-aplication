@@ -92,12 +92,13 @@ const variantStyles = {
     cursor: unset;
   `,
   tertiary: css`
+     text-align: right;
     background-color: transparent;
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.text.primary};
     border: none;
 
     &:hover {
-      color: ${(props) => props.theme.colors.primaryVariant};
+      color: ${(props) => props.theme.colors.grayDark};
     }
   `,
   tertiaryDisabled: css`
@@ -110,7 +111,7 @@ const variantStyles = {
 
 const StyledButton = styled.button<ButtonProps>`
   padding: ${(props) => props.theme.spacing.small};
-  min-width:100px;
+  min-width: 100px;
   letter-spacing: 0.08em;
   font-family: ${(props) => props.theme.typography.fontFamily};
   font-size: ${(props) => props.theme.typography.fontSize};
@@ -125,7 +126,13 @@ const StyledButton = styled.button<ButtonProps>`
 StyledButton.shouldForwardProp = (prop) => !["variant"].includes(prop);
 
 export const Button: React.FC<ButtonProps> = (props) => {
-  const { children, onClick, variant = "primary", disabled=false, ...rest } = props;
+  const {
+    children,
+    onClick,
+    variant = "primary",
+    disabled = false,
+    ...rest
+  } = props;
   return (
     <StyledButton
       onClick={onClick}
