@@ -15,4 +15,3 @@ jobs:
         with:
           project-id: teste
           api-key: ${{ secrets.LOCIZE_API_KEY }}
-          path: /public
