@@ -14,5 +14,5 @@ jobs:
       - name: Download translations
         uses: locize/download@v1
         with:
-          project-id: teste
+          project-id: ${{ secrets.LOCIZE_PROJECT_ID }}
           api-key: ${{ secrets.LOCIZE_API_KEY }}
