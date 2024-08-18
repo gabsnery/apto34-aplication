@@ -11,6 +11,7 @@ import { useTheme } from "styled-components";
 import { Product } from "store/api/product/product.interface";
 import { useGetImageQuery } from "store/api/product";
 import { useNavigate } from "react-router-dom";
+import { signed_files_expiration } from "utils";
 interface IProps {
   item: Product;
   quantity: number;
@@ -32,6 +33,8 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
     photoId || "",
     {
       skip: photoId === undefined,
+      pollingInterval: signed_files_expiration,
+    
     }
   );
   useEffect(() => {

@@ -15,6 +15,7 @@ import { useGetImageQuery } from "store/api/product";
 import { Product } from "store/api/product/product.interface";
 import { useTheme } from "styled-components";
 import { Text } from "ui-layout";
+import { signed_files_expiration } from "utils";
 
 
 export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
@@ -36,6 +37,7 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
     photoId || "",
     {
       skip: photoId === undefined,
+      pollingInterval: signed_files_expiration,
     }
   );
   useEffect(() => {

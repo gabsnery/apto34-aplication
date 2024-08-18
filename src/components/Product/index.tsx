@@ -12,6 +12,7 @@ import { useAppDispatch } from "../../store/store";
 import SignedThumbnail from "./signedThumbnail";
 import { setConfirmationModal } from "store/slices/confirmationModalSlice";
 import ConfirmationModal from "./ConfirmationModal";
+import { signed_files_expiration } from "utils";
 
 const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["product", "translation"], {
@@ -30,6 +31,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
     photoId || "",
     {
       skip: photoId === undefined,
+      pollingInterval: signed_files_expiration,
     }
   );
   const [quantity, setQuantity] = useState<number>(0);

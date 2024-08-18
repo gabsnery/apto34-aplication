@@ -5,13 +5,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { useGenerateSignedFileQuery } from "store/api/default";
 import { Button } from "ui-layout";
+import { signed_files_expiration } from "utils";
 
 const CookiesConsent: FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
   const language = useSelector((st: RootState) => st.language);
 
   
-  const {data} = useGenerateSignedFileQuery(`terms_of_use_${language || 'pt-BR'}.pdf`)
+  const {data ,refetch} = useGenerateSignedFileQuery(`privacy_policy_${language || 'pt-BR'}.pdf`,{
+    pollingInterval: signed_files_expiration,
+  })
 
 
   return (
@@ -24,7 +27,9 @@ const CookiesConsent: FC<React.PropsWithChildren<unknown>> = () => {
   >
     {t('cookies_consent_text')}
     <Button variant={'primary'} onClick={()=>{
-      window.open(data?.url, "_blank", "noreferrer");
+      refetch().then(()=>{
+        window.open(data?.url, "_blank", "noreferrer");
+      })
     }}> Privacy </Button>
   </CookieConsent>
   );

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Slider, { Settings } from "react-slick";
 import "./BannerStyles.css";
 import { useGetImageQuery } from "store/api/product";
+import { signed_files_expiration } from "utils";
 
 interface BannerProps {
   banners: {
@@ -23,7 +24,9 @@ const Banner: React.FC<BannerProps> = ({ banners }) => {
   };
   const [bannerPhotos, setBannerPhotos] = useState<string[]>([]);
   const { data: photoData0,isSuccess:IsSuccess0 } = useGetImageQuery(
-    "U2FsdGVkX1+uTPsm7Rwe1wId2ZZdEpPoCNbwK/Kf8V4="
+    "U2FsdGVkX1+uTPsm7Rwe1wId2ZZdEpPoCNbwK/Kf8V4=",{
+      pollingInterval: signed_files_expiration,
+    }
   );
 
   //TOP 3 WORST DECISION I MADE BUT ITS TEMPORARY
