@@ -17,6 +17,8 @@ jobs:
         uses: locize/download@v1
         with:
           project-id: ${{ secrets.LOCIZE_PROJECT_ID }}
+          api-key: ${{ secrets.LOCIZE_API_KEY }}
+          path: /public
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
