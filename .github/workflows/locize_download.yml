@@ -1,0 +1,25 @@
+name: Locize Translation Download and Push
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    name: Download and push translations
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download translations
+        uses: locize/download@v1
+        with:
+          project-id: ${{ secrets.LOCIZE_PROJECT_ID }}
+      - name: Pull changes from main
+        run: git pull origin main
+      - name: Commit & Push changes
+        uses: actions-js/push@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
