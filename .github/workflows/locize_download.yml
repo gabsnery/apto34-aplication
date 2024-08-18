@@ -16,6 +16,7 @@ jobs:
         with:
           project-id: ${{ secrets.LOCIZE_PROJECT_ID }}
           api-key: ${{ secrets.LOCIZE_API_KEY }}
+          path: src/assets/locales
       - name: Pull changes from main
         run: git pull origin main
       - name: Commit & Push changes
