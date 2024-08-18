@@ -1,19 +1,21 @@
 import { Container } from "@mui/material";
-import React, { FC, Suspense } from "react";
-import { Loading } from "components/Loading";
-import DefaultHeader from "./DefaultHeader";
-import DefaultFooter from "./DefaultFooter";
+import CookiesConsent from "components/CookiesConsent";
 import SnackbarHandler from "components/SnackbarHandler";
+import React, { FC, Suspense } from "react";
 import { useTheme } from "styled-components";
+import DefaultFooter from "./DefaultFooter";
+import DefaultHeader from "./DefaultHeader";
+
 const DefaultContainer: FC<
   React.PropsWithChildren<{
     children: NonNullable<React.ReactNode>;
   }>
 > = (props) => {
+
   const theme = useTheme();
   return (
     <>
-      <Suspense >
+      <Suspense>
         <DefaultHeader />
         <Container
           maxWidth={false}
@@ -23,14 +25,15 @@ const DefaultContainer: FC<
             paddingTop: "15px",
             paddingBottom: "25px",
             textAlign: "center",
-            minHeight: "calc(100vh - 293px)"
+            minHeight: "calc(100vh - 293px)",
           }}
         >
           <SnackbarHandler />
           {props.children}
         </Container>
       </Suspense>
-   <DefaultFooter /> 
+      <DefaultFooter />
+     <CookiesConsent/>
     </>
   );
 };

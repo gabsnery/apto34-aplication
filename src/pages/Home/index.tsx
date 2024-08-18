@@ -82,7 +82,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           <MiniBanner
             banner={{
               image:
-                "https://miro.medium.com/v2/resize:fit:1024/0*L5Hv8vQD_MqEwhRL.png",
+                "",
               title: "Nova Linha de Acessórios",
               subtitle: "Complete seu look com nossos acessórios",
             }}

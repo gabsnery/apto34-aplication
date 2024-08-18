@@ -1,6 +1,7 @@
 import ReactGA from "react-ga4";
 
 export const GApageView = async (page: string) => {
+  if (ReactGA.isInitialized) 
   ReactGA.send({ hitType: "pageview", page: page, title: page });
 };
 
@@ -22,6 +23,7 @@ export const GAInitializate = (userId?: string) => {
 }*/
 
 export const GAevent = async (action: string, category: string, label: any) => {
+  if (ReactGA.isInitialized) 
   ReactGA.event({
     category: category,
     action: action,

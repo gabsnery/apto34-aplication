@@ -40,3 +40,14 @@ export const defaultApi = createApi({
   endpoints: () => ({})
 })
 
+
+const endpoints = defaultApi.injectEndpoints({
+  endpoints: (build) => ({
+    generateSignedFile: build.query<{ url: string }, string>({
+      query: (id) => `/api/generate_signed/${encodeURIComponent(id)}`,
+    }),
+  })
+})
+
+export const { 
+  useGenerateSignedFileQuery } = endpoints;
