@@ -1,9 +1,6 @@
 name: Locize Translation Download and Push
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -14,8 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download translations
-        uses: locize/download@v1
+        uses: locize/download@latest
         with:
-          project-id: ${{ secrets.LOCIZE_PROJECT_ID }}
+          project-id: teste
           api-key: ${{ secrets.LOCIZE_API_KEY }}
           path: /public
