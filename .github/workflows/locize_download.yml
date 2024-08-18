@@ -6,6 +6,7 @@ on:
 jobs:
   my_job:
     runs-on: ubuntu-latest
+    environment: apto34-aplication 
     name: download and push
     steps:
       - name: Checkout
