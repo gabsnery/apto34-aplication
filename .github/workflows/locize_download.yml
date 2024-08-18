@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Download translations
-        uses: locize/download@latest
+        uses: locize/download@v1
         with:
           project-id: teste
           api-key: ${{ secrets.LOCIZE_API_KEY }}
