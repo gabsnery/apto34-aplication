@@ -1,12 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import Backend from 'i18next-locize-backend'
-const locizeOptions = {
-  projectId:import.meta.env.VITE_I18N_PROJECTID ,
-  apiKey: import.meta.env.VITE_I18N_APIKEY ,
-}
+import resourcesToBackend from "i18next-resources-to-backend";
 
-i18n.use(Backend)
+i18n.use(resourcesToBackend((language: any, namespace: any) => import(`./assets/locales/${language}/${namespace}.json`)))
 .use(initReactI18next) .init({
   compatibilityJSON: 'v4', 
   supportedLngs: ['pt-BR','en-US'],
@@ -14,8 +10,6 @@ i18n.use(Backend)
   interpolation: {
     escapeValue: false,
   },
-  backend: locizeOptions,
-
 });
 
 export default i18n;
