@@ -118,7 +118,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         </Text>
       )}
 
-      <Grid container columnSpacing={2} margin={"10px 0"}>
+      {/* <Grid container columnSpacing={2} margin={"10px 0"}>
         {import.meta.env.VITE_ENV !== "production" && type !== undefined && (
           <Text variant="body">{t(`email_sended`)}</Text>
         )}
@@ -127,7 +127,7 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
         {import.meta.env.VITE_ENV !== "production" && type !== undefined && (
           <Text variant="body">{t(`sorry_message`)}</Text>
         )}
-      </Grid>
+      </Grid> */}
       {type === "CreditCard" && (
         <CreditCardComponent
           setAllowFinish={setAllowFinish}

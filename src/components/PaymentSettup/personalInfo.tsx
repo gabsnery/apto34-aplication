@@ -1,11 +1,16 @@
-import { Modal, Box, Grid } from "@mui/material";
+import { Modal, Box, Grid, FormControlLabel, Checkbox } from "@mui/material";
 import Login from "components/Login";
 import { useTypedSelector } from "hooks";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { RootState } from "store";
 import { useAddClientMutation, useGetClientQuery } from "store/api/Client";
+import { useGenerateSignedFileQuery } from "store/api/default";
 import { Button, Text, TextField } from "ui-layout";
 import { PasswordField } from "ui-layout";
+import { signed_files_expiration } from "utils";
 
 interface Props {}
 
@@ -16,7 +21,13 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
   );
   const [addClient] = useAddClientMutation();
   const { data: clientData } = useGetClientQuery();
+  const language = useSelector((st: RootState) => st.language);
 
+  const {data ,refetch} = useGenerateSignedFileQuery(`terms_of_use_${language || 'pt-BR'}.pdf`,{
+    pollingInterval: signed_files_expiration,
+  })
+
+  const [termAcceped,setTermAccepted] = useState<boolean>(false)
   const [formData, setFormData] = useState<{
     name: string;
     surname: string;
@@ -126,10 +137,29 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
               required
             />
           )}
+          {!token && data && (
+              <FormControlLabel
+              control={<Checkbox name="lgpd_agreement" onChange={()=>{
+                setTermAccepted(!termAcceped)
+              }} />}
+              label={
+                <Text>
+                  random text {" "}
+                  <Link
+                    onClick={(e) => {
+                      window.open(data?.url,"_blak","noreferrer")
+                    } } to={""}>
+                    Termos de uso
+                  </Link>
+                </Text>
+              }
+            />
+          )}
           <Button
             onClick={() => {
               addClient(formData);
             }}
+            disabled={!termAcceped}
             variant="secondary"
           >
             {t("save")}
