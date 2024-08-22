@@ -6,6 +6,7 @@ import {
   CardMedia,
   Grid
 } from "@mui/material";
+import { useResponsive } from "hooks";
 //import { Link } from 'react-router-dom'
 
 import { useCallback, useEffect, useState } from "react";
@@ -24,6 +25,7 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
 }) => {
   const { t } = useTranslation(["product", "translation"]);
   const theme = useTheme();
+  const {isSm,isMd,isXs} =useResponsive()
 
   const navigate = useNavigate();
   const handleOnItemClick = useCallback(
@@ -59,7 +61,7 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
             {photoData && (
               <CardMedia
                 component="img"
-                height="300"
+                height={isXs?"200":"300"}
                 image={photoData?.url}
                 alt={value.nome}
               />
