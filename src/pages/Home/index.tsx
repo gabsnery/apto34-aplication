@@ -1,5 +1,4 @@
 import { Grid } from "@mui/material";
-import Banner from "components/Banner";
 import CategorySelector from "components/CategorySelector";
 import MiniBanner from "components/MiniBanner";
 import ProductsSlider from "components/ProductsSlider";
@@ -7,12 +6,19 @@ import { useTranslation } from "react-i18next";
 import { useGetBannersQuery } from "store/api/Banner";
 import { useTheme } from "styled-components";
 import { Text,Button } from 'ui-layout';
+import BannerCarousel from "components/BannerCarousel";
+import SimpleBanner from "components/SimpleBanner";
+import { useAppDispatch } from "store";
+import { useNavigate } from "react-router-dom";
+import { setFilter } from "store/slices/sessionFilterSlice";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const { data: banners, isLoading: isBannerLoading } = useGetBannersQuery();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <>
       <Grid container justifyContent={"center"} rowGap={3}>
@@ -23,7 +29,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           {isBannerLoading ? (
             <></>
           ) : (
-            <Banner
+            <BannerCarousel
               banners={
                 banners?.map((i) => ({
                   image: i.url_image,
@@ -48,34 +54,22 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           rowSpacing={1}
         >
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
-            <div
-              className="banner-image"
-            >
-              <div className="banner-text">
-                <h2>{"banner.title"}</h2>
-                <p>{"banner.subtitle"}</p>
-              </div>
-            </div>
+          <SimpleBanner image={"priscilla-du-preez-dlxLGIy-2VU-unsplash.jpg"} title={"BAnner 1"} subtitle={"Conheça nossa equipe"} url={""}/>
+          
           </Grid>
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
-            <div
-              className="banner-image"
-            >
-              <div className="banner-text">
-                <h2>{"banner.title"}</h2>
-                <p>{"banner.subtitle"}</p>
-              </div>
-            </div>
+          <SimpleBanner color={"#D4A59F"} title={"Calçados"} subtitle={"Veja nossos calçados"} url={""} onClick={()=>{
+             dispatch(
+              setFilter({
+                filter: "type",
+                value: 2,
+              })
+            );
+            navigate('/store')
+          }}/>
           </Grid>
           <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
-            <div
-              className="banner-image"
-            >
-              <div className="banner-text">
-                <h2>{"banner.title"}</h2>
-                <p>{"banner.subtitle"}</p>
-              </div>
-            </div>
+          <SimpleBanner image={"priscilla-du-preez-dlxLGIy-2VU-unsplash.jpg"} title={"BAnner 3"} subtitle={""} url={""}/>
           </Grid>
         </Grid>
         <Grid item xs={10}>

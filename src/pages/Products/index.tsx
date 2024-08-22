@@ -12,6 +12,7 @@ import { RootState, useAppDispatch } from "store";
 import { useTheme } from "styled-components";
 import { Button } from "ui-layout";
 import { lightTheme } from "ui-layout";
+import { useResponsive } from "hooks";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 
@@ -22,6 +23,7 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { category } = useParams<{ category: string }>();
   const dispatch = useAppDispatch();
   const { data: categorias } = useGetCategoriasQuery();
+  const {isSm,isMd,isXs} =useResponsive()
 
   useEffect(() => {
     setfilterOpen(false);
@@ -49,19 +51,18 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <>
       <Drawer
-        variant="temporary"
         anchor={"right"}
         open={filterOpen}
         sx={{
-          width: 300,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
-            width: 300,
-            paddingTop: theme.spacing.large,
+          zIndex: 1250,
+        }}
+        PaperProps={{
+          sx: {
+            width: isXs?'80%':isSm?'60%':isMd?'30%':'25%',
+            paddingTop: theme.spacing.medium,
             paddingLeft: theme.spacing.medium,
             paddingRight: theme.spacing.medium,
             backgroundColor: theme.colors.background,
-            boxSizing: "border-box",
           },
         }}
         onClose={(ev, reason) => {

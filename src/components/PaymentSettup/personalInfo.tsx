@@ -5,9 +5,10 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "store";
+import { RootState, useAppDispatch } from "store";
 import { useAddClientMutation, useGetClientQuery } from "store/api/Client";
 import { useGenerateSignedFileQuery } from "store/api/default";
+import { fetchLogin } from "store/slices/auth.slice";
 import { Button, Text, TextField } from "ui-layout";
 import { PasswordField } from "ui-layout";
 import { signed_files_expiration } from "utils";
@@ -19,15 +20,18 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
   const { token, nome, sobrenome, email } = useTypedSelector(
     ({ auth }) => auth
   );
-  const [addClient] = useAddClientMutation();
-  const { data: clientData } = useGetClientQuery();
+  const [addClient, { isSuccess }] = useAddClientMutation();
+  const { data: clientData, refetch:refetchClient } = useGetClientQuery();
   const language = useSelector((st: RootState) => st.language);
 
-  const {data ,refetch} = useGenerateSignedFileQuery(`terms_of_use_${language || 'pt-BR'}.pdf`,{
-    pollingInterval: signed_files_expiration,
-  })
+  const { data } = useGenerateSignedFileQuery(
+    `terms_of_use_${language || "pt-BR"}.pdf`,
+    {
+      pollingInterval: signed_files_expiration,
+    }
+  );
 
-  const [termAcceped,setTermAccepted] = useState<boolean>(false)
+  const [termAcceped, setTermAccepted] = useState<boolean>(false);
   const [formData, setFormData] = useState<{
     name: string;
     surname: string;
@@ -45,6 +49,8 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const dispatch = useAppDispatch();
+
   const style = {
     position: "absolute" as "absolute",
     top: "50%",
@@ -57,8 +63,22 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
     p: 4,
   };
   useEffect(() => {
-    if (token) handleClose();
+    if (token) {
+      handleClose();
+      if(!clientData)
+      refetchClient();
+    }
   }, [token]);
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        fetchLogin({
+          email: formData.email,
+          senha: formData.password,
+        })
+      );
+    }
+  }, [isSuccess]);
   useEffect(() => {
     if (clientData)
       setFormData({
@@ -138,17 +158,24 @@ const PersonalInfo: React.FC<React.PropsWithChildren<Props>> = () => {
             />
           )}
           {!token && data && (
-              <FormControlLabel
-              control={<Checkbox name="lgpd_agreement" onChange={()=>{
-                setTermAccepted(!termAcceped)
-              }} />}
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="lgpd_agreement"
+                  onChange={() => {
+                    setTermAccepted(!termAcceped);
+                  }}
+                />
+              }
               label={
                 <Text>
-                  random text {" "}
+                  random text{" "}
                   <Link
                     onClick={(e) => {
-                      window.open(data?.url,"_blak","noreferrer")
-                    } } to={""}>
+                      window.open(data?.url, "_blak", "noreferrer");
+                    }}
+                    to={""}
+                  >
                     Termos de uso
                   </Link>
                 </Text>

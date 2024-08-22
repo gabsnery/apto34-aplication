@@ -1,6 +1,6 @@
 import {
   getIdentificationTypes,
-  initMercadoPago
+  initMercadoPago,
 } from "@mercadopago/sdk-react";
 import { Grid, Step, StepLabel, Stepper } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -39,7 +39,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { data: clientData } = useGetClientQuery();
   const navigate = useNavigate();
 
-  const [paymentInfo, setPaymentInfo] = useState<IPayment|undefined>();
+  const [paymentInfo, setPaymentInfo] = useState<IPayment | undefined>();
   const [personalInfoData, setPersonalInfoData] = useState<any>({});
   const [addressInfoData, setAddressInfoData] = useState<any>({});
   const [allowFinish, setAllowFinish] = useState<boolean>(false);
@@ -53,7 +53,6 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
     if (activeStep === steps.length - 1) {
-
       addOrder({
         clienteId: userID,
         total: cart.total,
@@ -89,11 +88,11 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     if (payment?.pix_qrcode !== "") setqQr_code_base64(payment?.pix_qrcode);
     //if (payment) dispatch(clearCart());
   }, [payment]);
-  
+
   useEffect(() => {
     if (orderResponse) {
-      if(paymentInfo)
-      addPayment({ ...paymentInfo, id: orderResponse.id || 1 });
+      if (paymentInfo)
+        addPayment({ ...paymentInfo, id: orderResponse.id || 1 });
 
       addPreference({
         orderId: orderResponse.id,
@@ -122,7 +121,7 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
     }
   }, [orderResponse]);
 
-/*   addPayment({
+  /*   addPayment({
     id: orderResponse.id || 1,
     installments: paymentInfo.installments, //parcelas
     payer: {
@@ -191,30 +190,36 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
             </Grid>
           )}
         </Grid>
-        <Grid xs={6} item>
-          <Button
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            variant={"secondary"}
-          >
-            {t("back")}
-          </Button>
-        </Grid>
-        <Grid xs={6} item>
-          <Button
-            onClick={handleNext}
-            disabled={
-              activeStep === 0
-                ? !token
-                : activeStep === 2
+        {token && (
+          <Grid xs={6} item>
+            {activeStep != 0 && (
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                variant={"secondary"}
+              >
+                {t("back")}
+              </Button>
+            )}
+          </Grid>
+        )}
+        {token && (
+          <Grid xs={6} item>
+            <Button
+              onClick={handleNext}
+              disabled={
+                activeStep === 0
+                  ? !token
+                  : activeStep === 2
                   ? !allowFinish
                   : false
-            }
-            variant={"primary"}
-          >
-            {activeStep === steps.length - 1 ? t("pay") : t("next")}
-          </Button>
-        </Grid>
+              }
+              variant={"primary"}
+            >
+              {activeStep === steps.length - 1 ? t("pay") : t("next")}
+            </Button>
+          </Grid>
+        )}
         <Grid xs={12} item>
           <Button
             variant={"tertiary"}

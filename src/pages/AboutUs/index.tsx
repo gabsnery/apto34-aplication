@@ -1,5 +1,5 @@
 import { CircularProgress, Grid } from "@mui/material";
-import Banner from "components/Banner";
+import Banner from "components/BannerCarousel";
 import { Loading } from "components/Loading";
 import MiniBanner from "components/MiniBanner";
 import ProductsSlider from "components/ProductsSlider";

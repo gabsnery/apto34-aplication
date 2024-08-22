@@ -32,39 +32,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      <Grid item xs={12} sm={6} md={12}>
-        <Select
-          name={"category"}
-          label={t("category")}
-          sx={{ backgroundColor: "transparent" }}
-          size={"small"}
-          type="multiple"
-          value={
-            sessionFilter?.category.length > 0
-              ? sessionFilter?.category?.map((i) => i.toString())
-              : ""
-          }
-          onChange={(e) => {
-            const array = sessionFilter.category;
-            const index = array.indexOf(+(e.target.value as string));
-            if (index >= 0)
-              dispatch(removeFilter({ filter: "category", index: index }));
-            else
-              dispatch(
-                addFilter({
-                  filter: "category",
-                  value: +(e.target.value as string),
-                })
-              );
-          }}
-          options={
-            categorias?.map((item) => ({
-              value: item.id.toString(),
-              label: item.categoria,
-            })) || []
-          }
-        />
-      </Grid>
+    {category}
       <Grid item xs={12} sm={6} md={12}>
         <Select
           name={"type"}
@@ -94,7 +62,7 @@ const FilterBar: FC<React.PropsWithChildren<unknown>> = () => {
             subCategorias
               ?.filter(
                 (item) =>
-                  category === "" || item.categoria?.categoria === category
+                  category === undefined || item.categoria?.categoria === category
               )
               .map((item) => ({
                 value: item.id.toString(),

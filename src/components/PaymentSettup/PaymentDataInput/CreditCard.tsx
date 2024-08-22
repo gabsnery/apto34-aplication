@@ -223,9 +223,6 @@ export const CreditCardComponent = (props: {
           />
         </Grid>
       )}
-      <Grid item xs={8} sm={5} md={6}>
-        <Button onClick={() => {}}> Salvar</Button>
-      </Grid>
     </Grid>
   );
 };
