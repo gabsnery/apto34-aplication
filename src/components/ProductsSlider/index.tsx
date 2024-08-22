@@ -57,7 +57,10 @@ const ProductsSlider: React.FC = () => {
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
 
   const { data, isLoading: isProductsLoading } = useGetProductsQuery(
-    { ...sessionFilter, start: 1, count: 10 },
+    { category:[],
+      size:[],
+      color:[],
+      type:[] , start: 1, count: 10 },
     { skip: !sessionFilter }
   );
 
