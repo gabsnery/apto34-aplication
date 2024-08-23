@@ -31,6 +31,7 @@ export const mock_products :Product[]= [
         ],
         "nome": "Camiseta Esportiva DryFit",
         "valor_produto": 29,
+        "discount":10,
         "quantity": 50,
         "descricao": "Camiseta leve e respirável, ideal para atividades físicas."
     },
@@ -58,6 +59,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Tênis de Corrida Ultra",
         "valor_produto": 199.9,
+        "discount":10,
         "quantity": 40,
         "descricao": "Tênis com amortecimento avançado, perfeito para corridas longas."
     },
@@ -85,6 +87,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Jaqueta Corta-Vento Impermeável",
         "valor_produto": 149.9,
+        "discount":10,
         "quantity": 30,
         "descricao": "Jaqueta leve e resistente à água, ideal para atividades ao ar livre."
     },
@@ -112,6 +115,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Relógio Inteligente Pulse",
         "valor_produto": 299.9,
+        "discount":10,
         "quantity": 20,
         "descricao": "Relógio com monitoramento de saúde e notificações inteligentes."
     },
@@ -139,6 +143,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Mochila Executiva Compacta",
         "valor_produto": 89.9,
+        "discount":10,
         "quantity": 25,
         "descricao": "Mochila compacta e funcional, ideal para o dia a dia no trabalho."
     },
@@ -166,6 +171,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -193,6 +199,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -220,6 +227,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -247,6 +255,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -274,6 +283,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -301,6 +311,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -328,6 +339,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
+        "discount":10,
         "quantity": 35,
         "descricao": "Fone de ouvido sem fio com som de alta qualidade e longa duração da bateria."
     },
@@ -340,6 +352,7 @@ export const mock_products :Product[]= [
         "tamanhos": [],
         "nome": "wwww",
         "valor_produto": 333,
+        "discount":10,
         "quantity": 33,
         "descricao": "333"
     }
