@@ -34,7 +34,6 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
     {
       skip: photoId === undefined,
       pollingInterval: signed_files_expiration,
-    
     }
   );
   useEffect(() => {
@@ -78,8 +77,20 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
         >
           <Text variant={"h5"}>{t(`product:name_${item.id}`)}</Text>
         </Grid>
-        <Grid item xs={12} sm={2} alignContent={"center"}>
-          <Text variant={"h5"}>{(+item.valor_produto).toFixed(2)}</Text>
+        <Grid item xs={12} sm={1} alignContent={"center"}>
+          <Text
+            variant={"h5"}
+            color="error"
+            style={{ textDecoration: "line-through" }}
+          >{`R$ ${(+item.valor_produto)?.toFixed(2)}`}</Text>
+        </Grid>
+        <Grid item xs={12} sm={1} alignContent={"center"}>
+          <Text variant={"h5"}>
+            {`R$ ${(
+              +item.valor_produto *
+              ((100 - item.discount) / 100)
+            ).toFixed(2)}`}
+          </Text>
         </Grid>
         <Grid item xs={12} sm={2} alignContent={"center"}>
           <Text variant={"h5"}>{quantity}</Text>

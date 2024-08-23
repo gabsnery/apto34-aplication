@@ -1,8 +1,8 @@
 // src/components/Text.tsx
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
-interface TextProps {
+interface TextProps extends HTMLAttributes<HTMLBaseElement> {
   children: React.ReactNode;
   weight?: number;
   color?: "primary" | "secondary" | "terciary" | "error";

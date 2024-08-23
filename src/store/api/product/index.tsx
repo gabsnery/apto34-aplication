@@ -44,8 +44,7 @@ export const productApi = defaultApi.injectEndpoints({
         .map((item) => `size[]=${item}`)
         .join("&")}&${filter.color
         .map((item) => `color[]=${item}`)
-        .join("&")}&${filter.type.map((item) => `type[]=${item}`).join("&")}
-            `,
+        .join("&")}&${filter.type.map((item) => `type[]=${item}`).join("&")}&discount=${filter.discount||0}`,
       providesTags: ["Product"],
     }),
     getImage: build.query<{ url: string }, string>({

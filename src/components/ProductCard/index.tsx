@@ -4,7 +4,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
-  Grid
+  Grid,
 } from "@mui/material";
 import { useResponsive } from "hooks";
 //import { Link } from 'react-router-dom'
@@ -18,14 +18,13 @@ import { useTheme } from "styled-components";
 import { Text } from "ui-layout";
 import { signed_files_expiration } from "utils";
 
-
 export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
   value,
   dragging,
 }) => {
   const { t } = useTranslation(["product", "translation"]);
   const theme = useTheme();
-  const {isSm,isMd,isXs} =useResponsive()
+  const { isSm, isMd, isXs } = useResponsive();
 
   const navigate = useNavigate();
   const handleOnItemClick = useCallback(
@@ -61,13 +60,13 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
             {photoData && (
               <CardMedia
                 component="img"
-                height={isXs?"200":"300"}
+                height={isXs ? "200" : "300"}
                 image={photoData?.url}
                 alt={value.nome}
               />
             )}
             <CardContent>
-              <div style={{ height: "50px" }}>
+              <div style={{ height: "3rem" }}>
                 <Text color="primary" variant="h5">
                   {t(`name_${value.id}`)}
                 </Text>
@@ -75,15 +74,27 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
               <Grid
                 container
                 alignItems="center"
+                sx={{height:'2rem'}}
                 mt={3}
                 justifyContent="space-between"
               >
-                <Grid item xs={6}>
+                <Grid item xs={6} container>
+                  {value.discount > 0 && (
+                    <Text
+                      variant="body"
+                      color="error"
+                      style={{ textDecoration: "line-through" }}
+                    >
+                      {`R$ ${(+value.valor_produto).toFixed(2)}`}
+                    </Text>
+                  )}
                   <Text variant="body" color="secondary">
-                    {`R$ ${(+value.valor_produto).toFixed(2)}`}
+                    {`R$ ${(
+                      +value.valor_produto *
+                      ((100 - value.discount) / 100)
+                    ).toFixed(2)}`}
                   </Text>
                 </Grid>
-            
               </Grid>
             </CardContent>
           </CardActionArea>

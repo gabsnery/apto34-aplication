@@ -31,7 +31,7 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
     isLoading: isProductsLoading,
     isError: isProductError,
   } = useGetProductsQuery(
-    { ...filter, start: 0, count: 50 },
+    { ...filter, start: 0, count: 1000 },
     { skip: !filter }
   );
   const theme = useTheme();

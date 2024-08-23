@@ -37,7 +37,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleAddToCart = () => {
-    if (id && data && quantity>0) {
+    if (id && data && quantity > 0) {
       dispatch(addProduct({ product: data, quantity }));
       setConfirmModal(true);
     }
@@ -125,6 +125,25 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Grid>
               </Grid>
             </Grid>
+            {data && (
+              <Grid item xs={6} textAlign={'left'} container direction={'column'}>
+                {data?.discount > 0 && (
+                  <Text
+                    variant="h3"
+                    color="error"
+                    style={{ textDecoration: "line-through" }}
+                  >
+                    {`R$ ${(+data?.valor_produto).toFixed(2)}`}
+                  </Text>
+                )}
+                <Text variant="h3" color="secondary">
+                  {`R$ ${(
+                    +data?.valor_produto *
+                    ((100 - data?.discount) / 100)
+                  ).toFixed(2)}`}
+                </Text>
+              </Grid>
+            )}
             <Grid item xs={12}>
               {isLoading ? (
                 <Skeleton width="30%" />
@@ -160,7 +179,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 onClick={() => {
                   if (quantity > 0 && data) {
                     dispatch(addProduct({ product: data, quantity }));
-                    navigate('/cart')
+                    navigate("/cart");
                   }
                 }}
                 variant="action"

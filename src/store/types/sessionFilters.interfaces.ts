@@ -7,4 +7,5 @@ export interface SessionFilter {
   size:number[]
   color:number[]
   type:number[]
+  discount?:number
 }

@@ -63,6 +63,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
               setFilter({
                 filter: "type",
                 value: 2,
+                discount:70
               })
             );
             navigate('/store')

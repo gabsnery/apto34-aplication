@@ -14,6 +14,7 @@ export interface Product {
   produtoSubcategoria: ProdutoSubcategoria[];
   cores: ProductoColor[];
   tamanhos: ProductoSize[];
+  discount: number ;
 }
 
 export interface Category {

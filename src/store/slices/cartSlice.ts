@@ -27,10 +27,11 @@ const { reducer, actions } = createSlice({
           quantity: action.payload.quantity,
         });
       }
+      
       return {
         items: items,
         total: items.reduce(
-          (partialSum, a) => partialSum + a.product.valor_produto * a.quantity,
+          (partialSum, a) => partialSum +( (a.product.valor_produto * ((100 - a.product.discount)/100)) * a.quantity),
           0
         ),
       };

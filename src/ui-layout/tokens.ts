@@ -24,10 +24,10 @@ export const tokens = {
     white: '#FFFFFF',
   },
   spacing: {
-    small: '8px',
-    medium: '16px',
-    large: '24px',
-    extraLarge: '100px',
+    small: '0.6rem',
+    medium: '1rem',
+    large: '1.5rem',
+    extraLarge: '7rem',
   },
   typography: {
     fontFamily: '"Inter", sans-serif',
