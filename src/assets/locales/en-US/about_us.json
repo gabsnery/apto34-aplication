@@ -1,6 +1,11 @@
 {
   "about_me_content": "Welcome to Apto34! I'm glad you're here. Apto34 is more than just an e-commerce platform; it's a project born from my desire to learn and grow in the world of technology. I want to provide you with a smooth and enjoyable shopping experience while improving my skills and knowledge.",
   "about_us_content": "Welcome to Apto34! We're glad you're here.\nApto34 is more than just an e-commerce platform; it's a project born from our desire to learn and grow in the world of technology. We want to provide you with a smooth and enjoyable shopping experience while improving our skills and knowledge.",
+  "another": {
+    "existing": {
+      "key": "another changed value"
+    }
+  },
   "featuresDescription": "i18n & Locize: I'm committed to serving a global audience, so I've integrated i18n and Locize for multi-language support. This means you can shop in your preferred language, making your experience more personal and enjoyable. Styled-Components: My cool and modern design is crafted using styled-components. This allows me to create reusable and consistent styles across the platform.",
   "featuresTitle": "Cool Features",
   "features_1": "i18n & Locize: I'm committed to serving a global audience, so I've integrated i18n and Locize for multi-language support. This means you can shop in your preferred language, making your experience more personal and enjoyable.",
@@ -15,6 +20,9 @@
   "my_tech_2": "Node.js & Express: On the back-end, these tools ensure that everything runs efficiently and effectively.",
   "my_tech_3": "TypeScript: I use TypeScript to keep my codebase robust and reliable.",
   "my_tech_content": "React & Redux: I use these to create a fast, interactive front-end that’s both user-friendly and efficient. Node.js & Express: These power my back-end, ensuring everything runs smoothly behind the scenes. TypeScript: This helps me keep my code clean and reliable.",
+  "new": {
+    "key": "default value"
+  },
   "next_steps": "Next Steps",
   "next_steps_1": "Review interfaces",
   "next_steps_10": "Adjust quantity scheme for products of specific sizes and colors",
