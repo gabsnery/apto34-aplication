@@ -1,4 +1,5 @@
 {
+  "chave": "key2",
   "description_237": "Lightweight and breathable t-shirt, perfect for physical activities.",
   "description_238": "Shoes with advanced cushioning, perfect for long runs.",
   "description_239": "Lightweight and water-resistant jacket, ideal for outdoor activities.",
@@ -73,6 +74,8 @@
   "description_351": "Classic Oxford shoes in genuine leather, perfect for formal settings.",
   "description_352": "Casual white women's sneakers, comfortable and stylish for daily use.",
   "description_353": "Basic women's tank top in various colors, perfect for summer.",
+  "description_358": "Short denim skirt, perfect for casual summer combinations.",
+  "description_359": "Black sports leggings, with breathable and flexible fabric.",
   "name_237": "DryFit Sports T-Shirt",
   "name_238": "Ultra Running Shoes",
   "name_239": "Waterproof Windbreaker Jacket",
@@ -145,5 +148,7 @@
   "name_350": "Casual Women's T-Shirt",
   "name_351": "Classic Oxford Shoes",
   "name_352": "Casual White Women's Sneakers",
-  "name_353": "Basic Women's Tank Top"
+  "name_353": "Basic Women's Tank Top",
+  "name_358": "Short Denim Skirt",
+  "name_359": "Black Sports Leggings"
 }

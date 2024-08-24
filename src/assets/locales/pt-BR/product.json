@@ -1,4 +1,5 @@
 {
+  "chave": "chave2",
   "description_237": "Camiseta leve e respirável, ideal para atividades físicas.",
   "description_238": "Tênis com amortecimento avançado, perfeito para corridas longas.",
   "description_239": "Jaqueta leve e resistente à água, ideal para atividades ao ar livre.",
@@ -73,6 +74,8 @@
   "description_351": "Sapato Oxford clássico em couro legítimo, perfeito para ambientes formais.",
   "description_352": "Tênis casual feminino branco, confortável e estiloso para uso diário.",
   "description_353": "Regata básica feminina em diversas cores, perfeita para o verão.",
+  "description_358": "Saia curta jeans, perfeita para combinações casuais no verão.",
+  "description_359": "Legging esportiva preta, com tecido respirável e flexível.",
   "name_237": "Camiseta Esportiva DryFit",
   "name_238": "Tênis de Corrida Ultra",
   "name_239": "Jaqueta Corta-Vento Impermeável",
@@ -145,5 +148,8 @@
   "name_350": "Camiseta Feminina Casual",
   "name_351": "Sapato Oxford Clássico",
   "name_352": "Tênis Casual Feminino Branco",
-  "name_353": "Regata Feminina Básica"
+  "name_353": "Regata Feminina Básica",
+  "name_357": "Saia Curta Jeans",
+  "name_358": "Saia Curta Jeans",
+  "name_359": "Legging Esportiva Preta"
 }
