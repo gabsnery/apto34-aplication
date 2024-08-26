@@ -12,7 +12,7 @@ import { useResponsive } from "hooks";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useGetImageQuery } from "store/api/product";
+import { useGetCoverQuery } from "store/api/product";
 import { Product } from "store/api/product/product.interface";
 import { useTheme } from "styled-components";
 import { Text } from "ui-layout";
@@ -33,19 +33,13 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
     },
     [dragging]
   );
-  const [photoId, setPhotoId] = useState<string | undefined>();
-  const { data: photoData, isLoading: isPhotoLoading } = useGetImageQuery(
-    photoId || "",
+  const { data: photoData, isLoading: isPhotoLoading } = useGetCoverQuery(
+    value.id || 0,
     {
-      skip: photoId === undefined,
+      skip: value.id === undefined,
       pollingInterval: signed_files_expiration,
     }
   );
-  useEffect(() => {
-    if (value) {
-      setPhotoId(value.thumbnails[0]);
-    }
-  }, [value]);
   return (
     <>
       <Box onClickCapture={handleOnItemClick}>

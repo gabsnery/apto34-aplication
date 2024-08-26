@@ -50,6 +50,9 @@ export const productApi = defaultApi.injectEndpoints({
     getImage: build.query<{ url: string }, string>({
       query: (id) => `/api/product/image/${encodeURIComponent(id)}`,
     }),
+    getCover: build.query<{ url: string }, number>({
+      query: (id) => `/api/product/cover/${id}`,
+    }),
     getProduct: build.query<Product, number>({
       query: (id) => `/api/product/${id}`,
     }),
@@ -63,5 +66,6 @@ export const {
   useDeleteProductMutation,
   useGetProductQuery,
   useGetImageQuery,
+  useGetCoverQuery,
   useGetProductsQuery,
 } = productApi;

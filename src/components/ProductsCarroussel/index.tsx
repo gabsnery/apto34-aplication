@@ -55,7 +55,7 @@ export const ProductsCarroussel: React.FC<{ keyValue: string }> = ({
   }
 
   const { data, isSuccess } = useGetProductsQuery(
-    { ...sessionFilter, start: 1, count: 10 },
+    { ...sessionFilter, start: 0, count: 10 },
     { skip: !sessionFilter }
   );
   return data ? (

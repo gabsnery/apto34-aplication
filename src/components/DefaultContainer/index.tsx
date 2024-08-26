@@ -24,6 +24,8 @@ const DefaultContainer: FC<
             backgroundColor: theme.colors.background,
             paddingTop: "15px",
             paddingBottom: "25px",
+            paddingLeft: "150px",
+            paddingRight: "150px",
             textAlign: "center",
             minHeight: "calc(100vh - 293px)",
           }}

@@ -60,7 +60,7 @@ const ProductsSlider: React.FC = () => {
     { category:[],
       size:[],
       color:[],
-      type:[] , start: 1, count: 10 },
+      type:[] , start: 0, count: 10 },
     { skip: !sessionFilter }
   );
 

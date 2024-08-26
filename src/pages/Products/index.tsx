@@ -99,7 +99,7 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
         >
           <FilterBar />
         </Grid> */}
-        <Grid item xs={12} sm={12} textAlign={"right"}>
+        <Grid item xs={12} sm={12} textAlign={"right"} >
           <Button
             onClick={() => {
               setfilterOpen(true);
