@@ -20,7 +20,6 @@ const Cart: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const cart = useSelector((st: RootState) => st.cart);
-
   return (
     <Grid container sx={{ padding: {xs:0,sm:"0 100px"} }} columnSpacing={2}>
       <Grid item xs={12} md={8} >

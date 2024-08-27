@@ -9,22 +9,28 @@ import { Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 import { useTheme } from "styled-components";
 import { Product } from "store/api/product/product.interface";
-import { useGetCoverQuery, useGetImageQuery } from "store/api/product";
+import { useGetCoverQuery, useGetImageQuery, useGetProductQuery } from "store/api/product";
 import { useNavigate } from "react-router-dom";
 import { signed_files_expiration } from "utils";
+import { useGetColorsQuery } from "store/api/color";
+import { useGetSizesQuery } from "store/api/size";
 interface IProps {
-  item: Product;
+  item: Product ;
   quantity: number;
+  idColor: number;
+  idSize: number;
   idx: number;
 }
 const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
-  item,
+  item,idColor,
+  idSize,
   quantity,
   idx,
 }) => {
   const { t } = useTranslation(["product", "translation"]);
   const navigate = useNavigate();
-
+  const { data: colors } = useGetColorsQuery();
+  const { data: sizes } = useGetSizesQuery();
   const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
@@ -35,6 +41,10 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
       pollingInterval: signed_files_expiration,
     }
   );
+  const { data, isLoading:isProductLoading } = useGetProductQuery(+(item.id || 0), {
+    skip: item.id === undefined,
+  });
+  const notAvailable = (data?.stock?.find(s=>s.colorId===idColor && s.sizeId === idSize)?.quantity || 0)< quantity
   return (
     <Grid item container>
       <Grid
@@ -62,22 +72,22 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
         <Grid
           item
           xs={12}
-          sm={6}
+          sm={4}
           alignContent={"center"}
           sx={{ cursor: "pointer" }}
           onClick={() => {
             navigate(`/product/${item.id}`);
           }}
         >
-          <Text variant={"h5"}>{t(`product:name_${item.id}`)}</Text>
+          <Text variant={"h5"} color={notAvailable?"error":undefined} style={{ textDecoration: notAvailable?"line-through":'unset'}}>{t(`product:name_${item.id}`)}</Text>
         </Grid>
-        <Grid item xs={12} sm={1} alignContent={"center"}>
+        {item.discount>0 && <Grid item xs={12} sm={1} alignContent={"center"}>
           <Text
             variant={"h5"}
             color="error"
             style={{ textDecoration: "line-through" }}
           >{`R$ ${(+item.valor_produto)?.toFixed(2)}`}</Text>
-        </Grid>
+        </Grid>}
         <Grid item xs={12} sm={1} alignContent={"center"}>
           <Text variant={"h5"}>
             {`R$ ${(
@@ -87,8 +97,20 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
           </Text>
         </Grid>
         <Grid item xs={12} sm={2} alignContent={"center"}>
-          <Text variant={"h5"}>{quantity}</Text>
+          <Text variant={"h5"} 
+            
+            >{quantity}</Text>
         </Grid>
+        <Grid item xs={12} sm={1} alignContent={"center"}>
+          <Text variant={"h5"}>{sizes?.find(s=>s.id===idSize)?.descricao }</Text>
+        </Grid>
+        <Grid item xs={12} sm={2} alignContent={"center"}>
+          <Text variant={"h5"}>{colors?.find(s=>s.id===idColor)?.descricao } {}</Text>
+        </Grid>
+        <Grid item xs={12} sm={2} alignContent={"center"}>
+          <Text variant={"h5"} color={'error'}>{ notAvailable && 'quantidade indisponivel'}</Text>
+        </Grid>
+
         <Grid item xs={12} sm={2} alignContent={"center"}>
           <IconButton
             sx={{

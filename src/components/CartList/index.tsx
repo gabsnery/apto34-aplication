@@ -20,7 +20,7 @@ const CartList: React.FC<React.PropsWithChildren<unknown>> = () => {
     <>
       <Grid container sx={{ width: "100%" }} direction={"column"}>
         {cart.items.map((item, idx) => {
-          return <CartListItem  key={idx} item={item.product} quantity={item.quantity} idx={idx} />;
+          return <CartListItem  key={idx} item={item.product} {...item} idx={idx} />;
         })}
       </Grid>
     </>

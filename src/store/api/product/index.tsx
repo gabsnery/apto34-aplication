@@ -32,6 +32,16 @@ export const productApi = defaultApi.injectEndpoints({
       },
       invalidatesTags: ["Product"],
     }),
+    checkAvailability: build.mutation<boolean, any>({
+      query: (payload) => {
+        return {
+            url: "api/product/checkAvailability",
+            method: 'POST',
+            body: payload,
+            formData: true
+        };
+    },
+    }),
     getProducts: build.query<
       {products:Product[],total_count:number},
       SessionFilter & { start: number; count: number }
@@ -68,4 +78,5 @@ export const {
   useGetImageQuery,
   useGetCoverQuery,
   useGetProductsQuery,
+  useCheckAvailabilityMutation
 } = productApi;

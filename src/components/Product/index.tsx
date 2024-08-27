@@ -44,8 +44,13 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const [quantity, setQuantity] = useState<number>(0);
 
   const handleAddToCart = () => {
-    if (id && data && quantity > 0) {
-      dispatch(addProduct({ product: data, quantity }));
+    if (id && data && quantity > 0 && selectedColor && selectedSize) {
+      dispatch(addProduct({
+        product: data,
+        idColor: selectedColor,
+        idSize: selectedSize,
+        quantity,
+      }));
       setConfirmModal(true);
     }
   };
@@ -135,25 +140,37 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
             <Grid item xs={12} mb={1}>
               <Stack direction="row" spacing={1}>
                 {sizes?.map((item, idx) => {
-                  const isAvailable = (data?.stock?.filter(stock=>(stock.sizeId === item.id && stock.quantity > 0))||[]).length > 0
-                  const iSelected = item.id === selectedSize
+                  const isAvailable =
+                    (
+                      data?.stock?.filter(
+                        (stock) =>
+                          stock.sizeId === item.id && stock.quantity > 0
+                      ) || []
+                    ).length > 0;
+                  const iSelected = item.id === selectedSize;
 
                   return (
                     <Avatar
                       sx={{
                         color: "black",
-                        backgroundColor:  iSelected?'pink':isAvailable?"transparent":'lightgrey',
+                        backgroundColor: iSelected
+                          ? "pink"
+                          : isAvailable
+                          ? "transparent"
+                          : "lightgrey",
                         border: "1px black solid",
                         fontSize: "10px",
-                        cursor: isAvailable?"pointer":'unset',
-                        ':hover':{
-                        backgroundColor:isAvailable?'lightslategray':'lightgrey'
-                      }
+                        cursor: isAvailable ? "pointer" : "unset",
+                        ":hover": {
+                          backgroundColor: isAvailable
+                            ? "lightslategray"
+                            : "lightgrey",
+                        },
                       }}
                       alt="Remy Sharp"
-                      onClick={()=>{
-                        setSelectedSize(item.id)
-                        setSelectedColor(undefined)
+                      onClick={() => {
+                        setSelectedSize(item.id);
+                        setSelectedColor(undefined);
                       }}
                     >
                       {item.descricao}
@@ -165,28 +182,47 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
             <Grid item xs={12}>
               <Stack direction="row" spacing={1}>
                 {colors?.map((item, idx) => {
-                  const isAvailable = (data?.stock?.filter(stock=>(selectedSize===undefined || stock.sizeId === selectedSize)).filter(stock=>(stock.colorId === item.id && stock.quantity > 0))||[]).length > 0
-                  const iSelected = item.id === selectedColor
+                  const isAvailable =
+                    (
+                      data?.stock
+                        ?.filter(
+                          (stock) =>
+                            selectedSize === undefined ||
+                            stock.sizeId === selectedSize
+                        )
+                        .filter(
+                          (stock) =>
+                            stock.colorId === item.id && stock.quantity > 0
+                        ) || []
+                    ).length > 0;
+                  const iSelected = item.id === selectedColor;
                   return (
                     <Avatar
-                    sx={{
-                      color: "black",
-                      backgroundColor:  iSelected?'pink':isAvailable?"transparent":'lightgrey',
-                      border: "1px black solid",
-                      fontSize: "10px",
-                      cursor: isAvailable?"pointer":'unset',
-                      ':hover':{
-                        backgroundColor:isAvailable?'lightslategray':'lightgrey'
-                      }
-                    }}
-                    onClick={()=>{
-                      setSelectedColor(item.id)
-                    }}
-                    alt="Remy Sharp"
-                  >
-                    {item.descricao}
-                  </Avatar>
-                )})}
+                      sx={{
+                        color: "black",
+                        backgroundColor: iSelected
+                          ? "pink"
+                          : isAvailable
+                          ? "transparent"
+                          : "lightgrey",
+                        border: "1px black solid",
+                        fontSize: "10px",
+                        cursor: isAvailable ? "pointer" : "unset",
+                        ":hover": {
+                          backgroundColor: isAvailable
+                            ? "lightslategray"
+                            : "lightgrey",
+                        },
+                      }}
+                      onClick={() => {
+                        setSelectedColor(item.id);
+                      }}
+                      alt="Remy Sharp"
+                    >
+                      {item.descricao}
+                    </Avatar>
+                  );
+                })}
               </Stack>
             </Grid>
             {data && (
@@ -247,8 +283,15 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Button>
               <Button
                 onClick={() => {
-                  if (quantity > 0 && data) {
-                    dispatch(addProduct({ product: data, quantity }));
+                  if (quantity > 0 && data && selectedColor && selectedSize) {
+                    dispatch(
+                      addProduct({
+                        product: data,
+                        idColor: selectedColor,
+                        idSize: selectedSize,
+                        quantity,
+                      })
+                    );
                     navigate("/cart");
                   }
                 }}
