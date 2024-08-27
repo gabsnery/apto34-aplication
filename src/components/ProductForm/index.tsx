@@ -205,13 +205,6 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             
                         />
                     </Grid>
-                    <Grid item xs={4} >
-                        <Button variant="secondary"  onClick={() => {
-                            const cores = formData['cores'] || []
-                            setFormData({ ...formData, cores: [...cores, productoColor] })
-                            setProductoSize({})
-                        }}> {t('add')}</Button>
-                    </Grid>
                 </Grid>
                 <Grid item container xs={12} rowSpacing={2}
                     columnSpacing={2}>
@@ -238,16 +231,7 @@ const ProductForm: React.FC<React.PropsWithChildren<unknown>> = () => {
                             
                         />
                     </Grid>
-                    <Grid item xs={4} >
-                        <Button variant="secondary"  onClick={() => {
-                            const tamanhos = formData['tamanhos'] || []
-                            setFormData({ ...formData, tamanhos: [...tamanhos, productoSize] })
-                            setProductoSize({})
-                        }}> {t("add")}</Button>
-                    </Grid>
                 </Grid>
-                {formData.cores?.map(item => <><Text sx={{display:'contents'}} variant="h4" >{item.id}-{item.descricao}-{item.quantidade}</Text><br /></>)}
-                {formData.tamanhos?.map(item => <><Text sx={{display:'contents'}} variant="h4" >{item.id}-{item.descricao}-{item.quantidade}</Text><br /></>)}
             </Grid>
             <Grid item xs={12} textAlign={'right'}>
 

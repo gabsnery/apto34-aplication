@@ -21,14 +21,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2371720055018379-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [
-            {
-                "id": 1,
-                "descricao": "PP",
-                "quantidade": 2
-            }
-        ],
         "nome": "Camiseta Esportiva DryFit",
         "valor_produto": 29,
         "discount":10,
@@ -55,8 +47,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2381720055046090-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Tênis de Corrida Ultra",
         "valor_produto": 199.9,
         "discount":10,
@@ -83,8 +73,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2391720055069257-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Jaqueta Corta-Vento Impermeável",
         "valor_produto": 149.9,
         "discount":10,
@@ -111,8 +99,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2401720055089961-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Relógio Inteligente Pulse",
         "valor_produto": 299.9,
         "discount":10,
@@ -139,8 +125,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2411720055104591-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Mochila Executiva Compacta",
         "valor_produto": 89.9,
         "discount":10,
@@ -167,8 +151,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2421720055123312-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -195,8 +177,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2431720055137554-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -223,8 +203,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2441720055157076-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -251,8 +229,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2451720055182744-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -279,8 +255,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2461720055205358-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -307,8 +281,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2471720055221784-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -335,8 +307,6 @@ export const mock_products :Product[]= [
         "thumbnails": [
             "https://storage.googleapis.com/apto34/2481720055237388-thumb.jpg"
         ],
-        "cores": [],
-        "tamanhos": [],
         "nome": "Fone de Ouvido Bluetooth",
         "valor_produto": 159.9,
         "discount":10,
@@ -348,8 +318,6 @@ export const mock_products :Product[]= [
         "produtoSubcategoria": [],
         "photos": [],
         "thumbnails": [],
-        "cores": [],
-        "tamanhos": [],
         "nome": "wwww",
         "valor_produto": 333,
         "discount":10,

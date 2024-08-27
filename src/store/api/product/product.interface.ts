@@ -13,7 +13,7 @@ export interface Product {
   thumbnails:string[],
   produtoSubcategoria: ProdutoSubcategoria[];
   discount: number ;
-  stock:{quantity:number,colorId:number,sizeId:number}[]
+  stock?:{quantity:number,colorId:number,sizeId:number}[]
 }
 
 export interface Category {

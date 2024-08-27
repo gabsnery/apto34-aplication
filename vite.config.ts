@@ -22,8 +22,8 @@ export default defineConfig(({ mode }) => {
     define: envWithProcessPrefix,
     plugins: [react(),
       sentryVitePlugin({
-        org: "santos-lab",
-        project: "api",
+        org: "pessoal-3u",
+        project: "apto34",
         authToken: process.env.SENTRY_AUTH_TOKEN,
       })
     ],
