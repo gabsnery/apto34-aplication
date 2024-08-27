@@ -12,9 +12,8 @@ export interface Product {
   photos:string[],
   thumbnails:string[],
   produtoSubcategoria: ProdutoSubcategoria[];
-  cores: ProductoColor[];
-  tamanhos: ProductoSize[];
   discount: number ;
+  stock:{quantity:number,colorId:number,sizeId:number}[]
 }
 
 export interface Category {

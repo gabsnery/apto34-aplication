@@ -33,7 +33,7 @@ export const productApi = defaultApi.injectEndpoints({
       invalidatesTags: ["Product"],
     }),
     getProducts: build.query<
-      Product[],
+      {products:Product[],total_count:number},
       SessionFilter & { start: number; count: number }
     >({
       query: (filter) => `/api/product/${filter.start}/${

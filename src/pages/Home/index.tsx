@@ -25,7 +25,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
       <Grid item container xs={12} columnSpacing={2}>
         <CategorySelector />
       </Grid>
-        <Grid item xs={12}>
+        <Grid item width={'98vw'}>
           {isBannerLoading ? (
             <></>
           ) : (
@@ -44,20 +44,21 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
         <Grid item xs={12}  sx={{ height: "100px", backgroundColor:theme.colors.primaryLight, p:3}}>
               <Button variant="tertiary">{t('footer.aboutUsLabel')}</Button>
           </Grid>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} sm={12}>
           <ProductsSlider />
         </Grid>
         <Grid
           container
           justifyContent={"center"}
+          sx={{p:3}}
           columnSpacing={3}
           rowSpacing={1}
         >
-          <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
+          <Grid item xs={12} sm={6} md={4} sx={{ height: "350px" }}>
           <SimpleBanner image={"priscilla-du-preez-dlxLGIy-2VU-unsplash.jpg"} title={"BAnner 1"} subtitle={"Conheça nossa equipe"} url={""}/>
           
           </Grid>
-          <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
+          <Grid item xs={12} sm={6} md={4} sx={{ height: "350px" }}>
           <SimpleBanner color={"#D4A59F"} title={"Calçados"} subtitle={"Veja nossos calçados"} url={""} onClick={()=>{
              dispatch(
               setFilter({
@@ -69,7 +70,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
             navigate('/store')
           }}/>
           </Grid>
-          <Grid item xs={12} sm={6} md={3} sx={{ height: "350px" }}>
+          <Grid item xs={12} sm={6} md={4} sx={{ height: "350px" }}>
           <SimpleBanner image={"priscilla-du-preez-dlxLGIy-2VU-unsplash.jpg"} title={"BAnner 3"} subtitle={""} url={""}/>
           </Grid>
         </Grid>
@@ -84,7 +85,7 @@ const Home: React.FC<React.PropsWithChildren<unknown>> = () => {
           />
         </Grid>
 
-        <Grid item xs={9}>
+        <Grid item xs={12} sm={12}>
           <ProductsSlider />
         </Grid>
       </Grid>

@@ -5,6 +5,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Skeleton,
 } from "@mui/material";
 import { useResponsive } from "hooks";
 //import { Link } from 'react-router-dom'
@@ -33,7 +34,7 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
     },
     [dragging]
   );
-  const { data: photoData, isLoading: isPhotoLoading } = useGetCoverQuery(
+  const { data: photoData, isLoading,isSuccess } = useGetCoverQuery(
     value.id || 0,
     {
       skip: value.id === undefined,
@@ -51,14 +52,15 @@ export const ProductsCard: React.FC<{ value: Product; dragging?: boolean }> = ({
               navigate(`/product/${value.id}`);
             }}
           >
-            {photoData && (
+            {photoData && isSuccess && (
               <CardMedia
                 component="img"
-                height={isXs ? "200" : "300"}
+                height={isXs ? "200px" : "300px"}
                 image={photoData?.url}
                 alt={value.nome}
               />
             )}
+            {isLoading&&<Skeleton variant="rectangular" width="100%" height={isXs ? "200px" : "300px"}/>}
             <CardContent>
               <div style={{ height: "3rem" }}>
                 <Text color="primary" variant="h5">

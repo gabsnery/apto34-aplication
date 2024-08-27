@@ -1,4 +1,4 @@
-import { Grid, useTheme } from "@mui/material";
+import { Grid, Pagination, Stack, useTheme } from "@mui/material";
 //import { Link } from 'react-router-dom'
 import InfiniteScroll from "react-infinite-scroll-component";
 
@@ -11,13 +11,19 @@ import { useEffect, useState } from "react";
 import { Product } from "store/api/product/product.interface";
 import { useGetOrdersQuery } from "store/api/Order";
 import { SessionFilter } from "store/types/sessionFilters.interfaces";
+import { useSearchParams } from "react-router-dom";
 // import ReCAPTCHA from 'react-google-recaptcha'
 // import { add, isAfter } from 'date-fns'
 const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const page = searchParams.get("page"); //
+
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const [products, setProducts] = useState<Product[]>([]);
+  const count = 30;
   const [filter, setFilter] = useState<SessionFilter>({
     category: [],
     size: [],
@@ -31,19 +37,18 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
     isLoading: isProductsLoading,
     isError: isProductError,
   } = useGetProductsQuery(
-    { ...filter, start: 0, count: 1000 },
+    { ...filter, start: +(page || 0) * count, count: count },
     { skip: !filter }
   );
   const theme = useTheme();
   useEffect(() => {
     if (data) {
-      setProducts([...products, ...data]);
+      setProducts([...data.products]);
     }
   }, [data]);
   useEffect(() => {
-    setProducts([]);
     setFilter(sessionFilter);
-    refetch()
+    refetch();
   }, [sessionFilter]);
   return (
     /*     <InfiniteScroll
@@ -72,16 +77,35 @@ const ProductsGrid: React.FC<React.PropsWithChildren<unknown>> = () => {
       direction="row"
       rowSpacing={2}
       columnSpacing={3}
+      columns={{xs:2,sm:3,md:4,lg:5}}
       sx={{
         height: "inherit",
       }}
     >
       {products?.map((prod, idx) => (
-        <Grid key={idx} item xs={6} sm={4} md={3} lg={2}>
+        <Grid key={prod.id} item xs={1} sm={1} md={1} lg={1}>
           <ProductsCard value={prod} />
         </Grid>
       ))}
+      <Grid item xs={12} textAlign={"center"}>
+        {data && (
+          <Stack alignItems="center">
+            <Pagination
+              showFirstButton
+              showLastButton
+              count={Math.ceil(data?.total_count / count) - 1}
+              variant="outlined"
+              shape="rounded"
+              onChange={(event: React.ChangeEvent<unknown>, value: number) => {
+                searchParams.set("page", value.toString());
+                setSearchParams(searchParams);
+              }}
+            />
+          </Stack>
+        )}
+      </Grid>
     </Grid>
+
     /*     </InfiniteScroll> */
   );
 };

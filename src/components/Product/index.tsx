@@ -1,4 +1,4 @@
-import { Grid, Skeleton } from "@mui/material";
+import { Avatar, Grid, Skeleton, Stack } from "@mui/material";
 //import { Link } from 'react-router-dom'
 
 import { useEffect, useState } from "react";
@@ -13,6 +13,8 @@ import SignedThumbnail from "./signedThumbnail";
 import { setConfirmationModal } from "store/slices/confirmationModalSlice";
 import ConfirmationModal from "./ConfirmationModal";
 import { signed_files_expiration } from "utils";
+import { useGetSizesQuery } from "store/api/size";
+import { useGetColorsQuery } from "store/api/color";
 
 const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { t } = useTranslation(["product", "translation"], {
@@ -22,11 +24,16 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
 
   const dispatch = useAppDispatch();
   const { id } = useParams<{ id: string }>();
+  const { data: colors } = useGetColorsQuery();
+  const { data: sizes } = useGetSizesQuery();
+
   const { data, isLoading } = useGetProductQuery(+(id || 0), {
     skip: id === undefined,
   });
   const [photoId, setPhotoId] = useState<string | undefined>();
   const [confirmModal, setConfirmModal] = useState<boolean>(false);
+  const [selectedSize, setSelectedSize] = useState<number | undefined>();
+  const [selectedColor, setSelectedColor] = useState<number | undefined>();
   const { data: photoData, isLoading: isPhotoLoading } = useGetImageQuery(
     photoId || "",
     {
@@ -125,8 +132,71 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Grid>
               </Grid>
             </Grid>
+            <Grid item xs={12} mb={1}>
+              <Stack direction="row" spacing={1}>
+                {sizes?.map((item, idx) => {
+                  const isAvailable = (data?.stock?.filter(stock=>(stock.sizeId === item.id && stock.quantity > 0))||[]).length > 0
+                  const iSelected = item.id === selectedSize
+
+                  return (
+                    <Avatar
+                      sx={{
+                        color: "black",
+                        backgroundColor:  iSelected?'pink':isAvailable?"transparent":'lightgrey',
+                        border: "1px black solid",
+                        fontSize: "10px",
+                        cursor: isAvailable?"pointer":'unset',
+                        ':hover':{
+                        backgroundColor:isAvailable?'lightslategray':'lightgrey'
+                      }
+                      }}
+                      alt="Remy Sharp"
+                      onClick={()=>{
+                        setSelectedSize(item.id)
+                        setSelectedColor(undefined)
+                      }}
+                    >
+                      {item.descricao}
+                    </Avatar>
+                  );
+                })}
+              </Stack>
+            </Grid>
+            <Grid item xs={12}>
+              <Stack direction="row" spacing={1}>
+                {colors?.map((item, idx) => {
+                  const isAvailable = (data?.stock?.filter(stock=>(selectedSize===undefined || stock.sizeId === selectedSize)).filter(stock=>(stock.colorId === item.id && stock.quantity > 0))||[]).length > 0
+                  const iSelected = item.id === selectedColor
+                  return (
+                    <Avatar
+                    sx={{
+                      color: "black",
+                      backgroundColor:  iSelected?'pink':isAvailable?"transparent":'lightgrey',
+                      border: "1px black solid",
+                      fontSize: "10px",
+                      cursor: isAvailable?"pointer":'unset',
+                      ':hover':{
+                        backgroundColor:isAvailable?'lightslategray':'lightgrey'
+                      }
+                    }}
+                    onClick={()=>{
+                      setSelectedColor(item.id)
+                    }}
+                    alt="Remy Sharp"
+                  >
+                    {item.descricao}
+                  </Avatar>
+                )})}
+              </Stack>
+            </Grid>
             {data && (
-              <Grid item xs={6} textAlign={'left'} container direction={'column'}>
+              <Grid
+                item
+                xs={6}
+                textAlign={"left"}
+                container
+                direction={"column"}
+              >
                 {data?.discount > 0 && (
                   <Text
                     variant="h3"
@@ -144,7 +214,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </Text>
               </Grid>
             )}
-            <Grid item xs={12}>
+            {/*  <Grid item xs={12}>
               {isLoading ? (
                 <Skeleton width="30%" />
               ) : (
@@ -161,7 +231,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                   {item.descricao}
                 </Text>
               ))}
-            </Grid>
+            </Grid> */}
 
             <Grid item container xs={3} mt={5} rowGap={1} direction={"column"}>
               <NumberField

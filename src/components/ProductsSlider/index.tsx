@@ -33,10 +33,10 @@ const ProductsSlider: React.FC = () => {
       setSliderSettings({...sliderSettings,slidesToShow:4, arrows:true});
     }
     else if (isLg) {
-      setSliderSettings({...sliderSettings,slidesToShow:5, arrows:true});
+      setSliderSettings({...sliderSettings,slidesToShow:4, arrows:true});
     }
     else{
-      setSliderSettings({...sliderSettings,slidesToShow:6, arrows:true});
+      setSliderSettings({...sliderSettings,slidesToShow:5, arrows:true});
     }
   }, [isSm,isXs,isMd,isLg]);
     const handleBeforeChange = useCallback(() => {
@@ -72,7 +72,7 @@ const ProductsSlider: React.FC = () => {
     >
       {isProductsLoading?<></>:<Slider {...sliderSettings} beforeChange={handleBeforeChange}
           afterChange={handleAfterChange}>
-        {data?.map((prod, idx) => (
+        {data?.products.map((prod, idx) => (
           <div
             style={{
               padding: "5px 10px",

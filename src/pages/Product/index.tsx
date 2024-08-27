@@ -16,7 +16,7 @@ const Product: React.FC<React.PropsWithChildren<unknown>> = () => {
     <div
       style={{
         padding: `0 ${
-          isXs ? lightTheme.spacing.small : lightTheme.spacing.extraLarge
+          isXs ? lightTheme.spacing.small : lightTheme.spacing.large
         }`,
       }}
     >

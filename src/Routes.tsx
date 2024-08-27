@@ -14,6 +14,7 @@ import AboutUs from "./pages/AboutUs";
 import ConfirmationModalHandler from "./components/ConfirmationModalHandler";
 import Orders from "./pages/Orders";
 import { GApageView } from "utils";
+import ScrollToTop from "components/ScrollToTop";
 //import { GAInitializate } from "utils/functions/googleAnalytics";w
 
 /* const Areas = lazy(
@@ -28,41 +29,46 @@ const AppRoutes = () => {
   }, [location.pathname]);
   return (
     <Suspense>
-      <Routes>
-        <Route path="/admin/product" element={<PrivateRoute path="/login" />}>
-          <Route path="/admin/product" element={<ProdAdm />} />
-        </Route>
-        <Route path="/" element={<PrivateRoute both path="/login" />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-        <Route path="/login" element={<PrivateRoute unprivate path="/login" />}>
-          <Route path="/login" element={<Login />} />
-        </Route>
-        <Route path="/store/:category" element={<PrivateRoute both />}>
-          <Route path="/store/:category" element={<Products />} />
-        </Route>
-        <Route path="/store" element={<PrivateRoute both />}>
-          <Route path="/store" element={<Products />} />
-        </Route>
-        <Route path="/cart" element={<PrivateRoute both />}>
-          <Route path="/cart" element={<Cart />} />
-        </Route>
-        <Route path="/close-order" element={<PrivateRoute both />}>
-          <Route path="/close-order" element={<CloseOrder />} />
-        </Route>
-        <Route path="/product/:id" element={<PrivateRoute both />}>
-          <Route path="/product/:id" element={<Product />} />
-        </Route>
-        <Route path="/admin" element={<PrivateRoute admin />}>
-          <Route path="/admin" element={<Admin />} />
-        </Route>
-        <Route path="/aboutUs" element={<PrivateRoute both />}>
-          <Route path="/aboutUs" element={<AboutUs />} />
-        </Route>
-        <Route path="/orders" element={<PrivateRoute />}>
-          <Route path="/orders" element={<Orders />} />
-        </Route>
-      </Routes>
+      <ScrollToTop>
+        <Routes>
+          <Route path="/admin/product" element={<PrivateRoute path="/login" />}>
+            <Route path="/admin/product" element={<ProdAdm />} />
+          </Route>
+          <Route path="/" element={<PrivateRoute both path="/login" />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+          <Route
+            path="/login"
+            element={<PrivateRoute unprivate path="/login" />}
+          >
+            <Route path="/login" element={<Login />} />
+          </Route>
+          <Route path="/store/:category" element={<PrivateRoute both />}>
+            <Route path="/store/:category" element={<Products />} />
+          </Route>
+          <Route path="/store" element={<PrivateRoute both />}>
+            <Route path="/store" element={<Products />} />
+          </Route>
+          <Route path="/cart" element={<PrivateRoute both />}>
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+          <Route path="/close-order" element={<PrivateRoute both />}>
+            <Route path="/close-order" element={<CloseOrder />} />
+          </Route>
+          <Route path="/product/:id" element={<PrivateRoute both />}>
+            <Route path="/product/:id" element={<Product />} />
+          </Route>
+          <Route path="/admin" element={<PrivateRoute admin />}>
+            <Route path="/admin" element={<Admin />} />
+          </Route>
+          <Route path="/aboutUs" element={<PrivateRoute both />}>
+            <Route path="/aboutUs" element={<AboutUs />} />
+          </Route>
+          <Route path="/orders" element={<PrivateRoute />}>
+            <Route path="/orders" element={<Orders />} />
+          </Route>
+        </Routes>
+      </ScrollToTop>
       <ConfirmationModalHandler />
     </Suspense>
   );

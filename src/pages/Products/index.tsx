@@ -21,6 +21,9 @@ const Products: React.FC<React.PropsWithChildren<unknown>> = () => {
   const theme = useTheme();
   const sessionFilter = useSelector((st: RootState) => st.sessionFilter);
   const { category } = useParams<{ category: string }>();
+
+
+
   const dispatch = useAppDispatch();
   const { data: categorias } = useGetCategoriasQuery();
   const {isSm,isMd,isXs} =useResponsive()

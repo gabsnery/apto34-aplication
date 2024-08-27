@@ -9,7 +9,7 @@ import { Text } from "ui-layout";
 import { useAppDispatch } from "../../store/store";
 import { useTheme } from "styled-components";
 import { Product } from "store/api/product/product.interface";
-import { useGetImageQuery } from "store/api/product";
+import { useGetCoverQuery, useGetImageQuery } from "store/api/product";
 import { useNavigate } from "react-router-dom";
 import { signed_files_expiration } from "utils";
 interface IProps {
@@ -28,19 +28,13 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
   const theme = useTheme();
   const cart = useSelector((st: RootState) => st.cart);
   const dispatch = useAppDispatch();
-  const [photoId, setPhotoId] = useState<string | undefined>();
-  const { data: photoData, isLoading: isPhotoLoading } = useGetImageQuery(
-    photoId || "",
+  const { data: photoData, isLoading,isSuccess } = useGetCoverQuery(
+    item.id || 0,
     {
-      skip: photoId === undefined,
+      skip: item.id === undefined,
       pollingInterval: signed_files_expiration,
     }
   );
-  useEffect(() => {
-    if (item) {
-      setPhotoId(item.thumbnails[0]);
-    }
-  }, [item]);
   return (
     <Grid item container>
       <Grid
