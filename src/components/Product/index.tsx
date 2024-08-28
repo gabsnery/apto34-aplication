@@ -138,6 +138,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
               </Grid>
             </Grid>
             <Grid item xs={12} mb={1}>
+            {JSON.stringify(data?.stock)}
               <Stack direction="row" spacing={1}>
                 {sizes?.map((item, idx) => {
                   const isAvailable =
@@ -173,7 +174,7 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                         setSelectedColor(undefined);
                       }}
                     >
-                      {item.descricao}
+                      {item.id}-{item.descricao}
                     </Avatar>
                   );
                 })}
@@ -195,8 +196,19 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                             stock.colorId === item.id && stock.quantity > 0
                         ) || []
                     ).length > 0;
+
+                    const quantity = data?.stock
+                    ?.filter(
+                      (stock) =>
+                        selectedSize === undefined ||
+                        stock.sizeId === selectedSize
+                    )
+                    .filter(
+                      (stock) =>
+                        stock.colorId === item.id && stock.quantity > 0
+                    ) || []
                   const iSelected = item.id === selectedColor;
-                  return (
+                  return (<>
                     <Avatar
                       sx={{
                         color: "black",
@@ -219,8 +231,10 @@ const ProductView: React.FC<React.PropsWithChildren<unknown>> = () => {
                       }}
                       alt="Remy Sharp"
                     >
-                      {item.descricao}
+                      {item.descricao} {item.id} 
                     </Avatar>
+                    {JSON.stringify(quantity)}
+                    </>
                   );
                 })}
               </Stack>
