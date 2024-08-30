@@ -58,6 +58,8 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
         total: cart.total,
         produtos: cart.items.map((product) => ({
           id: product.product.id,
+          idColor: product.idColor,
+          idSize: product.idSize,
           quantidade: product.quantity,
         })),
         endereco: {
@@ -86,7 +88,9 @@ const Payment_: React.FC<React.PropsWithChildren<unknown>> = () => {
   }, []);
   useEffect(() => {
     if (payment?.pix_qrcode !== "") setqQr_code_base64(payment?.pix_qrcode);
-    //if (payment) dispatch(clearCart());
+    console.log("🚀 ~ useEffect ~ payment:", payment)
+    if (payment) {
+      dispatch(clearCart());}
   }, [payment]);
 
   useEffect(() => {

@@ -2,10 +2,9 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Product } from "store/api/product/product.interface";
 import { Order, OrderItem } from "store/types/cart.interfaces";
 
-const initialState: Order & {isBlocked?:boolean} = {
+const initialState: Order  = {
   items: [],
   total: 0,
-  isBlocked:false
 };
 
 const { reducer, actions } = createSlice({
@@ -14,7 +13,8 @@ const { reducer, actions } = createSlice({
   reducers: {
     addProduct: (state, action: PayloadAction<OrderItem>) => {
       const orderItem = state.items.findIndex(
-        (item) => item.product.id === action.payload.product.id
+        (item) => (item.product.id === action.payload.product.id && item.idColor === action.payload.idColor &&
+          item.idSize === action.payload.idSize)
       );
       let items = [...state.items];
       if (orderItem >= 0)
@@ -41,9 +41,10 @@ const { reducer, actions } = createSlice({
         ),
       };
     },
-    deleteProduct: (state, action: PayloadAction<Product>) => {
+    deleteProduct: (state, action: PayloadAction<OrderItem>) => {
       const orderItem = state.items.findIndex(
-        (item) => item.product.id === action.payload.id
+        (item) => (item.product.id === action.payload.product.id && item.idColor === action.payload.idColor &&
+          item.idSize === action.payload.idSize)
       );
       let items = [...state.items];
       if (orderItem >= 0) {
@@ -55,13 +56,6 @@ const { reducer, actions } = createSlice({
           (partialSum, a) => partialSum + a.product.valor_produto * a.quantity,
           0
         ),
-      };
-    },
-    blockCart:  (state, action: PayloadAction<boolean>) => {
-
-      return {
-       ...state,
-        isBlocked: action.payload,
       };
     },
     clearCart: () => initialState,

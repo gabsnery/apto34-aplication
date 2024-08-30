@@ -119,7 +119,10 @@ const CartListItem: React.FC<React.PropsWithChildren<IProps>> = ({
               color: theme.text.primary,
             }}
             onClick={() => {
-              dispatch(deleteProduct(item));
+              dispatch(deleteProduct({product:item,
+                idColor,
+                idSize,
+                quantity}));
             }}
           >
             <DeleteIcon />

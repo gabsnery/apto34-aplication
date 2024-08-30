@@ -37,7 +37,10 @@ const PaymentInfo: React.FC<React.PropsWithChildren<Props>> = ({
   const [type, setType] = useState<
     undefined | "CreditCard" | "PIX" | "Invoice"
   >();
-
+ 
+  useEffect(() => {
+    console.log("🚀 ~ useEffect ~ paymentInfo:", paymentInfo)
+  }, [paymentInfo]);
   useEffect(() => {
     if (type === "Invoice") {
       const today = new Date();
