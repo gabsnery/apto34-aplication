@@ -3,12 +3,15 @@ FROM node:18
 
 # Defina o diretório de trabalho
 WORKDIR /app
+RUN ls
 
 # Copie o package.json e o package-lock.json
 COPY package*.json ./
+RUN ls
 
 # Instale as dependências
 RUN npm install
+RUN ls
 
 # Copie o restante do código da aplicação
 COPY . .
