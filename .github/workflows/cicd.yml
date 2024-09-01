@@ -8,11 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: apto34-aplication 
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
+
     - name: Create .env file
       run: |
           echo "VITE_ENV=${{ secrets.VITE_ENV }}" >> .env
@@ -25,6 +25,7 @@ jobs:
           echo "VITE_SENTRY_RELEASE=${{ secrets.VITE_SENTRY_RELEASE }}" >> .env
           echo "VITE_SENTRY_AUTH_TOKEN=${{ secrets.VITE_SENTRY_AUTH_TOKEN }}" >> .env
           echo "VITE_REACT_APP_VERSION=$npm_package_version" >> .env
+          cat .env  # Verificar o conteúdo do arquivo .env
           docker build -t ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }} .
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1  
@@ -43,6 +44,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: apto34-aplication 
     steps:
+    - name: Stop and remove any existing container
+      run: |
+        docker stop react-app || true
+        docker rm react-app || true
     - name: SSH to VM and deploy
       uses: appleboy/ssh-action@v0.1.7  
       with:
