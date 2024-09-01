@@ -15,9 +15,7 @@ COPY . .
 
 # Construa a aplicação
 RUN npm run build
-
 # Exponha a porta em que a aplicação rodará
 EXPOSE 3000
-
 # Comando para rodar a aplicação
 CMD ["npm", "start"]
