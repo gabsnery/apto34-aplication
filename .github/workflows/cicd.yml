@@ -15,6 +15,7 @@ jobs:
       
     - name: Create .env file
       run: |
+          touch .env
           echo "VITE_ENV=${{ secrets.VITE_ENV }}" >> .env
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
           echo "VITE_MERCADOLIVRE_TOKEN=${{ secrets.VITE_MERCADOLIVRE_TOKEN }}" >> .env
@@ -47,14 +48,9 @@ jobs:
       run: |
         docker stop react-app || true
         docker rm react-app || true
-    - name: SSH to VM and deploy
-      uses: appleboy/ssh-action@v0.1.7  
-      with:
-        host: ${{ secrets.GCP_VM_IP }}
-        username: ${{ secrets.GCP_VM_USERNAME }}
-        key: ${{ secrets.GCP_VM_SSH_KEY }}
-        passphrase: ${{ secrets.GCP_VM_PASSPHRASE }}
-        script: |
+    - name: 'Create env file'
+        run: |
+          touch .env
           echo "VITE_ENV=${{ secrets.VITE_ENV }}" >> .env
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
           echo "VITE_MERCADOLIVRE_TOKEN=${{ secrets.VITE_MERCADOLIVRE_TOKEN }}" >> .env
@@ -65,6 +61,15 @@ jobs:
           echo "VITE_SENTRY_RELEASE=${{ secrets.VITE_SENTRY_RELEASE }}" >> .env
           echo "VITE_SENTRY_AUTH_TOKEN=${{ secrets.VITE_SENTRY_AUTH_TOKEN }}" >> .env
           echo "VITE_REACT_APP_VERSION=$npm_package_version" >> .env
+          cat .env
+    - name: SSH to VM and deploy
+      uses: appleboy/ssh-action@v0.1.7  
+      with:
+        host: ${{ secrets.GCP_VM_IP }}
+        username: ${{ secrets.GCP_VM_USERNAME }}
+        key: ${{ secrets.GCP_VM_SSH_KEY }}
+        passphrase: ${{ secrets.GCP_VM_PASSPHRASE }}
+        script: |
           docker pull ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }}
           docker stop react-app || true
           docker rm react-app || true
