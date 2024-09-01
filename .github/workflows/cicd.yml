@@ -64,4 +64,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }}
           docker stop react-app || true
           docker rm react-app || true
-          docker run --env-file .env -d -p 5173:3000 --name ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }}
+          docker run --env-file .env -d -p 5173:3000 --name react-app ${{ secrets.DOCKER_USERNAME }}/react-app:${{ github.sha }}
