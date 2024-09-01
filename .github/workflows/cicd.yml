@@ -8,11 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: apto34-aplication 
-
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+      
     - name: Create .env file
       run: |
           echo "VITE_ENV=${{ secrets.VITE_ENV }}" >> .env
