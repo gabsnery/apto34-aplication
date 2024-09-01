@@ -1,20 +1,13 @@
-# Use uma imagem do Node.js como base
-FROM node:18
+FROM node:18-alpine3.18 as builder
 
-# Defina o diretório de trabalho
 WORKDIR /app
 
-# Copie o package.json e o package-lock.json
-COPY package*.json ./
-
-# Instale as dependências
-RUN npm install
-
-# Copie o restante do código da aplicação
 COPY . .
 
-# Exponha a porta em que a aplicação rodará
-EXPOSE 3000
+RUN npm install && \
+    npm run build
 
-# Comando para rodar a aplicação
-CMD ["npm", "start"]
+FROM nginxinc/nginx-unprivileged:alpine as runtime
+
+COPY --from=builder /app/dist/ /usr/share/nginx/html/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
